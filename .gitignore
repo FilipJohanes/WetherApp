@@ -1,0 +1,137 @@
+# Daily Brief Service - Git Ignore File
+# Comprehensive ignore rules for Python email service project
+
+# === RUNTIME GENERATED FILES ===
+# These are created during normal operation and shouldn't be in version control
+*.db          # SQLite databases (app.db)
+*.log         # Log files (app.log)
+*.pid         # Process ID files
+
+# === PYTHON CACHE & BYTECODE ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === VIRTUAL ENVIRONMENTS ===
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# === ENVIRONMENT & SECRETS ===
+.env.local
+.env.production
+.env.development
+*.env
+config.ini
+secrets.json
+email_credentials.txt
+
+# === IDE & EDITOR FILES ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === TESTING ===
+.tox/
+.nox/
+.coverage
+.pytest_cache/
+cover/
+htmlcov/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# === DOCUMENTATION BUILD ===
+docs/_build/
+.readthedocs.yml
+
+# === JUPYTER NOTEBOOKS ===
+.ipynb_checkpoints
+
+# === PACKAGE MANAGERS ===
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === DEVELOPMENT FILES TO KEEP ===
+# These are explicitly NOT ignored for cross-PC development
+!tests/
+!test_*.py
+!*_test.py
+!examples/
+!.env.example
+!config.example.*
+!requirements.txt
+!requirements-dev.txt
+
+# === TEMPORARY FILES ===
+*.tmp
+*.temp
+temp/
+tmp/
+
+# === BACKUP FILES ===
+*.bak
+*.backup
+*.old
+
+# === OS SPECIFIC ===
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# === SECURITY ===
+*.pem
+*.key
+*.crt
+*.p12
+auth_token
+access_token

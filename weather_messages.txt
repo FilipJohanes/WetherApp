@@ -1,0 +1,56 @@
+# Weather Messages Configuration
+# Format: condition|neutral|cute|brutal
+# Each line represents one weather condition with three personality modes
+# Conditions can be: raining, heavy_rain, snowing, hot, cold, freezing, windy, stormy, foggy, sunny, cloudy, mild
+
+# Rain conditions
+raining|Take an umbrella - it's going to rain today.|🌧️ Pitter-patter raindrops are coming! Don't forget your cute umbrella! ☂️|Rain incoming. Umbrella or get soaked. Your choice.
+
+heavy_rain|Heavy rain expected - waterproof gear recommended.|⛈️ Big splashy rain today! Time for your rain boots and cozy raincoat! 💧|Heavy downpour alert. Waterproof everything or stay inside.
+
+# Snow conditions  
+snowing|Snow is falling - dress warmly and watch for slippery conditions.|❄️ Magical snowflakes are dancing down! Bundle up like a cute snow bunny! ⛄|Snow. Cold. Slippery. Don't fall on your face.
+
+# Temperature conditions
+hot|Very warm today - stay hydrated and seek shade.|🌞 It's gonna be toasty-warm! Perfect for ice cream and sunny smiles! 😎|Hot as hell. Drink water or melt.
+
+cold|Chilly weather - layer up to stay comfortable.|🧥 Brr! Time for cozy sweaters and warm hugs! Perfect snuggle weather! 🤗|Cold. Layer up or freeze your butt off.
+
+freezing|Freezing temperatures - heavy winter gear essential.|🥶 Super duper cold! Time for the fluffiest coat and warmest mittens! ❄️|Freezing cold. Dress like an arctic explorer or become a popsicle.
+
+mild|Pleasant temperature - enjoy the comfortable weather.|😊 Just right! Like a perfect warm hug from Mother Nature! 🌸|Decent temperature. Nothing to complain about for once.
+
+# Wind conditions
+windy|Strong winds expected - secure loose items.|💨 Whoooosh! Windy adventure day! Hold onto your hat and have fun! 🎩|High winds. Your hair will look terrible. Deal with it.
+
+stormy|Severe weather warning - stay indoors if possible.|⛈️ Big storm clouds are having a party! Stay cozy inside with hot cocoa! ☕|Storm warning. Stay inside unless you enjoy being nature's punching bag.
+
+# Visibility conditions
+foggy|Foggy conditions - drive carefully and use headlights.|🌫️ Mysterious fog is making everything look magical and dreamy! ✨|Fog everywhere. Drive slow or crash into something invisible.
+
+# Clear conditions
+sunny|Beautiful sunny day - perfect weather to enjoy outdoors.|☀️ Glorious sunshine day! Time for outdoor adventures and happy vibes! 🌻|Clear skies. No excuses to stay inside feeling sorry for yourself.
+
+cloudy|Overcast skies - still pleasant weather for activities.|☁️ Fluffy clouds are decorating the sky like cotton candy! So pretty! 🌤️|Cloudy but whatever. At least it's not raining on your parade.
+
+# Combined conditions
+sunny_hot|Hot and sunny - seek shade, wear sunscreen, stay hydrated.|🔥☀️ Super sunny-hot day! Perfect for beach vibes but don't become a lobster! 🦞|Blazing sun. Sunscreen up or turn into human jerky.
+
+cold_windy|Cold and windy - bundle up well, exposed skin will chill quickly.|🌬️❄️ Chilly winds are giving extra-cold hugs! Wrap up like a cozy burrito! 🌯|Cold + wind = misery combo. Dress appropriately or suffer.
+
+rainy_cold|Cold rain - waterproof and warm clothing essential.|🌧️🧥 Chilly raindrops need extra cozy protection! Rain boots and warm layers! 💙|Cold rain. The worst combo. Waterproof jacket or be cold AND wet.
+
+# Special weather
+humid|High humidity - light breathable clothing recommended.|💧 Sticky-warm air hugs today! Stay cool and drink lots of water! 🧊|Humid swamp weather. You'll sweat just standing still.
+
+dry|Very dry conditions - moisturize and stay hydrated.|🏜️ Super dry day! Keep your skin happy and drink extra water! 💦|Dry as a desert. Chapstick and water or turn into dust.
+
+# Extreme conditions
+heatwave|Extreme heat warning - limit outdoor activities, cooling centers available.|🔥🌡️ Ultra-mega hot day! Stay cool, drink ice-cold drinks, and find AC! 🧊|Heatwave. Deadly hot. Stay inside with AC or risk becoming bacon.
+
+blizzard|Blizzard conditions - stay indoors, travel extremely dangerous.|🌨️❄️ Epic snow adventure outside! But stay cozy inside where it's warm! 🏠|Blizzard. Don't be an idiot. Stay inside or become a snow sculpture.
+
+thunderstorm|Thunderstorms likely - avoid outdoor activities and tall objects.|⚡🌩️ Thunder and lightning show! Nature's fireworks, but watch from inside! 🏠|Thunderstorms. Lightning wants to kill you. Stay indoors.
+
+# Default fallback
+default|Check current conditions and dress accordingly.|🌤️ Whatever the weather brings, you've got this! Have a wonderful day! 💖|Weather is weather. Dress like a functional human being.
