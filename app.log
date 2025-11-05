@@ -1,0 +1,56 @@
+2025-11-05 09:25:05,626 - INFO - Initializing database at app.db
+2025-11-05 09:25:05,659 - INFO - Database initialized successfully
+2025-11-05 09:25:05,660 - INFO - Starting Daily Brief Service
+2025-11-05 09:25:05,660 - INFO - Loading configuration from environment variables
+2025-11-05 09:25:05,661 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-05 09:25:50,032 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-05 09:26:18,422 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:18,425 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:18,427 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:44,149 - INFO - Running daily weather job
+2025-11-05 09:26:44,150 - INFO - Sending weather to 3 subscribers
+2025-11-05 09:26:44,151 - INFO - Getting weather forecast for 51.5074, -0.1278
+2025-11-05 09:26:44,688 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:44,689 - INFO - DRY RUN - Would send email to user1@test.com: Today's Weather for London
+2025-11-05 09:26:44,689 - INFO - Getting weather forecast for 50.0755, 14.4378
+2025-11-05 09:26:45,128 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:45,128 - INFO - DRY RUN - Would send email to user2@test.com: Today's Weather for Prague
+2025-11-05 09:26:45,129 - INFO - Getting weather forecast for 35.6762, 139.6503
+2025-11-05 09:26:45,640 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:26:45,641 - INFO - DRY RUN - Would send email to user3@test.com: Today's Weather for Tokyo
+2025-11-05 09:35:11,828 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:35:11,836 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:37:49,102 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:37:49,104 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:37:49,106 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:38:05,934 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:38:05,935 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:38:05,936 - INFO - Loaded 21 weather message conditions
+2025-11-05 09:38:05,938 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,055 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,057 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,059 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,064 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,066 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:09:07,070 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:08,039 - INFO - Initializing database at app.db
+2025-11-05 10:10:08,078 - INFO - Added language column to subscribers table
+2025-11-05 10:10:08,079 - INFO - Database initialized successfully
+2025-11-05 10:10:08,079 - INFO - Starting Daily Brief Service
+2025-11-05 10:10:08,080 - INFO - Loading configuration from environment variables
+2025-11-05 10:10:08,080 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-05 10:10:41,689 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:41,691 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:41,692 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:41,695 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:41,697 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:10:41,698 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:17:57,537 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:17:57,580 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:17:57,583 - INFO - Loaded 21 weather message conditions
+2025-11-05 10:17:57,585 - INFO - Loaded 21 weather message conditions
+2025-11-05 11:14:15,184 - INFO - Loaded 21 weather message conditions
+2025-11-05 11:14:15,189 - INFO - Loaded 21 weather message conditions
+2025-11-05 11:14:15,191 - INFO - Loaded 21 weather message conditions
+2025-11-05 11:14:15,196 - INFO - Loaded 21 weather message conditions
+2025-11-05 11:15:16,175 - INFO - Loaded 21 weather message conditions

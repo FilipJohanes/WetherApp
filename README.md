@@ -10,13 +10,13 @@ A comprehensive Python 3.11+ service that transforms your email inbox into a sma
 
 1. **🌤️ Daily Weather Digest** - Subscribe by sending your location, receive personalized forecasts at 05:00
 2. **📅 Calendar Reminders** - Schedule one-shot or repeating reminders via email
-3. **🎭 Personality Modes** - Choose from neutral, cute, or brutal communication styles
+3. **🎭 Personality Modes** - Choose from neutral, cute, brutal, or secret Emuska communication styles
 
 ## ✨ Features
 
 - **🆓 100% Free**: Uses Open-Meteo weather API (no API keys required)
 - **📧 Email-Driven**: Control everything via simple email commands
-- **🎭 Personality Modes**: Neutral, cute, or brutal communication styles
+- **🎭 Personality Modes**: Neutral, cute, brutal, or secret Emuska communication styles
 - **🧠 Smart Parsing**: Flexible date/time parsing and location geocoding
 - **🛡️ Robust**: Handles duplicates, restarts, and network failures gracefully
 - **📦 Self-Contained**: Single Python file + SQLite database + config file
@@ -84,6 +84,7 @@ IMAP_PORT="993"
 SMTP_PORT="587" 
 SMTP_USE_TLS="true"
 TZ="Europe/Bratislava"
+LANGUAGE="en"                           # Default language (en/es/sk)
 ```
 
 #### Email Provider Examples:
@@ -170,10 +171,49 @@ cute
 brutal
 ```
 
+**🌟 Emuska mode (secret):**
+- This is a special hidden personality mode
+- Cannot be set via email commands
+- Must be activated manually in the database
+- Use `emuska_manager.py` script for activation
+- Custom messages can be added to `weather_messages.txt`
+
 **Set personality during subscription:**
 ```
 Prague, Czech Republic
 personality=cute
+```
+
+**Set language and personality:**
+```
+Madrid, Spain
+personality=brutal
+language=es
+```
+
+### 🌍 Multi-Language Support
+
+The service supports multiple languages for weather messages:
+
+**English (en)** - Default language with full personality support
+**Spanish (es)** - Complete translations for all personality modes
+**Slovak (sk)** - Special language designed for Emuska mode messages
+
+**Language Examples:**
+```
+# English weather (default)
+London
+personality=cute
+
+# Spanish weather  
+Madrid
+personality=brutal
+language=es
+
+# Slovak for Emuska mode
+Bratislava
+personality=emuska
+language=sk
 ```
 
 ### Calendar Reminders

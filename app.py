@@ -71,6 +71,7 @@ class Config:
         self.smtp_port = int(os.getenv("SMTP_PORT", "587"))
         self.smtp_use_tls = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
         self.timezone = os.getenv("TZ", "Europe/Bratislava")
+        self.language = os.getenv("LANGUAGE", "en")  # Default to English
         
     def _get_env(self, key: str) -> str:
         """Get required environment variable or exit."""
@@ -111,10 +112,18 @@ def init_db(path: str = "app.db") -> None:
             )
         """)
         
-        # Handle schema upgrade - add personality column if it doesn't exist
+        # Handle schema upgrades - add personality column if it doesn't exist
         try:
             conn.execute("ALTER TABLE subscribers ADD COLUMN personality TEXT DEFAULT 'neutral'")
             logger.info("Added personality column to subscribers table")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        
+        # Handle schema upgrade - add language column if it doesn't exist
+        try:
+            conn.execute("ALTER TABLE subscribers ADD COLUMN language TEXT DEFAULT 'en'")
+            logger.info("Added language column to subscribers table")
         except sqlite3.OperationalError:
             # Column already exists, which is fine
             pass
@@ -325,13 +334,13 @@ def parse_plaintext(body: str) -> Dict:
                 value = value.strip().strip('"\'')
                 params[key] = value
         
-        # Check for personality in calendar/weather commands
-        if 'personality' in params:
+        # Check for personality/language in calendar/weather commands
+        if 'personality' in params or 'language' in params:
             if any(key in params for key in ['date', 'time', 'message']):
                 params['command'] = 'CALENDAR'
                 return params
             else:
-                # Weather subscription with personality
+                # Weather subscription with personality/language
                 params['command'] = 'WEATHER'
                 # Extract location from lines that don't contain =
                 location_lines = []
@@ -351,8 +360,14 @@ def parse_plaintext(body: str) -> Dict:
     return {'command': 'WEATHER', 'location': body}
 
 
-def load_weather_messages(file_path: str = "weather_messages.txt") -> Dict[str, Dict[str, str]]:
+def load_weather_messages(file_path: str = None, language: str = "en") -> Dict[str, Dict[str, str]]:
     """Load weather messages from configuration file."""
+    if file_path is None:
+        file_path = f"languages/{language}/weather_messages.txt"
+        # Fallback to root directory for backward compatibility
+        if not os.path.exists(file_path):
+            file_path = "weather_messages.txt"
+    
     messages = {}
     
     try:
@@ -368,17 +383,18 @@ def load_weather_messages(file_path: str = "weather_messages.txt") -> Dict[str, 
                 if not line or line.startswith('#'):
                     continue
                 
-                # Parse format: condition|neutral|cute|brutal
+                # Parse format: condition|neutral|cute|brutal|emuska
                 parts = line.split('|')
-                if len(parts) != 4:
+                if len(parts) != 5:
                     logger.warning(f"Invalid format in {file_path} line {line_num}: {line}")
                     continue
                 
-                condition, neutral, cute, brutal = parts
+                condition, neutral, cute, brutal, emuska = parts
                 messages[condition.strip()] = {
                     'neutral': neutral.strip(),
                     'cute': cute.strip(), 
-                    'brutal': brutal.strip()
+                    'brutal': brutal.strip(),
+                    'emuska': emuska.strip()
                 }
         
         logger.info(f"Loaded {len(messages)} weather message conditions")
@@ -395,17 +411,20 @@ def _get_default_weather_messages() -> Dict[str, Dict[str, str]]:
         'default': {
             'neutral': 'Check current conditions and dress accordingly.',
             'cute': '🌤️ Whatever the weather brings, you\'ve got this! Have a wonderful day! 💖',
-            'brutal': 'Weather is weather. Dress like a functional human being.'
+            'brutal': 'Weather is weather. Dress like a functional human being.',
+            'emuska': ''
         },
         'raining': {
             'neutral': 'Take an umbrella - it\'s going to rain today.',
             'cute': '🌧️ Pitter-patter raindrops are coming! Don\'t forget your cute umbrella! ☂️',
-            'brutal': 'Rain incoming. Umbrella or get soaked. Your choice.'
+            'brutal': 'Rain incoming. Umbrella or get soaked. Your choice.',
+            'emuska': ''
         },
         'sunny': {
             'neutral': 'Beautiful sunny day - perfect weather to enjoy outdoors.',
             'cute': '☀️ Glorious sunshine day! Time for outdoor adventures and happy vibes! 🌻',
-            'brutal': 'Clear skies. No excuses to stay inside feeling sorry for yourself.'
+            'brutal': 'Clear skies. No excuses to stay inside feeling sorry for yourself.',
+            'emuska': ''
         }
     }
 
@@ -472,14 +491,14 @@ def detect_weather_condition(weather: Dict) -> str:
     return 'default'
 
 
-def get_weather_message(condition: str, personality: str = 'neutral', messages: Dict = None) -> str:
+def get_weather_message(condition: str, personality: str = 'neutral', messages: Dict = None, language: str = 'en') -> str:
     """Get weather message for specific condition and personality mode."""
     if messages is None:
-        messages = load_weather_messages()
+        messages = load_weather_messages(language=language)
     
     # Normalize personality mode
     personality = personality.lower().strip()
-    if personality not in ['neutral', 'cute', 'brutal']:
+    if personality not in ['neutral', 'cute', 'brutal', 'emuska']:
         personality = 'neutral'
     
     # Get message for condition
@@ -568,7 +587,7 @@ def get_weather_forecast(lat: float, lon: float, timezone_name: str) -> Optional
         return None
 
 
-def generate_weather_summary(weather: Dict, location: str, personality: str = 'neutral') -> str:
+def generate_weather_summary(weather: Dict, location: str, personality: str = 'neutral', language: str = 'en') -> str:
     """Generate natural language weather summary with clothing recommendation and personality."""
     temp_max = weather['temp_max']
     temp_min = weather['temp_min']
@@ -576,8 +595,8 @@ def generate_weather_summary(weather: Dict, location: str, personality: str = 'n
     precip_sum = weather['precipitation_sum']
     wind_speed = weather['wind_speed_max']
     
-    # Load weather messages
-    messages = load_weather_messages()
+    # Load weather messages for the specified language
+    messages = load_weather_messages(language=language)
     
     # Detect primary weather condition
     condition = detect_weather_condition(weather)
@@ -594,7 +613,7 @@ def generate_weather_summary(weather: Dict, location: str, personality: str = 'n
     summary += f"💨 Wind: up to {wind_speed:.0f} km/h\n\n"
     
     # Get personality-based weather message
-    weather_message = get_weather_message(condition, personality, messages)
+    weather_message = get_weather_message(condition, personality, messages, language)
     summary += f"💡 {weather_message}\n\n"
     
     # Generate clothing recommendation based on personality
@@ -642,6 +661,9 @@ def _generate_clothing_advice(temp_max: float, precip_prob: float, precip_sum: f
     elif personality == 'brutal':
         prefix = "🥶 Survival gear: "
         suffix = " or suffer the consequences."
+    elif personality == 'emuska':
+        prefix = "👗 Pre moju princeznú: Oblieč si "
+        suffix = ", aby si bola krásna a chránená ako skutočná kráľovná! 💕👸✨"
     else:  # neutral
         prefix = "👕 Clothing recommendation: "
         suffix = ""
@@ -649,7 +671,7 @@ def _generate_clothing_advice(temp_max: float, precip_prob: float, precip_sum: f
     return prefix + clothing_text + suffix
 
 
-def handle_weather_command(config: Config, from_email: str, location: str = None, is_delete: bool = False, personality: str = None, dry_run: bool = False) -> None:
+def handle_weather_command(config: Config, from_email: str, location: str = None, is_delete: bool = False, personality: str = None, language: str = None, dry_run: bool = False) -> None:
     """Handle weather subscription command."""
     conn = sqlite3.connect("app.db")
     
@@ -665,17 +687,19 @@ def handle_weather_command(config: Config, from_email: str, location: str = None
         else:
             # Get current subscriber info
             current_sub = conn.execute("""
-                SELECT location, lat, lon, personality FROM subscribers WHERE email = ?
+                SELECT location, lat, lon, personality, COALESCE(language, 'en') FROM subscribers WHERE email = ?
             """, (from_email,)).fetchone()
             
             current_location = current_sub[0] if current_sub else None
             current_lat = current_sub[1] if current_sub else None  
             current_lon = current_sub[2] if current_sub else None
             current_personality = current_sub[3] if current_sub else 'neutral'
+            current_language = current_sub[4] if current_sub else 'en'
             
             # Determine what to update
             new_location = location if location else current_location
             new_personality = personality if personality else current_personality
+            new_language = language if language else current_language
             
             if new_location:
                 # Subscribe/update location
@@ -686,30 +710,31 @@ def handle_weather_command(config: Config, from_email: str, location: str = None
                     
                     # Save/update subscription
                     conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality)
-                        VALUES (?, ?, ?, ?, ?, ?)
-                    """, (from_email, display_name, lat, lon, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality))
+                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality, language)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """, (from_email, display_name, lat, lon, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
                     conn.commit()
                     
-                    # Get sample weather with personality
+                    # Get sample weather with personality and language
                     weather = get_weather_forecast(lat, lon, config.timezone)
                     if weather:
-                        sample_forecast = generate_weather_summary(weather, display_name, new_personality)
+                        sample_forecast = generate_weather_summary(weather, display_name, new_personality, new_language)
                         response = f"✅ Weather subscription updated!\n"
                         response += f"📍 Location: {display_name} ({lat:.4f}, {lon:.4f})\n"
-                        response += f"🎭 Personality mode: {new_personality}\n\n"
+                        response += f"🎭 Personality mode: {new_personality}\n"
+                        response += f"🌍 Language: {new_language}\n\n"
                         response += f"Here's today's forecast:\n{sample_forecast}\n"
                     else:
                         response = f"✅ Subscribed to weather for {display_name} in {new_personality} mode, but couldn't fetch current forecast.\n\n"
                 else:
                     # Save with unknown coordinates
                     conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality)
-                        VALUES (?, ?, NULL, NULL, ?, ?)
-                    """, (from_email, new_location, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality))
+                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality, language)
+                        VALUES (?, ?, NULL, NULL, ?, ?, ?)
+                    """, (from_email, new_location, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
                     conn.commit()
                     
-                    response = f"⚠️ Subscribed to weather service in {new_personality} mode, but couldn't geocode '{new_location}'.\n"
+                    response = f"⚠️ Subscribed to weather service in {new_personality} mode (language: {new_language}), but couldn't geocode '{new_location}'.\n"
                     response += "Please try a more specific location (e.g., 'Prague, CZ' or 'New York, NY').\n\n"
             else:
                 response = f"❌ Please provide a location to subscribe to weather updates.\n\n"
@@ -916,14 +941,14 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
     conn = sqlite3.connect("app.db")
     try:
         subscribers = conn.execute("""
-            SELECT email, location, lat, lon, COALESCE(personality, 'neutral') as personality 
+            SELECT email, location, lat, lon, COALESCE(personality, 'neutral') as personality, COALESCE(language, 'en') as language
             FROM subscribers 
             WHERE lat IS NOT NULL AND lon IS NOT NULL
         """).fetchall()
         
         logger.info(f"Sending weather to {len(subscribers)} subscribers")
         
-        for email_addr, location, lat, lon, personality in subscribers:
+        for email_addr, location, lat, lon, personality, language in subscribers:
             try:
                 # Get weather forecast
                 weather = get_weather_forecast(lat, lon, config.timezone)
@@ -931,11 +956,11 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
                     logger.warning(f"No weather data for {email_addr} at {location}")
                     continue
                 
-                # Generate and send forecast with personality
-                summary = generate_weather_summary(weather, location, personality)
+                # Generate and send forecast with personality and language
+                summary = generate_weather_summary(weather, location, personality, language)
                 subject = f"Today's Weather for {location}"
                 
-                footer = f"\n\n---\nDaily Weather Service ({personality} mode)\nTo unsubscribe, reply with 'delete'"
+                footer = f"\n\n---\nDaily Weather Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
                 full_message = summary + footer
                 
                 send_email(config, email_addr, subject, full_message, dry_run)
@@ -1045,7 +1070,8 @@ def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool =
             
         elif command == 'WEATHER':
             personality = parsed.get('personality', None)
-            handle_weather_command(config, msg.from_email, parsed['location'], personality=personality, dry_run=dry_run)
+            language = parsed.get('language', None)
+            handle_weather_command(config, msg.from_email, parsed['location'], personality=personality, language=language, dry_run=dry_run)
             
         elif command == 'PERSONALITY':
             handle_personality_command(config, msg.from_email, parsed['mode'], dry_run=dry_run)

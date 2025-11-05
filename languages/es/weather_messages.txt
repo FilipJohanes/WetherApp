@@ -1,0 +1,57 @@
+# Weather Messages Configuration - Spanish
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Conditions can be: raining, heavy_rain, snowing, hot, cold, freezing, windy, stormy, foggy, sunny, cloudy, mild
+# Note: Emuska mode is a secret mode that can only be set manually in the database
+
+# Rain conditions
+raining|Lleva paraguas - va a llover hoy.|🌧️ ¡Gotitas de lluvia vienen cayendo! ¡No olvides tu lindo paraguas! ☂️|Se acerca la lluvia. Paraguas o empaparte. Tú eliges.|
+
+heavy_rain|Se esperan lluvias intensas - se recomienda equipo impermeable.|⛈️ ¡Gran lluvia salpicona hoy! ¡Hora de botas de lluvia y abrigo acogedor! 💧|Aguacero intenso. Impermeabiliza todo o quédate adentro.|
+
+# Snow conditions  
+snowing|Está nevando - abrígate bien y cuidado con las superficies resbaladizas.|❄️ ¡Copos de nieve mágicos están bailando! ¡Abrígate como un lindo conejito de nieve! ⛄|Nieve. Frío. Resbaloso. No te caigas de cara.|
+
+# Temperature conditions
+hot|Muy caluroso hoy - mantente hidratado y busca sombra.|🌞 ¡Va a estar calientito! ¡Perfecto para helado y sonrisas soleadas! 😎|Calor infernal. Bebe agua o derretirte.|
+
+cold|Clima frío - usa capas para mantenerte cómodo.|🧥 ¡Brr! ¡Hora de suéteres acogedores y abrazos cálidos! ¡Clima perfecto para acurrucarse! 🤗|Frío. Usa capas o congela tu trasero.|
+
+freezing|Temperaturas bajo cero - equipo de invierno pesado esencial.|🥶 ¡Súper súper frío! ¡Hora del abrigo más esponjoso y guantes más calientes! ❄️|Frío helador. Vístete como explorador ártico o conviértete en paleta.|
+
+mild|Temperatura agradable - disfruta el clima cómodo.|😊 ¡Perfecto! ¡Como un abrazo cálido perfecto de la Madre Naturaleza! 🌸|Temperatura decente. Nada de qué quejarse por una vez.|
+
+# Wind conditions
+windy|Se esperan vientos fuertes - asegura objetos sueltos.|💨 ¡Whoooosh! ¡Día de aventura ventosa! ¡Agárrate el sombrero y diviértete! 🎩|Vientos fuertes. Tu cabello se verá terrible. Acéptalo.|
+
+stormy|Advertencia de clima severo - quédate adentro si es posible.|⛈️ ¡Las grandes nubes de tormenta están de fiesta! ¡Quédate acogedor adentro con chocolate caliente! ☕|Advertencia de tormenta. Quédate adentro a menos que disfrutes ser el saco de boxeo de la naturaleza.|
+
+# Visibility conditions
+foggy|Condiciones de neblina - maneja con cuidado y usa luces.|🌫️ ¡La neblina misteriosa hace que todo se vea mágico y soñador! ✨|Neblina por todas partes. Maneja despacio o choca con algo invisible.|
+
+# Clear conditions
+sunny|Hermoso día soleado - clima perfecto para disfrutar al aire libre.|☀️ ¡Día de sol glorioso! ¡Hora de aventuras al aire libre y buenas vibras! 🌻|Cielos despejados. No hay excusas para quedarse adentro sintiéndote mal por ti mismo.|
+
+cloudy|Cielos nublados - aún clima agradable para actividades.|☁️ ¡Las nubes esponjosas están decorando el cielo como algodón de azúcar! ¡Tan bonito! 🌤️|Nublado pero lo que sea. Al menos no está lloviendo en tu desfile.|
+
+# Combined conditions
+sunny_hot|Caliente y soleado - busca sombra, usa protector solar, mantente hidratado.|🔥☀️ ¡Día súper soleado-caliente! ¡Perfecto para vibras de playa pero no te conviertas en langosta! 🦞|Sol ardiente. Protector solar o convertirte en cecina humana.|
+
+cold_windy|Frío y ventoso - abrígate bien, la piel expuesta se enfriará rápidamente.|🌬️❄️ ¡Los vientos fríos están dando abrazos extra-fríos! ¡Envuélvete como un burrito acogedor! 🌯|Frío + viento = combo miserable. Vístete apropiadamente o sufrir.|
+
+rainy_cold|Lluvia fría - ropa impermeable y cálida esencial.|🌧️🧥 ¡Las gotitas frías necesitan protección extra acogedora! ¡Botas de lluvia y capas cálidas! 💙|Lluvia fría. La peor combinación. Chaqueta impermeable o estar frío Y mojado.|
+
+# Special weather
+humid|Alta humedad - se recomienda ropa ligera y transpirable.|💧 ¡Abrazos de aire pegajoso-cálido hoy! ¡Mantente fresco y bebe mucha agua! 🧊|Clima húmedo de pantano. Sudarás solo de estar parado.|
+
+dry|Condiciones muy secas - hidrátate y usa humectante.|🏜️ ¡Día súper seco! ¡Mantén tu piel feliz y bebe agua extra! 💦|Seco como un desierto. Bálsamo labial y agua o convertirte en polvo.|
+
+# Extreme conditions
+heatwave|Advertencia de calor extremo - limita actividades al aire libre, centros de enfriamiento disponibles.|🔥🌡️ ¡Día ultra-mega caliente! ¡Mantente fresco, bebe bebidas heladas y encuentra AC! 🧊|Ola de calor. Mortalmente caliente. Quédate adentro con AC o arriesgarte a convertirte en tocino.|
+
+blizzard|Condiciones de ventisca - quédate adentro, viajar es extremadamente peligroso.|🌨️❄️ ¡Épica aventura de nieve afuera! ¡Pero quédate acogedor adentro donde está cálido! 🏠|Ventisca. No seas idiota. Quédate adentro o conviértete en escultura de nieve.|
+
+thunderstorm|Probables tormentas eléctricas - evita actividades al aire libre y objetos altos.|⚡🌩️ ¡Espectáculo de truenos y relámpagos! ¡Fuegos artificiales de la naturaleza, pero mira desde adentro! 🏠|Tormentas eléctricas. Los rayos quieren matarte. Quédate adentro.|
+
+# Default fallback
+default|Revisa las condiciones actuales y vístete apropiadamente.|🌤️ ¡Cualquier clima que traiga, tú puedes con esto! ¡Ten un día maravilloso! 💖|El clima es clima. Vístete como un ser humano funcional.|
