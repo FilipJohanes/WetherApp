@@ -1,8 +1,8 @@
-# Weather Messages Configuration  
+# Weather Messages Configuration - English
 # Format: condition|neutral|cute|brutal|emuska
 # Each line represents one weather condition with four personality modes
 # Conditions can be: raining, heavy_rain, snowing, hot, cold, freezing, windy, stormy, foggy, sunny, cloudy, mild
-# Note: Emuska mode is a secret mode that can only be set manually in the database
+# Note: Emuska mode is not available in English (only available in Slovak language)
 
 # Rain conditions
 raining|Take an umbrella - it's going to rain today.|🌧️ Pitter-patter raindrops are coming! Don't forget your cute umbrella! ☂️|Rain incoming. Umbrella or get soaked. Your choice.|

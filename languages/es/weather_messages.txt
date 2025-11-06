@@ -2,7 +2,7 @@
 # Format: condition|neutral|cute|brutal|emuska
 # Each line represents one weather condition with four personality modes
 # Conditions can be: raining, heavy_rain, snowing, hot, cold, freezing, windy, stormy, foggy, sunny, cloudy, mild
-# Note: Emuska mode is a secret mode that can only be set manually in the database
+# Note: Emuska mode is not available in Spanish (only available in Slovak language)
 
 # Rain conditions
 raining|Lleva paraguas - va a llover hoy.|🌧️ ¡Gotitas de lluvia vienen cayendo! ¡No olvides tu lindo paraguas! ☂️|Se acerca la lluvia. Paraguas o empaparte. Tú eliges.|

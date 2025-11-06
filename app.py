@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 """
-Daily Brief Service - Email-driven weather subscriptions and calendar reminders.
+Daily Brief Service - Email-driven weather subscriptions.
 
 This service monitors an email inbox for commands and provides:
 1. Daily weather digest subscriptions (send location to subscribe)
-2. Calendar reminders (send date/time/message to schedule)
+2. Multi-language support (EN/ES/SK) and personality modes
+3. Smart email parsing with system email filtering
+
+Features:
+- Weather forecasts at 05:00 local time
+- 4 personality modes: neutral, cute, brutal, emuska
+- Unicode-safe logging for international users
+- Webhook architecture for scalability
 
 Requirements:
 - Python 3.11+
@@ -38,14 +45,33 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv is optional, environment variables can be set manually
+    pass
 
-# Configure logging
+# Configure logging with UTF-8 encoding to handle emojis
+class SafeStreamHandler(logging.StreamHandler):
+    """Custom stream handler that safely handles Unicode characters"""
+    def emit(self, record):
+        try:
+            super().emit(record)
+        except UnicodeEncodeError:
+            # Fallback: encode with ascii and replace problem characters
+            msg = self.format(record)
+            safe_msg = msg.encode('ascii', errors='replace').decode('ascii')
+            record.msg = safe_msg
+            super().emit(record)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.StreamHandler(sys.stderr),
-        logging.FileHandler('app.log')
+        SafeStreamHandler(sys.stderr),
+        logging.FileHandler('app.log', encoding='utf-8')
     ]
 )
 logger = logging.getLogger(__name__)
@@ -253,17 +279,35 @@ def _extract_plain_text(email_message) -> str:
             except:
                 body = ""
     
-    # Clean up body - take first 20 lines, strip signatures
-    lines = body.split('\n')[:20]
+    # Clean up body - remove reply chains and signatures
+    lines = body.split('\n')
     cleaned_lines = []
     
     for line in lines:
         line = line.strip()
-        # Stop at common signature patterns
-        if line.startswith('--') or line.startswith('___') or 'sent from' in line.lower():
+        
+        # Stop at reply chain indicators
+        if (line.startswith('On ') and ('wrote:' in line or 'sent:' in line)) or \
+           line.startswith('>') or \
+           line.startswith('From:') or \
+           line.startswith('Sent:') or \
+           line.startswith('To:') or \
+           line.startswith('Subject:'):
             break
-        if line:  # Skip empty lines
+            
+        # Stop at common signature patterns
+        if line.startswith('--') or line.startswith('___') or \
+           'sent from' in line.lower() or \
+           'best regards' in line.lower() or \
+           'thank you' in line.lower():
+            break
+            
+        if line:  # Add non-empty lines
             cleaned_lines.append(line)
+            
+        # Limit to first 10 meaningful lines to avoid very long emails
+        if len(cleaned_lines) >= 10:
+            break
     
     return '\n'.join(cleaned_lines)
 
@@ -311,53 +355,94 @@ def send_email(config: Config, to: str, subject: str, body: str, dry_run: bool =
 
 
 def parse_plaintext(body: str) -> Dict:
-    """Parse email body to determine command type and extract parameters."""
+    """Parse email body to determine command type and extract parameters - IDIOT-PROOF version!"""
     body = body.strip()
+    lines = [line.strip() for line in body.split('\n') if line.strip()]
     
-    # Check for delete command
-    if body.lower() == 'delete':
-        return {'command': 'DELETE'}
+    if not lines:
+        return {'command': 'WEATHER', 'location': 'current'}
     
-    # Check for personality mode command
-    lower_body = body.lower()
-    if lower_body in ['neutral', 'cute', 'brutal']:
-        return {'command': 'PERSONALITY', 'mode': lower_body}
+    # Smart parsing: look for keywords in individual lines
+    location_lines = []
+    personality_mode = None
+    language_code = None
+    calendar_text = None
     
-    # Check for key=value format (calendar command)
-    if '=' in body:
-        params = {}
-        for line in body.split('\n'):
-            line = line.strip()
-            if '=' in line:
-                key, value = line.split('=', 1)
-                key = key.strip().lower()
-                value = value.strip().strip('"\'')
-                params[key] = value
+    for line in lines:
+        line_lower = line.lower()
         
-        # Check for personality/language in calendar/weather commands
-        if 'personality' in params or 'language' in params:
-            if any(key in params for key in ['date', 'time', 'message']):
-                params['command'] = 'CALENDAR'
-                return params
+        # Check for explicit commands
+        if line_lower == 'delete' or 'unsubscribe' in line_lower:
+            return {'command': 'DELETE'}
+            
+        # Check for personality modes (can be anywhere in the message)
+        if any(mode in line_lower for mode in ['neutral', 'cute', 'brutal', 'emuska']):
+            for mode in ['neutral', 'cute', 'brutal', 'emuska']:
+                if mode in line_lower:
+                    personality_mode = mode
+                    break
+            continue
+            
+        # Check for language codes (sk, en, es)
+        if line_lower in ['sk', 'en', 'es'] or \
+           'language:' in line_lower or \
+           'lang:' in line_lower:
+            # Extract language code
+            if line_lower in ['sk', 'en', 'es']:
+                language_code = line_lower
             else:
-                # Weather subscription with personality/language
-                params['command'] = 'WEATHER'
-                # Extract location from lines that don't contain =
-                location_lines = []
-                for line in body.split('\n'):
-                    line = line.strip()
-                    if line and '=' not in line:
-                        location_lines.append(line)
-                params['location'] = '\n'.join(location_lines) if location_lines else 'current'
-                return params
-        
-        # If we have calendar-like fields, treat as calendar command
-        if any(key in params for key in ['date', 'time', 'message']):
-            params['command'] = 'CALENDAR'
-            return params
+                for lang in ['sk', 'en', 'es']:
+                    if lang in line_lower:
+                        language_code = lang
+                        break
+            continue
+            
+        # Calendar/reminder system disabled for now
+        # if any(keyword in line_lower for keyword in ['remind', 'reminder', 'meeting', 'appointment', 'call']):
+        #     calendar_text = line
+        #     continue
+            
+        # Check if line looks like a location (city, country, coordinates)
+        if line and not any(word in line_lower for word in ['remind', 'personality', 'language', 'mode']):
+            # Remove common non-location words and see if anything remains
+            clean_line = line
+            for remove_word in ['please', 'thank you', 'thanks', 'hello', 'hi']:
+                clean_line = re.sub(r'\b' + remove_word + r'\b', '', clean_line, flags=re.IGNORECASE)
+            clean_line = clean_line.strip(' ,.')
+            
+            if clean_line:
+                location_lines.append(clean_line)
     
-    # Otherwise, treat as location (weather command)
-    return {'command': 'WEATHER', 'location': body}
+    # Decide what to return based on what we found
+    
+    # If we found personality mode, return that command
+    if personality_mode:
+        return {'command': 'PERSONALITY', 'mode': personality_mode}
+        
+    # If we found language code, return language change command
+    if language_code:
+        return {'command': 'LANGUAGE', 'language': language_code}
+        
+    # Calendar system disabled - will be re-enabled later
+    # if calendar_text:
+    #     return {'command': 'CALENDAR', 'text': calendar_text}
+    
+    # Otherwise, treat as weather location
+    if location_lines:
+        # Take only the first line that looks like a location
+        location = location_lines[0]
+        result = {'command': 'WEATHER', 'location': location}
+        
+        # Add any personality/language we found
+        if personality_mode:
+            result['personality'] = personality_mode
+        if language_code:
+            result['language'] = language_code
+            
+        return result
+    
+    # Fallback - treat entire first line as location
+    return {'command': 'WEATHER', 'location': lines[0] if lines else 'current'}
 
 
 def load_weather_messages(file_path: str = None, language: str = "en") -> Dict[str, Dict[str, str]]:
@@ -501,9 +586,19 @@ def get_weather_message(condition: str, personality: str = 'neutral', messages: 
     if personality not in ['neutral', 'cute', 'brutal', 'emuska']:
         personality = 'neutral'
     
+    # Special handling for Emuska mode - only available in Slovak
+    if personality == 'emuska' and language != 'sk':
+        logger.warning(f"Emuska mode requested for {language} language, falling back to 'cute'")
+        personality = 'cute'  # Fallback to cute mode for non-Slovak languages
+    
     # Get message for condition
     if condition in messages:
-        return messages[condition][personality]
+        # Check if the personality exists and has content for this language
+        message = messages[condition].get(personality, '')
+        if not message and personality == 'emuska':
+            # If Emuska message is empty, fallback to cute
+            message = messages[condition].get('cute', messages.get('default', {}).get('cute', 'Have a great day!'))
+        return message or messages.get('default', {}).get(personality, 'Have a great day!')
     else:
         # Fallback to default
         return messages.get('default', {}).get(personality, 'Have a great day!')
@@ -701,6 +796,14 @@ def handle_weather_command(config: Config, from_email: str, location: str = None
             new_personality = personality if personality else current_personality
             new_language = language if language else current_language
             
+            # Validate Emuska personality mode - only available in Slovak
+            if new_personality == 'emuska' and new_language != 'sk':
+                response = f"❌ Emuska personality mode is only available in Slovak language.\n"
+                response += f"Please set language to 'sk' to use Emuska mode, or choose another personality: neutral, cute, brutal\n\n"
+                response += _get_usage_footer()
+                send_email(config, from_email, "Weather Service - Language Error", response, dry_run)
+                return
+            
             if new_location:
                 # Subscribe/update location
                 geocode_result = geocode_location(new_location) if new_location != current_location else (current_lat, current_lon, current_location)
@@ -756,31 +859,40 @@ def handle_personality_command(config: Config, from_email: str, mode: str, dry_r
     
     try:
         # Validate personality mode
-        if mode not in ['neutral', 'cute', 'brutal']:
-            response = f"❌ Invalid personality mode '{mode}'. Choose from: neutral, cute, brutal\n\n"
+        if mode not in ['neutral', 'cute', 'brutal', 'emuska']:
+            response = f"❌ Invalid personality mode '{mode}'. Choose from: neutral, cute, brutal, emuska\n\n"
             response += _get_usage_footer()
             send_email(config, from_email, "Personality Mode - Error", response, dry_run)
             return
         
-        # Check if user is subscribed to weather service
+        # Check if user is subscribed to weather service and get their language
         current_sub = conn.execute("""
-            SELECT location, lat, lon FROM subscribers WHERE email = ?
+            SELECT location, lat, lon, COALESCE(language, 'en') FROM subscribers WHERE email = ?
         """, (from_email,)).fetchone()
         
         if current_sub:
+            location, lat, lon, user_language = current_sub
+            
+            # Validate Emuska personality mode - only available in Slovak
+            if mode == 'emuska' and user_language != 'sk':
+                response = f"❌ Emuska personality mode is only available in Slovak language.\n"
+                response += f"Your current language: {user_language}\n"
+                response += f"Please change language to 'sk' first, or choose another personality: neutral, cute, brutal\n\n"
+                response += _get_usage_footer()
+                send_email(config, from_email, "Personality Mode - Language Error", response, dry_run)
+                return
+            
             # Update existing subscription personality
             conn.execute("""
                 UPDATE subscribers SET personality = ?, updated_at = ? WHERE email = ?
             """, (mode, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
             conn.commit()
             
-            location, lat, lon = current_sub
-            
             # Show sample with new personality
             if lat and lon:
                 weather = get_weather_forecast(lat, lon, config.timezone)
                 if weather:
-                    sample_forecast = generate_weather_summary(weather, location, mode)
+                    sample_forecast = generate_weather_summary(weather, location, mode, user_language)
                     response = f"✅ Personality mode updated to '{mode}'!\n\n"
                     response += f"Here's how your weather reports will look:\n{sample_forecast}\n"
                 else:
@@ -793,6 +905,54 @@ def handle_personality_command(config: Config, from_email: str, mode: str, dry_r
         
         response += _get_usage_footer()
         send_email(config, from_email, f"Personality Mode - {mode.title()}", response, dry_run)
+        
+    finally:
+        conn.close()
+
+
+def handle_language_command(config: Config, from_email: str, language: str, dry_run: bool = False) -> None:
+    """Handle language change command."""
+    conn = sqlite3.connect("app.db")
+    
+    try:
+        # Validate language code
+        if language not in ['en', 'es', 'sk']:
+            response = f"❌ Invalid language '{language}'. Choose from: en (English), es (Spanish), sk (Slovak)\n\n"
+            response += _get_usage_footer()
+            send_email(config, from_email, "Language - Error", response, dry_run)
+            return
+        
+        # Check if user is subscribed to weather service
+        current_sub = conn.execute("""
+            SELECT location, lat, lon, COALESCE(personality, 'neutral') FROM subscribers WHERE email = ?
+        """, (from_email,)).fetchone()
+        
+        if current_sub:
+            location, lat, lon, personality = current_sub
+            
+            # Update existing subscription language
+            conn.execute("""
+                UPDATE subscribers SET language = ?, updated_at = ? WHERE email = ?
+            """, (language, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
+            conn.commit()
+            
+            # Show sample with new language
+            if lat and lon:
+                weather = get_weather_forecast(lat, lon, config.timezone)
+                if weather:
+                    sample_forecast = generate_weather_summary(weather, location, personality, language)
+                    response = f"✅ Language updated to '{language}'!\n\n"
+                    response += f"Here's how your weather reports will look:\n{sample_forecast}\n"
+                else:
+                    response = f"✅ Language updated to '{language}' for {location}!\n\n"
+            else:
+                response = f"✅ Language updated to '{language}' for {location}!\n\n"
+        else:
+            response = f"ℹ️ You're not subscribed to the weather service yet.\n"
+            response += f"Send a location to subscribe with '{language}' language.\n\n"
+        
+        response += _get_usage_footer()
+        send_email(config, from_email, f"Language - {language.upper()}", response, dry_run)
         
     finally:
         conn.close()
@@ -920,16 +1080,14 @@ def _get_usage_footer() -> str:
 
 🎭 PERSONALITY MODES:
 • Send "neutral" for standard weather reports
-• Send "cute" for friendly, emoji-filled reports 
+• Send "cute" for friendly, emoji-friendly reports 
 • Send "brutal" for blunt, no-nonsense reports
+• Send "emuska" for quirky Slovak-style reports
 
-📅 CALENDAR REMINDERS:
-• Send a structured message:
-  date=2025-12-01
-  time=08:30
-  message=Doctor Appointment
-  repeat=3
-• Send "delete" to remove all your pending reminders
+🌍 LANGUAGE SUPPORT:
+• Send "en" for English reports
+• Send "es" for Spanish reports  
+• Send "sk" for Slovak reports
 
 Need help? Just reply to this email!"""
 
@@ -1030,7 +1188,13 @@ def run_due_reminders_job(config: Config, dry_run: bool = False) -> None:
 
 def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool = False) -> None:
     """Process an inbound email command."""
-    logger.info(f"Processing email from {msg.from_email}: {msg.subject}")
+    logger.info(f"Received email from {msg.from_email}: {msg.subject}")
+    
+    # Filter out system emails and unwanted messages
+    if not should_process_email(msg):
+        return
+    
+    logger.info(f"Processing valid user email from {msg.from_email}: {msg.subject}")
     
     # Check for duplicates
     conn = sqlite3.connect("app.db")
@@ -1057,16 +1221,14 @@ def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool =
         command = parsed.get('command')
         
         if command == 'DELETE':
-            # Ambiguous delete - remove both weather subscription and reminders
+            # Delete weather subscription (reminder system disabled)
             handle_weather_command(config, msg.from_email, is_delete=True, dry_run=dry_run)
-            delete_all_reminders(config, msg.from_email, dry_run=dry_run)
+            # delete_all_reminders(config, msg.from_email, dry_run=dry_run)  # Reminder system disabled
             
-            # Send combined confirmation
-            response = "✅ Complete cleanup performed:\n"
-            response += "• Unsubscribed from weather service\n"
-            response += "• Deleted all pending calendar reminders\n\n"
+            # Send confirmation
+            response = "✅ Unsubscribed from weather service\n\n"
             response += _get_usage_footer()
-            send_email(config, msg.from_email, "Services - Cleanup Complete", response, dry_run)
+            send_email(config, msg.from_email, "Weather Service - Unsubscribed", response, dry_run)
             
         elif command == 'WEATHER':
             personality = parsed.get('personality', None)
@@ -1076,8 +1238,12 @@ def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool =
         elif command == 'PERSONALITY':
             handle_personality_command(config, msg.from_email, parsed['mode'], dry_run=dry_run)
             
-        elif command == 'CALENDAR':
-            handle_calendar_command(config, msg.from_email, parsed, dry_run=dry_run)
+        elif command == 'LANGUAGE':
+            handle_language_command(config, msg.from_email, parsed['language'], dry_run=dry_run)
+            
+        # elif command == 'CALENDAR':
+        #     handle_calendar_command(config, msg.from_email, parsed, dry_run=dry_run)
+        #     # Calendar system temporarily disabled
             
         else:
             # Unknown command
@@ -1090,6 +1256,74 @@ def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool =
         response = f"❌ Error processing your request: {str(e)}\n\n"
         response += _get_usage_footer()
         send_email(config, msg.from_email, "Daily Brief Service - Error", response, dry_run)
+
+
+def should_process_email(msg: EmailMessageInfo) -> bool:
+    """Determine if an email should be processed by our service."""
+    
+    # Skip emails from system/automated accounts
+    system_senders = [
+        'no-reply@google.com',
+        'no-reply@accounts.google.com',
+        'noreply@google.com',
+        'mailer-daemon@googlemail.com',
+        'mailer-daemon@gmail.com',
+        'bounce@',
+        'postmaster@',
+        'daemon@',
+        'system@'
+    ]
+    
+    # Check if sender is a system account
+    sender = msg.from_email.lower()
+    for system_sender in system_senders:
+        if sender.startswith(system_sender.lower()):
+            logger.info(f"Skipping system email from {msg.from_email}")
+            return False
+    
+    # Skip emails with encoded subjects (usually system emails)
+    if '=?' in msg.subject and '?=' in msg.subject:
+        logger.info(f"Skipping email with encoded subject: {msg.subject}")
+        return False
+    
+    # Skip emails with system-like subjects
+    system_subjects = [
+        'delivery status notification',
+        'security alert',
+        'account notification',
+        'two-factor authentication',
+        'your account',
+        'security code',
+        'verify',
+        'confirmation'
+    ]
+    
+    subject_lower = msg.subject.lower()
+    for system_subject in system_subjects:
+        if system_subject in subject_lower:
+            logger.info(f"Skipping system email with subject: {msg.subject}")
+            return False
+    
+    # Skip emails with very short or empty body (likely system emails)
+    body_text = msg.plain_text_body.strip()
+    if len(body_text) < 3:
+        logger.info(f"Skipping email with too short body from {msg.from_email}")
+        return False
+    
+    # Skip emails that look like automated responses
+    if any(phrase in body_text.lower() for phrase in [
+        'this is an automated',
+        'do not reply',
+        'noreply',
+        'automatically generated',
+        'undelivered mail'
+    ]):
+        logger.info(f"Skipping automated email from {msg.from_email}")
+        return False
+    
+    # If we get here, it looks like a legitimate user email
+    logger.info(f"Email from {msg.from_email} passed filtering checks")
+    return True
 
 
 def check_inbox_job(config: Config, dry_run: bool = False) -> None:
@@ -1279,12 +1513,13 @@ def main():
         name='Check inbox for new commands'
     )
     
-    scheduler.add_job(
-        func=lambda: run_due_reminders_job(config, args.dry_run),
-        trigger=IntervalTrigger(minutes=1),
-        id='check_reminders',
-        name='Send due calendar reminders'
-    )
+    # Reminder system temporarily disabled
+    # scheduler.add_job(
+    #     func=lambda: run_due_reminders_job(config, args.dry_run),
+    #     trigger=IntervalTrigger(minutes=1),
+    #     id='check_reminders',
+    #     name='Send due calendar reminders'
+    # )
     
     scheduler.add_job(
         func=lambda: run_daily_weather_job(config, args.dry_run),
@@ -1296,7 +1531,7 @@ def main():
     logger.info("Scheduler started - Daily Brief Service is running")
     logger.info("Jobs scheduled:")
     logger.info("  - Check inbox: every 1 minute")
-    logger.info("  - Check reminders: every 1 minute")
+    # logger.info("  - Check reminders: every 1 minute")  # Disabled
     logger.info("  - Daily weather: 05:00 local time")
     
     try:

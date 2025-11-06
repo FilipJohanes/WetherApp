@@ -1,0 +1,53 @@
+# Spanish Messages - Complete Localization  
+# Format: message_key|neutral|cute|brutal|emuska
+
+# System Messages
+welcome|Bienvenido al Servicio Daily Brief! Envía tu ubicación para suscribirte a las actualizaciones meteorológicas diarias.|🌟 ¡Bienvenido a Daily Brief! ¡Envíanos tu ubicación y te mantendremos informado con adorables reportes del tiempo! 💫|Bienvenido. Envía ubicación. Recibe clima. Simple.|
+
+subscription_confirmed|✅ Suscripción meteorológica confirmada para {location}. Los pronósticos diarios se enviarán a las 05:00 hora local.|🎉 ¡Genial! ¡Ya estás listo para recibir actualizaciones diarias del clima en {location}! ¡Te enviaremos hermosos pronósticos cada mañana a las 5 AM! ☀️|Suscrito a {location}. Clima diario a las 05:00. Hecho.|
+
+unsubscribed|✅ Desuscrito del servicio meteorológico.|👋 ¡Qué pena verte partir! Te has desuscrito de las actualizaciones del clima. ¡Cuídate! 💕|Desuscrito. No más spam meteorológico.|
+
+location_not_found|❌ No se pudo encontrar la ubicación "{location}". Por favor intenta de nuevo con una dirección más específica.|🤔 Hmm, no pudimos encontrar "{location}" en nuestros mapas. ¿Podrías intentar de nuevo con una dirección más detallada? ¿Quizás agregar el país? 🗺️|Ubicación "{location}" no encontrada. Sé más específico.|
+
+personality_changed|🎭 Modo de personalidad cambiado a: {mode}|🎭 ¡Ooh, cambiando al modo {mode}! ¡Esto será divertido! ✨|Personalidad: {mode}. Lo que sea.|
+
+language_changed|🌍 Idioma cambiado a: {language}|🌍 ¡Idioma cambiado a {language}! ¡Qué emocionante! 🎊|Idioma: {language}.|
+
+error_processing|❌ Error procesando tu solicitud. Por favor intenta de nuevo.|😅 ¡Ups! Algo salió mal. ¿Podrías intentar eso de nuevo? ¡Prometemos hacerlo mejor! 💝|Error ocurrido. Intenta de nuevo.|
+
+unknown_command|❓ No pude entender tu solicitud. Envía tu ubicación para actualizaciones del clima, o "delete" para desuscribirte.|🤷‍♀️ ¡Hmm, no estoy segura de lo que quisiste decir! Intenta enviando tu ubicación para el clima, o "delete" para desuscribirte. ¡Estoy aquí para ayudar! 💖|No entiendo. Envía ubicación o "delete".|
+
+usage_guide|📖 GUÍA DE USO:\n\n🌤️ SERVICIO METEOROLÓGICO:\n• Envía una ubicación para suscribirte\n• Envía "delete" para desuscribirte\n• Pronóstico diario enviado a las 05:00 hora local\n\n🎭 MODOS DE PERSONALIDAD:\n• Envía "neutral" para reportes estándar\n• Envía "cute" para reportes amigables\n• Envía "brutal" para reportes directos\n\n🌍 IDIOMA:\n• Envía "en" para Inglés\n• Envía "es" para Español\n• Envía "sk" para Eslovaco|📖 ¡Cómo usar Daily Brief! 💕\n\n🌤️ SERVICIO METEOROLÓGICO:\n• ¡Envía tu ubicación y recibe reportes de sol diarios!\n• Envía "delete" si quieres dejarnos 😢\n• ¡Te enviaremos lindos pronósticos cada mañana a las 5 AM!\n\n🎭 MODOS DE PERSONALIDAD:\n• "neutral" - Reportes profesionales del clima\n• "cute" - ¡Clima adorable con emojis! ✨\n• "brutal" - Hechos del clima sin rodeos\n\n🌍 IDIOMA:\n• "en" para Inglés • "es" para Español • "sk" para Eslovaco|📖 COMANDOS:\n\n🌤️ CLIMA:\n• Ubicación = suscribirse\n• "delete" = desuscribirse\n• Reportes diarios a las 05:00\n\n🎭 MODOS:\n• "neutral", "cute", "brutal"\n\n🌍 IDIOMAS:\n• "en", "es", "sk"|
+
+# Weather Conditions
+sunny|Cielos soleados por delante - ¡día perfecto para salir!|☀️ ¡Hermoso sol hoy! ¡Perfecto para aventuras al aire libre y buenas vibras! 😎|Soleado. Sal afuera o desperdicia el día adentro.|
+
+cloudy|Cielos nublados hoy - clima cómodo para la mayoría de actividades.|☁️ ¡Nubes esponjosas están decorando el cielo hoy! ¡Aún es un clima encantador para una linda caminata! 🌤️|Nublado. Nada emocionante.|
+
+rainy|Se espera lluvia hoy - ¡no olvides tu paraguas!|🌧️ ¡Gotas de lluvia pitter-patter vienen! ¡Excusa perfecta para tiempo acogedor adentro con té caliente! ☔|Lluvia. Paraguas o mojarse.|
+
+stormy|Advertencia de tormenta - mantente adentro y seguro.|⛈️ ¡Las grandes nubes de tormenta están teniendo una fiesta dramática! ¡Tiempo perfecto para acurrucarse adentro! 🌩️|Tormenta. Quédate adentro a menos que quieras ser golpeado por un rayo.|
+
+snowy|Se espera nieve - abrígate y ten cuidado con condiciones resbaladizas.|❄️ ¡Copos de nieve mágicos están bailando desde el cielo! ¡Tiempo para ropa caliente y diversión en la nieve! ⛄|Nieve. Frío. Resbaladizo. No te caigas.|
+
+windy|Condiciones ventosas - asegura objetos sueltos y agárrate el sombrero.|💨 ¡Whoooosh! ¡El viento quiere jugar hoy! ¡Agarra tu sombrero y disfruta la brisa! 🎪|Ventoso. Tu cabello se verá terrible.|
+
+foggy|Clima con niebla - conduce cuidadosamente con visibilidad reducida.|🌫️ ¡La niebla misteriosa está haciendo que todo se vea como un cuento de hadas! ¡Conduce despacio! ✨|Niebla. No puedes ver. Conduce lento o choca.|
+
+hot|Muy caliente hoy - mantente hidratado y busca sombra.|🔥 ¡Día súper tostado! ¡Perfecto para helado, nadar y mantenerse fresco! 🍦|Caliente como el infierno. Bebe agua o colapsa.|
+
+cold|Clima frío - vístete calurosamente en capas.|🧥 ¡Brr! ¡Clima perfecto para suéteres y abrazos acogedores y chocolate caliente! 🤗|Frío. Ponte capas o congélate.|
+
+mild|Clima templado agradable - disfruta las condiciones cómodas.|😊 ¡Simplemente perfecto! ¡Como un abrazo gentil de la Madre Naturaleza! 🌸|Clima decente. Nada de qué quejarse.|
+
+# Email Subjects
+daily_forecast_subject|🌤️ Pronóstico Meteorológico Diario - {location}|🌟 Tu Brillo Meteorológico Diario - {location}|Reporte del Clima - {location}|
+
+subscription_subject|Servicio Meteorológico - Suscripción Confirmada|🎉 ¡Bienvenido al Clima Diario! - Confirmado|Suscrito - Servicio Meteorológico|
+
+unsubscribe_subject|Servicio Meteorológico - Desuscrito|👋 Adiós del Clima Diario|Desuscrito|
+
+error_subject|Servicio Daily Brief - Error|😅 ¡Ups! Algo salió mal|Error|
+
+settings_subject|Servicio Daily Brief - Configuración Actualizada|✨ ¡Configuración Actualizada!|Configuración Cambiada|

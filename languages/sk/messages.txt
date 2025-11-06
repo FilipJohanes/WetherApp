@@ -1,0 +1,53 @@
+# Slovak Messages - Complete Localization with Emuska Mode
+# Format: message_key|neutral|cute|brutal|emuska
+
+# System Messages  
+welcome|Vitajte v službe Daily Brief! Pošlite svoju polohu na odber denných predpovedí počasia.|🌟 Vitajte v Daily Brief! Pošlite nám svoju polohu a budeme vás informovať o rozkošných predpovediach počasia! 💫|Vitajte. Pošlite polohu. Dostanete počasie. Jednoduché.|Čauko! Tak čo, chceš vedieť aké bude počasie? Pošli mi kde si a budem ti každý deň písať! 😄
+
+subscription_confirmed|✅ Odber počasia potvrdený pre {location}. Denné predpovede budú posielané o 05:00 miestneho času.|🎉 Super! Ste pripravení na denné aktualizácie počasia v {location}! Budeme vám posielať krásne predpovede každé ráno o 5:00! ☀️|Odber do {location}. Denné počasie o 05:00. Hotovo.|Perfekt! Takže {location}, že? Fajn, každé ráno ti o piatej pošlem ako bude, dohodnuté! 🤝
+
+unsubscribed|✅ Odber služby počasia zrušený.|👋 Škoda že odchádzate! Odhlásili ste sa z aktualizácií počasia. Opatrujte sa! 💕|Odhlásené. Žiadne ďalšie spam správy o počasí.|No čo, už ma nechceš? Fajn, odhlásila som ťa. Maj sa! 👋
+
+location_not_found|❌ Nepodarilo sa nájsť polohu "{location}". Skúste to znovu s presnejšou adresou.|🤔 Hmm, nemohli sme nájsť "{location}" na našich mapách. Mohli by ste to skúsiť znovu s podrobnejšou adresou? Možno pridať krajinu? 🗺️|Poloha "{location}" nenájdená. Buďte konkrétnejší.|Hmm, "{location}" neviem kde to je... Napíš mi to lepšie, možno s krajinou? 🤷‍♀️
+
+personality_changed|🎭 Režim osobnosti zmenený na: {mode}|🎭 Oooh, prepíname na režim {mode}! To bude zábava! ✨|Osobnosť: {mode}. Akokoľvek.|Výborne! Teraz budem {mode} - bude to sranda! 😊
+
+language_changed|🌍 Jazyk zmenený na: {language}|🌍 Jazyk prepnutý na {language}! Aké vzrušujúce! 🎊|Jazyk: {language}.|Super! Teraz budeme komunikovať po {language}! 🎉
+
+error_processing|❌ Chyba pri spracovaní vašej požiadavky. Skúste to prosím znovu.|😅 Ups! Niečo sa pokazilo. Mohli by ste to skúsiť znovu? Sľubujeme, že to bude lepšie! 💝|Vyskytla sa chyba. Skúste znovu.|Jaj, niečo som pokazila! Skús to znovu, áno? 😅
+
+unknown_command|❓ Nerozumiem vašej požiadavke. Pošlite svoju polohu pre aktualizácie počasia, alebo "delete" na odhlásenie.|🤷‍♀️ Hmm, nie som si istá čo ste mysleli! Skúste poslať svoju polohu pre počasie, alebo "delete" na odhlásenie. Som tu na pomoc! 💖|Nerozumiem. Pošlite polohu alebo "delete".|Neviem čo chceš... Napíš mi kde si pre počasie, alebo "delete" ak ma už nechceš! 🤔
+
+usage_guide|📖 NÁVOD NA POUŽITIE:\n\n🌤️ SLUŽBA POČASIA:\n• Pošlite polohu na odber\n• Pošlite "delete" na odhlásenie\n• Denná predpoveď posielaná o 05:00 miestneho času\n\n🎭 REŽIMY OSOBNOSTI:\n• Pošlite "neutral" pre štandardné správy\n• Pošlite "cute" pre priateľské správy\n• Pošlite "brutal" pre priame správy\n• Pošlite "emuska" pre vtipné správy\n\n🌍 JAZYK:\n• Pošlite "en" pre angličtinu\n• Pošlite "es" pre španielčinu\n• Pošlite "sk" pre slovenčinu|📖 Ako používať Daily Brief! 💕\n\n🌤️ SLUŽBA POČASIA:\n• Pošlite svoju polohu a dostávajte denné slnečné správy!\n• Pošlite "delete" ak nás chcete opustiť 😢\n• Budeme vám posielať rozkošné predpovede každé ráno o 5:00!\n\n🎭 REŽIMY OSOBNOSTI:\n• "neutral" - Profesionálne správy o počasí\n• "cute" - Rozkošné počasie s emotikonmi! ✨\n• "brutal" - Fakty o počasí bez obalov\n• "emuska" - Vtipné slovenské správy!\n\n🌍 JAZYK:\n• "en" pre angličtinu • "es" pre španielčinu • "sk" pre slovenčinu|📖 PRÍKAZY:\n\n🌤️ POČASIE:\n• Poloha = odber\n• "delete" = odhlásenie\n• Denné správy o 05:00\n\n🎭 REŽIMY:\n• "neutral", "cute", "brutal", "emuska"\n\n🌍 JAZYKY:\n• "en", "es", "sk"|📖 Ako to funguje:\n\n🌤️ POČASIE:\n• Napíš kde si = začnem ti posielať počasie\n• Napíš "delete" = skončíme spolu 😢\n• Každý deň ráno o piatej ti napíšem ako bude\n\n🎭 ŠTÝLY:\n• "neutral" - normálne\n• "cute" - rozkošne s emotikonmi\n• "brutal" - ostro a na rovinu  \n• "emuska" - vtipne po slovensky!\n\n🌍 JAZYKY:\n• "en", "es", "sk"|
+
+# Weather Conditions
+sunny|Slnečné oblohy vpred - perfektný deň na von!|☀️ Krásne slnko dnes! Perfektné pre dobrodružstvá vonku a dobré nálady! 😎|Slnečno. Choď von alebo premárni deň vnútri.|Paráda! Slniečko svieti, tak sa nehraj doma a choď von! ☀️
+
+cloudy|Oblačné oblohy dnes - pohodlné počasie pre väčšinu aktivít.|☁️ Nadýchané mráčiky dnes zdobia oblohu! Stále krásne počasie na pekný spánok! 🌤️|Oblačno. Nič vzrušujúce.|Tak trochu oblačno, ale nie je to zlé. Môžeš ísť von! ☁️
+
+rainy|Dnes sa očakáva dážď - nezabudnite na dáždnik!|🌧️ Pitter-patter kvapky dažďa prichádzajú! Perfektná výhovorka na útulný čas doma s horúcim čajom! ☔|Dážď. Dáždnik alebo sa zmoč.|Hej, bude pršať! Zober si dáždnik, nechci aby si bol mokrý! ☔
+
+stormy|Výstraha pred búrkou - zostaňte doma a buďte v bezpečí.|⛈️ Veľké búrkové mraky majú dramatickú párty! Perfektný čas na tulenie sa doma! 🌩️|Búrka. Zostaň doma ak nechceš byť zasiahnutý bleskom.|Jaj, búrka bude! Choď domov a neopúšťaj sa, môže to byť nebezpečné! ⛈️
+
+snowy|Očakáva sa sneh - oblečte sa teplo a pozor na klzké podmienky.|❄️ Čarovné snehové vločky tancujú z neba! Čas na teplé oblečenie a snežnú zábavu! ⛄|Sneh. Zima. Klzko. Nespadni.|Jupí, bude snežiť! Obleč sa teplo a pozor aby si sa nepošmykol! ❄️
+
+windy|Veterné podmienky - zabezpečte voľné predmety a držte si klobúk!|💨 Whoooosh! Vietor si chce dnes hrať! Držte si klobúk a užívajte si vánok! 🎪|Veterno. Tvoje vlasy budú vyzerať hrozne.|Fúka ako čert! Drž si klobúk a pozor aby ťa neodfouklo! 💨
+
+foggy|Hmlové počasie - jazdte opatrne so zníženou viditeľnosťou.|🌫️ Tajomná hmla robí všetko ako rozprávkové! Jazdite pomaly! ✨|Hmla. Nevidíš. Jazdíš pomaly alebo havaruj.|Hmla ako v horore! Jazdí pomaly, nič nevidíš! 🌫️
+
+hot|Veľmi horúco dnes - zostaňte hydratovaní a hľadajte tieň.|🔥 Super pražný deň! Perfektný na zmrzlinu, plávanie a ochladenie! 🍦|Horúco ako v pekle. Pite vodu alebo skolabujte.|Mama mia, aké teplo! Pij veľa vody a choď do tieňa! 🔥
+
+cold|Studené počasie - obliekajte sa teplo vo vrstvách.|🧥 Brr! Perfektné počasie na svetre, útulné objatia a horúcu čokoládu! 🤗|Zima. Obliekaj vrstvy alebo zmrzni.|Brr, zima je! Obleč si viac vrstiev, nechcem aby si sa nachladil! 🧥
+
+mild|Príjemne mierne počasie - užívajte si pohodlné podmienky.|😊 Jednoducho perfektné! Ako jemné objatie od matky prírody! 🌸|Slušné počasie. Niet sa na čo sťažovať.|Fajn počasie! Ani teplo, ani zima - presne tak ako mám rada! 😊
+
+# Email Subjects
+daily_forecast_subject|🌤️ Denná predpoveď počasia - {location}|🌟 Váš denný meteorologický lesk - {location}|Správa o počasí - {location}|🌤️ Ahoj! Počasie pre {location}|
+
+subscription_subject|Služba počasia - Odber potvrdený|🎉 Vitajte v dennom počasí! - Potvrdené|Odber - Služba počasia|🎉 Super! Teraz sme kamaráti!|
+
+unsubscribe_subject|Služba počasia - Odhlásené|👋 Zbohom od denného počasia|Odhlásené|👋 Čauko, bolo fajn!|
+
+error_subject|Služba Daily Brief - Chyba|😅 Ups! Niečo sa pokazilo|Chyba|😅 Jaj, urobila som chybu!|
+
+settings_subject|Služba Daily Brief - Nastavenia aktualizované|✨ Nastavenia aktualizované!|Nastavenia zmenené|✨ Zmenila som nastavenia!|

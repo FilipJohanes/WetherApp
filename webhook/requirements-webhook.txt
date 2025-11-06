@@ -3,3 +3,4 @@ APScheduler
 dateparser
 python-dateutil
 python-dotenv
+flask

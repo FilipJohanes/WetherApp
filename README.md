@@ -3,41 +3,104 @@
 ![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey.svg)
+![Tests](https://img.shields.io/badge/tests-17%2F17%20passed-brightgreen.svg)
+![Languages](https://img.shields.io/badge/languages-EN%20%7C%20ES%20%7C%20SK-blue.svg)
 
-> 🚀 **Production-ready email-driven service for daily weather updates and calendar reminders**
+> 🚀 **Production-ready multi-language email-driven weather service**
 
-A comprehensive Python 3.11+ service that transforms your email inbox into a smart personal assistant:
+A comprehensive Python 3.11+ service that transforms your email inbox into a smart weather assistant with full multi-language support:
 
 1. **🌤️ Daily Weather Digest** - Subscribe by sending your location, receive personalized forecasts at 05:00
-2. **📅 Calendar Reminders** - Schedule one-shot or repeating reminders via email
-3. **🎭 Personality Modes** - Choose from neutral, cute, brutal, or secret Emuska communication styles
+2. **🎭 Multi-Language Personality Modes** - Choose from 4 personalities (neutral, cute, brutal, emuska) in 3 languages (English, Spanish, Slovak)
+3. **🛡️ Smart Email Processing** - Handles system emails, Unicode characters, and flexible input parsing
 
 ## ✨ Features
 
 - **🆓 100% Free**: Uses Open-Meteo weather API (no API keys required)
-- **📧 Email-Driven**: Control everything via simple email commands
-- **🎭 Personality Modes**: Neutral, cute, brutal, or secret Emuska communication styles
-- **🧠 Smart Parsing**: Flexible date/time parsing and location geocoding
-- **🛡️ Robust**: Handles duplicates, restarts, and network failures gracefully
-- **📦 Self-Contained**: Single Python file + SQLite database + config file
-- **🌍 Timezone Aware**: Configurable timezone support (default: Europe/Bratislava)
-- **🔄 Cross-Platform**: Works on Windows, Linux, and macOS
-- **🧪 Development Ready**: Includes tests and examples for multi-PC development
+- **📧 Email-Driven**: Control everything via simple email commands  
+- **🌍 Multi-Language**: Full support for English, Spanish, and Slovak
+- **🎭 4 Personality Modes**: Neutral, cute, brutal, emuska communication styles
+- **🧠 Smart Parsing**: Handles multi-line emails, system email filtering, Unicode support
+- **🛡️ Production Ready**: Handles duplicates, restarts, network failures, and crashes gracefully
+- **📦 Self-Contained**: Organized structure with comprehensive documentation
+- **⏰ Timezone Aware**: Configurable timezone support (default: Europe/Bratislava)
+- **🔄 Cross-Platform**: Works on Windows, Linux, macOS, and Raspberry Pi
+- **🔧 Webhook Ready**: Scalable architecture with Flask webhook support available
 
-## � Table of Contents
+## 📁 Project Structure
+
+```
+📁 reminderAPP/
+├── 📄 app.py                    # ⚡ Main service application
+├── 📄 .env                      # 🔐 Configuration (email credentials)  
+├── 📄 requirements.txt          # 📦 Core dependencies
+├── 📄 README.md                # 📖 This file
+│
+├── 📁 docs/                     # 📚 Documentation & guides
+│   ├── DEPLOYMENT.md            # � Production setup guide
+│   ├── WEBHOOK_GUIDE.md         # 🔗 Webhook architecture docs
+│   └── 📁 user-guides/         # 👤 User manuals & quick reference
+│
+├── 📁 languages/               # 🌍 Multi-language support  
+│   ├── 📁 en/es/sk/            # English, Spanish, Slovak messages
+│
+├── 📁 tests/                   # 🧪 Comprehensive test suite (14 test files)
+│   └── test_*.py               # All functionality tests
+│
+├── 📁 scripts/                 # 🛠️ Utilities & deployment tools
+│   ├── check_db.py             # Database inspection
+│   └── 📁 deployment/          # Automated deployment scripts  
+│
+├── 📁 webhook/                 # � Scalable webhook architecture
+│   ├── webhook_simple.py       # Basic Flask webhook server
+│   └── imap_webhook_bridge.py  # IMAP to webhook bridge
+│
+└── 📁 examples/                # 📋 Sample configs & development files
+│   └── 📁 debug/               # Debug & maintenance tools
+│
+└── 📁 examples/                # Sample configurations
+```
+
+## 📖 Table of Contents
 
 - [🚀 Quick Start](#-quick-start)
+- [📚 Documentation](#-documentation) 
 - [📧 Usage Guide](#-usage-guide)
 - [🎭 Personality Modes](#-personality-modes)
+- [🌍 Language Support](#-language-support)
 - [🛠️ CLI Commands](#️-cli-commands)
 - [📊 Example Responses](#-example-responses)
 - [🏗️ Architecture](#️-architecture)
 - [🔧 Configuration](#-configuration)
+- [🧪 Testing](#-testing)
+- [🚀 Deployment](#-deployment)
 - [🚨 Troubleshooting](#-troubleshooting)
 - [🤝 Contributing](#-contributing)
 - [📝 License](#-license)
 
-##  Quick Start
+## 📚 Documentation
+
+Your complete guide to using and deploying the Daily Brief Service:
+
+### 👥 **For Users & Alpha Testers:**
+- **[📖 User Manual](docs/user-guides/USER_MANUAL.md)** - Complete guide with examples
+- **[⚡ Quick Reference](docs/user-guides/QUICK_REFERENCE.md)** - Cheat sheet for commands
+- **[📧 Welcome Template](docs/user-guides/WELCOME_EMAIL_TEMPLATE.md)** - Auto-response content
+
+### 🛠️ **For Deployment & Setup:**
+- **[✅ Final Checklist](docs/deployment/FINAL_CHECKLIST.md)** - Pre-deployment verification
+- **[💻 Local PC Setup](docs/deployment/DEPLOY_LOCAL_PC.md)** - Windows/Mac/Linux deployment
+- **[🥧 Raspberry Pi Guide](docs/deployment/DEPLOY_PI_ZERO_2W.md)** - Pi Zero 2 W specific setup
+- **[☁️ Cloud Options](docs/deployment/DEPLOY_CLOUD_OPTIONS.md)** - AWS/Azure/VPS deployment
+- **[📧 Email Configuration](docs/deployment/EMAIL_SETUP_GUIDE.md)** - Gmail & other providers
+- **[🚀 Alpha Testing Ready](docs/deployment/ALPHA_DEPLOYMENT_READY.md)** - Readiness assessment
+
+### 🔧 **Project Structure:**
+- **[📁 Structure Guide](PROJECT_STRUCTURE.md)** - Detailed directory organization
+
+---
+
+## 🚀 Quick Start
 
 ### 1. Clone the Repository
 
@@ -171,13 +234,6 @@ cute
 brutal
 ```
 
-**🌟 Emuska mode (secret):**
-- This is a special hidden personality mode
-- Cannot be set via email commands
-- Must be activated manually in the database
-- Use `emuska_manager.py` script for activation
-- Custom messages can be added to `weather_messages.txt`
-
 **Set personality during subscription:**
 ```
 Prague, Czech Republic
@@ -197,7 +253,7 @@ The service supports multiple languages for weather messages:
 
 **English (en)** - Default language with full personality support
 **Spanish (es)** - Complete translations for all personality modes
-**Slovak (sk)** - Special language designed for Emuska mode messages
+**Slovak (sk)** - Complete Slovak language support with all personality modes
 
 **Language Examples:**
 ```
@@ -210,9 +266,9 @@ Madrid
 personality=brutal
 language=es
 
-# Slovak for Emuska mode
+# Slovak weather
 Bratislava
-personality=emuska
+personality=neutral
 language=sk
 ```
 
@@ -303,6 +359,102 @@ Today's weather for Bratislava, Slovakia:
 
 💡 To delete all your pending reminders, just reply with 'delete'.
 ```
+
+## 🧪 Testing
+
+Run the comprehensive test suite to verify all functionality:
+
+### **Quick Test:**
+```bash
+# Run all tests (17 tests, 100% pass rate)
+cd testing
+python test_all.py
+```
+
+### **Specific Tests:**
+```bash
+# Multi-language tests
+python test_multilang.py
+
+# Slovak language tests
+python test_slovak_complete.py
+
+# Message system validation
+python test_messages_comprehensive.py
+
+# Integration testing
+python test_integration_sk.py
+```
+
+### **Debug Tools:**
+```bash
+# Check service status
+cd scripts/debug
+python check_status.py
+
+# Test personality modes
+python debug_personality.py
+
+# Language management tools
+python emuska_manager.py
+```
+
+**Test Coverage:**
+- ✅ Multi-language support (EN/ES/SK)
+- ✅ All personality modes (neutral/cute/brutal)
+- ✅ Weather message generation
+- ✅ Email parsing and validation
+- ✅ Database operations
+- ✅ Slovak language implementation
+- ✅ Integration scenarios
+
+---
+
+## 🚀 Deployment
+
+Choose your deployment platform with automated setup scripts:
+
+### **🖥️ Local PC (Windows/Mac/Linux)**
+```bash
+# Quick deployment
+scripts/deployment/quick_deploy.bat    # Windows
+./scripts/deployment/quick_deploy.sh   # Linux/Mac
+```
+📖 **[Complete Local Setup Guide](docs/deployment/DEPLOY_LOCAL_PC.md)**
+
+### **🥧 Raspberry Pi Zero 2 W**
+```bash
+# Automated Pi setup
+./scripts/deployment/setup_pi_zero.sh
+```
+📖 **[Pi Zero 2 W Setup Guide](docs/deployment/DEPLOY_PI_ZERO_2W.md)**
+
+### **☁️ Cloud Deployment**
+- **AWS EC2**: Free tier compatible
+- **Azure VM**: Student credits supported
+- **Google Cloud**: Compute Engine
+- **VPS Providers**: DigitalOcean, Linode, Vultr
+
+📖 **[Cloud Options Guide](docs/deployment/DEPLOY_CLOUD_OPTIONS.md)**
+
+### **📧 Email Configuration**
+Supports Gmail, Outlook, Yahoo, and custom SMTP/IMAP:
+
+```bash
+# Copy example config
+cp .env.example .env
+
+# Edit with your credentials
+# See EMAIL_SETUP_GUIDE.md for provider-specific instructions
+```
+
+📖 **[Email Setup Guide](docs/deployment/EMAIL_SETUP_GUIDE.md)**
+📖 **[Quick Email Setup](docs/deployment/QUICK_EMAIL_SETUP.md)**
+
+### **✅ Pre-Deployment Checklist**
+📖 **[Final Checklist](docs/deployment/FINAL_CHECKLIST.md)** - Verify readiness before going live
+
+---
 
 ## 🏗️ Architecture
 

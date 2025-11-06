@@ -1,0 +1,53 @@
+# English Messages - Complete Localization
+# Format: message_key|neutral|cute|brutal|emuska
+
+# System Messages
+welcome|Welcome to Daily Brief Service! Send your location to subscribe to daily weather updates.|🌟 Welcome to Daily Brief! Send us your location and we'll keep you updated with adorable weather reports! 💫|Welcome. Send location. Get weather. Simple.|
+
+subscription_confirmed|✅ Weather subscription confirmed for {location}. Daily forecasts will be sent at 05:00 local time.|🎉 Yay! You're all set for daily weather updates in {location}! We'll send you lovely forecasts every morning at 5 AM! ☀️|Subscribed to {location}. Daily weather at 05:00. Done.|
+
+unsubscribed|✅ Unsubscribed from weather service.|👋 Sad to see you go! You've been unsubscribed from weather updates. Take care! 💕|Unsubscribed. No more weather spam.|
+
+location_not_found|❌ Could not find location "{location}". Please try again with a more specific address.|🤔 Hmm, we couldn't find "{location}" on our maps. Could you try again with a more detailed address? Maybe add the country? 🗺️|Location "{location}" not found. Be more specific.|
+
+personality_changed|🎭 Personality mode changed to: {mode}|🎭 Ooh, switching to {mode} mode! This will be fun! ✨|Personality: {mode}. Whatever.|
+
+language_changed|🌍 Language changed to: {language}|🌍 Language switched to {language}! How exciting! 🎊|Language: {language}.|
+
+error_processing|❌ Error processing your request. Please try again.|😅 Oops! Something went wrong. Could you try that again? We promise to do better! 💝|Error occurred. Try again.|
+
+unknown_command|❓ I couldn't understand your request. Send your location for weather updates, or "delete" to unsubscribe.|🤷‍♀️ Hmm, I'm not sure what you meant! Try sending your location for weather, or "delete" to unsubscribe. I'm here to help! 💖|Don't understand. Send location or "delete".|
+
+usage_guide|📖 USAGE GUIDE:\n\n🌤️ WEATHER SERVICE:\n• Send a location to subscribe\n• Send "delete" to unsubscribe\n• Daily forecast sent at 05:00 local time\n\n🎭 PERSONALITY MODES:\n• Send "neutral" for standard reports\n• Send "cute" for friendly reports \n• Send "brutal" for blunt reports\n\n🌍 LANGUAGE:\n• Send "en" for English\n• Send "es" for Spanish\n• Send "sk" for Slovak|📖 How to use Daily Brief! 💕\n\n🌤️ WEATHER SERVICE:\n• Send your location and get daily sunshine reports!\n• Send "delete" if you want to leave us 😢\n• We'll send you cute forecasts every morning at 5 AM!\n\n🎭 PERSONALITY MODES:\n• "neutral" - Professional weather reports\n• "cute" - Adorable weather with emojis! ✨\n• "brutal" - No-nonsense weather facts\n\n🌍 LANGUAGE:\n• "en" for English • "es" for Spanish • "sk" for Slovak|📖 COMMANDS:\n\n🌤️ WEATHER:\n• Location = subscribe\n• "delete" = unsubscribe\n• Daily reports at 05:00\n\n🎭 MODES:\n• "neutral", "cute", "brutal"\n\n🌍 LANGUAGES:\n• "en", "es", "sk"|
+
+# Weather Conditions
+sunny|Sunny skies ahead - perfect day to get outside!|☀️ Beautiful sunshine today! Perfect for outdoor adventures and happy vibes! 😎|Sunny. Go outside or waste the day indoors.|
+
+cloudy|Cloudy skies today - comfortable weather for most activities.|☁️ Fluffy clouds are decorating the sky today! Still lovely weather for a nice walk! 🌤️|Cloudy. Nothing exciting.|
+
+rainy|Rain expected today - don't forget your umbrella!|🌧️ Pitter-patter raindrops are coming! Perfect excuse for cozy indoor time with hot tea! ☔|Rain. Umbrella or get wet.|
+
+stormy|Storm warning - stay indoors and stay safe.|⛈️ Big storm clouds are having a dramatic party! Perfect time for snuggling indoors! 🌩️|Storm. Stay inside unless you want to be struck by lightning.|
+
+snowy|Snow expected - bundle up and watch for slippery conditions.|❄️ Magical snowflakes are dancing from the sky! Time for warm clothes and snow fun! ⛄|Snow. Cold. Slippery. Don't fall.|
+
+windy|Windy conditions - secure loose items and hold onto your hat!|💨 Whoooosh! The wind wants to play today! Hold your hat and enjoy the breeze! 🎪|Windy. Your hair will look terrible.|
+
+foggy|Foggy weather - drive carefully with reduced visibility.|🌫️ Mysterious fog is making everything look like a dreamy fairytale! Drive slowly! ✨|Fog. Can't see. Drive slow or crash.|
+
+hot|Very hot today - stay hydrated and seek shade.|🔥 Super toasty day! Perfect for ice cream, swimming, and staying cool! 🍦|Hot as hell. Drink water or collapse.|
+
+cold|Cold weather - dress warmly in layers.|🧥 Brr! Perfect sweater weather for cozy hugs and hot chocolate! 🤗|Cold. Layer up or freeze.|
+
+mild|Pleasant mild weather - enjoy the comfortable conditions.|😊 Just perfect! Like a gentle hug from Mother Nature herself! 🌸|Decent weather. Nothing to complain about.|
+
+# Email Subjects  
+daily_forecast_subject|🌤️ Daily Weather Forecast - {location}|🌟 Your Daily Weather Sparkle - {location}|Weather Report - {location}|
+
+subscription_subject|Weather Service - Subscription Confirmed|🎉 Welcome to Daily Weather! - Confirmed|Subscribed - Weather Service|
+
+unsubscribe_subject|Weather Service - Unsubscribed|👋 Goodbye from Daily Weather|Unsubscribed|
+
+error_subject|Daily Brief Service - Error|😅 Oops! Something went wrong|Error|
+
+settings_subject|Daily Brief Service - Settings Updated|✨ Settings Updated!|Settings Changed|
