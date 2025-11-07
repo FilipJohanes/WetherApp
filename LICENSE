@@ -1,21 +1,85 @@
-MIT License
+PROPRIETARY SOFTWARE LICENSE
 
-Copyright (c) 2025 Daily Brief Service Contributors
+Daily Brief Service - Multi-Language Weather Email System
+Copyright (c) 2025 Filip Johanes. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+================================================================================
+                              PROPRIETARY LICENSE
+================================================================================
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This software and associated documentation files (the "Software") are the 
+exclusive property of Filip Johanes ("Author"). This Software contains 
+proprietary and confidential information including but not limited to:
+
+• Multi-language localization system (English, Spanish, Slovak)
+• Unique Slovak "emuska" personality mode and custom messages
+• Email-driven weather service architecture
+• Comprehensive testing framework
+• Database schema and user management system
+
+================================================================================
+                                RESTRICTIONS
+================================================================================
+
+NO COMMERCIAL USE: This Software may NOT be used for any commercial purposes,
+including but not limited to:
+- Selling or licensing the Software or any derivative works
+- Using the Software in commercial products or services
+- Offering paid services based on this Software
+
+NO REDISTRIBUTION: You may NOT distribute, share, publish, or make available
+this Software or any portion thereof to any third party.
+
+NO MODIFICATION FOR DISTRIBUTION: While you may modify the Software for your
+personal use, you may NOT distribute any modified versions.
+
+NO REVERSE ENGINEERING: You may NOT reverse engineer, decompile, disassemble,
+or attempt to derive the source code from any compiled version.
+
+================================================================================
+                            LIMITED PERSONAL USE
+================================================================================
+
+Subject to the restrictions above, you are granted a limited, non-exclusive,
+non-transferable license to:
+- Use the Software for personal, non-commercial purposes only
+- Study the code for educational purposes
+- Run the Software on your personal systems
+
+================================================================================
+                              COPYRIGHT NOTICE
+================================================================================
+
+This Software contains unique intellectual property including:
+• Original Slovak language personality messages
+• Proprietary localization architecture  
+• Custom email processing algorithms
+• Innovative multi-personality weather delivery system
+
+Copyright infringement will be prosecuted to the fullest extent of the law.
+
+================================================================================
+                                 WARRANTY
+================================================================================
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+================================================================================
+                                VIOLATIONS
+================================================================================
+
+Any violation of this license will result in:
+1. Immediate termination of your license to use this Software
+2. Legal action for copyright infringement
+3. Claims for damages and attorney fees
+
+For licensing inquiries or commercial use permissions, contact:
+Email: filip.johanes9@gmail.com
+
+© 2025 Filip Johanes. All Rights Reserved.
+Daily Brief Service is a proprietary product.

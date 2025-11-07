@@ -1,12 +1,15 @@
 # 📬 Daily Brief Service
 
 ![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![License](https://img.shields.io/badge/license-Proprietary-red.svg)
 ![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey.svg)
 ![Tests](https://img.shields.io/badge/tests-17%2F17%20passed-brightgreen.svg)
 ![Languages](https://img.shields.io/badge/languages-EN%20%7C%20ES%20%7C%20SK-blue.svg)
 
-> 🚀 **Production-ready multi-language email-driven weather service**
+> 🚀 **Proprietary multi-language email-driven weather service**  
+> **© 2025 Filip Johanes. All Rights Reserved.**
+
+⚠️ **PROPRIETARY SOFTWARE** - This project contains proprietary algorithms and unique features. Commercial use, redistribution, or derivative works are strictly prohibited. See [LICENSE](LICENSE) for details.
 
 A comprehensive Python 3.11+ service that transforms your email inbox into a smart weather assistant with full multi-language support:
 
@@ -619,19 +622,38 @@ python app.py --dry-run
 
 ## 🐛 Issues & Support
 
-- 🐞 **Bug Reports**: [Create an issue](https://github.com/yourusername/daily-brief-service/issues)
-- 💡 **Feature Requests**: [Start a discussion](https://github.com/yourusername/daily-brief-service/discussions)
-- ❓ **Questions**: Check existing issues or start a new discussion
+- 🐞 **Bug Reports**: Contact filip.johanes9@gmail.com
+- 💡 **Feature Requests**: Contact for commercial licensing inquiries
+- ❓ **Questions**: Personal use support available via email
 
-## 📝 License
+## 📝 License & Copyright
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+**© 2025 Filip Johanes. All Rights Reserved.**
+
+This project is **PROPRIETARY SOFTWARE** under a restrictive license:
+
+⚠️ **Commercial use PROHIBITED**  
+⚠️ **Redistribution PROHIBITED**  
+⚠️ **Selling or licensing PROHIBITED**  
+✅ **Personal use only**  
+✅ **Educational study allowed**
+
+This software contains unique intellectual property including:
+- Original Slovak "emuska" personality messages
+- Proprietary multi-language localization system
+- Custom email processing algorithms
+- Innovative weather delivery architecture
+
+**Any commercial use or redistribution will result in legal action.**
+
+For commercial licensing inquiries, contact: filip.johanes9@gmail.com
+
+See the [LICENSE](LICENSE) file for complete terms and conditions.
 
 ## 🙏 Acknowledgments
 
 - **Open-Meteo**: Free weather API service
 - **Python Community**: For excellent libraries and tools
-- **Contributors**: Thank you to everyone who helps improve this project
 
 ---
 

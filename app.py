@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
 Daily Brief Service - Email-driven weather subscriptions.
+Copyright (c) 2025 Filip Johanes. All Rights Reserved.
+
+PROPRIETARY SOFTWARE - DO NOT DISTRIBUTE
+This software contains proprietary algorithms and unique features including
+Slovak "emuska" personality mode. Commercial use or redistribution prohibited.
 
 This service monitors an email inbox for commands and provides:
 1. Daily weather digest subscriptions (send location to subscribe)
