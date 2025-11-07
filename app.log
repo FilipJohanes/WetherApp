@@ -1485,3 +1485,75 @@ Sk
 2025-11-06 13:44:11,938 - INFO - Loaded 24 messages for language: en
 2025-11-06 13:44:11,940 - INFO - Loaded 24 messages for language: es
 2025-11-06 13:44:11,941 - INFO - Loaded 24 messages for language: sk
+2025-11-07 07:54:18,700 - INFO - Initializing database at app.db
+2025-11-07 07:54:18,711 - INFO - Database initialized successfully
+2025-11-07 07:54:18,711 - INFO - Starting Daily Brief Service
+2025-11-07 07:54:18,711 - INFO - Loading configuration from environment variables
+2025-11-07 07:54:18,711 - INFO - Configuration loaded - Email: your-service-email@example.com, TZ: Europe/Bratislava
+2025-11-07 07:54:18,720 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-07 07:54:18,720 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-07 07:54:18,721 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-07 07:54:18,721 - INFO - Jobs scheduled:
+2025-11-07 07:54:18,721 - INFO -   - Check inbox: every 1 minute
+2025-11-07 07:54:18,721 - INFO -   - Daily weather: 05:00 local time
+2025-11-07 07:54:18,727 - INFO - Added job "Check inbox for new commands" to job store "default"
+2025-11-07 07:54:18,728 - INFO - Added job "Send daily weather forecasts" to job store "default"
+2025-11-07 07:54:18,728 - INFO - Scheduler started
+2025-11-07 07:55:18,723 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:56:18 CET)" (scheduled at 2025-11-07 07:55:18.720556+01:00)
+2025-11-07 07:55:18,724 - INFO - Checking inbox for new messages
+2025-11-07 07:55:18,724 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:55:18,965 - ERROR - IMAP connection error: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-07 07:55:18,967 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:56:18 CET)" executed successfully
+2025-11-07 07:56:18,732 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:57:18 CET)" (scheduled at 2025-11-07 07:56:18.720556+01:00)
+2025-11-07 07:56:18,733 - INFO - Checking inbox for new messages
+2025-11-07 07:56:18,733 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:56:18,958 - ERROR - IMAP connection error: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-07 07:56:18,959 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:57:18 CET)" executed successfully
+2025-11-07 07:57:18,729 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:58:18 CET)" (scheduled at 2025-11-07 07:57:18.720556+01:00)
+2025-11-07 07:57:18,730 - INFO - Checking inbox for new messages
+2025-11-07 07:57:18,730 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:57:18,986 - ERROR - IMAP connection error: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-07 07:57:18,987 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:58:18 CET)" executed successfully
+2025-11-07 07:57:44,636 - INFO - Initializing database at app.db
+2025-11-07 07:57:44,637 - INFO - Database initialized successfully
+2025-11-07 07:57:44,637 - INFO - Starting Daily Brief Service
+2025-11-07 07:57:44,637 - INFO - Loading configuration from environment variables
+2025-11-07 07:57:44,637 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-07 07:57:44,639 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-07 07:57:44,640 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-07 07:57:44,640 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-07 07:57:44,640 - INFO - Jobs scheduled:
+2025-11-07 07:57:44,640 - INFO -   - Check inbox: every 1 minute
+2025-11-07 07:57:44,640 - INFO -   - Daily weather: 05:00 local time
+2025-11-07 07:57:44,641 - INFO - Added job "Check inbox for new commands" to job store "default"
+2025-11-07 07:57:44,642 - INFO - Added job "Send daily weather forecasts" to job store "default"
+2025-11-07 07:57:44,642 - INFO - Scheduler started
+2025-11-07 07:58:18,736 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:59:18 CET)" (scheduled at 2025-11-07 07:58:18.720556+01:00)
+2025-11-07 07:58:18,737 - INFO - Checking inbox for new messages
+2025-11-07 07:58:18,737 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:58:19,009 - ERROR - IMAP connection error: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-07 07:58:19,010 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:59:18 CET)" executed successfully
+2025-11-07 07:58:44,647 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:59:44 CET)" (scheduled at 2025-11-07 07:58:44.639852+01:00)
+2025-11-07 07:58:44,647 - INFO - Checking inbox for new messages
+2025-11-07 07:58:44,647 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:58:45,635 - INFO - Found 0 unseen messages
+2025-11-07 07:58:46,069 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 07:59:44 CET)" executed successfully
+2025-11-07 07:59:18,736 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 08:00:18 CET)" (scheduled at 2025-11-07 07:59:18.720556+01:00)
+2025-11-07 07:59:18,736 - INFO - Checking inbox for new messages
+2025-11-07 07:59:18,737 - INFO - Fetching unseen emails from IMAP
+2025-11-07 07:59:18,963 - ERROR - IMAP connection error: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-07 07:59:18,964 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-07 08:00:18 CET)" executed successfully
+2025-11-07 07:59:44,651 - INFO - Shutting down Daily Brief Service
+2025-11-07 07:59:44,652 - INFO - Scheduler has been shut down
+2025-11-07 07:59:47,438 - INFO - Loaded 21 weather message conditions
+2025-11-07 07:59:47,439 - INFO - Loaded 24 messages for language: en
+2025-11-07 07:59:47,439 - INFO - Loaded 24 messages for language: es
+2025-11-07 07:59:47,440 - INFO - Loaded 24 messages for language: sk
+2025-11-07 07:59:56,640 - INFO - Geocoding location: Prague, CZ
+2025-11-07 07:59:57,059 - WARNING - No geocoding results for: Prague, CZ
+2025-11-07 07:59:57,060 - INFO - Geocoding location: New York, NY
+2025-11-07 07:59:57,388 - WARNING - No geocoding results for: New York, NY
+2025-11-07 07:59:57,389 - INFO - Geocoding location: Madrid, Spain
+2025-11-07 07:59:57,777 - INFO - Geocoded 'Madrid, Spain' to 40.4165, -3.70256 (Madrid, Madrid, Spain)
+2025-11-07 07:59:57,779 - INFO - Geocoding location: Prague, CZ
+2025-11-07 07:59:58,131 - WARNING - No geocoding results for: Prague, CZ

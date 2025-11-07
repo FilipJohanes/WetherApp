@@ -38,6 +38,9 @@ Comprehensive test suite for the Daily Brief Service covering all functionality.
 ## Running Tests
 
 ```bash
+# Interactive test runner (recommended) 
+python tests/test_runner.py
+
 # Run all tests
 python tests/test_all.py
 

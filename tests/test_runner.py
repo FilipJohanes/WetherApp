@@ -6,7 +6,7 @@ Safe testing with no email sending - perfect for development!
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))  # Go up one level to project root
 
 def run_test_suite():
     """Run comprehensive test suite for Daily Brief Service"""

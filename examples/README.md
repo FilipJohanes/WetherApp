@@ -5,6 +5,7 @@ This directory contains example configurations, development utilities, and sampl
 ## Configuration Examples
 - `.env.example` - Sample environment configuration
 - `.env.bridge-example` - Sample webhook bridge configuration  
+- `.env.test` - Safe testing environment configuration
 - `requirements-dev.txt` - Development dependencies
 
 ## Email Testing Examples 📧
