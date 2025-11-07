@@ -38,6 +38,7 @@ import hashlib
 import re
 import time
 import argparse
+import signal
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -49,6 +50,9 @@ import dateparser
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
+
+# Global scheduler variable for signal handling
+scheduler = None
 
 # Load environment variables from .env file
 try:
@@ -80,6 +84,31 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+def signal_handler(signum, frame):
+    """Graceful shutdown handler for Ctrl+C and other signals"""
+    signal_names = {
+        signal.SIGINT: "SIGINT (Ctrl+C)",
+        signal.SIGTERM: "SIGTERM"
+    }
+    signal_name = signal_names.get(signum, f"Signal {signum}")
+    
+    logger.info(f"🛑 Received {signal_name} - Shutting down Daily Brief Service gracefully...")
+    
+    if scheduler and scheduler.running:
+        logger.info("📧 Stopping email monitoring...")
+        logger.info("⏰ Stopping scheduled jobs...")
+        scheduler.shutdown(wait=False)
+        logger.info("✅ Daily Brief Service stopped successfully")
+    else:
+        logger.info("⚠️ Scheduler not running, forcing exit...")
+    
+    print("\n👋 Daily Brief Service has been stopped. Goodbye!")
+    sys.exit(0)
+
+# Register signal handlers
+signal.signal(signal.SIGINT, signal_handler)   # Ctrl+C
+signal.signal(signal.SIGTERM, signal_handler)  # Termination signal
 
 
 class EmailMessageInfo(NamedTuple):
@@ -1508,6 +1537,7 @@ def main():
         logger.info("Running in DRY RUN mode - no emails will be sent")
     
     # Initialize scheduler
+    global scheduler
     scheduler = BlockingScheduler(timezone=config.timezone)
     
     # Schedule jobs
@@ -1539,11 +1569,19 @@ def main():
     # logger.info("  - Check reminders: every 1 minute")  # Disabled
     logger.info("  - Daily weather: 05:00 local time")
     
+    logger.info("🎯 Press Ctrl+C to stop the service gracefully")
+    
     try:
         scheduler.start()
     except KeyboardInterrupt:
-        logger.info("Shutting down Daily Brief Service")
-        scheduler.shutdown()
+        # This should be handled by signal_handler, but keeping as fallback
+        logger.info("🛑 Keyboard interrupt received")
+        signal_handler(signal.SIGINT, None)
+    except Exception as e:
+        logger.error(f"❌ Unexpected error: {e}")
+        if scheduler and scheduler.running:
+            scheduler.shutdown()
+        raise
 
 
 if __name__ == "__main__":
