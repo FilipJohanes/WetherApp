@@ -1557,3 +1557,178 @@ Sk
 2025-11-07 07:59:57,777 - INFO - Geocoded 'Madrid, Spain' to 40.4165, -3.70256 (Madrid, Madrid, Spain)
 2025-11-07 07:59:57,779 - INFO - Geocoding location: Prague, CZ
 2025-11-07 07:59:58,131 - WARNING - No geocoding results for: Prague, CZ
+2025-11-07 13:04:31,479 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:31,487 - INFO - Loaded 24 messages for language: en
+2025-11-07 13:04:31,494 - INFO - Loaded 24 messages for language: es
+2025-11-07 13:04:31,502 - INFO - Loaded 24 messages for language: sk
+2025-11-07 13:04:31,511 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:31,520 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:31,521 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,606 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,606 - INFO - Loaded 24 messages for language: en
+2025-11-07 13:04:42,606 - INFO - Loaded 24 messages for language: es
+2025-11-07 13:04:42,607 - INFO - Loaded 24 messages for language: sk
+2025-11-07 13:04:42,607 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,608 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,609 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,843 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:42,844 - INFO - Loaded 24 messages for language: en
+2025-11-07 13:04:42,844 - INFO - Loaded 24 messages for language: es
+2025-11-07 13:04:42,844 - INFO - Loaded 24 messages for language: sk
+2025-11-07 13:04:43,076 - INFO - Geocoding location: Prague, CZ
+2025-11-07 13:04:43,393 - WARNING - No geocoding results for: Prague, CZ
+2025-11-07 13:04:43,394 - INFO - Geocoding location: New York, NY
+2025-11-07 13:04:43,642 - WARNING - No geocoding results for: New York, NY
+2025-11-07 13:04:43,643 - INFO - Geocoding location: Madrid, Spain
+2025-11-07 13:04:43,896 - INFO - Geocoded 'Madrid, Spain' to 40.4165, -3.70256 (Madrid, Madrid, Spain)
+2025-11-07 13:04:43,897 - INFO - Geocoding location: Prague, CZ
+2025-11-07 13:04:44,149 - WARNING - No geocoding results for: Prague, CZ
+2025-11-07 13:04:44,578 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:44,579 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:44,581 - INFO - Loaded 21 weather message conditions
+2025-11-07 13:04:44,582 - INFO - Loaded 21 weather message conditions
+2025-11-08 11:49:18,748 - INFO - Loading configuration from environment variables
+2025-11-08 11:49:18,749 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-08 11:50:19,694 - INFO - Loading configuration from environment variables
+2025-11-08 11:50:19,694 - ERROR - Required environment variable IMAP_HOST is not set
+2025-11-08 11:51:44,010 - INFO - Loading configuration from environment variables
+2025-11-08 11:51:44,011 - ERROR - Required environment variable IMAP_HOST is not set
+2025-11-08 11:52:16,250 - INFO - Loading configuration from environment variables
+2025-11-08 11:52:16,250 - ERROR - Required environment variable IMAP_HOST is not set
+2025-11-08 11:53:01,598 - ERROR - Required environment variable IMAP_HOST is not set
+2025-11-08 11:54:02,404 - INFO - Starting Daily Brief Web Interface
+2025-11-08 11:54:02,404 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 11:54:02,430 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 11:54:02,430 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 11:54:15,505 - INFO - 192.168.1.24 - - [08/Nov/2025 11:54:15] "GET / HTTP/1.1" 200 -
+2025-11-08 11:54:15,709 - INFO - 192.168.1.24 - - [08/Nov/2025 11:54:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-08 11:54:35,751 - INFO - 192.168.1.24 - - [08/Nov/2025 11:54:35] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 11:55:02,778 - INFO - 192.168.1.24 - - [08/Nov/2025 11:55:02] "GET /stats HTTP/1.1" 200 -
+2025-11-08 11:55:26,449 - INFO - 192.168.1.24 - - [08/Nov/2025 11:55:26] "GET / HTTP/1.1" 200 -
+2025-11-08 11:55:27,130 - INFO - 192.168.1.24 - - [08/Nov/2025 11:55:27] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 11:55:28,702 - INFO - 192.168.1.24 - - [08/Nov/2025 11:55:28] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-08 11:55:31,726 - INFO - 192.168.1.24 - - [08/Nov/2025 11:55:31] "GET /stats HTTP/1.1" 200 -
+2025-11-08 11:55:46,045 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 11:55:46,046 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 12:08:38,955 - INFO - Geocoding location: Bratislava
+2025-11-08 12:08:39,262 - INFO - Geocoded 'Bratislava' to 48.14816, 17.10674 (Bratislava, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:08:48,921 - INFO - Geocoding location: Los Angeles
+2025-11-08 12:08:49,165 - INFO - Geocoded 'Los Angeles' to 34.05223, -118.24368 (Los Angeles, California, United States) - Timezone: America/Los_Angeles
+2025-11-08 12:56:18,622 - INFO - Starting Daily Brief Web Interface
+2025-11-08 12:56:18,622 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 12:56:18,629 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 12:56:18,629 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 12:56:18,839 - INFO - 192.168.1.24 - - [08/Nov/2025 12:56:18] "GET / HTTP/1.1" 200 -
+2025-11-08 12:56:22,478 - INFO - 192.168.1.24 - - [08/Nov/2025 12:56:22] "GET / HTTP/1.1" 200 -
+2025-11-08 13:02:47,816 - INFO - 192.168.1.24 - - [08/Nov/2025 13:02:47] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 13:06:03,374 - INFO - 192.168.1.24 - - [08/Nov/2025 13:06:03] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 13:06:03,955 - INFO - 192.168.1.24 - - [08/Nov/2025 13:06:03] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-08 13:08:44,286 - INFO - 192.168.1.24 - - [08/Nov/2025 13:08:44] "GET /stats HTTP/1.1" 200 -
+2025-11-08 13:09:10,061 - INFO - 192.168.1.24 - - [08/Nov/2025 13:09:10] "GET / HTTP/1.1" 200 -
+2025-11-08 13:10:34,003 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 13:10:34,003 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 13:11:09,037 - INFO - Starting Daily Brief Web Interface
+2025-11-08 13:11:09,037 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 13:11:09,045 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 13:11:09,045 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 13:11:16,915 - INFO - 192.168.1.24 - - [08/Nov/2025 13:11:16] "GET / HTTP/1.1" 200 -
+2025-11-08 13:14:45,020 - INFO - 192.168.1.24 - - [08/Nov/2025 13:14:45] "GET / HTTP/1.1" 200 -
+2025-11-08 13:14:47,377 - INFO - 192.168.1.24 - - [08/Nov/2025 13:14:47] "GET / HTTP/1.1" 200 -
+2025-11-08 13:14:48,355 - INFO - 192.168.1.24 - - [08/Nov/2025 13:14:48] "GET / HTTP/1.1" 200 -
+2025-11-08 13:15:26,621 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 13:15:26,621 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 13:15:36,747 - INFO - Starting Daily Brief Web Interface
+2025-11-08 13:15:36,748 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 13:15:36,755 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 13:15:36,755 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 13:15:44,444 - INFO - 192.168.1.24 - - [08/Nov/2025 13:15:44] "GET / HTTP/1.1" 200 -
+2025-11-08 13:17:05,948 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 13:17:05,948 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 13:17:39,341 - INFO - Starting Daily Brief Web Interface
+2025-11-08 13:17:39,342 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 13:17:39,357 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 13:17:39,358 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 13:17:42,126 - INFO - 192.168.1.24 - - [08/Nov/2025 13:17:42] "GET / HTTP/1.1" 200 -
+2025-11-08 13:19:29,178 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 13:19:29,178 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 12:22:17,920 - INFO - Starting Daily Brief Web Interface
+2025-11-08 12:22:17,920 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 12:22:17,928 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 12:22:17,928 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 12:22:20,648 - INFO - 192.168.1.24 - - [08/Nov/2025 12:22:20] "GET / HTTP/1.1" 200 -
+2025-11-08 12:25:18,794 - INFO - 192.168.1.190 - - [08/Nov/2025 12:25:18] "GET / HTTP/1.1" 200 -
+2025-11-08 12:27:36,255 - INFO - 192.168.1.190 - - [08/Nov/2025 12:27:36] "GET / HTTP/1.1" 200 -
+2025-11-08 12:27:43,598 - INFO - 192.168.1.190 - - [08/Nov/2025 12:27:43] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 12:29:06,313 - INFO - Processing subscription for bcb2606@gmail.vom - Senec, Slovakia
+2025-11-08 12:29:06,314 - INFO - Geocoding location: Senec, Slovakia
+2025-11-08 12:29:06,643 - INFO - Geocoded 'Senec, Slovakia' to 48.21951, 17.40043 (Senec, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:29:06,656 - ERROR - Subscription error: 'No time zone found with key Europe/Bratislavaon'
+2025-11-08 12:29:06,657 - INFO - 192.168.1.190 - - [08/Nov/2025 12:29:06] "POST /subscribe HTTP/1.1" 200 -
+2025-11-08 12:29:23,104 - INFO - Processing subscription for bcb2606@gmail.com - Senec
+2025-11-08 12:29:23,105 - INFO - Geocoding location: Senec
+2025-11-08 12:29:23,385 - INFO - Geocoded 'Senec' to 48.21951, 17.40043 (Senec, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:29:23,387 - ERROR - Subscription error: 'No time zone found with key Europe/Bratislavaon'
+2025-11-08 12:29:23,388 - INFO - 192.168.1.190 - - [08/Nov/2025 12:29:23] "POST /subscribe HTTP/1.1" 200 -
+2025-11-08 12:29:36,118 - INFO - Processing subscription for bcb2606@gmail.com - Senec, skovakia
+2025-11-08 12:29:36,118 - INFO - Geocoding location: Senec, skovakia
+2025-11-08 12:29:36,392 - WARNING - No geocoding results for: Senec, skovakia
+2025-11-08 12:29:36,394 - INFO - 192.168.1.190 - - [08/Nov/2025 12:29:36] "POST /subscribe HTTP/1.1" 200 -
+2025-11-08 12:29:46,466 - INFO - Processing subscription for bcb2606@gmail.com - Senec
+2025-11-08 12:29:46,467 - INFO - Geocoding location: Senec
+2025-11-08 12:29:46,761 - INFO - Geocoded 'Senec' to 48.21951, 17.40043 (Senec, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:29:46,764 - ERROR - Subscription error: 'No time zone found with key Europe/Bratislavaon'
+2025-11-08 12:29:46,764 - INFO - 192.168.1.190 - - [08/Nov/2025 12:29:46] "POST /subscribe HTTP/1.1" 200 -
+2025-11-08 12:40:51,877 - INFO - 192.168.1.24 - - [08/Nov/2025 12:40:51] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 12:44:15,056 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 12:44:15,057 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 12:44:20,688 - INFO - Starting Daily Brief Web Interface
+2025-11-08 12:44:20,689 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 12:44:20,695 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 12:44:20,695 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 12:45:18,564 - INFO - Processing subscription for bcb2505@gmail.com - Senec, Slovakia
+2025-11-08 12:45:18,564 - INFO - Geocoding location: Senec, Slovakia
+2025-11-08 12:45:18,905 - INFO - Geocoded 'Senec, Slovakia' to 48.21951, 17.40043 (Senec, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:45:18,925 - ERROR - Database error: table subscribers has no column named timezone
+2025-11-08 12:45:18,940 - INFO - 192.168.1.24 - - [08/Nov/2025 12:45:18] "POST /subscribe HTTP/1.1" 200 -
+2025-11-08 12:48:08,132 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 12:48:08,132 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-08 12:48:42,682 - INFO - Starting Daily Brief Web Interface
+2025-11-08 12:48:42,682 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-08 12:48:42,689 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-08 12:48:42,689 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-08 12:49:22,781 - INFO - Processing subscription for bcb2505@gmail.com - Senec, Slovakia
+2025-11-08 12:49:22,781 - INFO - Geocoding location: Senec, Slovakia
+2025-11-08 12:49:23,120 - INFO - Geocoded 'Senec, Slovakia' to 48.21951, 17.40043 (Senec, Bratislava Region, Slovakia) - Timezone: Europe/Paris
+2025-11-08 12:49:23,132 - INFO - Subscription created for bcb2505@gmail.com in timezone Europe/Paris
+2025-11-08 12:49:23,133 - INFO - 192.168.1.24 - - [08/Nov/2025 12:49:23] "[32mPOST /subscribe HTTP/1.1[0m" 302 -
+2025-11-08 12:49:23,137 - INFO - Getting weather forecast for 48.21951, 17.40043
+2025-11-08 12:49:23,454 - INFO - Loaded 21 weather message conditions
+2025-11-08 12:49:23,469 - INFO - 192.168.1.24 - - [08/Nov/2025 12:49:23] "GET /preview?email=bcb2505@gmail.com HTTP/1.1" 200 -
+2025-11-08 12:49:34,814 - INFO - 192.168.1.24 - - [08/Nov/2025 12:49:34] "GET /subscribe HTTP/1.1" 200 -
+2025-11-08 14:24:07,783 - INFO - 127.0.0.1 - - [08/Nov/2025 14:24:07] "GET / HTTP/1.1" 200 -
+2025-11-08 14:36:42,676 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-08 14:36:42,676 - INFO - ⚠️ Scheduler not running, forcing exit...

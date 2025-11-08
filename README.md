@@ -14,7 +14,7 @@
 A comprehensive Python 3.11+ service that transforms your email inbox into a smart weather assistant with full multi-language support:
 
 1. **🌤️ Daily Weather Digest** - Subscribe by sending your location, receive personalized forecasts at 05:00
-2. **🎭 Multi-Language Personality Modes** - Choose from 4 personalities (neutral, cute, brutal, emuska) in 3 languages (English, Spanish, Slovak)
+2. **🎭 Multi-Language Personality Modes** - Choose from 3 personalities (neutral, cute, brutal) in 3 languages (English, Spanish, Slovak)
 3. **🛡️ Smart Email Processing** - Handles system emails, Unicode characters, and flexible input parsing
 
 ## ✨ Features
@@ -22,7 +22,7 @@ A comprehensive Python 3.11+ service that transforms your email inbox into a sma
 - **🆓 100% Free**: Uses Open-Meteo weather API (no API keys required)
 - **📧 Email-Driven**: Control everything via simple email commands  
 - **🌍 Multi-Language**: Full support for English, Spanish, and Slovak
-- **🎭 4 Personality Modes**: Neutral, cute, brutal, emuska communication styles
+- **🎭 3 Personality Modes**: Neutral, cute, brutal communication styles
 - **🧠 Smart Parsing**: Handles multi-line emails, system email filtering, Unicode support
 - **🛡️ Production Ready**: Handles duplicates, restarts, network failures, and crashes gracefully
 - **📦 Self-Contained**: Organized structure with comprehensive documentation
@@ -398,8 +398,8 @@ python check_status.py
 # Test personality modes
 python debug_personality.py
 
-# Language management tools
-python emuska_manager.py
+# Database management tools
+python db_manager.py
 ```
 
 **Test Coverage:**
@@ -639,7 +639,6 @@ This project is **PROPRIETARY SOFTWARE** under a restrictive license:
 ✅ **Educational study allowed**
 
 This software contains unique intellectual property including:
-- Original Slovak "emuska" personality messages
 - Proprietary multi-language localization system
 - Custom email processing algorithms
 - Innovative weather delivery architecture

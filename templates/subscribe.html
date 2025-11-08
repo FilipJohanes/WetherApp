@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribe - Daily Brief Service{% endblock %}
+
+{% block header_subtitle %}Subscribe to Daily Weather Updates{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>📧 Subscribe to Daily Weather</h2>
+    <p style="margin-top: 10px;">
+        Fill out the form below to start receiving personalized weather forecasts every morning at 5:00 AM.
+    </p>
+</div>
+
+<form method="POST" action="{{ url_for('subscribe') }}" novalidate>
+    {{ form.hidden_tag() }}
+    
+    <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+        {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <small style="color: #6c757d; display: block; margin-top: 5px;">
+            Your email will only be used for weather updates. We never share or sell your data.
+        </small>
+    </div>
+    
+    <div class="form-group">
+        {{ form.location.label }}
+        {{ form.location(class="form-control", placeholder="Bratislava, Slovakia") }}
+        {% if form.location.errors %}
+            {% for error in form.location.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <small style="color: #6c757d; display: block; margin-top: 5px;">
+            Be specific for best results (e.g., "Madrid, Spain" or "New York, NY")
+        </small>
+    </div>
+    
+    <div class="form-group">
+        {{ form.language.label }}
+        {{ form.language(class="form-control") }}
+        {% if form.language.errors %}
+            {% for error in form.language.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <small style="color: #6c757d; display: block; margin-top: 5px;">
+            Choose the language for your weather reports
+        </small>
+    </div>
+    
+    <div class="form-group">
+        {{ form.personality.label }}
+        {{ form.personality(class="form-control") }}
+        {% if form.personality.errors %}
+            {% for error in form.personality.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <small style="color: #6c757d; display: block; margin-top: 5px;">
+            <strong>Neutral:</strong> Standard reports | 
+            <strong>Cute:</strong> Friendly & emoji-rich | 
+            <strong>Brutal:</strong> Blunt & direct
+        </small>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        {{ form.submit(class="btn") }}
+    </div>
+    
+    <p style="margin-top: 15px; font-size: 0.9em; color: #6c757d; text-align: center;">
+        Your email is used only for weather delivery. No spam, no sharing.
+    </p>
+</form>
+
+<div class="card" style="margin-top: 30px; background: #e7f3ff; border: 1px solid #0056b3;">
+    <h3 style="color: #004085;">ℹ️ Already Subscribed?</h3>
+    <p style="color: #004085;">
+        Submitting this form with an existing email will <strong>update your preferences</strong> 
+        (location, language, or personality).
+    </p>
+</div>
+
+<script>
+// Simple client-side validation enhancement
+document.querySelector('form').addEventListener('submit', function(e) {
+    const email = document.getElementById('email').value;
+    const location = document.getElementById('location').value;
+    
+    if (!email || !location) {
+        alert('Please fill in all required fields');
+        e.preventDefault();
+        return false;
+    }
+    
+    // Basic email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
+{% endblock %}

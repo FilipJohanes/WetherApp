@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily weather forecasts with personality - Subscribe to get personalized weather emails">
+    <title>{% block title %}Daily Brief Service{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #764ba2;
+        }
+        
+        main {
+            padding: 30px 20px;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .flash.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .flash.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .flash.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        button, .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        button:hover, .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active, .btn:active {
+            transform: translateY(0);
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        pre {
+            background: #2d2d2d;
+            color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        /* Connecting arrows between steps */
+        .stats-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 23%;
+            right: 23%;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #667eea 33%, #764ba2 66%, #764ba2 100%);
+            z-index: 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: 2px solid transparent;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        /* Progressive gradient backgrounds for each step */
+        .stat-card:nth-child(1) {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ffffff 100%);
+        }
+        
+        .stat-card:nth-child(2) {
+            background: linear-gradient(135deg, #ddd6fe 0%, #ffffff 100%);
+        }
+        
+        .stat-card:nth-child(3) {
+            background: linear-gradient(135deg, #fce7f3 0%, #ffffff 100%);
+        }
+        
+        .stat-card:nth-child(4) {
+            background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%);
+        }
+        
+        .stat-card h3 {
+            font-size: 1.1em;
+            margin: 10px 0 5px 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+        
+        .stat-card p {
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        /* Pulse animation on number emojis */
+        .stat-card > div:first-child {
+            font-size: 2.5em;
+            animation: pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        .stat-card:nth-child(1) > div:first-child { animation-delay: 0s; }
+        .stat-card:nth-child(2) > div:first-child { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) > div:first-child { animation-delay: 0.4s; }
+        .stat-card:nth-child(4) > div:first-child { animation-delay: 0.6s; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            main {
+                padding: 20px 15px;
+            }
+            
+            button, .btn {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            /* Hide connecting line on mobile */
+            .stats-grid::before {
+                display: none;
+            }
+            
+            .stat-card > div:first-child {
+                font-size: 2em;
+            }
+        }
+        
+        /* Security indicators */
+        .security-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Daily Brief Service</h1>
+            <p>{% block header_subtitle %}Personalized Weather, Delivered Daily{% endblock %}</p>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('subscribe') }}">✉️ Subscribe</a></li>
+                <li><a href="{{ url_for('unsubscribe') }}">🚫 Unsubscribe</a></li>
+                <li><a href="{{ url_for('stats') }}">📊 Stats</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message|safe }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer>
+            <p>🔒 Secure Connection <span class="security-badge">Protected</span></p>
+            <p>&copy; 2025 Daily Brief Service | Made with ❤️ by Filip Johanes</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                Emails sent at 5:00 AM daily | Free weather service
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

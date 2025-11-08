@@ -25,7 +25,7 @@ Madrid español
 
 ### **With Personality:**
 ```
-Bratislava emuska
+Bratislava cute
 ```
 or
 ```
@@ -34,7 +34,7 @@ New York brutal
 
 ### **Everything Together:**
 ```
-Bratislava sk emuska
+Bratislava sk cute
 ```
 
 ---
@@ -43,26 +43,26 @@ Bratislava sk emuska
 
 ### **Single Line:**
 ```
-bratislava sk emuska
+bratislava sk cute
 ```
 
 ### **Multiple Lines:**
 ```
 bratislava
 sk
-emuska
+cute
 ```
 
 ### **Natural Language:**
 ```
-hello, i want weather for bratislava in slovak with emuska personality
+hello, i want weather for bratislava in slovak with cute personality
 ```
 
 ### **Old Format Still Works:**
 ```
 location: Bratislava, Slovakia
 language: sk
-personality: emuska
+personality: cute
 ```
 
 ---
@@ -82,7 +82,6 @@ Direct keywords:
 - `neutral` / `normal` / `standard`
 - `cute` / `sweet` / `lovely`
 - `brutal` / `harsh` / `direct`
-- `emuska` / `princess` / `romantic`
 
 ---
 
@@ -92,11 +91,11 @@ Direct keywords:
 |----------------|------------------------|
 | `Bratislava` | Location: Bratislava, EN, neutral |
 | `Madrid es` | Location: Madrid, ES, neutral |
-| `bratislava emuska` | Location: Bratislava, EN, emuska |
+| `bratislava cute` | Location: Bratislava, EN, cute |
 | `Madrid español cute` | Location: Madrid, ES, cute |
 | `New York brutal` | Location: New York, EN, brutal |
 | `Prague sk` | Location: Prague, SK, neutral |
-| `bratislava sk emuska` | Location: Bratislava, SK, emuska |
+| `bratislava sk cute` | Location: Bratislava, SK, cute |
 
 ---
 
@@ -113,7 +112,7 @@ Just send what you want! The system is smart enough to figure it out. 🧠
 
 ## 🔧 **Technical Features**
 
-✅ **Order doesn't matter** - "bratislava sk emuska" = "sk emuska bratislava"  
+✅ **Order doesn't matter** - "bratislava sk cute" = "sk cute bratislava"  
 ✅ **Case insensitive** - "BRATISLAVA" = "bratislava" = "Bratislava"  
 ✅ **Synonym support** - "sweet" = "cute", "harsh" = "brutal"  
 ✅ **Natural language** - Understands conversational emails  
@@ -128,7 +127,7 @@ Just send what you want! The system is smart enough to figure it out. 🧠
 Just email `dailywether.reminder@gmail.com` with your city and preferences!
 
 **Examples:**
-- New subscriber: `Bratislava sk emuska`
+- New subscriber: `Bratislava sk cute`
 - Change personality: `brutal`
 - Change language: `es`
 - Unsubscribe: `delete`

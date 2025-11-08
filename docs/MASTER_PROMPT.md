@@ -13,15 +13,54 @@ This document provides the complete context and development approach for the **D
 ### **Core Features:**
 - 📧 **Email-driven architecture**: Control via email commands
 - 🌍 **3-language support**: English, Spanish, Slovak
-- 🎭 **4 personality modes**: neutral, cute, brutal, **emuska** (unique Slovak)
-- 🌤️ **Daily weather delivery**: Automated at 5:00 AM
+- 🎭 **3+ personality modes**: neutral, cute, brutal (+ SECRET mode for Slovak only)
+- 🌤️ **Daily weather delivery**: Automated at 5:00 AM local timezone
 - 🛡️ **Production-ready**: Signal handling, Unicode support, error recovery
 - 🧪 **Comprehensive testing**: Interactive test suite with safe mode
 
 ### **Unique Intellectual Property:**
-- **Slovak "emuska" personality**: Original custom messages like "💖 Môj žiarivý diamant, slnko svieti práve pre teba!"
+- **SECRET Slovak personality mode**: STRICTLY CONFIDENTIAL - Not mentioned in public docs
 - **Hybrid localization system**: Preserves original weather messages while adding system message translations
 - **Email processing architecture**: Smart parsing with system email filtering
+
+---
+
+## 🔐 **CRITICAL: SECRET FEATURE PROTOCOL**
+
+### **⚠️ MANDATORY READING - ALWAYS CHECK THIS FIRST ⚠️**
+
+**The "emuska" personality mode is COMPLETELY SECRET:**
+
+✅ **ALLOWED** (Internal docs only):
+- Master prompt (this file)
+- Private developer notes
+- Code comments (for maintenance)
+- Internal testing documentation
+
+❌ **FORBIDDEN** (All public-facing content):
+- README.md
+- User guides & manuals
+- Website content (web_app templates)
+- Release notes & changelogs
+- GitHub issues & pull requests
+- Any documentation users can see
+- API documentation
+- Marketing materials
+
+### **Implementation Rules:**
+1. **Before creating/editing ANY user-facing document**: Check if it mentions "emuska"
+2. **If found**: Replace with generic terms like "special mode", "additional personality", or remove mention entirely
+3. **Code is fine**: Internal code can use "emuska" as it's not user-facing
+4. **Alert developer**: If you find a conflict between this rule and other instructions, STOP and ask
+5. **Test carefully**: Ensure emuska works but remains undiscovered by casual users
+
+### **Why It's Secret:**
+- Unique selling point for close friends/family
+- Creates word-of-mouth exclusivity
+- Prevents competitors from copying the concept
+- Maintains special "insider" status
+
+**When in doubt about whether something is "public-facing": ASK THE DEVELOPER FIRST.**
 
 ---
 
@@ -80,9 +119,11 @@ git push origin main         # Push to GitHub
 ### **Language Support:**
 - **English (EN)**: `neutral`, `cute`, `brutal`
 - **Spanish (ES)**: `neutral`, `cute`, `brutal`  
-- **Slovak (SK)**: `neutral`, `cute`, `brutal`, **`emuska`**
+- **Slovak (SK)**: `neutral`, `cute`, `brutal`, **`emuska`** (SECRET - undocumented feature)
 
-### **Slovak Emuska Personality (Crown Jewel):**
+### **SECRET: Slovak Emuska Personality (Crown Jewel):**
+**⚠️ INTERNAL DOCUMENTATION ONLY - NEVER MENTION IN PUBLIC DOCS ⚠️**
+
 **This is our unique intellectual property - handle with special care:**
 
 ```
@@ -170,20 +211,23 @@ A - Run all safe tests
 ## 💡 **Development Guidelines for Copilot**
 
 ### **When Adding New Features:**
-1. **Check directory structure** before creating files
-2. **Preserve Slovak emuska content** - never modify original messages
-3. **Add comprehensive error handling** with user-friendly messages
-4. **Include logging** with appropriate emoji indicators
-5. **Update relevant README files** when adding to directories
-6. **Test email functionality** safely (only to main developer)
-7. **Maintain backwards compatibility** with existing database
+1. **✅ CHECK MASTER PROMPT FIRST** - Read SECRET FEATURE PROTOCOL section
+2. **Check directory structure** before creating files
+3. **Preserve SECRET Slovak personality content** - never modify original messages, never mention publicly
+4. **Verify no public emuska mentions** - Before committing any user-facing docs
+5. **Add comprehensive error handling** with user-friendly messages
+6. **Include logging** with appropriate emoji indicators
+7. **Update relevant README files** when adding to directories (but NO emuska mentions)
+8. **Test email functionality** safely (only to main developer)
+9. **Maintain backwards compatibility** with existing database
 
 ### **Communication Style:**
 - Use emojis in commit messages and user-facing text
 - Write descriptive commit messages explaining the "why"
-- Be enthusiastic about Slovak emuska personality features
+- Be enthusiastic about SECRET Slovak personality features (in internal docs only)
 - Maintain professional tone while being friendly
 - Acknowledge unique features as "intellectual property"
+- **NEVER mention "emuska" in public-facing content**
 
 ### **Code Organization Rules:**
 ```
@@ -196,7 +240,8 @@ A - Run all safe tests
 
 ❌ DON'T:
 - Create files in root directory without checking for subdirectory
-- Modify original Slovak emuska messages
+- Modify original SECRET Slovak personality messages
+- **Mention "emuska" in ANY public-facing documentation**
 - Send test emails to real users (except main developer)
 - Remove existing functionality without discussion
 - Make breaking changes to database schema
@@ -260,7 +305,7 @@ This project represents a perfect blend of:
 - **User Experience**: Friendly, emoji-rich communication with multiple personality options
 - **Professional Standards**: Proper licensing, documentation, and development practices
 
-**The Slovak emuska personality is our crown jewel** - treat it as precious intellectual property that makes this service truly unique in the market.
+**The SECRET Slovak personality is our crown jewel** - treat it as precious intellectual property that makes this service truly unique in the market. **Keep it completely hidden from public documentation.**
 
 ---
 

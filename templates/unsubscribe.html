@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Unsubscribe - Daily Brief Service{% endblock %}
+
+{% block header_subtitle %}Unsubscribe from Daily Weather{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>🚫 Unsubscribe from Daily Weather</h2>
+    <p style="margin-top: 10px; color: #6c757d;">
+        We're sorry to see you go! Enter your email below to unsubscribe from daily weather updates.
+    </p>
+</div>
+
+<form method="POST" action="{{ url_for('unsubscribe') }}" novalidate>
+    {{ form.hidden_tag() }}
+    
+    <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+        {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <div style="margin-top: 20px;">
+        {{ form.submit(class="btn", style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);") }}
+    </div>
+</form>
+
+<div style="margin-top: 25px; padding: 10px; font-size: 0.85em; color: #6c757d; border-top: 1px solid #dee2e6;">
+    <p style="margin: 0;"><strong>Alternative:</strong> Email <strong>dailywether.reminder@gmail.com</strong> with "delete" in the body.</p>
+</div>
+
+<div class="card" style="margin-top: 20px; background: #fff3cd; border: 1px solid #ffc107;">
+    <h3 style="color: #856404;">⚠️ Changed Your Mind?</h3>
+    <p style="color: #856404;">
+        You can re-subscribe anytime on the <a href="{{ url_for('subscribe') }}" style="color: #667eea;">subscribe page</a>.
+    </p>
+</div>
+{% endblock %}

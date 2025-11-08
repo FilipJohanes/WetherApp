@@ -1,0 +1,20 @@
+[Unit]
+Description=Daily Brief Web Interface
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/projects/WetherApp
+Environment="PATH=/home/pi/projects/WetherApp/venv/bin"
+Environment="FLASK_SECRET_KEY=CHANGE_THIS_TO_RANDOM_SECRET_KEY"
+ExecStart=/home/pi/projects/WetherApp/venv/bin/python /home/pi/projects/WetherApp/web_app.py
+Restart=always
+RestartSec=10
+
+# Security settings
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

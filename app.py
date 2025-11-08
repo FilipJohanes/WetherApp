@@ -48,9 +48,13 @@ import dateparser
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
+from timezonefinder import TimezoneFinder
 
 # Global scheduler variable for signal handling
 scheduler = None
+
+# Initialize timezone finder (reused across all lookups)
+tf = TimezoneFinder()
 
 # Load environment variables from .env file
 try:
@@ -182,6 +186,22 @@ def init_db(path: str = "app.db") -> None:
         try:
             conn.execute("ALTER TABLE subscribers ADD COLUMN language TEXT DEFAULT 'en'")
             logger.info("Added language column to subscribers table")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        
+        # Handle schema upgrade - add timezone column if it doesn't exist
+        try:
+            conn.execute("ALTER TABLE subscribers ADD COLUMN timezone TEXT DEFAULT 'UTC'")
+            logger.info("Added timezone column to subscribers table")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        
+        # Handle schema upgrade - add last_sent_date column to track daily sends
+        try:
+            conn.execute("ALTER TABLE subscribers ADD COLUMN last_sent_date TEXT NULL")
+            logger.info("Added last_sent_date column to subscribers table")
         except sqlite3.OperationalError:
             # Column already exists, which is fine
             pass
@@ -715,7 +735,7 @@ def get_weather_message(condition: str, personality: str = 'neutral', messages: 
 
 
 def geocode_location(location: str) -> Optional[tuple]:
-    """Geocode location using Open-Meteo Geocoding API."""
+    """Geocode location using Open-Meteo Geocoding API and determine timezone."""
     logger.info(f"Geocoding location: {location}")
     
     try:
@@ -745,8 +765,14 @@ def geocode_location(location: str) -> Optional[tuple]:
             if country:
                 display_name += f", {country}"
             
-            logger.info(f"Geocoded '{location}' to {lat}, {lon} ({display_name})")
-            return lat, lon, display_name
+            # Determine timezone from coordinates
+            timezone = tf.timezone_at(lat=lat, lng=lon)
+            if not timezone:
+                logger.warning(f"Could not determine timezone for {lat}, {lon}, defaulting to UTC")
+                timezone = "UTC"
+            
+            logger.info(f"Geocoded '{location}' to {lat}, {lon} ({display_name}) - Timezone: {timezone}")
+            return lat, lon, display_name, timezone
         else:
             logger.warning(f"No geocoding results for: {location}")
             return None
@@ -916,34 +942,47 @@ def handle_weather_command(config: Config, from_email: str, location: str = None
             
             if new_location:
                 # Subscribe/update location
-                geocode_result = geocode_location(new_location) if new_location != current_location else (current_lat, current_lon, current_location)
+                geocode_result = geocode_location(new_location) if new_location != current_location else None
                 
                 if geocode_result and geocode_result[0] is not None:
-                    lat, lon, display_name = geocode_result
+                    lat, lon, display_name, timezone_str = geocode_result
                     
-                    # Save/update subscription
+                    # Save/update subscription with timezone
                     conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality, language)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (from_email, display_name, lat, lon, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
+                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, timezone, updated_at, personality, language)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (from_email, display_name, lat, lon, timezone_str, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
                     conn.commit()
                     
-                    # Get sample weather with personality and language
-                    weather = get_weather_forecast(lat, lon, config.timezone)
+                    # Get sample weather with personality and language (use subscriber's timezone)
+                    weather = get_weather_forecast(lat, lon, timezone_str)
                     if weather:
                         sample_forecast = generate_weather_summary(weather, display_name, new_personality, new_language)
                         response = f"✅ Weather subscription updated!\n"
                         response += f"📍 Location: {display_name} ({lat:.4f}, {lon:.4f})\n"
+                        response += f"🌍 Timezone: {timezone_str}\n"
                         response += f"🎭 Personality mode: {new_personality}\n"
-                        response += f"🌍 Language: {new_language}\n\n"
+                        response += f"🌍 Language: {new_language}\n"
+                        response += f"⏰ Daily forecast will be sent at 05:00 {timezone_str} time\n\n"
                         response += f"Here's today's forecast:\n{sample_forecast}\n"
                     else:
                         response = f"✅ Subscribed to weather for {display_name} in {new_personality} mode, but couldn't fetch current forecast.\n\n"
+                elif current_lat and current_lon:
+                    # Just update personality/language, keep existing location and coordinates
+                    conn.execute("""
+                        UPDATE subscribers 
+                        SET personality = ?, language = ?, updated_at = ?
+                        WHERE email = ?
+                    """, (new_personality, new_language, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
+                    conn.commit()
+                    
+                    response = f"✅ Updated to {new_personality} mode (language: {new_language})\n"
+                    response += f"Location unchanged: {current_location}\n\n"
                 else:
                     # Save with unknown coordinates
                     conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, updated_at, personality, language)
-                        VALUES (?, ?, NULL, NULL, ?, ?, ?)
+                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, timezone, updated_at, personality, language)
+                        VALUES (?, ?, NULL, NULL, 'UTC', ?, ?, ?)
                     """, (from_email, new_location, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
                     conn.commit()
                     
@@ -1211,38 +1250,72 @@ Need help? Just reply to this email!"""
 
 
 def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
-    """Send daily weather forecast to all subscribers."""
-    logger.info("Running daily weather job")
+    """Send daily weather forecast to subscribers at 5 AM their local time."""
+    logger.info("Running hourly weather job - checking for 5 AM deliveries")
     
     conn = sqlite3.connect("app.db")
     try:
+        # Get all subscribers with timezone info
         subscribers = conn.execute("""
-            SELECT email, location, lat, lon, COALESCE(personality, 'neutral') as personality, COALESCE(language, 'en') as language
+            SELECT email, location, lat, lon, COALESCE(timezone, 'UTC') as timezone,
+                   COALESCE(personality, 'neutral') as personality, 
+                   COALESCE(language, 'en') as language,
+                   last_sent_date
             FROM subscribers 
             WHERE lat IS NOT NULL AND lon IS NOT NULL
         """).fetchall()
         
-        logger.info(f"Sending weather to {len(subscribers)} subscribers")
+        logger.info(f"Checking {len(subscribers)} subscribers for 5 AM delivery")
+        sent_count = 0
         
-        for email_addr, location, lat, lon, personality, language in subscribers:
+        for email_addr, location, lat, lon, subscriber_tz, personality, language, last_sent_date in subscribers:
             try:
-                # Get weather forecast
-                weather = get_weather_forecast(lat, lon, config.timezone)
-                if not weather:
-                    logger.warning(f"No weather data for {email_addr} at {location}")
-                    continue
+                # Get current time in subscriber's timezone
+                subscriber_now = datetime.now(ZoneInfo(subscriber_tz))
+                subscriber_date = subscriber_now.date().isoformat()
+                subscriber_hour = subscriber_now.hour
                 
-                # Generate and send forecast with personality and language
-                summary = generate_weather_summary(weather, location, personality, language)
-                subject = f"Today's Weather for {location}"
-                
-                footer = f"\n\n---\nDaily Weather Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
-                full_message = summary + footer
-                
-                send_email(config, email_addr, subject, full_message, dry_run)
+                # Check if it's 5 AM in their timezone and we haven't sent today
+                if subscriber_hour == 5 and last_sent_date != subscriber_date:
+                    logger.info(f"Sending to {email_addr} - it's 5 AM in {subscriber_tz}")
+                    
+                    # Get weather forecast using subscriber's timezone
+                    weather = get_weather_forecast(lat, lon, subscriber_tz)
+                    if not weather:
+                        logger.warning(f"No weather data for {email_addr} at {location}")
+                        continue
+                    
+                    # Generate and send forecast with personality and language
+                    summary = generate_weather_summary(weather, location, personality, language)
+                    subject = f"Today's Weather for {location}"
+                    
+                    footer = f"\n\n---\nDaily Weather Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
+                    full_message = summary + footer
+                    
+                    if send_email(config, email_addr, subject, full_message, dry_run):
+                        # Update last_sent_date to prevent double-sending
+                        conn.execute("""
+                            UPDATE subscribers 
+                            SET last_sent_date = ?
+                            WHERE email = ?
+                        """, (subscriber_date, email_addr))
+                        conn.commit()
+                        sent_count += 1
+                        logger.info(f"✅ Sent weather to {email_addr} ({sent_count} total)")
+                else:
+                    # Log why we skipped (for debugging)
+                    if last_sent_date == subscriber_date:
+                        logger.debug(f"Skipping {email_addr} - already sent today ({subscriber_date})")
+                    else:
+                        logger.debug(f"Skipping {email_addr} - it's {subscriber_hour}:00 in {subscriber_tz}, not 5 AM")
                 
             except Exception as e:
-                logger.error(f"Error sending weather to {email_addr}: {e}")
+                logger.error(f"Error processing subscriber {email_addr}: {e}")
+        
+        if sent_count > 0:
+            logger.info(f"✅ Daily weather job complete - sent {sent_count} emails")
+        else:
+            logger.info("No emails sent this hour")
                 
     finally:
         conn.close()
@@ -1642,16 +1715,16 @@ def main():
     
     scheduler.add_job(
         func=lambda: run_daily_weather_job(config, args.dry_run),
-        trigger=CronTrigger(hour=5, minute=0),
+        trigger=IntervalTrigger(hours=1),
         id='daily_weather',
-        name='Send daily weather forecasts'
+        name='Check for 5 AM deliveries (hourly)'
     )
     
     logger.info("Scheduler started - Daily Brief Service is running")
     logger.info("Jobs scheduled:")
     logger.info("  - Check inbox: every 1 minute")
     # logger.info("  - Check reminders: every 1 minute")  # Disabled
-    logger.info("  - Daily weather: 05:00 local time")
+    logger.info("  - Weather deliveries: every hour (sends at 5 AM local time per subscriber)")
     
     logger.info("🎯 Press Ctrl+C to stop the service gracefully")
     
