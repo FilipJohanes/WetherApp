@@ -22,8 +22,6 @@ Requirements:
 - Python 3.11+
 - See requirements.txt for dependencies
 - Environment variables for email configuration
-
-Author: GitHub Copilot
 """
 
 import os
@@ -389,94 +387,172 @@ def send_email(config: Config, to: str, subject: str, body: str, dry_run: bool =
 
 
 def parse_plaintext(body: str) -> Dict:
-    """Parse email body to determine command type and extract parameters - IDIOT-PROOF version!"""
+    """
+    Smart email parser - Natural language friendly!
+    
+    Accepts formats like:
+    - "subscribe bratislava sk emuska"
+    - "subscribe\nbratislava\nsk\nemuska"
+    - "hello, i want weather for bratislava in slovak with emuska"
+    - Old format still works: "location: Bratislava"
+    
+    Detects:
+    - Languages: en, es, sk, english, spanish, slovak, slovenčina, español
+    - Personalities: neutral, cute, brutal, emuska (+ synonyms)
+    - Locations: anything else (validated by geocoding later)
+    - Commands: delete, unsubscribe
+    """
     body = body.strip()
+    
+    # Normalize text for analysis (preserve original for location extraction)
+    text_lower = body.lower()
+    
+    # Quick check for delete command
+    if 'delete' in text_lower or 'unsubscribe' in text_lower:
+        return {'command': 'DELETE'}
+    
+    # Extract all tokens (words and phrases)
+    # Split by lines and spaces, but preserve multi-word locations
     lines = [line.strip() for line in body.split('\n') if line.strip()]
-    
-    if not lines:
-        return {'command': 'WEATHER', 'location': 'current'}
-    
-    # Smart parsing: look for keywords in individual lines
-    location_lines = []
-    personality_mode = None
-    language_code = None
-    calendar_text = None
-    
+    all_tokens = []
     for line in lines:
+        all_tokens.extend([word.strip(',.!?;:') for word in line.split() if word.strip()])
+    
+    # Also keep full lines as potential locations
+    full_line_tokens = [line.strip(',.!?;:') for line in lines if line.strip()]
+    
+    # Initialize detected values
+    detected_language = None
+    detected_personality = None
+    detected_location = None
+    
+    # Language detection maps
+    language_map = {
+        # Language codes
+        'en': 'en', 'es': 'es', 'sk': 'sk',
+        # Full names
+        'english': 'en', 'spanish': 'es', 'slovak': 'sk',
+        # Native names
+        'slovenčina': 'sk', 'slovensky': 'sk', 'slovenské': 'sk',
+        'español': 'es', 'española': 'es',
+    }
+    
+    # Personality detection maps
+    personality_map = {
+        # Direct keywords
+        'neutral': 'neutral', 'cute': 'cute', 'brutal': 'brutal', 'emuska': 'emuska',
+        # Synonyms
+        'normal': 'neutral', 'standard': 'neutral', 'basic': 'neutral',
+        'sweet': 'cute', 'lovely': 'cute', 'nice': 'cute', 'kind': 'cute',
+        'harsh': 'brutal', 'direct': 'brutal', 'honest': 'brutal', 'straight': 'brutal',
+        'princess': 'emuska', 'romantic': 'emuska', 'loving': 'emuska',
+    }
+    
+    # Filter words to ignore (common filler words and command keywords)
+    ignore_words = {
+        'subscribe', 'weather', 'forecast', 'please', 'thank', 'thanks', 'hello', 
+        'hi', 'hey', 'want', 'need', 'get', 'send', 'me', 'my', 'for', 'in', 
+        'with', 'the', 'a', 'an', 'to', 'from', 'daily', 'service', 'i', 'id',
+        'like', 'would', 'could', 'can', 'language', 'location', 'personality',
+        'mode', 'type', 'style', 'prefer', 'preference', 'set', 'change',
+        'update', 'modify', 'sign', 'up', 'signup', 'join', 'register',
+    }
+    
+    # Parse tokens to detect language and personality
+    location_candidates = []
+    
+    for i, token in enumerate(all_tokens):
+        token_lower = token.lower()
+        
+        # Skip labels like "language:", "location:", etc.
+        if token_lower.endswith(':'):
+            continue
+        
+        # Check for language
+        if token_lower in language_map and not detected_language:
+            detected_language = language_map[token_lower]
+            continue
+        
+        # Check for personality
+        if token_lower in personality_map and not detected_personality:
+            detected_personality = personality_map[token_lower]
+            continue
+        
+        # If it's not a filler word and not already detected as lang/personality
+        if token_lower not in ignore_words and len(token) > 1:
+            location_candidates.append(token)
+    
+    # Also check full lines for location (better for "Bratislava, Slovakia" style)
+    for line in full_line_tokens:
         line_lower = line.lower()
         
-        # Check for explicit commands
-        if line_lower == 'delete' or 'unsubscribe' in line_lower:
-            return {'command': 'DELETE'}
-            
-        # Check for personality modes (can be anywhere in the message)
-        if any(mode in line_lower for mode in ['neutral', 'cute', 'brutal', 'emuska']):
-            for mode in ['neutral', 'cute', 'brutal', 'emuska']:
-                if mode in line_lower:
-                    personality_mode = mode
+        # Skip if it's a language or personality keyword
+        is_keyword = False
+        for keyword in list(language_map.keys()) + list(personality_map.keys()):
+            if line_lower == keyword:
+                is_keyword = True
+                break
+        
+        if not is_keyword and len(line) > 2:
+            # Remove label prefixes
+            line_clean = re.sub(r'^(location|city|place|where):\s*', '', line, flags=re.IGNORECASE)
+            if line_clean and line_clean.lower() not in ignore_words:
+                location_candidates.append(line_clean)
+    
+    # Smart location selection: prefer longer, more specific strings
+    if location_candidates:
+        # Sort by length (longer = more specific like "Bratislava, Slovakia" vs "Bratislava")
+        location_candidates = sorted(set(location_candidates), key=len, reverse=True)
+        
+        # Filter out candidates that are substrings of longer candidates
+        final_location = None
+        for candidate in location_candidates:
+            # Check if this candidate contains any language/personality keywords
+            candidate_lower = candidate.lower()
+            has_keyword = False
+            for keyword in list(language_map.keys()) + list(personality_map.keys()):
+                if keyword in candidate_lower.split():
+                    has_keyword = True
                     break
-            continue
             
-        # Check for language codes (sk, en, es)
-        if line_lower in ['sk', 'en', 'es'] or \
-           'language:' in line_lower or \
-           'lang:' in line_lower:
-            # Extract language code
-            if line_lower in ['sk', 'en', 'es']:
-                language_code = line_lower
-            else:
-                for lang in ['sk', 'en', 'es']:
-                    if lang in line_lower:
-                        language_code = lang
-                        break
-            continue
-            
-        # Calendar/reminder system disabled for now
-        # if any(keyword in line_lower for keyword in ['remind', 'reminder', 'meeting', 'appointment', 'call']):
-        #     calendar_text = line
-        #     continue
-            
-        # Check if line looks like a location (city, country, coordinates)
-        if line and not any(word in line_lower for word in ['remind', 'personality', 'language', 'mode']):
-            # Remove common non-location words and see if anything remains
-            clean_line = line
-            for remove_word in ['please', 'thank you', 'thanks', 'hello', 'hi']:
-                clean_line = re.sub(r'\b' + remove_word + r'\b', '', clean_line, flags=re.IGNORECASE)
-            clean_line = clean_line.strip(' ,.')
-            
-            if clean_line:
-                location_lines.append(clean_line)
-    
-    # Decide what to return based on what we found
-    
-    # If we found personality mode, return that command
-    if personality_mode:
-        return {'command': 'PERSONALITY', 'mode': personality_mode}
+            if not has_keyword:
+                final_location = candidate
+                break
         
-    # If we found language code, return language change command
-    if language_code:
-        return {'command': 'LANGUAGE', 'language': language_code}
-        
-    # Calendar system disabled - will be re-enabled later
-    # if calendar_text:
-    #     return {'command': 'CALENDAR', 'text': calendar_text}
+        detected_location = final_location or location_candidates[0]
     
-    # Otherwise, treat as weather location
-    if location_lines:
-        # Take only the first line that looks like a location
-        location = location_lines[0]
-        result = {'command': 'WEATHER', 'location': location}
+    # Determine command type
+    # If only personality is detected, it's a personality change
+    if detected_personality and not detected_location:
+        return {'command': 'PERSONALITY', 'mode': detected_personality}
+    
+    # If only language is detected, it's a language change
+    if detected_language and not detected_location and not detected_personality:
+        return {'command': 'LANGUAGE', 'language': detected_language}
+    
+    # Otherwise, it's a weather subscription/update
+    if detected_location:
+        result = {
+            'command': 'WEATHER',
+            'location': detected_location
+        }
         
-        # Add any personality/language we found
-        if personality_mode:
-            result['personality'] = personality_mode
-        if language_code:
-            result['language'] = language_code
-            
+        # Add optional parameters if detected
+        if detected_personality:
+            result['personality'] = detected_personality
+        if detected_language:
+            result['language'] = detected_language
+        
         return result
     
-    # Fallback - treat entire first line as location
-    return {'command': 'WEATHER', 'location': lines[0] if lines else 'current'}
+    # Fallback - no clear command detected
+    # Try to use first non-keyword line as location
+    for line in full_line_tokens:
+        if len(line) > 2 and line.lower() not in ignore_words:
+            return {'command': 'WEATHER', 'location': line}
+    
+    # Ultimate fallback
+    return {'command': 'WEATHER', 'location': full_line_tokens[0] if full_line_tokens else 'current'}
 
 
 def load_weather_messages(file_path: str = None, language: str = "en") -> Dict[str, Dict[str, str]]:
@@ -1108,20 +1184,28 @@ def _get_usage_footer() -> str:
     return """📖 USAGE GUIDE:
 
 🌤️ WEATHER SERVICE:
-• Send a location to subscribe: "Prague, CZ" or "40.7128,-74.0060"
+• Just send your location: "Bratislava", "Madrid, Spain", "New York"
+• Add language: "Bratislava sk" or "Madrid español"
+• Add personality: "Bratislava sk emuska" or "Madrid cute"
 • Send "delete" to unsubscribe from daily weather
 • Daily forecast sent at 05:00 local time
 
 🎭 PERSONALITY MODES:
-• Send "neutral" for standard weather reports
-• Send "cute" for friendly, emoji-friendly reports 
-• Send "brutal" for blunt, no-nonsense reports
-• Send "emuska" for quirky Slovak-style reports
+• neutral - Standard weather reports
+• cute - Friendly, emoji-friendly reports 
+• brutal - Blunt, no-nonsense reports
+• emuska - Romantic Slovak-style reports (SK only)
 
-🌍 LANGUAGE SUPPORT:
-• Send "en" for English reports
-• Send "es" for Spanish reports  
-• Send "sk" for Slovak reports
+🌍 LANGUAGES:
+• en / english - English reports
+• es / español - Spanish reports  
+• sk / slovenčina - Slovak reports
+
+💡 EXAMPLES:
+• "Bratislava" → subscribes with default settings
+• "Madrid es cute" → Spanish language, cute personality
+• "New York brutal" → English, brutal personality
+• "Prague sk emuska" → Slovak, emuska personality
 
 Need help? Just reply to this email!"""
 
