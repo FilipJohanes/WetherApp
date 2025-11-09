@@ -847,57 +847,104 @@ def generate_weather_summary(weather: Dict, location: str, personality: str = 'n
     weather_message = get_weather_message(condition, personality, messages, language)
     summary += f"💡 {weather_message}\n\n"
     
-    # Generate clothing recommendation based on personality
-    clothing = _generate_clothing_advice(temp_max, precip_prob, precip_sum, wind_speed, personality)
+    # Generate clothing recommendation based on personality and language
+    clothing = _generate_clothing_advice(temp_max, precip_prob, precip_sum, wind_speed, personality, language)
     summary += clothing + "\n"
     
     return summary
 
 
-def _generate_clothing_advice(temp_max: float, precip_prob: float, precip_sum: float, wind_speed: float, personality: str) -> str:
+def _generate_clothing_advice(temp_max: float, precip_prob: float, precip_sum: float, wind_speed: float, personality: str, language: str = 'en') -> str:
     """Generate clothing advice based on weather conditions and personality mode."""
+    
+    # Localized clothing items
+    clothing_texts = {
+        'en': {
+            'very_cold': "heavy winter coat, thermal layers, warm boots",
+            'cold': "heavy winter coat, warm layers, gloves",
+            'cool': "warm jacket and layers",
+            'mild': "light jacket or sweater",
+            'warm': "light clothing, t-shirt",
+            'rain_heavy': "rain jacket, waterproof shoes",
+            'rain_light': "umbrella handy",
+            'wind': "windproof outer layer"
+        },
+        'es': {
+            'very_cold': "abrigo de invierno pesado, capas térmicas, botas cálidas",
+            'cold': "abrigo de invierno pesado, capas cálidas, guantes",
+            'cool': "chaqueta abrigada y capas",
+            'mild': "chaqueta ligera o suéter",
+            'warm': "ropa ligera, camiseta",
+            'rain_heavy': "chaqueta impermeable, zapatos impermeables",
+            'rain_light': "paraguas a mano",
+            'wind': "capa exterior cortavientos"
+        },
+        'sk': {
+            'very_cold': "ťažký zimný kabát, termo vrstvy, teplé topánky",
+            'cold': "ťažký zimný kabát, teplé vrstvy, rukavice",
+            'cool': "teplá bunda a viac vrstiev",
+            'mild': "ľahká bunda alebo sveter",
+            'warm': "ľahké oblečenie, tričko",
+            'rain_heavy': "nepremokavá bunda, vodotesné topánky",
+            'rain_light': "dáždnik poruke",
+            'wind': "vetrovka alebo vetruodolná vrstva"
+        }
+    }
+    
+    texts = clothing_texts.get(language, clothing_texts['en'])
     base_clothing = []
     accessories = []
     
     # Temperature-based clothing
     if temp_max < 0:
-        base_clothing.append("heavy winter coat, thermal layers, warm boots")
+        base_clothing.append(texts['very_cold'])
     elif temp_max < 5:
-        base_clothing.append("heavy winter coat, warm layers, gloves")
+        base_clothing.append(texts['cold'])
     elif temp_max < 15:
-        base_clothing.append("warm jacket and layers")
+        base_clothing.append(texts['cool'])
     elif temp_max < 25:
-        base_clothing.append("light jacket or sweater")
+        base_clothing.append(texts['mild'])
     else:
-        base_clothing.append("light clothing, t-shirt")
+        base_clothing.append(texts['warm'])
     
     # Precipitation accessories
     if precip_prob > 50 or precip_sum > 1:
-        accessories.append("rain jacket, waterproof shoes")
+        accessories.append(texts['rain_heavy'])
     elif precip_prob > 20:
-        accessories.append("umbrella handy")
+        accessories.append(texts['rain_light'])
     
     # Wind protection
     if wind_speed > 30:
-        accessories.append("windproof outer layer")
+        accessories.append(texts['wind'])
     
     # Combine advice
     clothing_items = base_clothing + accessories
     clothing_text = ", ".join(clothing_items)
     
-    # Add personality-based prefix
-    if personality == 'cute':
-        prefix = "👕 Fashion advice: Wear "
-        suffix = " and look absolutely adorable! 💖"
-    elif personality == 'brutal':
-        prefix = "🥶 Survival gear: "
-        suffix = " or suffer the consequences."
-    elif personality == 'emuska':
-        prefix = "👗 Pre moju princeznú: Oblieč si "
-        suffix = ", aby si bola krásna a chránená ako skutočná kráľovná! 💕👸✨"
-    else:  # neutral
-        prefix = "👕 Clothing recommendation: "
-        suffix = ""
+    # Add personality-based prefix (localized)
+    prefixes = {
+        'en': {
+            'cute': ("👕 Fashion advice: Wear ", " and look absolutely adorable! 💖"),
+            'brutal': ("🥶 Survival gear: ", " or suffer the consequences."),
+            'emuska': ("👗 Pre moju princeznú: Oblieč si ", ", aby si bola krásna a chránená ako skutočná kráľovná! 💕👸✨"),
+            'neutral': ("👕 Clothing recommendation: ", "")
+        },
+        'es': {
+            'cute': ("👕 Consejo de moda: Usa ", " ¡y luce absolutamente adorable! 💖"),
+            'brutal': ("🥶 Equipo de supervivencia: ", " o sufre las consecuencias."),
+            'emuska': ("👗 Pre moju princeznú: Oblieč si ", ", aby si bola krásna a chránená ako skutočná kráľovná! 💕👸✨"),
+            'neutral': ("👕 Recomendación de ropa: ", "")
+        },
+        'sk': {
+            'cute': ("👕 Módna rada: Obleč si ", " a vyzeraj úplne roztomilo! 💖"),
+            'brutal': ("🥶 Výbava na prežitie: ", " alebo trp následky."),
+            'emuska': ("👗 Pre moju princeznú: Oblieč si ", ", aby si bola krásna a chránená ako skutočná kráľovná! 💕👸✨"),
+            'neutral': ("👕 Odporúčanie oblečenia: ", "")
+        }
+    }
+    
+    lang_prefixes = prefixes.get(language, prefixes['en'])
+    prefix, suffix = lang_prefixes.get(personality, lang_prefixes['neutral'])
     
     return prefix + clothing_text + suffix
 
