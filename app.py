@@ -1297,8 +1297,8 @@ Need help? Just reply to this email!"""
 
 
 def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
-    """Send daily weather forecast to all subscribers at 5 AM Bratislava time."""
-    logger.info("Running daily weather job - sending to all subscribers")
+    """Check all subscribers hourly, send weather to those at 5 AM in their local time."""
+    logger.info("Running hourly weather check - looking for 5 AM deliveries")
     
     conn = sqlite3.connect("app.db")
     try:
@@ -1312,47 +1312,49 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
             WHERE lat IS NOT NULL AND lon IS NOT NULL
         """).fetchall()
         
-        logger.info(f"Sending daily weather to {len(subscribers)} subscribers")
+        logger.info(f"Checking {len(subscribers)} subscribers for 5 AM delivery")
         sent_count = 0
-        
-        # Get today's date in Bratislava timezone
-        bratislava_now = datetime.now(ZoneInfo('Europe/Bratislava'))
-        today_date = bratislava_now.date().isoformat()
         
         for email_addr, location, lat, lon, subscriber_tz, personality, language, last_sent_date in subscribers:
             try:
-                # Check if we haven't sent today (prevent double-sending if job runs twice)
-                if last_sent_date == today_date:
-                    logger.info(f"Already sent to {email_addr} today, skipping")
-                    continue
+                # Get current time in subscriber's timezone
+                subscriber_now = datetime.now(ZoneInfo(subscriber_tz))
+                subscriber_date = subscriber_now.date().isoformat()
+                subscriber_hour = subscriber_now.hour
+                
+                # Check if it's 5 AM in their timezone and we haven't sent today
+                if subscriber_hour == 5 and last_sent_date != subscriber_date:
+                    logger.info(f"Sending to {email_addr} - it's 5 AM in {subscriber_tz}")
                     
-                logger.info(f"Sending to {email_addr} at {location} (timezone: {subscriber_tz})")
-                
-                # Get weather forecast using subscriber's timezone
-                weather = get_weather_forecast(lat, lon, subscriber_tz)
-                if not weather:
-                    logger.warning(f"No weather data for {email_addr} at {location}")
-                    continue
-                
-                # Generate and send forecast with personality and language
-                summary = generate_weather_summary(weather, location, personality, language)
-                subject = f"Today's Weather for {location}"
-                
-                footer = f"\n\n---\nDaily Weather Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
-                full_message = summary + footer
-                
-                if send_email(config, email_addr, subject, full_message, dry_run):
-                    # Update last_sent_date to prevent double-sending
-                    conn.execute("""
-                        UPDATE subscribers 
-                        SET last_sent_date = ?
-                        WHERE email = ?
-                    """, (today_date, email_addr))
-                    conn.commit()
-                    sent_count += 1
-                    logger.info(f"✅ Sent weather to {email_addr} ({sent_count} total)")
+                    # Get weather forecast using subscriber's timezone
+                    weather = get_weather_forecast(lat, lon, subscriber_tz)
+                    if not weather:
+                        logger.warning(f"No weather data for {email_addr} at {location}")
+                        continue
+                    
+                    # Generate and send forecast with personality and language
+                    summary = generate_weather_summary(weather, location, personality, language)
+                    subject = f"Today's Weather for {location}"
+                    
+                    footer = f"\n\n---\nDaily Weather Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
+                    full_message = summary + footer
+                    
+                    if send_email(config, email_addr, subject, full_message, dry_run):
+                        # Update last_sent_date to prevent double-sending
+                        conn.execute("""
+                            UPDATE subscribers 
+                            SET last_sent_date = ?
+                            WHERE email = ?
+                        """, (subscriber_date, email_addr))
+                        conn.commit()
+                        sent_count += 1
+                        logger.info(f"✅ Sent weather to {email_addr} ({sent_count} total)")
+                    else:
+                        logger.warning(f"Failed to send email to {email_addr}")
                 else:
-                    logger.warning(f"Failed to send email to {email_addr}")
+                    # Log for debugging (only for our test user)
+                    if 'fotky2019' in email_addr:
+                        logger.info(f"Test user {email_addr}: {subscriber_hour}:00 in {subscriber_tz} (waiting for 5:00)")
                 
             except Exception as e:
                 logger.error(f"Error processing subscriber {email_addr}: {e}")
@@ -1360,7 +1362,7 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
         if sent_count > 0:
             logger.info(f"✅ Daily weather job complete - sent {sent_count} emails")
         else:
-            logger.info("No emails sent - check subscriber list or configuration")
+            logger.info("No emails sent this hour")
                 
     finally:
         conn.close()
@@ -1760,16 +1762,16 @@ def main():
     
     scheduler.add_job(
         func=lambda: run_daily_weather_job(config, args.dry_run),
-        trigger=CronTrigger(hour=5, minute=0, timezone=config.timezone),
+        trigger=CronTrigger(minute=0),
         id='daily_weather',
-        name='Send daily weather forecasts'
+        name='Check hourly for 5 AM deliveries'
     )
     
     logger.info("Scheduler started - Daily Brief Service is running")
     logger.info("Jobs scheduled:")
     logger.info("  - Check inbox: every 1 minute")
     # logger.info("  - Check reminders: every 1 minute")  # Disabled
-    logger.info("  - Daily weather: 05:00 Bratislava time")
+    logger.info("  - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber")
     
     logger.info("🎯 Press Ctrl+C to stop the service gracefully")
     
