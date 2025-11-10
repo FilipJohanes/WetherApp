@@ -1732,3 +1732,569 @@ Sk
 2025-11-08 14:24:07,783 - INFO - 127.0.0.1 - - [08/Nov/2025 14:24:07] "GET / HTTP/1.1" 200 -
 2025-11-08 14:36:42,676 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-08 14:36:42,676 - INFO - ⚠️ Scheduler not running, forcing exit...
+2025-11-10 09:53:46,757 - INFO - Initializing database at app.db
+2025-11-10 09:53:46,759 - INFO - Database initialized successfully
+2025-11-10 09:53:46,760 - INFO - Starting Daily Brief Service
+2025-11-10 09:53:46,760 - INFO - Loading configuration from environment variables
+2025-11-10 09:53:46,760 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-10 09:53:46,763 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 09:53:46,763 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 09:53:46,764 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 09:53:46,764 - INFO - Jobs scheduled:
+2025-11-10 09:53:46,764 - INFO -   - Check inbox: every 1 minute
+2025-11-10 09:53:46,764 - INFO -   - Daily weather: 05:00 Bratislava time
+2025-11-10 09:53:46,764 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 09:53:46,775 - INFO - Added job "Check inbox for new commands" to job store "default"
+2025-11-10 09:53:46,776 - INFO - Added job "Send daily weather forecasts" to job store "default"
+2025-11-10 09:53:46,776 - INFO - Scheduler started
+2025-11-10 09:54:46,774 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 09:55:46 CET)" (scheduled at 2025-11-10 09:54:46.763349+01:00)
+2025-11-10 09:54:46,775 - INFO - Checking inbox for new messages
+2025-11-10 09:54:46,776 - INFO - Fetching unseen emails from IMAP
+2025-11-10 09:54:48,074 - INFO - Found 0 unseen messages
+2025-11-10 09:54:48,331 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 09:55:46 CET)" executed successfully
+2025-11-10 09:55:46,774 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 09:56:46 CET)" (scheduled at 2025-11-10 09:55:46.763349+01:00)
+2025-11-10 09:55:46,777 - INFO - Checking inbox for new messages
+2025-11-10 09:55:46,779 - INFO - Fetching unseen emails from IMAP
+2025-11-10 09:55:48,361 - INFO - Found 0 unseen messages
+2025-11-10 09:55:48,627 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 09:56:46 CET)" executed successfully
+2025-11-10 09:56:46,770 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-10 09:56:46,771 - INFO - 📧 Stopping email monitoring...
+2025-11-10 09:56:46,772 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-10 09:56:46,773 - INFO - Scheduler has been shut down
+2025-11-10 09:56:46,773 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-10 09:59:14,320 - INFO - Initializing database at app.db
+2025-11-10 09:59:14,321 - INFO - Database initialized successfully
+2025-11-10 09:59:14,321 - INFO - Starting Daily Brief Service
+2025-11-10 09:59:14,321 - INFO - Loading configuration from environment variables
+2025-11-10 09:59:14,321 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-10 09:59:14,325 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 09:59:14,325 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 09:59:14,325 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 09:59:14,325 - INFO - Jobs scheduled:
+2025-11-10 09:59:14,325 - INFO -   - Check inbox: every 1 minute
+2025-11-10 09:59:14,325 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 09:59:14,325 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 09:59:14,329 - INFO - Added job "Check inbox for new commands" to job store "default"
+2025-11-10 09:59:14,330 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 09:59:14,330 - INFO - Scheduler started
+2025-11-10 10:00:00,014 - INFO - Running job "Check hourly for 5 AM deliveries (trigger: cron[minute='0'], next run at: 2025-11-10 11:00:00 CET)" (scheduled at 2025-11-10 10:00:00+01:00)
+2025-11-10 10:00:00,017 - INFO - Running hourly weather check - looking for 5 AM deliveries
+2025-11-10 10:00:00,046 - INFO - Checking 10 subscribers for 5 AM delivery
+2025-11-10 10:00:00,062 - INFO - Sending to fotky2019.filip@gmail.com - it's 5 AM in America/Caracas
+2025-11-10 10:00:00,062 - INFO - Getting weather forecast for 10.4806, -66.9036
+2025-11-10 10:00:03,008 - INFO - Loaded 21 weather message conditions
+2025-11-10 10:00:03,009 - INFO - Sending email to fotky2019.filip@gmail.com: Today's Weather for Caracas, Venezuela
+2025-11-10 10:00:04,543 - INFO - Email sent successfully to fotky2019.filip@gmail.com
+2025-11-10 10:00:04,581 - INFO - ✅ Sent weather to fotky2019.filip@gmail.com (1 total)
+2025-11-10 10:00:04,582 - INFO - ✅ Daily weather job complete - sent 1 emails
+2025-11-10 10:00:04,583 - INFO - Job "Check hourly for 5 AM deliveries (trigger: cron[minute='0'], next run at: 2025-11-10 11:00:00 CET)" executed successfully
+2025-11-10 10:00:14,328 - INFO - Running job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 10:01:14 CET)" (scheduled at 2025-11-10 10:00:14.325130+01:00)
+2025-11-10 10:00:14,329 - INFO - Checking inbox for new messages
+2025-11-10 10:00:14,330 - INFO - Fetching unseen emails from IMAP
+2025-11-10 10:00:15,766 - INFO - Found 0 unseen messages
+2025-11-10 10:00:16,172 - INFO - Job "Check inbox for new commands (trigger: interval[0:01:00], next run at: 2025-11-10 10:01:14 CET)" executed successfully
+2025-11-10 10:01:14,328 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-10 10:01:14,329 - INFO - 📧 Stopping email monitoring...
+2025-11-10 10:01:14,329 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-10 10:01:14,330 - INFO - Scheduler has been shut down
+2025-11-10 10:01:14,330 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-10 10:15:53,800 - INFO - Initializing database at app.db
+2025-11-10 10:15:53,801 - INFO - Database initialized successfully
+2025-11-10 10:15:53,802 - INFO - Starting Daily Brief Service
+2025-11-10 10:15:53,802 - INFO - Loading configuration from environment variables
+2025-11-10 10:15:53,802 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-10 10:15:53,802 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 10:15:53,805 - INFO - 🔄 Starting IMAP IDLE monitoring for real-time email processing
+2025-11-10 10:15:53,805 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 10:15:53,806 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 10:15:53,806 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 10:15:53,806 - INFO - Jobs scheduled:
+2025-11-10 10:15:53,806 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 10:15:53,807 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 10:15:53,807 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 10:15:53,809 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 10:15:53,810 - INFO - Scheduler started
+2025-11-10 10:15:54,631 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:15:54,756 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:15:55,064 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:16:06,491 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:16:06,857 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:16:07,488 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:16:18,720 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:16:18,970 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:16:19,222 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:16:29,847 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:16:29,986 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:16:30,366 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:16:41,235 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:16:41,372 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:16:41,956 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:16:53,209 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:16:53,411 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:16:53,752 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:17:04,935 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:17:05,069 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:17:05,355 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:17:16,641 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:17:16,846 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:17:17,255 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:17:28,410 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:17:28,614 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:17:29,638 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:17:40,317 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:17:40,458 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:17:40,722 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:17:51,987 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:17:52,252 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:17:52,563 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:18:03,156 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:18:03,286 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:18:03,563 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:18:14,357 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:18:14,544 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:18:14,821 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:18:25,724 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:18:25,859 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:18:26,151 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:18:37,605 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:18:37,800 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:18:38,304 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:18:49,900 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:18:50,281 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:18:50,788 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:19:01,884 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:19:02,007 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:19:02,264 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:19:13,743 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:19:13,868 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:19:14,121 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:19:25,249 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:19:25,382 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:19:25,786 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:19:37,349 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:19:37,478 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:19:38,067 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:19:50,039 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:19:50,170 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:19:50,577 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:01,807 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:02,012 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:02,433 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:13,135 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:13,266 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:13,547 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:24,152 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:24,284 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:24,549 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:35,475 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:35,611 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:35,988 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:47,028 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:47,244 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:48,165 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:20:59,439 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:20:59,626 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:20:59,932 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:21:12,212 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:21:12,347 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:21:12,724 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:21:24,390 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:21:24,594 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:21:24,931 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:21:36,773 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:21:37,070 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:21:37,386 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:21:49,668 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:21:49,871 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:21:50,709 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:22:01,949 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:22:02,080 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:22:02,382 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:22:13,819 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:22:13,966 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:22:14,332 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:22:26,858 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:22:27,121 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:22:27,496 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:22:38,275 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:22:38,410 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:22:38,683 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:22:49,943 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:22:50,084 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:22:50,484 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:23:01,714 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:23:01,916 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:23:02,328 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:23:13,788 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:23:14,094 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:23:14,502 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:23:25,308 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:23:25,670 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:23:26,069 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:23:37,620 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:23:37,804 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:23:38,250 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:23:49,630 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:23:49,836 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:23:50,120 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:24:02,085 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:24:02,290 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:24:02,911 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:24:14,591 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:24:14,742 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:24:15,043 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:24:26,255 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:24:26,398 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:24:26,779 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:24:37,598 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:24:37,731 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:24:38,004 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:24:49,584 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:24:49,788 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:24:50,146 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:01,441 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:01,581 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:01,918 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:12,615 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:12,758 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:13,217 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:24,625 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:24,762 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:25,053 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:36,444 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:36,648 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:36,966 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:47,924 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:48,065 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:48,377 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:25:58,977 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:25:59,166 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:25:59,588 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:26:10,547 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:26:10,690 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:26:11,039 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:26:22,390 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:26:22,531 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:26:22,855 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:26:33,932 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:26:34,102 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:26:34,380 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:26:45,530 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:26:45,656 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:26:45,950 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:26:57,179 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:26:57,348 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:26:57,694 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:27:09,037 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:27:09,216 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:27:09,626 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:27:20,406 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:27:20,615 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:27:20,997 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:27:32,178 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:27:32,303 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:27:32,692 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:27:43,376 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:27:43,537 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:27:44,048 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:27:55,464 - INFO - 📬 Connected to IMAP server, starting IDLE mode
+2025-11-10 10:27:55,620 - WARNING - ⚠️ IMAP IDLE not supported, falling back to polling
+2025-11-10 10:27:55,956 - INFO - 🔄 Reconnecting to email server in 10 seconds...
+2025-11-10 10:42:49,928 - INFO - Initializing database at app.db
+2025-11-10 10:42:49,932 - INFO - Database initialized successfully
+2025-11-10 10:42:49,933 - INFO - Starting Daily Brief Service
+2025-11-10 10:42:49,933 - INFO - Loading configuration from environment variables
+2025-11-10 10:42:49,933 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 10:42:49,933 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 10:42:49,940 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 10:42:49,941 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 10:42:49,942 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 10:42:49,942 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 10:42:49,942 - INFO - Jobs scheduled:
+2025-11-10 10:42:49,942 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 10:42:49,943 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 10:42:49,943 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 10:42:49,949 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 10:42:49,950 - INFO - Scheduler started
+2025-11-10 10:42:51,723 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:42:51,724 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:43:23,063 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:43:23,064 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:43:54,270 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:43:54,271 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:44:25,481 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:44:25,482 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:44:56,691 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:44:56,692 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:45:28,004 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:45:28,005 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:45:49,772 - INFO - Initializing database at app.db
+2025-11-10 10:45:49,774 - INFO - Database initialized successfully
+2025-11-10 10:45:49,774 - INFO - Starting Daily Brief Service
+2025-11-10 10:45:49,774 - INFO - Loading configuration from environment variables
+2025-11-10 10:45:49,775 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 10:45:49,775 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 10:45:49,780 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 10:45:49,780 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 10:45:49,781 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 10:45:49,781 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 10:45:49,781 - INFO - Jobs scheduled:
+2025-11-10 10:45:49,781 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 10:45:49,782 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 10:45:49,782 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 10:45:49,784 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 10:45:49,784 - INFO - Scheduler started
+2025-11-10 10:45:50,971 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:45:50,972 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:46:22,120 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:46:22,121 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:52:48,916 - INFO - Initializing database at app.db
+2025-11-10 10:52:48,918 - INFO - Database initialized successfully
+2025-11-10 10:52:48,919 - INFO - Starting Daily Brief Service
+2025-11-10 10:52:48,919 - INFO - Loading configuration from environment variables
+2025-11-10 10:52:48,919 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 10:52:48,920 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 10:52:48,923 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 10:52:48,923 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 10:52:48,924 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 10:52:48,925 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 10:52:48,925 - INFO - Jobs scheduled:
+2025-11-10 10:52:48,925 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 10:52:48,925 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 10:52:48,926 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 10:52:48,928 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 10:52:48,929 - INFO - Scheduler started
+2025-11-10 10:52:50,909 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 10:52:50,909 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 10:58:23,458 - INFO - Initializing database at app.db
+2025-11-10 10:58:23,460 - INFO - Database initialized successfully
+2025-11-10 10:58:23,460 - INFO - Starting Daily Brief Service
+2025-11-10 10:58:23,461 - INFO - Loading configuration from environment variables
+2025-11-10 10:58:23,461 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-10 10:58:23,466 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 10:58:23,466 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 10:58:23,467 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 10:58:23,467 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 10:58:23,467 - INFO - Jobs scheduled:
+2025-11-10 10:58:23,467 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 10:58:23,467 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 10:58:23,468 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 10:58:23,471 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 10:58:23,472 - INFO - Scheduler started
+2025-11-10 10:58:24,051 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-10 10:58:24,052 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 13:35:46,786 - INFO - Initializing database at app.db
+2025-11-10 13:35:46,788 - INFO - Database initialized successfully
+2025-11-10 13:35:46,789 - INFO - Starting Daily Brief Service
+2025-11-10 13:35:46,789 - INFO - Loading configuration from environment variables
+2025-11-10 13:37:09,220 - INFO - Initializing database at app.db
+2025-11-10 13:37:09,222 - INFO - Database initialized successfully
+2025-11-10 13:37:09,223 - INFO - Starting Daily Brief Service
+2025-11-10 13:37:09,223 - INFO - Loading configuration from environment variables
+2025-11-10 13:37:09,223 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-10 12:38:43,149 - INFO - Initializing database at app.db
+2025-11-10 12:38:43,150 - INFO - Database initialized successfully
+2025-11-10 12:38:43,150 - INFO - Starting Daily Brief Service
+2025-11-10 12:38:43,151 - INFO - Loading configuration from environment variables
+2025-11-10 12:38:43,151 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 12:38:43,151 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 12:38:43,188 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 12:38:43,188 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 12:38:43,189 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 12:38:43,189 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 12:38:43,189 - INFO - Jobs scheduled:
+2025-11-10 12:38:43,190 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 12:38:43,191 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 12:38:43,192 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 12:38:43,201 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 12:38:43,202 - INFO - Scheduler started
+2025-11-10 12:38:44,297 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:38:44,299 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:39:16,106 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:39:16,107 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:39:47,320 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:39:47,321 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:40:18,435 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:40:18,449 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:40:50,048 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:40:50,049 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 13:41:12,759 - INFO - Initializing database at app.db
+2025-11-10 13:41:12,761 - INFO - Database initialized successfully
+2025-11-10 13:41:12,762 - INFO - Starting Daily Brief Service
+2025-11-10 13:41:12,762 - INFO - Loading configuration from environment variables
+2025-11-10 13:41:12,762 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-10 12:46:21,138 - INFO - Initializing database at app.db
+2025-11-10 12:46:21,140 - INFO - Database initialized successfully
+2025-11-10 12:46:21,140 - INFO - Starting Daily Brief Service
+2025-11-10 12:46:21,140 - INFO - Loading configuration from environment variables
+2025-11-10 12:46:21,140 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 12:46:21,141 - INFO - Running in DRY RUN mode - no emails will be sent
+2025-11-10 12:46:21,145 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 12:46:21,145 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 12:46:21,146 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 12:46:21,147 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 12:46:21,147 - INFO - Jobs scheduled:
+2025-11-10 12:46:21,148 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 12:46:21,148 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 12:46:21,148 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 12:46:21,151 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 12:46:21,152 - INFO - Scheduler started
+2025-11-10 12:46:22,347 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:46:22,348 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:46:53,847 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:46:53,847 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:47:25,055 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:47:25,056 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:47:56,267 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:47:56,268 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 12:48:27,686 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 12:48:27,686 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 13:58:31,447 - INFO - Initializing database at app.db
+2025-11-10 13:58:31,448 - INFO - Database initialized successfully
+2025-11-10 13:58:31,449 - INFO - Starting Daily Brief Service
+2025-11-10 13:58:31,449 - INFO - Loading configuration from environment variables
+2025-11-10 13:58:31,449 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-10 13:58:31,450 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 13:58:31,457 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 13:58:31,457 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 13:58:31,458 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 13:58:31,459 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 13:58:31,459 - INFO - Jobs scheduled:
+2025-11-10 13:58:31,459 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 13:58:31,460 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 13:58:31,460 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 13:58:31,463 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 13:58:31,464 - INFO - Scheduler started
+2025-11-10 13:58:32,661 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 13:58:32,662 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 13:59:04,201 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 13:59:04,203 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:01:00,754 - INFO - Initializing database at app.db
+2025-11-10 14:01:00,755 - INFO - Database initialized successfully
+2025-11-10 14:01:00,755 - INFO - Starting Daily Brief Service
+2025-11-10 14:01:00,755 - INFO - Loading configuration from environment variables
+2025-11-10 14:01:00,756 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-10 14:01:00,756 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 14:01:00,759 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 14:01:00,759 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 14:01:00,760 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 14:01:00,760 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 14:01:00,760 - INFO - Jobs scheduled:
+2025-11-10 14:01:00,760 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 14:01:00,763 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 14:01:00,763 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 14:01:00,767 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 14:01:00,768 - INFO - Scheduler started
+2025-11-10 14:01:01,022 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:01:01,882 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:01:01,882 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:01:32,174 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:01:32,992 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:01:32,993 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:02:03,611 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:02:04,589 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:02:04,589 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:02:34,819 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:02:36,232 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:02:36,232 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:03:06,595 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:03:07,342 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:03:07,343 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:03:37,820 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:03:38,727 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:03:38,728 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:04:09,105 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:04:10,145 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:04:10,148 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:04:40,626 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:04:41,796 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:04:41,797 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:05:12,035 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:05:13,214 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:05:13,215 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:05:43,519 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:05:44,482 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:05:44,483 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:06:14,767 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:06:15,720 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:06:15,721 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:06:45,975 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:06:46,848 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:06:46,856 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:07:17,160 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:07:18,160 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:07:18,161 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:07:30,548 - INFO - Initializing database at app.db
+2025-11-10 14:07:30,551 - INFO - Database initialized successfully
+2025-11-10 14:07:30,552 - INFO - Starting Daily Brief Service
+2025-11-10 14:07:30,552 - INFO - Loading configuration from environment variables
+2025-11-10 14:07:30,552 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-10 14:07:30,552 - INFO - Configuration loaded - Email: daily.weather@outlook.com, TZ: Europe/Bratislava
+2025-11-10 14:07:30,556 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 14:07:30,556 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 14:07:30,557 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 14:07:30,559 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 14:07:30,559 - INFO - Jobs scheduled:
+2025-11-10 14:07:30,559 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 14:07:30,560 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 14:07:30,561 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 14:07:30,564 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 14:07:30,565 - INFO - Scheduler started
+2025-11-10 14:07:30,814 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:07:31,770 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:07:31,771 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:08:02,027 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:08:03,086 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:08:03,086 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 14:08:33,354 - INFO - 🔐 Attempting IMAP login - Email: daily.weather@outlook.com, Password: vequbfquiiefsdtu
+2025-11-10 14:08:34,399 - ERROR - ❌ IMAP connection error in monitor: b'LOGIN failed.'
+2025-11-10 14:08:34,400 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-10 15:58:04,192 - INFO - Initializing database at app.db
+2025-11-10 15:58:04,193 - INFO - Database initialized successfully
+2025-11-10 15:58:04,194 - INFO - Starting Daily Brief Service
+2025-11-10 15:58:04,194 - INFO - Loading configuration from environment variables
+2025-11-10 15:58:04,194 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-10 15:58:04,194 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-10 15:58:04,201 - INFO - 🔄 Starting real-time email monitoring
+2025-11-10 15:58:04,201 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-10 15:58:04,202 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-10 15:58:04,202 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-10 15:58:04,202 - INFO - Jobs scheduled:
+2025-11-10 15:58:04,202 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-10 15:58:04,203 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-10 15:58:04,203 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-10 15:58:04,210 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-10 15:58:04,211 - INFO - Scheduler started
+2025-11-10 15:58:04,358 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:58:04,816 - INFO - 📬 Connected to IMAP server
+2025-11-10 15:58:04,952 - INFO - ⚠️ IMAP IDLE not supported - using polling (20 seconds)
+2025-11-10 15:58:24,958 - INFO - Fetching unseen emails from IMAP
+2025-11-10 15:58:25,107 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:58:25,672 - INFO - Found 2 unseen messages
+2025-11-10 15:58:26,435 - INFO - ⚡ Processing 2 new email(s) immediately (response time: 20.0s)
+2025-11-10 15:58:26,436 - INFO - 📧 Real-time processing email from: no-reply@accounts.google.com
+2025-11-10 15:58:26,437 - INFO - Received email from no-reply@accounts.google.com: =?UTF-8?Q?Bezpe=C4=8Dnostn=C3=A9_upozornenie?=
+2025-11-10 15:58:26,437 - INFO - Skipping system email from no-reply@accounts.google.com
+2025-11-10 15:58:26,437 - INFO - 📧 Real-time processing email from: no-reply@accounts.google.com
+2025-11-10 15:58:26,437 - INFO - Received email from no-reply@accounts.google.com: =?UTF-8?Q?Bezpe=C4=8Dnostn=C3=A9_upozornenie?=
+2025-11-10 15:58:26,437 - INFO - Skipping system email from no-reply@accounts.google.com
+2025-11-10 15:58:46,444 - INFO - Fetching unseen emails from IMAP
+2025-11-10 15:58:46,588 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:58:47,303 - INFO - Found 0 unseen messages
+2025-11-10 15:59:07,587 - INFO - Fetching unseen emails from IMAP
+2025-11-10 15:59:07,780 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:59:08,827 - INFO - Found 0 unseen messages
+2025-11-10 15:59:29,097 - INFO - Fetching unseen emails from IMAP
+2025-11-10 15:59:29,260 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:59:30,296 - INFO - Found 0 unseen messages
+2025-11-10 15:59:30,557 - INFO - ✅ Email monitoring active - no new messages
+2025-11-10 15:59:50,564 - INFO - Fetching unseen emails from IMAP
+2025-11-10 15:59:50,781 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-10 15:59:51,953 - INFO - Found 0 unseen messages
+2025-11-10 16:00:00,008 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-10 16:00:00,010 - INFO - 📧 Stopping email monitoring thread...
+2025-11-10 16:00:00,288 - INFO - 🛑 Email monitoring thread stopped
+2025-11-10 16:00:00,290 - INFO - ✅ Email monitoring thread stopped
+2025-11-10 16:00:00,290 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-10 16:00:00,291 - INFO - Scheduler has been shut down
+2025-11-10 16:00:00,291 - INFO - ✅ Daily Brief Service stopped successfully

@@ -4,9 +4,9 @@
 # Note: Slovak is the only language that supports the special Emuska personality mode
 
 # Rain conditions
-raining|Vezmi si dáždnik - dnes bude pršať.|🌧️ Krásne kvapky dažďa prichádzajú! Nezabudni na svoj rozkošný dáždnik! ☂️|Dážď prichádza. Dáždnik alebo sa zmočiť. Tvoja voľba.|💕 Môj drahý poklad, dnes budú padať dažďové perličky z neba. Vezmi si dáždnik a choď opatrne, moja princezná! ✨
+raining|Vezmi si dáždnik - dnes bude pršať.|🌧️ Krásne kvapky dažďa prichádzajú! Nezabudni na svoj rozkošný dáždnik! ☂️|Dážď prichádza. Dáždnik alebo sa zmočiť. Tvoja voľba.|💕 Môj pokladík, dnes budú padať dažďové perličky z neba. Vezmi si dáždnik a choď opatrne, srdiečko! ✨
 
-heavy_rain|Očakávajú sa silné dažde - odporúča sa nepremokavé oblečenie.|⛈️ Veľký žblnkajúci dážď dnes! Čas na gumáky a útulnú pláštenku! 💧|Silný lejak. Všetko nepremokavé alebo zostaň doma.|🌧️ Drahá Emuška, dnes bude veľký dážď! Oblieč si niečo teplé a nepremokavé, chcem aby si zostala suchá a zdravá, môj anjelik! 💖
+heavy_rain|Očakávajú sa silné dažde - odporúča sa nepremokavé oblečenie.|⛈️ Veľký žblnkajúci dážď dnes! Čas na gumáky a útulnú pláštenku! 💧|Silný lejak. Všetko nepremokavé alebo zostaň doma.|🌧️ Drahá Emuška, dnes bude veľký dážď! Oblieč si niečo teplé a nepremokavé, chcem aby si zostala suchá a zdravá! 💖
 
 # Snow conditions  
 snowing|Sneží - obliekaj sa teplo a pozor na klzké povrchy.|❄️ Čarovné snehové vločky tancujú! Zahaľ sa ako rozkošný snežný zajačik! ⛄|Sneh. Zima. Šmykľavo. Nespadni na tvár.|❄️ Zlatíčko moje, vonku tancujú nádherné snehové víly! Oblieč si najteplejší kabátik a choď opatrne, moja snehová princezná! ❄️✨
@@ -16,22 +16,22 @@ hot|Veľmi teplo dnes - zostaň hydratovaný a hľadaj tieň.|🌞 Bude krásne 
 
 cold|Chladné počasie - vrstvenie pre pohodlie.|🧥 Brr! Čas na útulné svetríky a teplé objatia! Perfektné počasie na prituľovanie! 🤗|Zima. Vrstvenie alebo zmrazenie zadku.|🧥 Pampúšik môj, je chladno! Zabal sa do najkrajších teplých veci, aby si bola zababúšená a spokojná ako malá princezná! 💕❄️
 
-freezing|Mrazivé teploty - ťažké zimné oblečenie nevyhnutné.|🥶 Super super zima! Čas na najchlpatejší kabát a najteplejšie rukavice! ❄️|Mrazivá zima. Obliekaj sa ako arktický prieskumník alebo sa staň nanukom.|🥶 Snehuliačik môj, vonku je veľká zima! Oblieč sa ako malá zimná princezná - teplý kabát, rukavice a čiapku, aby si bola v teplúčku! ❄️
+freezing|Mrazivé teploty - ťažké zimné oblečenie nevyhnutné.|🥶 Super super zima! Čas na najchlpatejší kabát a najteplejšie rukavice! ❄️|Mrazivá zima. Obliekaj sa ako arktický prieskumník alebo sa staň nanukom.|🥶 Snehuliačik môj, vonku je veľká zima! Oblieč sa ako moja malá eskimáčka - teplý kabát, rukavice a čiapku, aby si bola v teplúčku! ❄️
 
-mild|Príjemná teplota - užívaj si pohodlné počasie.|😊 Presne tak! Ako dokonalé teplé objatie od Matky Prírody! 🌸|Slušná teplota. Niet sa na čo sťažovať aspoň raz.|🌸 Zlatíčko, dnes je nádherné počasie práve pre teba! Vychutnaj si každú chvíľku, môj krásny kvet. Si perfektná tak ako je tento deň! 💖🌺
+mild|Príjemná teplota - užívaj si pohodlné počasie.|😊 Presne tak! Ako dokonalé teplé objatie od Matky Prírody! 🌸|Slušná teplota. Niet sa na čo sťažovať aspoň raz.|🌸 Zlatíčko, dnes je nádherné počasie práve pre teba! Vychutnaj si každú chvíľku. Si perfektná tak ako je tento deň! 💖🌺
 
 # Wind conditions
-windy|Očakávajú sa silné vetry - zabezpeč voľné predmety.|💨 Whoooosh! Vetríkový dobrodružný deň! Drž si klobúk a bav sa! 🎩|Silné vetry. Tvoje vlasy budú vyzerať hrozne. Zmieriť sa s tým.|💨 Drahá Emuška, dnes fúka veterík! Drž si svoje krásne vlasy a choď opatrne. Si ako motýlik, ktorý potrebuje ochranu pred vetrom! 🦋💕
+windy|Očakávajú sa silné vetry - zabezpeč voľné predmety.|💨 Whoooosh! Vetríkový dobrodružný deň! Drž si klobúk a bav sa! 🎩|Silné vetry. Tvoje vlasy budú vyzerať hrozne. Zmieriť sa s tým.|💨 Drahá Emuška, dnes fúka veterík! Dávaj si pozor, aby ta neodfúklo fesanda moja. 🦋💕
 
-stormy|Varovanie pred búrkou - zostaň doma ak je to možné.|⛈️ Veľké búrkové mraky majú párty! Zostaň doma s horúcou čokoládou! ☕|Varovanie pred búrkou. Zostaň doma ak si nechceš byť boxovacím vrecom prírody.|⛈️ Môj poklad, vonku je búrka! Zostaň doma v teple a bezpečí, uprav si čaj a odpočívaj. Si príliš vzácna na to, aby si sa vystavovala nebezpečenstvu! 💖🏠
+stormy|Varovanie pred búrkou - zostaň doma ak je to možné.|⛈️ Veľké búrkové mraky majú párty! Zostaň doma s horúcou čokoládou! ☕|Varovanie pred búrkou. Zostaň doma ak si nechceš byť boxovacím vrecom prírody.|⛈️ Môj pampúšik, vonku je búrka! Zostaň doma v teple a bezpečí, sprav si čajík a odpočívaj. Dávaj na seba velký pozor moja! 💖🏠
 
 # Visibility conditions
-foggy|Hmlisté podmienky - opatrnosť pri šoférovaní, používaj svetlá.|🌫️ Záhadná hmla robí všetko čarovné a snové! ✨|Hmla všade. Choď pomaly alebo naraziť do niečoho neviditeľného.|🌫️ Zlatíčko, vonku je ako v rozprávke - všade hmla! Choď opatrne môj drahý anjel, si príliš vzácna na to, aby sa ti niečo stalo! ✨💕
+foggy|Hmlisté podmienky - opatrnosť pri šoférovaní, používaj svetlá.|🌫️ Záhadná hmla robí všetko čarovné a snové! ✨|Hmla všade. Choď pomaly alebo naraziť do niečoho neviditeľného.|🌫️ Srdiečko, vonku je ako v rozprávke - všade hmla! Choď opatrne moja, aby sa ti nič nestalo! ✨💕
 
 # Clear conditions
-sunny|Krásny slnečný deň - perfektné počasie na vonkajšie aktivity.|☀️ Nádherný slnečný deň! Čas na vonkajšie dobrodružstvá a dobré nálady! 🌻|Jasná obloha. Žiadne výhovorky zostať doma a ľutovať seba.|☀️ Môj žiarivý diamant, slnko svieti práve pre teba! Vyjdi von a zažiar ako kráľovná. Celý svet čaká na tvoju krásnu úsmev! 💎🌞
+sunny|Krásny slnečný deň - perfektné počasie na vonkajšie aktivity.|☀️ Nádherný slnečný deň! Čas na vonkajšie dobrodružstvá a dobré nálady! 🌻|Jasná obloha. Žiadne výhovorky zostať doma a ľutovať seba.|☀️ Bambulka moj, dnes je krásne počasíčko stvorené na pobyt vonku. Celý svet čaká na tvoj krásny úsmev! 💎🌞
 
-cloudy|Zamračená obloha - stále príjemné počasie na aktivity.|☁️ Nadýchané oblaky zdobia oblohu ako cukrová vata! Tak krásne! 🌤️|Zamračené ale čokoľvek. Aspoň neprší na tvoju prehliadku.|☁️ Drahá Emuška, aj keď je zamračené, ty si môj slnečný lúč! Oblaky sú len dekorácia na tvojej krásnej oblohe. Si nádherná za každého počasia! 💖🌸
+cloudy|Zamračená obloha - stále príjemné počasie na aktivity.|☁️ Nadýchané oblaky zdobia oblohu ako cukrová vata! Tak krásne! 🌤️|Zamračené ale čokoľvek. Aspoň neprší na tvoju prehliadku.|☁️ Drahá Emuška, aj keď je zamračené, ty si moje svetielko najkrajšie. 💖🌸
 
 # Combined conditions
 sunny_hot|Horúco a slnečno - hľadaj tieň, používaj opaľovací krém, zostaň hydratovaný.|🔥☀️ Super slnečno-horúci deň! Perfektný na plážové vibrácie ale nestaň sa homarom! 🦞|Pálčivé slnko. Opaľovací krém alebo sa zmeniť na ľudské jerky.|🔥 Môj žiarivý poklad, slnko je dnes veľmi silné! Chráň svoju krásnu pokožku krémom a zostaň v tieni. Si ako vzácna perla, ktorú musím chrániť! 💎☀️

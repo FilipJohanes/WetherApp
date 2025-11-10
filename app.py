@@ -37,6 +37,7 @@ import re
 import time
 import argparse
 import signal
+import threading
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -52,6 +53,10 @@ from timezonefinder import TimezoneFinder
 
 # Global scheduler variable for signal handling
 scheduler = None
+
+# Global email monitoring thread
+email_monitor_thread = None
+email_monitor_stop_event = threading.Event()
 
 # Initialize timezone finder (reused across all lookups)
 tf = TimezoneFinder()
@@ -97,16 +102,25 @@ def signal_handler(signum, frame):
     
     logger.info(f"🛑 Received {signal_name} - Shutting down Daily Brief Service gracefully...")
     
+    # Stop email monitoring thread first
+    stop_email_monitor()
+    
+    # Give threads 2 seconds to stop gracefully
+    if email_monitor_thread and email_monitor_thread.is_alive():
+        email_monitor_thread.join(timeout=2)
+    
     if scheduler and scheduler.running:
-        logger.info("📧 Stopping email monitoring...")
         logger.info("⏰ Stopping scheduled jobs...")
         scheduler.shutdown(wait=False)
         logger.info("✅ Daily Brief Service stopped successfully")
     else:
-        logger.info("⚠️ Scheduler not running, forcing exit...")
+        logger.info("⚠️ Scheduler not running")
     
     print("\n👋 Daily Brief Service has been stopped. Goodbye!")
-    sys.exit(0)
+    
+    # Force exit if threads are still hanging
+    import os
+    os._exit(0)
 
 # Register signal handlers
 signal.signal(signal.SIGINT, signal_handler)   # Ctrl+C
@@ -147,6 +161,14 @@ class Config:
 def load_env() -> Config:
     """Load and validate environment configuration."""
     logger.info("Loading configuration from environment variables")
+    
+    # Check which .env file is being used
+    env_path = os.path.abspath('.env')
+    if os.path.exists(env_path):
+        logger.info(f"✅ Using .env file: {env_path}")
+    else:
+        logger.info("⚠️ No .env file found - using system environment variables")
+    
     config = Config()
     
     # Set timezone globally
@@ -251,6 +273,7 @@ def imap_fetch_unseen(config: Config) -> List[EmailMessageInfo]:
     try:
         # Connect to IMAP server
         mail = imaplib.IMAP4_SSL(config.imap_host, config.imap_port)
+        logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}, Password: {config.email_password}")
         mail.login(config.email_address, config.email_password)
         mail.select('INBOX')
         
@@ -371,6 +394,151 @@ def mark_seen(config: Config, uid: str) -> None:
     pass
 
 
+def start_email_monitor_thread(config: Config, dry_run: bool = False) -> None:
+    """Start the real-time email monitoring thread using IMAP IDLE."""
+    global email_monitor_thread, email_monitor_stop_event
+    
+    email_monitor_stop_event.clear()
+    email_monitor_thread = threading.Thread(
+        target=email_idle_monitor,
+        args=(config, dry_run),
+        daemon=True,
+        name="EmailMonitor"
+    )
+    email_monitor_thread.start()
+    logger.info("📧 Real-time email monitoring started using IMAP IDLE")
+
+
+def stop_email_monitor() -> None:
+    """Stop the email monitoring thread."""
+    global email_monitor_thread, email_monitor_stop_event
+    
+    if email_monitor_thread and email_monitor_thread.is_alive():
+        logger.info("📧 Stopping email monitoring thread...")
+        email_monitor_stop_event.set()
+        email_monitor_thread.join(timeout=5)
+        if email_monitor_thread.is_alive():
+            logger.warning("⚠️ Email monitoring thread did not stop gracefully")
+        else:
+            logger.info("✅ Email monitoring thread stopped")
+
+
+def email_idle_monitor(config: Config, dry_run: bool = False) -> None:
+    """Monitor emails in real-time using IMAP IDLE or frequent polling."""
+    logger.info("🔄 Starting real-time email monitoring")
+    
+    while not email_monitor_stop_event.is_set():
+        try:
+            # Connect to IMAP server with timeout
+            mail = imaplib.IMAP4_SSL(config.imap_host, config.imap_port)
+            mail.sock.settimeout(10)  # 10 second timeout for all operations
+            logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}, Password: {config.email_password}")
+            mail.login(config.email_address, config.email_password)
+            mail.select('INBOX')
+            logger.info("📬 Connected to IMAP server")
+            
+            # Try IMAP IDLE first
+            idle_supported = False
+            try:
+                mail.send(b'IDLE\r\n')
+                response = mail.readline()
+                
+                if b'+ idling' in response.lower() or b'+ waiting' in response.lower():
+                    idle_supported = True
+                    logger.info("✅ IMAP IDLE supported - using real-time notifications")
+                    
+                    # End IDLE mode immediately to reset
+                    mail.send(b'DONE\r\n')
+                    mail.readline()
+                else:
+                    logger.info("⚠️ IMAP IDLE not supported - using polling (20 seconds)")
+            except:
+                logger.info("⚠️ IMAP IDLE not supported - using polling (20 seconds)")
+            
+            # Email monitoring loop
+            last_check = datetime.now()
+            
+            while not email_monitor_stop_event.is_set():
+                try:
+                    if idle_supported:
+                        # Use IMAP IDLE for real-time notifications
+                        mail.send(b'IDLE\r\n')
+                        response = mail.readline()
+                        
+                        # Wait for notification or timeout
+                        ready = False
+                        timeout_count = 0
+                        
+                        while not email_monitor_stop_event.is_set() and not ready:
+                            try:
+                                mail.sock.settimeout(30)
+                                response = mail.readline()
+                                
+                                if response and (b'EXISTS' in response or b'FETCH' in response):
+                                    logger.info("🎯 New email detected via IDLE!")
+                                    ready = True
+                                    
+                            except Exception:
+                                timeout_count += 1
+                                if timeout_count > 10:  # 5 minutes of timeouts
+                                    break
+                                continue
+                        
+                        # End IDLE mode
+                        try:
+                            mail.send(b'DONE\r\n')
+                            mail.readline()
+                        except:
+                            pass
+                            
+                    else:
+                        # Use polling for services that don't support IDLE
+                        if email_monitor_stop_event.wait(20):  # Check every 20 seconds
+                            break
+                        ready = True
+                    
+                    if ready and not email_monitor_stop_event.is_set():
+                        # Process new emails immediately
+                        current_time = datetime.now()
+                        time_since_last = (current_time - last_check).total_seconds()
+                        
+                        try:
+                            messages = imap_fetch_unseen(config)
+                            if messages:
+                                logger.info(f"⚡ Processing {len(messages)} new email(s) immediately (response time: {time_since_last:.1f}s)")
+                                for msg in messages:
+                                    logger.info(f"📧 Real-time processing email from: {msg.from_email}")
+                                    process_inbound_email(config, msg, dry_run)
+                                last_check = current_time
+                            elif not idle_supported:
+                                # Only log for polling mode, not IDLE
+                                if time_since_last > 60:  # Log every minute in polling mode
+                                    logger.info(f"✅ Email monitoring active - no new messages")
+                                    last_check = current_time
+                        except Exception as e:
+                            logger.error(f"❌ Error processing real-time email: {e}")
+                    
+                except Exception as e:
+                    logger.error(f"❌ Email monitoring error: {e}")
+                    break
+            
+            try:
+                mail.close()
+                mail.logout()
+            except:
+                pass
+                
+        except Exception as e:
+            logger.error(f"❌ IMAP connection error in monitor: {e}")
+            
+        # Wait before reconnecting if we're not stopping
+        if not email_monitor_stop_event.is_set():
+            logger.info("🔄 Reconnecting to email server in 30 seconds...")
+            email_monitor_stop_event.wait(30)
+    
+    logger.info("🛑 Email monitoring thread stopped")
+
+
 def send_email(config: Config, to: str, subject: str, body: str, dry_run: bool = False) -> bool:
     """Send email via SMTP."""
     if dry_run:
@@ -394,6 +562,7 @@ def send_email(config: Config, to: str, subject: str, body: str, dry_run: bool =
         else:
             server = smtplib.SMTP_SSL(config.smtp_host, config.smtp_port)
             
+        logger.info(f"🔐 Attempting SMTP login - Email: {config.email_address}, Password: {config.email_password}")
         server.login(config.email_address, config.email_password)
         server.send_message(msg)
         server.quit()
@@ -1744,14 +1913,10 @@ def main():
     global scheduler
     scheduler = BlockingScheduler(timezone=config.timezone)
     
-    # Schedule jobs
-    scheduler.add_job(
-        func=lambda: check_inbox_job(config, args.dry_run),
-        trigger=IntervalTrigger(minutes=1),
-        id='check_inbox',
-        name='Check inbox for new commands'
-    )
+    # Start real-time email monitoring thread instead of polling
+    start_email_monitor_thread(config, args.dry_run)
     
+    # Schedule jobs - only weather checking, emails are handled real-time
     # Reminder system temporarily disabled
     # scheduler.add_job(
     #     func=lambda: run_due_reminders_job(config, args.dry_run),
@@ -1769,7 +1934,7 @@ def main():
     
     logger.info("Scheduler started - Daily Brief Service is running")
     logger.info("Jobs scheduled:")
-    logger.info("  - Check inbox: every 1 minute")
+    logger.info("  - Email monitoring: real-time IMAP IDLE (immediate response)")
     # logger.info("  - Check reminders: every 1 minute")  # Disabled
     logger.info("  - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber")
     
