@@ -1,0 +1,129 @@
+Raspberry Pi Maintenance Guide for WetherApp
+=========================================
+
+1. Update Project from GitHub
+----------------------------
+SSH into your Raspberry Pi and run:
+
+cd ~/WetherApp
+git pull origin webservice
+
+If you need to switch branches:
+git fetch origin
+git checkout webservice
+
+2. Restart Services After Update
+-------------------------------
+After pulling new code, restart the services:
+
+sudo systemctl restart dailybrief.service
+sudo systemctl restart dailybrief-web.service
+
+Check status:
+sudo systemctl status dailybrief.service
+sudo systemctl status dailybrief-web.service
+
+3. Check Service Logs
+---------------------
+View live logs:
+sudo journalctl -u dailybrief.service -f
+sudo journalctl -u dailybrief-web.service -f
+
+View last 100 log entries:
+sudo journalctl -u dailybrief.service -n 100
+sudo journalctl -u dailybrief-web.service -n 100
+
+4. Monitor System Health
+------------------------
+Check CPU, RAM, and swap usage:
+htop
+free -h
+
+Check uptime:
+uptime
+
+Check disk space:
+df -h
+
+5. Update Python Dependencies
+-----------------------------
+If requirements.txt changes:
+
+cd ~/WetherApp
+source venv/bin/activate
+pip install -r requirements.txt
+
+6. Edit Environment Variables
+-----------------------------
+To update email/password or other settings:
+nano ~/WetherApp/.env
+
+7. Check Database
+-----------------
+View subscribers:
+python3 -c "import sqlite3; conn = sqlite3.connect('app.db'); rows = conn.execute('SELECT * FROM subscribers').fetchall(); print(rows)"
+
+8. Reboot Pi (if needed)
+------------------------
+sudo reboot
+
+9. Troubleshooting
+------------------
+If a service fails to start, check logs for errors:
+sudo journalctl -u dailybrief.service -n 50
+
+If you need to reload systemd after editing service files:
+sudo systemctl daemon-reload
+
+10. Useful Commands
+-------------------
+# Start service
+sudo systemctl start dailybrief.service
+
+# Stop service
+sudo systemctl stop dailybrief.service
+
+# Enable auto-start on boot
+sudo systemctl enable dailybrief.service
+
+# Disable auto-start
+sudo systemctl disable dailybrief.service
+
+# Check network info
+ifconfig
+
+# Check public IP
+curl ifconfig.me
+
+---
+Keep this file for quick reference when maintaining your WetherApp on Raspberry Pi!
+
+
+11. Systemd Daemon, Autostart, and Service Management
+---------------------------------------------------
+Systemd is the service manager on Raspberry Pi OS. It controls background processes (daemons) and can automatically start your app on boot.
+
+**Key concepts:**
+- **Daemon:** A background process that runs without user interaction (your weather/email service is a daemon).
+- **Service:** A systemd unit that manages a daemon (e.g., dailybrief.service).
+- **Autostart:** Enabling a service to start automatically when the Pi boots.
+
+**Commands and what they do:**
+- `sudo systemctl start <service>`: Start the service immediately.
+- `sudo systemctl stop <service>`: Stop the service immediately.
+- `sudo systemctl restart <service>`: Restart the service (use after code updates).
+- `sudo systemctl status <service>`: Show current status and logs for the service.
+- `sudo systemctl enable <service>`: Enable autostart on boot (recommended for production).
+- `sudo systemctl disable <service>`: Disable autostart on boot.
+- `sudo systemctl daemon-reload`: Reload systemd after editing service files (required for changes to take effect).
+
+**Why use systemd/autostart?**
+- Ensures your app runs automatically after reboot or power loss
+- Restarts your app if it crashes (with `Restart=always` in the service file)
+- Centralized management of logs, status, and restarts
+
+**Example:**
+If you edit `/etc/systemd/system/dailybrief.service`, always run:
+	sudo systemctl daemon-reload
+	sudo systemctl restart dailybrief.service
+to apply changes.
