@@ -2298,3 +2298,129 @@ Sk
 2025-11-10 16:00:00,290 - INFO - ⏰ Stopping scheduled jobs...
 2025-11-10 16:00:00,291 - INFO - Scheduler has been shut down
 2025-11-10 16:00:00,291 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-11 09:24:16,804 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,806 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,808 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,810 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,812 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,813 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:16,816 - INFO - Loaded 21 weather message conditions
+2025-11-11 09:24:40,570 - INFO - Initializing database at app.db
+2025-11-11 09:24:40,617 - INFO - Database initialized successfully
+2025-11-11 09:25:11,203 - INFO - Initializing database at app.db
+2025-11-11 09:25:11,204 - INFO - Database initialized successfully
+2025-11-11 09:25:11,204 - INFO - Starting Daily Brief Service
+2025-11-11 09:25:11,204 - INFO - Loading configuration from environment variables
+2025-11-11 09:25:11,205 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-11 09:25:11,205 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-11 09:25:11,241 - INFO - 🔄 Starting real-time email monitoring
+2025-11-11 09:25:11,241 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-11 09:25:11,243 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-11 09:25:11,244 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-11 09:25:11,244 - INFO - Jobs scheduled:
+2025-11-11 09:25:11,244 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-11 09:25:11,245 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-11 09:25:11,246 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-11 09:25:11,256 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-11 09:25:11,257 - INFO - Scheduler started
+2025-11-11 09:25:11,568 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:25:12,438 - INFO - 📬 Connected to IMAP server
+2025-11-11 09:25:12,827 - INFO - ⚠️ IMAP IDLE not supported - using polling (20 seconds)
+2025-11-11 09:25:32,829 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:25:32,982 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:25:34,151 - INFO - Found 5 unseen messages
+2025-11-11 09:25:37,017 - INFO - ⚡ Processing 5 new email(s) immediately (response time: 20.0s)
+2025-11-11 09:25:37,018 - INFO - 📧 Real-time processing email from: mailer-daemon@googlemail.com
+2025-11-11 09:25:37,018 - INFO - Received email from mailer-daemon@googlemail.com: Delivery Status Notification (Failure)
+2025-11-11 09:25:37,019 - INFO - Skipping system email from mailer-daemon@googlemail.com
+2025-11-11 09:25:37,019 - INFO - 📧 Real-time processing email from: mailer-daemon@googlemail.com
+2025-11-11 09:25:37,019 - INFO - Received email from mailer-daemon@googlemail.com: Delivery Status Notification (Delay)
+2025-11-11 09:25:37,020 - INFO - Skipping system email from mailer-daemon@googlemail.com
+2025-11-11 09:25:37,020 - INFO - 📧 Real-time processing email from: mailer-daemon@googlemail.com
+2025-11-11 09:25:37,021 - INFO - Received email from mailer-daemon@googlemail.com: Delivery Status Notification (Failure)
+2025-11-11 09:25:37,021 - INFO - Skipping system email from mailer-daemon@googlemail.com
+2025-11-11 09:25:37,021 - INFO - 📧 Real-time processing email from: mailer-daemon@googlemail.com
+2025-11-11 09:25:37,022 - INFO - Received email from mailer-daemon@googlemail.com: Delivery Status Notification (Delay)
+2025-11-11 09:25:37,022 - INFO - Skipping system email from mailer-daemon@googlemail.com
+2025-11-11 09:25:37,023 - INFO - 📧 Real-time processing email from: mailer-daemon@googlemail.com
+2025-11-11 09:25:37,023 - INFO - Received email from mailer-daemon@googlemail.com: Delivery Status Notification (Delay)
+2025-11-11 09:25:37,024 - INFO - Skipping system email from mailer-daemon@googlemail.com
+2025-11-11 09:25:57,037 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:25:57,216 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:25:57,997 - INFO - Found 0 unseen messages
+2025-11-11 09:26:18,258 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:26:18,425 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:26:19,725 - INFO - Found 0 unseen messages
+2025-11-11 09:26:40,040 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:26:40,248 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:26:41,424 - INFO - Found 0 unseen messages
+2025-11-11 09:26:41,731 - INFO - ✅ Email monitoring active - no new messages
+2025-11-11 09:27:01,743 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:27:01,902 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:27:03,322 - INFO - Found 0 unseen messages
+2025-11-11 09:27:23,612 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:27:23,764 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:27:25,194 - INFO - Found 0 unseen messages
+2025-11-11 09:27:45,492 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:27:45,674 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:27:46,341 - INFO - Found 0 unseen messages
+2025-11-11 09:27:46,588 - INFO - ✅ Email monitoring active - no new messages
+2025-11-11 09:28:06,598 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:28:06,744 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:28:07,888 - INFO - Found 0 unseen messages
+2025-11-11 09:28:28,189 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:28:28,361 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:28:29,755 - INFO - Found 0 unseen messages
+2025-11-11 09:28:50,179 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:28:50,337 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:28:51,416 - INFO - Found 0 unseen messages
+2025-11-11 09:28:51,684 - INFO - ✅ Email monitoring active - no new messages
+2025-11-11 09:29:11,687 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:29:12,285 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:29:13,378 - INFO - Found 0 unseen messages
+2025-11-11 09:29:33,700 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:29:34,415 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:29:35,165 - INFO - Found 0 unseen messages
+2025-11-11 09:29:55,583 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:29:55,832 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:29:56,540 - INFO - Found 0 unseen messages
+2025-11-11 09:29:56,990 - INFO - ✅ Email monitoring active - no new messages
+2025-11-11 09:30:34,064 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:34,263 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:34,887 - INFO - Found 0 unseen messages
+2025-11-11 09:30:35,164 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:35,300 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:36,018 - INFO - Found 0 unseen messages
+2025-11-11 09:30:37,715 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:37,886 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:39,212 - INFO - Found 0 unseen messages
+2025-11-11 09:30:40,565 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:40,705 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:42,081 - INFO - Found 0 unseen messages
+2025-11-11 09:30:43,706 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:44,002 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:44,692 - INFO - Found 0 unseen messages
+2025-11-11 09:30:46,049 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:46,187 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:47,269 - INFO - Found 0 unseen messages
+2025-11-11 09:30:48,572 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:48,762 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:49,420 - INFO - Found 0 unseen messages
+2025-11-11 09:30:50,704 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:50,866 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:51,930 - INFO - Found 0 unseen messages
+2025-11-11 09:30:53,221 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:53,399 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:54,493 - INFO - Found 0 unseen messages
+2025-11-11 09:30:55,774 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:55,917 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:57,222 - INFO - Found 0 unseen messages
+2025-11-11 09:30:58,499 - INFO - Fetching unseen emails from IMAP
+2025-11-11 09:30:58,746 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-11 09:30:59,424 - INFO - Found 0 unseen messages
+2025-11-11 14:42:33,229 - INFO - 🚀 Starting Daily Brief WhatsApp Service
+2025-11-11 14:42:33,230 - INFO - Loading configuration from environment variables
+2025-11-11 14:42:33,231 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-11 14:42:33,231 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-11 14:42:33,231 - ERROR - Missing required WhatsApp configuration!
+2025-11-11 14:42:33,231 - ERROR - ❌ Configuration error: WhatsApp configuration incomplete
