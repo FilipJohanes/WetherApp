@@ -148,7 +148,6 @@ class Config:
         self.smtp_use_tls = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
         self.timezone = os.getenv("TZ", "Europe/Bratislava")
         self.language = os.getenv("LANGUAGE", "en")  # Default to English
-        self.email_poll_interval = int(os.getenv("EMAIL_POLL_INTERVAL", "60"))  # Default 60s for Pi Zero
         
     def _get_env(self, key: str) -> str:
         """Get required environment variable or exit."""
@@ -452,9 +451,9 @@ def email_idle_monitor(config: Config, dry_run: bool = False) -> None:
                     mail.send(b'DONE\r\n')
                     mail.readline()
                 else:
-                    logger.info(f"⚠️ IMAP IDLE not supported - using polling ({config.email_poll_interval} seconds)")
+                    logger.info("⚠️ IMAP IDLE not supported - using polling (20 seconds)")
             except:
-                logger.info(f"⚠️ IMAP IDLE not supported - using polling ({config.email_poll_interval} seconds)")
+                logger.info("⚠️ IMAP IDLE not supported - using polling (20 seconds)")
             
             # Email monitoring loop
             last_check = datetime.now()
@@ -494,7 +493,7 @@ def email_idle_monitor(config: Config, dry_run: bool = False) -> None:
                             
                     else:
                         # Use polling for services that don't support IDLE
-                        if email_monitor_stop_event.wait(config.email_poll_interval):  # Configurable interval
+                        if email_monitor_stop_event.wait(20):  # Check every 20 seconds
                             break
                         ready = True
                     
