@@ -2424,3 +2424,51 @@ Sk
 2025-11-11 14:42:33,231 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
 2025-11-11 14:42:33,231 - ERROR - Missing required WhatsApp configuration!
 2025-11-11 14:42:33,231 - ERROR - ❌ Configuration error: WhatsApp configuration incomplete
+2025-11-18 22:52:09,822 - INFO - DRY RUN - Would send email to user@example.com: Test
+2025-11-18 22:52:09,831 - INFO - Geocoding location: 
+2025-11-18 22:52:10,098 - WARNING - No geocoding results for: 
+2025-11-18 22:52:10,099 - INFO - Getting weather forecast for 0, 0
+2025-11-18 22:52:10,405 - ERROR - Weather API error for 0, 0: 400 Client Error: Bad Request for url: https://api.open-meteo.com/v1/forecast?latitude=0&longitude=0&daily=temperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_sum%2Cwind_speed_10m_max%2Cprecipitation_probability_max&timezone=Invalid%2FZone&forecast_days=1
+2025-11-18 22:52:10,408 - INFO - Loaded 21 weather message conditions
+2025-11-18 22:52:10,410 - INFO - Skipping system email from no-reply@google.com
+2025-11-18 22:52:10,423 - INFO - Created README.md file
+2025-11-18 22:52:10,447 - WARNING - Weather messages file nonexistent.txt not found, using defaults
+2025-11-18 22:52:10,448 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmp435az2he.db
+2025-11-18 22:52:10,453 - INFO - Added language column to subscribers table
+2025-11-18 22:52:10,455 - INFO - Added timezone column to subscribers table
+2025-11-18 22:52:10,456 - INFO - Added last_sent_date column to subscribers table
+2025-11-18 22:52:10,458 - INFO - Database initialized successfully
+2025-11-18 22:52:10,465 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-18 22:52:11,492 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:11,620 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:12,964 - INFO - Found 0 unseen messages
+2025-11-18 22:52:13,378 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:13,505 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:14,591 - INFO - Found 0 unseen messages
+2025-11-18 22:52:15,846 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:15,971 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:16,629 - INFO - Found 0 unseen messages
+2025-11-18 22:52:17,928 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:18,053 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:18,819 - INFO - Found 0 unseen messages
+2025-11-18 22:52:20,151 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:20,277 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:21,061 - INFO - Found 0 unseen messages
+2025-11-18 22:52:22,350 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:22,475 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:23,171 - INFO - Found 0 unseen messages
+2025-11-18 22:52:24,451 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:24,576 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:25,751 - INFO - Found 0 unseen messages
+2025-11-18 22:52:27,031 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:27,157 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:27,738 - INFO - Found 0 unseen messages
+2025-11-18 22:52:28,995 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:29,122 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:29,911 - INFO - Found 0 unseen messages
+2025-11-18 22:52:31,267 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:31,391 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:32,126 - INFO - Found 0 unseen messages
+2025-11-18 22:52:33,410 - INFO - Fetching unseen emails from IMAP
+2025-11-18 22:52:33,536 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
+2025-11-18 22:52:34,585 - INFO - Found 0 unseen messages

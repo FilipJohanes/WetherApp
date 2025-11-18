@@ -59,19 +59,19 @@ class TestEmailParsing:
         result = parse_plaintext("Prague, Czech Republic")
         assert result == {'command': 'WEATHER', 'location': 'Prague, Czech Republic'}
 
-    def test_calendar_command(self):
-        """Test calendar reminder parsing."""
-        body = "date=2025-12-01\ntime=08:30\nmessage=Doctor Appointment\nrepeat=3"
-        result = parse_plaintext(body)
-        
-        expected = {
-            'command': 'CALENDAR',
-            'date': '2025-12-01',
-            'time': '08:30', 
-            'message': 'Doctor Appointment',
-            'repeat': '3'
-        }
-        assert result == expected
+    # REMINDER SYSTEM DISABLED
+    # def test_calendar_command(self):
+    #     """Test calendar reminder parsing."""
+    #     body = "date=2025-12-01\ntime=08:30\nmessage=Doctor Appointment\nrepeat=3"
+    #     result = parse_plaintext(body)
+    #     expected = {
+    #         'command': 'CALENDAR',
+    #         'date': '2025-12-01',
+    #         'time': '08:30', 
+    #         'message': 'Doctor Appointment',
+    #         'repeat': '3'
+    #     }
+    #     assert result == expected
 
     def test_weather_with_personality(self):
         """Test weather command with personality setting."""

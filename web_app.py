@@ -1,3 +1,9 @@
+from flask import Flask
+
+def create_app():
+    app = Flask(__name__)
+    # TODO: Add all route and config setup here
+    return app
 #!/usr/bin/env python3
 """
 Secure Flask Web Interface for Daily Brief Service

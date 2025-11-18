@@ -191,7 +191,6 @@ The service will automatically:
 - ✅ Create `app.db` SQLite database
 - 🔄 Check for emails every minute  
 - 🌅 Send daily weather at 05:00 local time
-- ⏰ Process calendar reminders on schedule
 - 📝 Log all activities to `app.log`
 
 ## 📧 Usage Guide
@@ -304,8 +303,6 @@ delete
 # List current weather subscribers
 python app.py --list-subs
 
-# List pending calendar reminders  
-python app.py --list-reminders
 
 # Send test email to verify setup
 python app.py --send-test user@example.com
@@ -474,18 +471,6 @@ CREATE TABLE subscribers (
 );
 ```
 
-**reminders** - Calendar reminders
-```sql
-CREATE TABLE reminders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    message TEXT NOT NULL,
-    first_run_at TEXT NOT NULL,
-    remaining_repeats INTEGER NOT NULL,
-    last_sent_at TEXT NULL,
-    created_at TEXT NOT NULL
-);
-```
 
 **inbox_log** - Email deduplication
 ```sql
@@ -505,10 +490,6 @@ CREATE TABLE inbox_log (
    - Parses commands and replies
    - Logs for deduplication
 
-2. **Reminder Delivery** - Every 1 minute
-   - Sends due calendar reminders
-   - Handles repeat scheduling
-   - Cleans up completed reminders
 
 3. **Daily Weather** - 05:00 local time
    - Fetches forecasts for all subscribers
@@ -656,4 +637,4 @@ See the [LICENSE](LICENSE) file for complete terms and conditions.
 
 ---
 
-**Made with ❤️ for the open-source community**
+**Made with ❤️ for the beta testers and proprietary users**

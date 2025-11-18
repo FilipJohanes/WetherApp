@@ -1,3 +1,32 @@
+def handle_personality_command(config, from_email, mode, dry_run=False):
+    """Handle personality change command."""
+    current_sub = get_subscriber(from_email)
+    if not current_sub:
+        response = f"ℹ️ You're not subscribed to the weather service yet.\nSend a location to subscribe first.\n\n"
+        response += _get_usage_footer()
+        send_email(config, from_email, "Personality Change - Error", response, dry_run)
+        return
+
+    location, lat, lon, personality, language, timezone = current_sub
+    add_or_update_subscriber(from_email, location, lat, lon, mode, language, timezone)
+    response = f"✅ Personality mode updated to '{mode}'.\n\n"
+    response += _get_usage_footer()
+    send_email(config, from_email, "Personality Change", response, dry_run)
+
+def handle_language_command(config, from_email, language, dry_run=False):
+    """Handle language change command."""
+    current_sub = get_subscriber(from_email)
+    if not current_sub:
+        response = f"ℹ️ You're not subscribed to the weather service yet.\nSend a location to subscribe first.\n\n"
+        response += _get_usage_footer()
+        send_email(config, from_email, "Language Change - Error", response, dry_run)
+        return
+
+    location, lat, lon, personality, _, timezone = current_sub
+    add_or_update_subscriber(from_email, location, lat, lon, personality, language, timezone)
+    response = f"✅ Language updated to '{language}'.\n\n"
+    response += _get_usage_footer()
+    send_email(config, from_email, "Language Change", response, dry_run)
 #!/usr/bin/env python3
 """
 Daily Brief Service - Email-driven weather subscriptions.
@@ -27,6 +56,8 @@ Requirements:
 import os
 import sys
 import sqlite3
+from services.subscription_service import get_subscriber, add_or_update_subscriber, delete_subscriber
+from datetime import timezone
 import imaplib
 import smtplib
 import ssl
@@ -228,24 +259,25 @@ def init_db(path: str = "app.db") -> None:
             # Column already exists, which is fine
             pass
         
+        # REMINDER SYSTEM DISABLED
         # Reminders table for calendar service
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS reminders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                email TEXT NOT NULL,
-                message TEXT NOT NULL,
-                first_run_at TEXT NOT NULL,
-                remaining_repeats INTEGER NOT NULL,
-                last_sent_at TEXT NULL,
-                created_at TEXT NOT NULL
-            )
-        """)
-        
-        # Index for efficient reminder queries
-        conn.execute("""
-            CREATE INDEX IF NOT EXISTS idx_reminders_email_time 
-            ON reminders (email, first_run_at)
-        """)
+        #conn.execute("""
+        #    CREATE TABLE IF NOT EXISTS reminders (
+        #        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        #        email TEXT NOT NULL,
+        #        message TEXT NOT NULL,
+        #        first_run_at TEXT NOT NULL,
+        #        remaining_repeats INTEGER NOT NULL,
+        #        last_sent_at TEXT NULL,
+        #        created_at TEXT NOT NULL
+        #    )
+        #""")
+        #
+        ## Index for efficient reminder queries
+        #conn.execute("""
+        #    CREATE INDEX IF NOT EXISTS idx_reminders_email_time 
+        #    ON reminders (email, first_run_at)
+        #""")
         
         # Inbox log for deduplication
         conn.execute("""
@@ -273,7 +305,7 @@ def imap_fetch_unseen(config: Config) -> List[EmailMessageInfo]:
     try:
         # Connect to IMAP server
         mail = imaplib.IMAP4_SSL(config.imap_host, config.imap_port)
-        logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}, Password: {config.email_password}")
+        logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}")
         mail.login(config.email_address, config.email_password)
         mail.select('INBOX')
         
@@ -432,7 +464,7 @@ def email_idle_monitor(config: Config, dry_run: bool = False) -> None:
             # Connect to IMAP server with timeout
             mail = imaplib.IMAP4_SSL(config.imap_host, config.imap_port)
             mail.sock.settimeout(10)  # 10 second timeout for all operations
-            logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}, Password: {config.email_password}")
+            logger.info(f"🔐 Attempting IMAP login - Email: {config.email_address}")
             mail.login(config.email_address, config.email_password)
             mail.select('INBOX')
             logger.info("📬 Connected to IMAP server")
@@ -562,7 +594,7 @@ def send_email(config: Config, to: str, subject: str, body: str, dry_run: bool =
         else:
             server = smtplib.SMTP_SSL(config.smtp_host, config.smtp_port)
             
-        logger.info(f"🔐 Attempting SMTP login - Email: {config.email_address}, Password: {config.email_password}")
+        logger.info(f"🔐 Attempting SMTP login - Email: {config.email_address}")
         server.login(config.email_address, config.email_password)
         server.send_message(msg)
         server.quit()
@@ -1124,314 +1156,174 @@ def handle_weather_command(config: Config, from_email: str, location: str = None
     
     try:
         if is_delete:
-            # Remove subscriber
-            cursor = conn.execute("DELETE FROM subscribers WHERE email = ?", (from_email,))
-            if cursor.rowcount > 0:
-                conn.commit()
+            deleted = delete_subscriber(from_email)
+            if deleted > 0:
                 response = f"✅ You've been unsubscribed from the daily weather service.\n\n"
             else:
                 response = f"ℹ️ You weren't subscribed to the weather service.\n\n"
-        else:
-            # Get current subscriber info
-            current_sub = conn.execute("""
-                SELECT location, lat, lon, personality, COALESCE(language, 'en') FROM subscribers WHERE email = ?
-            """, (from_email,)).fetchone()
-            
-            current_location = current_sub[0] if current_sub else None
-            current_lat = current_sub[1] if current_sub else None  
-            current_lon = current_sub[2] if current_sub else None
-            current_personality = current_sub[3] if current_sub else 'neutral'
-            current_language = current_sub[4] if current_sub else 'en'
-            
-            # Determine what to update
-            new_location = location if location else current_location
-            new_personality = personality if personality else current_personality
-            new_language = language if language else current_language
-            
-            # Validate Emuska personality mode - only available in Slovak
-            if new_personality == 'emuska' and new_language != 'sk':
-                response = f"❌ Emuska personality mode is only available in Slovak language.\n"
-                response += f"Please set language to 'sk' to use Emuska mode, or choose another personality: neutral, cute, brutal\n\n"
-                response += _get_usage_footer()
-                send_email(config, from_email, "Weather Service - Language Error", response, dry_run)
-                return
-            
-            if new_location:
-                # Subscribe/update location
-                geocode_result = geocode_location(new_location) if new_location != current_location else None
-                
-                if geocode_result and geocode_result[0] is not None:
-                    lat, lon, display_name, timezone_str = geocode_result
-                    
-                    # Save/update subscription with timezone
-                    conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, timezone, updated_at, personality, language)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (from_email, display_name, lat, lon, timezone_str, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
-                    conn.commit()
-                    
-                    # Get sample weather with personality and language (use subscriber's timezone)
-                    weather = get_weather_forecast(lat, lon, timezone_str)
-                    if weather:
-                        sample_forecast = generate_weather_summary(weather, display_name, new_personality, new_language)
-                        response = f"✅ Weather subscription updated!\n"
-                        response += f"📍 Location: {display_name} ({lat:.4f}, {lon:.4f})\n"
-                        response += f"🌍 Timezone: {timezone_str}\n"
-                        response += f"🎭 Personality mode: {new_personality}\n"
-                        response += f"🌍 Language: {new_language}\n"
-                        response += f"⏰ Daily forecast will be sent at 05:00 {timezone_str} time\n\n"
-                        response += f"Here's today's forecast:\n{sample_forecast}\n"
-                    else:
-                        response = f"✅ Subscribed to weather for {display_name} in {new_personality} mode, but couldn't fetch current forecast.\n\n"
-                elif current_lat and current_lon:
-                    # Just update personality/language, keep existing location and coordinates
-                    conn.execute("""
-                        UPDATE subscribers 
-                        SET personality = ?, language = ?, updated_at = ?
-                        WHERE email = ?
-                    """, (new_personality, new_language, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
-                    conn.commit()
-                    
-                    response = f"✅ Updated to {new_personality} mode (language: {new_language})\n"
-                    response += f"Location unchanged: {current_location}\n\n"
-                else:
-                    # Save with unknown coordinates
-                    conn.execute("""
-                        INSERT OR REPLACE INTO subscribers (email, location, lat, lon, timezone, updated_at, personality, language)
-                        VALUES (?, ?, NULL, NULL, 'UTC', ?, ?, ?)
-                    """, (from_email, new_location, datetime.now(ZoneInfo(config.timezone)).isoformat(), new_personality, new_language))
-                    conn.commit()
-                    
-                    response = f"⚠️ Subscribed to weather service in {new_personality} mode (language: {new_language}), but couldn't geocode '{new_location}'.\n"
-                    response += "Please try a more specific location (e.g., 'Prague, CZ' or 'New York, NY').\n\n"
+            response += _get_usage_footer()
+            subject = "Weather Service - Unsubscribed"
+            send_email(config, from_email, subject, response, dry_run)
+            return
+        current_sub = get_subscriber(from_email)
+        current_location = current_sub[0] if current_sub else None
+        current_lat = current_sub[1] if current_sub else None
+        current_lon = current_sub[2] if current_sub else None
+        current_personality = current_sub[3] if current_sub else 'neutral'
+        current_language = current_sub[4] if current_sub else 'en'
+        current_timezone = current_sub[5] if current_sub else None
+        new_location = location if location else current_location
+        new_personality = personality if personality else current_personality
+        new_language = language if language else current_language
+        new_timezone = current_timezone
+        # Validate Emuska personality mode - only available in Slovak
+        if new_personality == 'emuska' and new_language != 'sk':
+            response = f"❌ Emuska personality mode is only available in Slovak language.\n"
+            response += f"Please set language to 'sk' to use Emuska mode, or choose another personality: neutral, cute, brutal\n\n"
+            response += _get_usage_footer()
+            send_email(config, from_email, "Weather Service - Language Error", response, dry_run)
+            return
+        if new_location:
+            geocode_result = geocode_location(new_location) if new_location != current_location else None
+            if geocode_result and geocode_result[0] is not None:
+                lat, lon, tz = geocode_result[0], geocode_result[1], geocode_result[2]
+                add_or_update_subscriber(
+                    from_email, new_location, lat, lon, new_personality, new_language, tz
+                )
+                response = f"✅ Subscribed to daily weather for {new_location}!\n\n"
+            elif current_lat and current_lon:
+                add_or_update_subscriber(
+                    from_email, new_location, current_lat, current_lon, new_personality, new_language, new_timezone
+                )
+                response = f"✅ Updated subscription for {new_location}!\n\n"
             else:
-                response = f"❌ Please provide a location to subscribe to weather updates.\n\n"
-        
-        # Add usage instructions
+                add_or_update_subscriber(
+                    from_email, new_location, None, None, new_personality, new_language, new_timezone
+                )
+                response = f"❌ Could not geocode location '{new_location}'.\n\n"
+                response += "Please try a more specific location (e.g., 'Prague, CZ' or 'New York, NY').\n\n"
+        else:
+            response = f"❌ Please provide a location to subscribe to weather updates.\n\n"
         response += _get_usage_footer()
-        
-        # Send reply
         subject = "Weather Service - Subscription Update"
         send_email(config, from_email, subject, response, dry_run)
+        return
         
     finally:
         conn.close()
 
 
-def handle_personality_command(config: Config, from_email: str, mode: str, dry_run: bool = False) -> None:
-    """Handle personality mode change command."""
-    conn = sqlite3.connect("app.db")
-    
-    try:
-        # Validate personality mode
-        if mode not in ['neutral', 'cute', 'brutal', 'emuska']:
-            response = f"❌ Invalid personality mode '{mode}'. Choose from: neutral, cute, brutal, emuska\n\n"
-            response += _get_usage_footer()
-            send_email(config, from_email, "Personality Mode - Error", response, dry_run)
-            return
-        
-        # Check if user is subscribed to weather service and get their language
-        current_sub = conn.execute("""
-            SELECT location, lat, lon, COALESCE(language, 'en') FROM subscribers WHERE email = ?
-        """, (from_email,)).fetchone()
-        
-        if current_sub:
-            location, lat, lon, user_language = current_sub
-            
-            # Validate Emuska personality mode - only available in Slovak
-            if mode == 'emuska' and user_language != 'sk':
-                response = f"❌ Emuska personality mode is only available in Slovak language.\n"
-                response += f"Your current language: {user_language}\n"
-                response += f"Please change language to 'sk' first, or choose another personality: neutral, cute, brutal\n\n"
-                response += _get_usage_footer()
-                send_email(config, from_email, "Personality Mode - Language Error", response, dry_run)
-                return
-            
-            # Update existing subscription personality
-            conn.execute("""
-                UPDATE subscribers SET personality = ?, updated_at = ? WHERE email = ?
-            """, (mode, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
-            conn.commit()
-            
-            # Show sample with new personality
-            if lat and lon:
-                weather = get_weather_forecast(lat, lon, config.timezone)
-                if weather:
-                    sample_forecast = generate_weather_summary(weather, location, mode, user_language)
-                    response = f"✅ Personality mode updated to '{mode}'!\n\n"
-                    response += f"Here's how your weather reports will look:\n{sample_forecast}\n"
-                else:
-                    response = f"✅ Personality mode updated to '{mode}' for {location}!\n\n"
-            else:
-                response = f"✅ Personality mode updated to '{mode}' for {location}!\n\n"
-        else:
-            response = f"ℹ️ You're not subscribed to the weather service yet.\n"
-            response += f"Send a location to subscribe with '{mode}' personality mode.\n\n"
-        
-        response += _get_usage_footer()
-        send_email(config, from_email, f"Personality Mode - {mode.title()}", response, dry_run)
-        
-    finally:
-        conn.close()
+# REMINDER SYSTEM DISABLED
+#def handle_calendar_command(config: Config, from_email: str, fields: Dict, dry_run: bool = False) -> None:
+#    """Handle calendar reminder command."""
+#    conn = sqlite3.connect("app.db")
+#    
+#    try:
+#        # Validate required fields
+#        if 'message' not in fields:
+#            response = "❌ Error: 'message' field is required for calendar reminders.\n\n"
+#            response += _get_usage_footer()
+#            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
+#            return
+#        
+#        # Parse date and time
+#        date_str = fields.get('date', 'today')
+#        time_str = fields.get('time', '09:00')
+#        repeat_count = int(fields.get('repeat', '1'))
+#        
+#        # Combine date and time for parsing
+#        datetime_str = f"{date_str} {time_str}"
+#        
+#        # Parse with timezone
+#        parsed_dt = dateparser.parse(
+#            datetime_str,
+#            settings={
+#                'TIMEZONE': config.timezone,
+#                'RETURN_AS_TIMEZONE_AWARE': True,
+#                'TO_TIMEZONE': config.timezone
+#            }
+#        )
+#        
+#        if not parsed_dt:
+#            response = f"❌ Error: Couldn't parse date/time '{datetime_str}'.\n"
+#            response += "Try formats like: 'tomorrow 2pm', '2025-12-01 08:30', 'next Friday 9am'\n\n"
+#            response += _get_usage_footer()
+#            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
+#            return
+#        
+#        # Ensure we're scheduling for the future
+#        now = datetime.now(ZoneInfo(config.timezone))
+#        if parsed_dt <= now:
+#            response = f"❌ Error: Cannot schedule reminder in the past.\n"
+#            response += f"Parsed time: {parsed_dt.strftime('%Y-%m-%d %H:%M %Z')}\n"
+#            response += f"Current time: {now.strftime('%Y-%m-%d %H:%M %Z')}\n\n"
+#            response += _get_usage_footer()
+#            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
+#            return
+#        
+#        # Save reminder
+#        remaining_repeats = max(0, repeat_count - 1)  # First send doesn't count as repeat
+#        
+#        conn.execute("""
+#            INSERT INTO reminders (email, message, first_run_at, remaining_repeats, created_at)
+#            VALUES (?, ?, ?, ?, ?)
+#        """, (
+#            from_email,
+#            fields['message'],
+#            parsed_dt.isoformat(),
+#            remaining_repeats,
+#            now.isoformat()
+#        ))
+#        conn.commit()
+#        
+#        # Generate schedule summary
+#        response = f"✅ Calendar reminder scheduled!\n\n"
+#        response += f"📝 Message: {fields['message']}\n"
+#        response += f"📅 First reminder: {parsed_dt.strftime('%Y-%m-%d %H:%M %Z')}\n"
+#        
+#        if repeat_count > 1:
+#            response += f"🔄 Total reminders: {repeat_count} (every 10 minutes)\n"
+#            last_reminder = parsed_dt + timedelta(minutes=10 * remaining_repeats)
+#            response += f"📅 Last reminder: {last_reminder.strftime('%Y-%m-%d %H:%M %Z')}\n"
+#        
+#        response += f"\n💡 To delete all your pending reminders, just reply with 'delete'.\n\n"
+#        response += _get_usage_footer()
+#        
+#        send_email(config, from_email, "Calendar Reminder - Scheduled", response, dry_run)
+#        
+#    except ValueError as e:
+#        response = f"❌ Error: Invalid repeat count. Must be a positive number.\n\n"
+#        response += _get_usage_footer()
+#        send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
+#    except Exception as e:
+#        logger.error(f"Calendar command error: {e}")
+#        response = f"❌ Error processing calendar reminder: {str(e)}\n\n"
+#        response += _get_usage_footer()
+#        send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
+#    finally:
+#        conn.close()
 
 
-def handle_language_command(config: Config, from_email: str, language: str, dry_run: bool = False) -> None:
-    """Handle language change command."""
-    conn = sqlite3.connect("app.db")
-    
-    try:
-        # Validate language code
-        if language not in ['en', 'es', 'sk']:
-            response = f"❌ Invalid language '{language}'. Choose from: en (English), es (Spanish), sk (Slovak)\n\n"
-            response += _get_usage_footer()
-            send_email(config, from_email, "Language - Error", response, dry_run)
-            return
-        
-        # Check if user is subscribed to weather service
-        current_sub = conn.execute("""
-            SELECT location, lat, lon, COALESCE(personality, 'neutral') FROM subscribers WHERE email = ?
-        """, (from_email,)).fetchone()
-        
-        if current_sub:
-            location, lat, lon, personality = current_sub
-            
-            # Update existing subscription language
-            conn.execute("""
-                UPDATE subscribers SET language = ?, updated_at = ? WHERE email = ?
-            """, (language, datetime.now(ZoneInfo(config.timezone)).isoformat(), from_email))
-            conn.commit()
-            
-            # Show sample with new language
-            if lat and lon:
-                weather = get_weather_forecast(lat, lon, config.timezone)
-                if weather:
-                    sample_forecast = generate_weather_summary(weather, location, personality, language)
-                    response = f"✅ Language updated to '{language}'!\n\n"
-                    response += f"Here's how your weather reports will look:\n{sample_forecast}\n"
-                else:
-                    response = f"✅ Language updated to '{language}' for {location}!\n\n"
-            else:
-                response = f"✅ Language updated to '{language}' for {location}!\n\n"
-        else:
-            response = f"ℹ️ You're not subscribed to the weather service yet.\n"
-            response += f"Send a location to subscribe with '{language}' language.\n\n"
-        
-        response += _get_usage_footer()
-        send_email(config, from_email, f"Language - {language.upper()}", response, dry_run)
-        
-    finally:
-        conn.close()
-
-
-def handle_calendar_command(config: Config, from_email: str, fields: Dict, dry_run: bool = False) -> None:
-    """Handle calendar reminder command."""
-    conn = sqlite3.connect("app.db")
-    
-    try:
-        # Validate required fields
-        if 'message' not in fields:
-            response = "❌ Error: 'message' field is required for calendar reminders.\n\n"
-            response += _get_usage_footer()
-            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
-            return
-        
-        # Parse date and time
-        date_str = fields.get('date', 'today')
-        time_str = fields.get('time', '09:00')
-        repeat_count = int(fields.get('repeat', '1'))
-        
-        # Combine date and time for parsing
-        datetime_str = f"{date_str} {time_str}"
-        
-        # Parse with timezone
-        parsed_dt = dateparser.parse(
-            datetime_str,
-            settings={
-                'TIMEZONE': config.timezone,
-                'RETURN_AS_TIMEZONE_AWARE': True,
-                'TO_TIMEZONE': config.timezone
-            }
-        )
-        
-        if not parsed_dt:
-            response = f"❌ Error: Couldn't parse date/time '{datetime_str}'.\n"
-            response += "Try formats like: 'tomorrow 2pm', '2025-12-01 08:30', 'next Friday 9am'\n\n"
-            response += _get_usage_footer()
-            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
-            return
-        
-        # Ensure we're scheduling for the future
-        now = datetime.now(ZoneInfo(config.timezone))
-        if parsed_dt <= now:
-            response = f"❌ Error: Cannot schedule reminder in the past.\n"
-            response += f"Parsed time: {parsed_dt.strftime('%Y-%m-%d %H:%M %Z')}\n"
-            response += f"Current time: {now.strftime('%Y-%m-%d %H:%M %Z')}\n\n"
-            response += _get_usage_footer()
-            send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
-            return
-        
-        # Save reminder
-        remaining_repeats = max(0, repeat_count - 1)  # First send doesn't count as repeat
-        
-        conn.execute("""
-            INSERT INTO reminders (email, message, first_run_at, remaining_repeats, created_at)
-            VALUES (?, ?, ?, ?, ?)
-        """, (
-            from_email,
-            fields['message'],
-            parsed_dt.isoformat(),
-            remaining_repeats,
-            now.isoformat()
-        ))
-        conn.commit()
-        
-        # Generate schedule summary
-        response = f"✅ Calendar reminder scheduled!\n\n"
-        response += f"📝 Message: {fields['message']}\n"
-        response += f"📅 First reminder: {parsed_dt.strftime('%Y-%m-%d %H:%M %Z')}\n"
-        
-        if repeat_count > 1:
-            response += f"🔄 Total reminders: {repeat_count} (every 10 minutes)\n"
-            last_reminder = parsed_dt + timedelta(minutes=10 * remaining_repeats)
-            response += f"📅 Last reminder: {last_reminder.strftime('%Y-%m-%d %H:%M %Z')}\n"
-        
-        response += f"\n💡 To delete all your pending reminders, just reply with 'delete'.\n\n"
-        response += _get_usage_footer()
-        
-        send_email(config, from_email, "Calendar Reminder - Scheduled", response, dry_run)
-        
-    except ValueError as e:
-        response = f"❌ Error: Invalid repeat count. Must be a positive number.\n\n"
-        response += _get_usage_footer()
-        send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
-    except Exception as e:
-        logger.error(f"Calendar command error: {e}")
-        response = f"❌ Error processing calendar reminder: {str(e)}\n\n"
-        response += _get_usage_footer()
-        send_email(config, from_email, "Calendar Reminder - Error", response, dry_run)
-    finally:
-        conn.close()
-
-
-def delete_all_reminders(config: Config, from_email: str, dry_run: bool = False) -> None:
-    """Delete all pending reminders for a user."""
-    conn = sqlite3.connect("app.db")
-    
-    try:
-        cursor = conn.execute("DELETE FROM reminders WHERE email = ?", (from_email,))
-        deleted_count = cursor.rowcount
-        conn.commit()
-        
-        if deleted_count > 0:
-            response = f"✅ Deleted {deleted_count} pending reminder(s).\n\n"
-        else:
-            response = f"ℹ️ No pending reminders found to delete.\n\n"
-        
-        response += _get_usage_footer()
-        send_email(config, from_email, "Calendar Reminders - Deleted", response, dry_run)
-        
-    finally:
-        conn.close()
+# REMINDER SYSTEM DISABLED
+#def delete_all_reminders(config: Config, from_email: str, dry_run: bool = False) -> None:
+#    """Delete all pending reminders for a user."""
+#    conn = sqlite3.connect("app.db")
+#    
+#    try:
+#        cursor = conn.execute("DELETE FROM reminders WHERE email = ?", (from_email,))
+#        deleted_count = cursor.rowcount
+#        conn.commit()
+#        
+#        if deleted_count > 0:
+#            response = f"✅ Deleted {deleted_count} pending reminder(s).\n\n"
+#        else:
+#            response = f"ℹ️ No pending reminders found to delete.\n\n"
+#        
+#        response += _get_usage_footer()
+#        send_email(config, from_email, "Calendar Reminders - Deleted", response, dry_run)
+#        
+#    finally:
+#        conn.close()
 
 
 def _get_usage_footer() -> str:
@@ -1486,8 +1378,9 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
         
         for email_addr, location, lat, lon, subscriber_tz, personality, language, last_sent_date in subscribers:
             try:
-                # Get current time in subscriber's timezone
-                subscriber_now = datetime.now(ZoneInfo(subscriber_tz))
+                # Get current UTC time as aware datetime, then convert to subscriber's timezone
+                utc_now = datetime.now(timezone.utc)
+                subscriber_now = utc_now.astimezone(ZoneInfo(subscriber_tz))
                 subscriber_date = subscriber_now.date().isoformat()
                 subscriber_hour = subscriber_now.hour
                 
@@ -1537,60 +1430,61 @@ def run_daily_weather_job(config: Config, dry_run: bool = False) -> None:
         conn.close()
 
 
-def run_due_reminders_job(config: Config, dry_run: bool = False) -> None:
-    """Send due calendar reminders."""
-    now = datetime.now(ZoneInfo(config.timezone))
-    conn = sqlite3.connect("app.db")
-    
-    try:
-        # Find due reminders
-        reminders = conn.execute("""
-            SELECT id, email, message, first_run_at, remaining_repeats, last_sent_at
-            FROM reminders
-            WHERE (last_sent_at IS NULL AND ? >= first_run_at)
-               OR (last_sent_at IS NOT NULL AND remaining_repeats > 0 
-                   AND ? >= datetime(last_sent_at, '+10 minutes'))
-            ORDER BY first_run_at
-        """, (now.isoformat(), now.isoformat())).fetchall()
-        
-        if reminders:
-            logger.info(f"Processing {len(reminders)} due reminders")
-        
-        for reminder_id, email_addr, message, first_run_at, remaining_repeats, last_sent_at in reminders:
-            try:
-                # Send reminder
-                subject = "📅 Calendar Reminder"
-                body = f"🔔 Reminder: {message}\n\n"
-                body += f"Scheduled for: {first_run_at}\n"
-                
-                if remaining_repeats > 0:
-                    body += f"Remaining repeats: {remaining_repeats}\n"
-                
-                body += "\n---\nCalendar Reminder Service\nTo delete all reminders, reply with 'delete'"
-                
-                if send_email(config, email_addr, subject, body, dry_run):
-                    # Update reminder status
-                    new_remaining = remaining_repeats - 1 if last_sent_at else remaining_repeats
-                    
-                    if new_remaining >= 0:
-                        conn.execute("""
-                            UPDATE reminders 
-                            SET last_sent_at = ?, remaining_repeats = ?
-                            WHERE id = ?
-                        """, (now.isoformat(), new_remaining, reminder_id))
-                    
-                    # Clean up completed reminders
-                    if new_remaining <= 0:
-                        conn.execute("DELETE FROM reminders WHERE id = ?", (reminder_id,))
-                    
-                    conn.commit()
-                    logger.info(f"Sent reminder {reminder_id} to {email_addr}")
-                    
-            except Exception as e:
-                logger.error(f"Error sending reminder {reminder_id}: {e}")
-                
-    finally:
-        conn.close()
+# REMINDER SYSTEM DISABLED
+#def run_due_reminders_job(config: Config, dry_run: bool = False) -> None:
+#    """Send due calendar reminders."""
+#    now = datetime.now(ZoneInfo(config.timezone))
+#    conn = sqlite3.connect("app.db")
+#    
+#    try:
+#        # Find due reminders
+#        reminders = conn.execute("""
+#            SELECT id, email, message, first_run_at, remaining_repeats, last_sent_at
+#            FROM reminders
+#            WHERE (last_sent_at IS NULL AND ? >= first_run_at)
+#               OR (last_sent_at IS NOT NULL AND remaining_repeats > 0 
+#                   AND ? >= datetime(last_sent_at, '+10 minutes'))
+#            ORDER BY first_run_at
+#        """, (now.isoformat(), now.isoformat())).fetchall()
+#        
+#        if reminders:
+#            logger.info(f"Processing {len(reminders)} due reminders")
+#        
+#        for reminder_id, email_addr, message, first_run_at, remaining_repeats, last_sent_at in reminders:
+#            try:
+#                # Send reminder
+#                subject = "📅 Calendar Reminder"
+#                body = f"🔔 Reminder: {message}\n\n"
+#                body += f"Scheduled for: {first_run_at}\n"
+#                
+#                if remaining_repeats > 0:
+#                    body += f"Remaining repeats: {remaining_repeats}\n"
+#                
+#                body += "\n---\nCalendar Reminder Service\nTo delete all reminders, reply with 'delete'"
+#                
+#                if send_email(config, email_addr, subject, body, dry_run):
+#                    # Update reminder status
+#                    new_remaining = remaining_repeats - 1 if last_sent_at else remaining_repeats
+#                    
+#                    if new_remaining >= 0:
+#                        conn.execute("""
+#                            UPDATE reminders 
+#                            SET last_sent_at = ?, remaining_repeats = ?
+#                            WHERE id = ?
+#                        """, (now.isoformat(), new_remaining, reminder_id))
+#                    
+#                    # Clean up completed reminders
+#                    if new_remaining <= 0:
+#                        conn.execute("DELETE FROM reminders WHERE id = ?", (reminder_id,))
+#                    
+#                    conn.commit()
+#                    logger.info(f"Sent reminder {reminder_id} to {email_addr}")
+#                    
+#            except Exception as e:
+#                logger.error(f"Error sending reminder {reminder_id}: {e}")
+#                
+#    finally:
+#        conn.close()
 
 
 def process_inbound_email(config: Config, msg: EmailMessageInfo, dry_run: bool = False) -> None:
@@ -1712,11 +1606,10 @@ def should_process_email(msg: EmailMessageInfo) -> bool:
             return False
     
     # Skip emails with very short or empty body (likely system emails)
-    body_text = msg.plain_text_body.strip()
-    if len(body_text) < 3:
-        logger.info(f"Skipping email with too short body from {msg.from_email}")
-        return False
-    
+        body_text = msg.plain_text_body.strip()
+        if len(body_text) < 3:
+            logger.info(f"Skipping email with too short body from {msg.from_email}")
+            return False
     # Skip emails that look like automated responses
     if any(phrase in body_text.lower() for phrase in [
         'this is an automated',
@@ -1766,26 +1659,26 @@ def list_subscribers() -> None:
     finally:
         conn.close()
 
-
-def list_reminders() -> None:
-    """List pending reminders (CLI command)."""
-    conn = sqlite3.connect("app.db")
-    try:
-        reminders = conn.execute("""
-            SELECT email, message, first_run_at, remaining_repeats, last_sent_at
-            FROM reminders 
-            ORDER BY first_run_at
-        """).fetchall()
-        
-        print(f"\n📅 Pending Reminders ({len(reminders)} total):")
-        print("-" * 100)
-        
-        for email_addr, message, first_run_at, remaining_repeats, last_sent_at in reminders:
-            status = f"{remaining_repeats} left" if last_sent_at else "pending"
-            print(f"{email_addr:<30} {first_run_at:<20} {status:<10} {message}")
-            
-    finally:
-        conn.close()
+# REMINDER SYSTEM DISABLED
+#def list_reminders() -> None:
+#    """List pending reminders (CLI command)."""
+#    conn = sqlite3.connect("app.db")
+#    try:
+#        reminders = conn.execute("""
+#            SELECT email, message, first_run_at, remaining_repeats, last_sent_at
+#            FROM reminders 
+#            ORDER BY first_run_at
+#        """).fetchall()
+#        
+#        print(f"\n📅 Pending Reminders ({len(reminders)} total):")
+#        print("-" * 100)
+#        
+#        for email_addr, message, first_run_at, remaining_repeats, last_sent_at in reminders:
+#            status = f"{remaining_repeats} left" if last_sent_at else "pending"
+#            print(f"{email_addr:<30} {first_run_at:<20} {status:<10} {message}")
+#            
+#    finally:
+#        conn.close()
 
 
 def send_test_email(config: Config, to_email: str) -> None:
@@ -1796,9 +1689,9 @@ def send_test_email(config: Config, to_email: str) -> None:
     body += _get_usage_footer()
     
     if send_email(config, to_email, subject, body):
-        print(f"✅ Test email sent to {to_email}")
+        print(f"\u2705 Test email sent to {to_email}")
     else:
-        print(f"❌ Failed to send test email to {to_email}")
+        print(f"\u274C Failed to send test email to {to_email}")
 
 
 def create_readme_if_missing() -> None:
@@ -1877,7 +1770,8 @@ def main():
     parser = argparse.ArgumentParser(description="Daily Brief Service")
     parser.add_argument("--dry-run", action="store_true", help="Run without sending emails")
     parser.add_argument("--list-subs", action="store_true", help="List weather subscribers")
-    parser.add_argument("--list-reminders", action="store_true", help="List pending reminders")
+    # REMINDER SYSTEM DISABLED
+    #parser.add_argument("--list-reminders", action="store_true", help="List pending reminders")
     parser.add_argument("--send-test", metavar="EMAIL", help="Send test email to address")
     
     args = parser.parse_args()
@@ -1892,10 +1786,11 @@ def main():
     if args.list_subs:
         list_subscribers()
         return
-        
-    if args.list_reminders:
-        list_reminders()
-        return
+
+    # REMINDER SYSTEM DISABLED   
+    # if args.list_reminders:
+    #     list_reminders()
+    #     return
     
     if args.send_test:
         config = load_env()
