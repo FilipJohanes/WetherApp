@@ -178,8 +178,47 @@ Send emails to your configured service address:
 - Calendar Reminders: Structured message (see docs)
 - CLI: `python app.py --list-subs`, `--list-reminders`, `--send-test user@example.com`, `--dry-run`
 
+<<<<<<< HEAD
 ## License
 Open source - use freely.
+=======
+<<<<<<< HEAD
+# Run in dry-run mode (no emails sent)
+python app.py --dry-run
+```
+
+### 5. Run the Service
+
+```bash
+python app.py
+```
+
+The service will automatically:
+- ✅ Create `app.db` SQLite database
+- 🔄 Check for emails every minute  
+- 🌅 Send daily weather at 05:00 local time
+- 📝 Log all activities to `app.log`
+
+## 📧 Usage Guide
+
+Send emails to your configured service address with these commands:
+
+### Weather Subscriptions
+
+**Subscribe to daily weather:**
+```
+Bratislava
+```
+or
+```
+Prague, Czech Republic
+```
+or coordinates:
+=======
+## License
+Open source - use freely.
+>>>>>>> 8c25680 (Repo cleanup: reorganized files, updated .gitignore, .env.example, README.md, modularized app.py)
+>>>>>>> 31f6de7
 ```
 40.7128,-74.0060
 ```
@@ -275,8 +314,6 @@ delete
 # List current weather subscribers
 python app.py --list-subs
 
-# List pending calendar reminders  
-python app.py --list-reminders
 
 # Send test email to verify setup
 python app.py --send-test user@example.com
@@ -445,18 +482,6 @@ CREATE TABLE subscribers (
 );
 ```
 
-**reminders** - Calendar reminders
-```sql
-CREATE TABLE reminders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    message TEXT NOT NULL,
-    first_run_at TEXT NOT NULL,
-    remaining_repeats INTEGER NOT NULL,
-    last_sent_at TEXT NULL,
-    created_at TEXT NOT NULL
-);
-```
 
 **inbox_log** - Email deduplication
 ```sql
@@ -476,10 +501,6 @@ CREATE TABLE inbox_log (
    - Parses commands and replies
    - Logs for deduplication
 
-2. **Reminder Delivery** - Every 1 minute
-   - Sends due calendar reminders
-   - Handles repeat scheduling
-   - Cleans up completed reminders
 
 3. **Daily Weather** - 05:00 local time
    - Fetches forecasts for all subscribers
@@ -627,4 +648,4 @@ See the [LICENSE](LICENSE) file for complete terms and conditions.
 
 ---
 
-**Made with ❤️ for the open-source community**
+**Made with ❤️ for the beta testers and proprietary users**

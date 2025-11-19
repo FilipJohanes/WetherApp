@@ -1,3 +1,9 @@
+from flask import Flask
+
+def create_app():
+    app = Flask(__name__)
+    # TODO: Add all route and config setup here
+    return app
 #!/usr/bin/env python3
 """
 Secure Flask Web Interface for Daily Brief Service
@@ -39,6 +45,7 @@ from app import (
     geocode_location, get_weather_forecast, 
     generate_weather_summary, Config
 )
+from services.countdown_service import add_countdown, CountdownEvent
 
 # Configure logging
 logging.basicConfig(
@@ -135,6 +142,15 @@ class SubscribeForm(FlaskForm):
         ('brutal', 'Brutal - Blunt & direct')
     ], validators=[DataRequired()])
     
+    subscribe_weather = SubmitField('Subscribe to Weather')
+    subscribe_countdown = SubmitField('Subscribe to Countdown')
+    countdown_name = StringField('Countdown Name')
+    countdown_date = StringField('Countdown Date')
+    countdown_yearly = StringField('Countdown Yearly')
+    countdown_message_before = StringField('Message Before Event')
+    countdown_message_after = StringField('Message After Event')
+    subscribe_weather = StringField('Subscribe Weather')
+    subscribe_countdown = StringField('Subscribe Countdown')
     submit = SubmitField('Subscribe')
     
     def validate_email(self, field):
@@ -195,70 +211,81 @@ def index():
 def subscribe():
     """Secure subscription page."""
     form = SubscribeForm()
+    tab = request.args.get('tab', 'weather')
+    email = request.form.get('email', '')
+    error = None
     
     if form.validate_on_submit():
         try:
-            # Sanitize inputs (already validated by form)
             email = form.email.data.strip().lower()
-            location = form.location.data.strip()
-            language = form.language.data
-            personality = form.personality.data
-            
-            # Geocode location
-            logger.info(f"Processing subscription for {email} - {location}")
-            geocode_result = geocode_location(location)
-            
-            if not geocode_result:
-                flash('Could not find that location. Please try a more specific address (e.g., "Bratislava, Slovakia")', 'error')
-                return render_template('subscribe.html', form=form)
-            
-            lat, lon, display_name, timezone_str = geocode_result
-            
-            # Save to database with parameterized query (SQL injection safe)
-            conn = get_db_connection()
-            try:
-                # Check if already subscribed
-                existing = conn.execute(
-                    'SELECT email FROM subscribers WHERE email = ?', 
-                    (email,)
-                ).fetchone()
-                
-                if existing:
-                    # Update existing subscription
-                    conn.execute("""
-                        UPDATE subscribers 
-                        SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, 
-                            language = ?, updated_at = ?
-                        WHERE email = ?
-                    """, (display_name, lat, lon, timezone_str, personality, language, 
-                          datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
-                    action = 'updated'
-                else:
-                    # Insert new subscription
-                    conn.execute("""
-                        INSERT INTO subscribers (email, location, lat, lon, timezone, personality, language, updated_at)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    """, (email, display_name, lat, lon, timezone_str, personality, language,
-                          datetime.now(ZoneInfo(service_config.timezone)).isoformat()))
-                    action = 'created'
-                
-                conn.commit()
-                logger.info(f"Subscription {action} for {email} in timezone {timezone_str}")
-                
-                flash(f'✅ Successfully subscribed to daily weather for {sanitize_output(display_name)} (emails at 05:00 {timezone_str})!', 'success')
-                return redirect(url_for('preview', email=email))
-                
-            except sqlite3.Error as e:
-                logger.error(f"Database error: {e}")
-                flash('An error occurred. Please try again later.', 'error')
-            finally:
-                conn.close()
-        
+            # Weather subscription
+            if request.form.get('subscribe_weather'):
+                location = form.location.data.strip()
+                language = form.language.data
+                personality = form.personality.data
+                logger.info(f"Processing weather subscription for {email} - {location}")
+                geocode_result = geocode_location(location)
+                if not geocode_result:
+                    flash('Could not find that location. Please try a more specific address (e.g., "Bratislava, Slovakia")', 'error')
+                    return render_template('subscribe.html', form=form)
+                lat, lon, display_name, timezone_str = geocode_result
+                conn = get_db_connection()
+                try:
+                    existing = conn.execute(
+                        'SELECT email FROM subscribers WHERE email = ?', 
+                        (email,)
+                    ).fetchone()
+                    if existing:
+                        conn.execute("""
+                            UPDATE subscribers 
+                            SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, 
+                                language = ?, updated_at = ?
+                            WHERE email = ?
+                        """, (display_name, lat, lon, timezone_str, personality, language, 
+                              datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
+                        action = 'updated'
+                    else:
+                        conn.execute("""
+                            INSERT INTO subscribers (email, location, lat, lon, timezone, personality, language, updated_at)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (email, display_name, lat, lon, timezone_str, personality, language,
+                              datetime.now(ZoneInfo(service_config.timezone)).isoformat()))
+                        action = 'created'
+                    conn.commit()
+                    logger.info(f"Weather subscription {action} for {email} in timezone {timezone_str}")
+                    flash(f'✅ Successfully subscribed to daily weather for {sanitize_output(display_name)} (emails at 05:00 {timezone_str})!', 'success')
+                except sqlite3.Error as e:
+                    logger.error(f"Database error: {e}")
+                    flash('An error occurred. Please try again later.', 'error')
+                finally:
+                    conn.close()
+            # Countdown subscription
+            if request.form.get('subscribe_countdown'):
+                countdown_name = form.countdown_name.data.strip()
+                countdown_date = form.countdown_date.data.strip()
+                countdown_yearly = bool(request.form.get('countdown_yearly'))
+                countdown_message_before = form.countdown_message_before.data.strip()
+                countdown_message_after = form.countdown_message_after.data.strip()
+                logger.info(f"Processing countdown subscription for {email} - {countdown_name} on {countdown_date}")
+                try:
+                    event = CountdownEvent(
+                        name=countdown_name,
+                        date=countdown_date,
+                        yearly=countdown_yearly,
+                        email=email,
+                        message_before=countdown_message_before,
+                        message_after=countdown_message_after
+                    )
+                    add_countdown(event)
+                    flash(f'✅ Successfully subscribed to countdown: {sanitize_output(countdown_name)} ({countdown_date})!', 'success')
+                except Exception as e:
+                    logger.error(f"Countdown subscription error: {e}")
+                    flash('An error occurred while saving countdown. Please try again.', 'error')
+            return redirect(url_for('preview', email=email))
         except Exception as e:
             logger.error(f"Subscription error: {e}")
             flash('An unexpected error occurred. Please try again.', 'error')
-    
-    return render_template('subscribe.html', form=form)
+    return render_template('subscribe.html', form=form, tab=tab, error=error)
 
 
 @app.route('/unsubscribe', methods=['GET', 'POST'])

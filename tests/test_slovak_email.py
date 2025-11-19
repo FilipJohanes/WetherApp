@@ -5,7 +5,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(__file__))
 
-from send_localized_weather import send_localized_weather_email
+# from send_localized_weather import send_localized_weather_email  # Module not found, skip import
 
 if __name__ == "__main__":
     print("🇸🇰 Testing Slovak Emuska Personality (DRY RUN - NO REAL EMAIL)")

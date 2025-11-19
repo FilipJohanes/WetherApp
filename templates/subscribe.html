@@ -2,109 +2,90 @@
 
 {% block title %}Subscribe - Daily Brief Service{% endblock %}
 
-{% block header_subtitle %}Subscribe to Daily Weather Updates{% endblock %}
+{% block header_subtitle %}Subscribe to Daily Updates{% endblock %}
 
 {% block content %}
 <div class="card">
-    <h2>📧 Subscribe to Daily Weather</h2>
+    <h2>📧 Subscribe to Daily Updates</h2>
     <p style="margin-top: 10px;">
-        Fill out the form below to start receiving personalized weather forecasts every morning at 5:00 AM.
+        You can subscribe to <b>weather</b> and/or <b>countdown</b> updates. Select one or both below.
     </p>
 </div>
 
 <form method="POST" action="{{ url_for('subscribe') }}" novalidate>
     {{ form.hidden_tag() }}
-    
     <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
-        {% if form.email.errors %}
-            {% for error in form.email.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Your email will only be used for weather updates. We never share or sell your data.
-        </small>
+        <label for="email">Email (required)</label>
+        <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
+        <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
     </div>
-    
     <div class="form-group">
-        {{ form.location.label }}
-        {{ form.location(class="form-control", placeholder="Bratislava, Slovakia") }}
-        {% if form.location.errors %}
-            {% for error in form.location.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Be specific for best results (e.g., "Madrid, Spain" or "New York, NY")
-        </small>
+        <input type="checkbox" id="subscribe_weather" name="subscribe_weather" {% if request.form.subscribe_weather %}checked{% endif %}>
+        <label for="subscribe_weather">Subscribe to daily weather updates</label>
     </div>
-    
+    <div id="weather-fields">
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" class="form-control" placeholder="Bratislava, Slovakia" value="{{ request.form.location or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language" name="language" class="form-control">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="sk">Slovak</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="personality">Personality</label>
+            <select id="personality" name="personality" class="form-control">
+                <option value="neutral">Neutral</option>
+                <option value="cute">Cute</option>
+                <option value="brutal">Brutal</option>
+            </select>
+        </div>
+    </div>
     <div class="form-group">
-        {{ form.language.label }}
-        {{ form.language(class="form-control") }}
-        {% if form.language.errors %}
-            {% for error in form.language.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Choose the language for your weather reports
-        </small>
+        <input type="checkbox" id="subscribe_countdown" name="subscribe_countdown" {% if request.form.subscribe_countdown %}checked{% endif %}>
+        <label for="subscribe_countdown">Subscribe to countdown event</label>
     </div>
-    
-    <div class="form-group">
-        {{ form.personality.label }}
-        {{ form.personality(class="form-control") }}
-        {% if form.personality.errors %}
-            {% for error in form.personality.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            <strong>Neutral:</strong> Standard reports | 
-            <strong>Cute:</strong> Friendly & emoji-rich | 
-            <strong>Brutal:</strong> Blunt & direct
-        </small>
+    <div id="countdown-fields">
+        <div class="form-group">
+            <label for="countdown_name">Countdown Name</label>
+            <input type="text" id="countdown_name" name="countdown_name" class="form-control" placeholder="Birthday, Wedding, Christmas" value="{{ request.form.countdown_name or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="countdown_date">Date</label>
+            <input type="date" id="countdown_date" name="countdown_date" class="form-control" value="{{ request.form.countdown_date or '' }}">
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="countdown_yearly" name="countdown_yearly" {% if request.form.countdown_yearly %}checked{% endif %}>
+            <label for="countdown_yearly">Yearly event (e.g. Christmas)</label>
+        </div>
+        <div class="form-group">
+            <label for="countdown_message_before">Message before event</label>
+            <input type="text" id="countdown_message_before" name="countdown_message_before" class="form-control" placeholder="Days to wedding: {days}" value="{{ request.form.countdown_message_before or '' }}">
+            <small>Use <code>{days}</code> to insert countdown value.</small>
+        </div>
+        <div class="form-group">
+            <label for="countdown_message_after">Message after event (optional)</label>
+            <input type="text" id="countdown_message_after" name="countdown_message_after" class="form-control" placeholder="Married for: {days}" value="{{ request.form.countdown_message_after or '' }}">
+            <small>If empty, countdown disables after event.</small>
+        </div>
     </div>
-    
     <div style="margin-top: 30px;">
-        {{ form.submit(class="btn") }}
+        <button type="submit" class="btn btn-success">Subscribe</button>
     </div>
-    
-    <p style="margin-top: 15px; font-size: 0.9em; color: #6c757d; text-align: center;">
-        Your email is used only for weather delivery. No spam, no sharing.
-    </p>
 </form>
-
-<div class="card" style="margin-top: 30px; background: #e7f3ff; border: 1px solid #0056b3;">
-    <h3 style="color: #004085;">ℹ️ Already Subscribed?</h3>
-    <p style="color: #004085;">
-        Submitting this form with an existing email will <strong>update your preferences</strong> 
-        (location, language, or personality).
-    </p>
-</div>
-
 <script>
-// Simple client-side validation enhancement
-document.querySelector('form').addEventListener('submit', function(e) {
-    const email = document.getElementById('email').value;
-    const location = document.getElementById('location').value;
-    
-    if (!email || !location) {
-        alert('Please fill in all required fields');
-        e.preventDefault();
-        return false;
-    }
-    
-    // Basic email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
-        e.preventDefault();
-        return false;
-    }
-});
+// Show/hide fields based on checkboxes
+function updateFields() {
+    document.getElementById('weather-fields').style.display = document.getElementById('subscribe_weather').checked ? '' : 'none';
+    document.getElementById('countdown-fields').style.display = document.getElementById('subscribe_countdown').checked ? '' : 'none';
+}
+document.getElementById('subscribe_weather').addEventListener('change', updateFields);
+document.getElementById('subscribe_countdown').addEventListener('change', updateFields);
+window.onload = updateFields;
 </script>
 {% endblock %}

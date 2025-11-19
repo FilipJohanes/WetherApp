@@ -35,6 +35,7 @@ from services.weather_service import run_daily_weather_job, list_subscribers
 from services.email_service import start_email_monitor, stop_email_monitor, send_test_email
 from services.reminder_service import list_reminders, run_due_reminders_job
 from timezonefinder import TimezoneFinder
+from services.countdown_service import init_countdown_db
 
 # Global scheduler variable for signal handling
 scheduler = None
@@ -245,6 +246,8 @@ def main():
     
     # Initialize database
     init_db()
+    # Initialize countdown DB
+    init_countdown_db()
     
     if args.list_subs:
         list_subscribers()
