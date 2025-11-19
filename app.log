@@ -2713,3 +2713,123 @@ Sk
 2025-11-19 15:23:59,785 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
 2025-11-19 15:24:00,046 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
 2025-11-19 15:24:00,046 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 22:45:26,651 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:45:27,367 - INFO - README.md already exists.
+2025-11-19 22:45:27,410 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:45:27,416 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmpipl90qgj.db
+2025-11-19 22:45:27,429 - INFO - Added language column to subscribers table
+2025-11-19 22:45:27,431 - INFO - Added timezone column to subscribers table
+2025-11-19 22:45:27,432 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:45:27,438 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:45:27,449 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:48:56,388 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:48:57,014 - INFO - README.md already exists.
+2025-11-19 22:48:57,034 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:48:57,040 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmp8rqm28bi.db
+2025-11-19 22:48:57,044 - INFO - Added language column to subscribers table
+2025-11-19 22:48:57,046 - INFO - Added timezone column to subscribers table
+2025-11-19 22:48:57,047 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:48:57,053 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:48:57,064 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:52:01,416 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:52:02,060 - INFO - README.md already exists.
+2025-11-19 22:52:02,075 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:52:02,081 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmpqo6iqr4w.db
+2025-11-19 22:52:02,085 - INFO - Added language column to subscribers table
+2025-11-19 22:52:02,086 - INFO - Added timezone column to subscribers table
+2025-11-19 22:52:02,088 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:52:02,093 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:52:02,106 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:53:32,031 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:53:32,653 - INFO - README.md already exists.
+2025-11-19 22:53:32,670 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:53:32,685 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmp1s1wu2mh.db
+2025-11-19 22:53:32,697 - INFO - Added language column to subscribers table
+2025-11-19 22:53:32,699 - INFO - Added timezone column to subscribers table
+2025-11-19 22:53:32,701 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:53:32,707 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:53:32,719 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:54:32,490 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:54:33,055 - INFO - README.md already exists.
+2025-11-19 22:54:33,070 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:54:33,082 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmpni6aedp6.db
+2025-11-19 22:54:33,093 - INFO - Added language column to subscribers table
+2025-11-19 22:54:33,095 - INFO - Added timezone column to subscribers table
+2025-11-19 22:54:33,097 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:54:33,102 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:54:33,113 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:55:32,237 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:55:32,819 - INFO - README.md already exists.
+2025-11-19 22:55:32,835 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:55:32,848 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmpont2qk5u.db
+2025-11-19 22:55:32,860 - INFO - Added language column to subscribers table
+2025-11-19 22:55:32,862 - INFO - Added timezone column to subscribers table
+2025-11-19 22:55:32,863 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:55:32,868 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:55:32,879 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:56:35,506 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:56:36,171 - INFO - README.md already exists.
+2025-11-19 22:56:36,191 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:56:36,207 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmp57eln2a6.db
+2025-11-19 22:56:36,219 - INFO - Added language column to subscribers table
+2025-11-19 22:56:36,222 - INFO - Added timezone column to subscribers table
+2025-11-19 22:56:36,224 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:56:36,232 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:56:36,248 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:56:54,671 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 22:56:55,258 - INFO - README.md already exists.
+2025-11-19 22:56:55,274 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 22:56:55,287 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmpzc0_ouxk.db
+2025-11-19 22:56:55,298 - INFO - Added language column to subscribers table
+2025-11-19 22:56:55,300 - INFO - Added timezone column to subscribers table
+2025-11-19 22:56:55,301 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 22:56:55,306 - ERROR - ❌ Unexpected error: 'NoneType' object has no attribute 'start'
+2025-11-19 22:56:55,317 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 23:00:43,794 - INFO - [DRY RUN] Would send email to user@example.com: Test
+Body
+2025-11-19 23:00:44,162 - INFO - README.md already exists.
+2025-11-19 23:00:44,207 - ERROR - Failed to load weather messages: [Errno 2] No such file or directory: 'C:\\PythonProjects\\WetherApp\\languages\\nonexistent.txt\\weather_messages.txt'
+2025-11-19 23:00:44,214 - INFO - Initializing database at C:\Users\filip\AppData\Local\Temp\tmp24fil93z.db
+2025-11-19 23:00:44,219 - INFO - Added language column to subscribers table
+2025-11-19 23:00:44,221 - INFO - Added timezone column to subscribers table
+2025-11-19 23:00:44,223 - INFO - Added last_sent_date column to subscribers table
+2025-11-19 23:00:44,233 - ERROR - Required environment variable EMAIL_ADDRESS is not set
+2025-11-19 22:06:53,476 - INFO - Starting Daily Brief Service...
+2025-11-19 22:06:56,405 - INFO - Starting Daily Brief Web Interface
+2025-11-19 22:06:56,406 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-19 22:06:56,406 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-19 22:06:56,406 - WARNING - Add to .env: FLASK_SECRET_KEY=b7b52143ed338bef90b4089e63b10c10649737e4fd23a18649ffa615550dc42e
+2025-11-19 22:06:56,417 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-19 22:06:56,417 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-19 22:07:55,274 - INFO - Starting Daily Brief Service...
+2025-11-19 22:08:07,704 - INFO - Starting Daily Brief Web Interface
+2025-11-19 22:08:07,704 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-19 22:08:07,705 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-19 22:08:07,705 - WARNING - Add to .env: FLASK_SECRET_KEY=399cc6f956274b84a30ee1712100d1644812627c2f7e136f4d292c45bbef267d
+2025-11-19 22:08:07,712 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-19 22:08:07,713 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-19 22:08:24,934 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:24] "GET / HTTP/1.1" 200 -
+2025-11-19 22:08:25,228 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-19 22:08:26,704 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:26] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 22:08:30,526 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:30] "GET / HTTP/1.1" 200 -
+2025-11-19 22:08:31,327 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:31] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 22:08:31,713 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:31] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-19 22:08:34,108 - INFO - 127.0.0.1 - - [19/Nov/2025 22:08:34] "GET /stats HTTP/1.1" 200 -
+2025-11-19 22:11:57,091 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-19 22:11:57,092 - INFO - ⚠️ Scheduler not running
+2025-11-19 22:13:48,553 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-19 22:13:48,554 - INFO - ⚠️ Scheduler not running

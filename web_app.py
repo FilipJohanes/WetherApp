@@ -1,3 +1,148 @@
+
+from flask import Flask, session
+app = Flask(__name__)
+from flask_wtf import FlaskForm, CSRFProtect
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from wtforms import StringField, SelectField, SubmitField, validators
+from wtforms.validators import DataRequired, Email, Length, ValidationError
+from email_validator import validate_email, EmailNotValidError
+
+from services.user_service import (
+    register_user, authenticate_user, create_password_reset, reset_password,
+    set_mfa_secret, get_mfa_secret, set_user_status, get_user_by_email, get_user
+)
+import re
+
+# --- User Account Forms ---
+class RegisterForm(FlaskForm):
+    email = StringField('Email', [DataRequired(), Email()])
+    password = StringField('Password', [DataRequired(), Length(min=8, max=128)])
+    submit = SubmitField('Register')
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', [DataRequired(), Email()])
+    password = StringField('Password', [DataRequired()])
+    submit = SubmitField('Login')
+
+class PasswordResetRequestForm(FlaskForm):
+    email = StringField('Email', [DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+class PasswordResetForm(FlaskForm):
+    password = StringField('New Password', [DataRequired(), Length(min=8, max=128)])
+    submit = SubmitField('Reset Password')
+
+class MFASetupForm(FlaskForm):
+    secret = StringField('MFA Secret', [DataRequired()])
+    submit = SubmitField('Set Up MFA')
+
+class MFAVerifyForm(FlaskForm):
+    code = StringField('MFA Code', [DataRequired(), Length(min=6, max=8)])
+    submit = SubmitField('Verify')
+
+# --- User Account Routes ---
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        email = form.email.data.strip().lower()
+        password = form.password.data
+        if not re.match(r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$', email):
+            flash('Invalid email format.', 'error')
+            return render_template('register.html', form=form)
+        if register_user(email, password):
+            flash('Registration successful! You can now log in.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Email already registered.', 'error')
+    return render_template('register.html', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data.strip().lower()
+        password = form.password.data
+        user_id = authenticate_user(email, password)
+        if user_id:
+            session['user_id'] = user_id
+            flash('Logged in successfully.', 'success')
+            return redirect(url_for('account'))
+        else:
+            flash('Invalid credentials or inactive account.', 'error')
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    flash('Logged out.', 'info')
+    return redirect(url_for('login'))
+
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password_request():
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+        email = form.email.data.strip().lower()
+        token = create_password_reset(email)
+        if token:
+            # Send password reset email
+            reset_url = url_for('reset_password_confirm', token=token, _external=True)
+            subject = "Password Reset Request"
+            body = f"To reset your password, click the following link: {reset_url}\nIf you did not request this, ignore this email."
+            try:
+                send_email(service_config, email, subject, body)
+                flash('Password reset link sent to your email.', 'info')
+            except Exception as e:
+                logger.error(f"Failed to send password reset email: {e}")
+                flash('Failed to send email. Please try again later.', 'error')
+        else:
+            flash('Email not found.', 'error')
+    return render_template('reset_password_request.html', form=form)
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password_confirm(token):
+    form = PasswordResetForm()
+    if form.validate_on_submit():
+        password = form.password.data
+        if reset_password(token, password):
+            flash('Password reset successful! You can now log in.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Invalid or expired token.', 'error')
+    return render_template('reset_password_confirm.html', form=form)
+
+@app.route('/mfa-setup', methods=['GET', 'POST'])
+def mfa_setup():
+    if 'user_id' not in session:
+        flash('Login required.', 'error')
+        return redirect(url_for('login'))
+    form = MFASetupForm()
+    if form.validate_on_submit():
+        set_mfa_secret(session['user_id'], form.secret.data)
+        flash('MFA secret set.', 'success')
+        return redirect(url_for('account'))
+    return render_template('mfa_setup.html', form=form)
+
+@app.route('/mfa-verify', methods=['GET', 'POST'])
+def mfa_verify():
+    if 'user_id' not in session:
+        flash('Login required.', 'error')
+        return redirect(url_for('login'))
+    form = MFAVerifyForm()
+    # TODO: Implement TOTP code verification
+    if form.validate_on_submit():
+        flash('MFA verification not implemented.', 'info')
+        return redirect(url_for('account'))
+    return render_template('mfa_verify.html', form=form)
+
+@app.route('/account')
+def account():
+    if 'user_id' not in session:
+        flash('Login required.', 'error')
+        return redirect(url_for('login'))
+    user = get_user(session['user_id'])
+    return render_template('account.html', user=user)
 from flask import Flask
 
 def create_app():

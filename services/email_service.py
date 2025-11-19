@@ -1,8 +1,17 @@
+# Stubs for app.py imports
+def start_email_monitor():
+    pass
+
+def stop_email_monitor():
+    pass
+
+def send_test_email(config, to):
+    print(f"Test email sent to {to}")
 # email_service.py
 import sqlite3
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from services.weather_service import generate_weather_summary
+from services.summary_service import generate_weather_summary
 from services.countdown_service import generate_countdown_summary, get_user_countdowns
 
 # Dummy send_email for demonstration
