@@ -576,8 +576,37 @@ def init_db(path: str = "app.db") -> None:
 
 def main():
     logger.info("Starting Daily Brief Service...")
-    # Add main orchestration logic here
-    pass
+    config = load_env()
+    init_db()
+    init_countdown_db()
+
+    global scheduler
+    scheduler = BlockingScheduler()
+
+    # Schedule daily weather job at 05:00 local time
+    scheduler.add_job(
+        lambda: run_daily_weather_job(config),
+        CronTrigger(hour=5, minute=0, timezone=config.timezone),
+        id="daily_weather",
+        replace_existing=True
+    )
+
+    # Schedule reminders job every 10 minutes
+    scheduler.add_job(
+        lambda: run_due_reminders_job(config),
+        CronTrigger(minute="*/10", timezone=config.timezone),
+        id="reminders",
+        replace_existing=True
+    )
+
+    # Start email monitor in a separate thread
+    start_email_monitor()
+
+    logger.info("✅ Daily Brief Service is running. Press Ctrl+C to stop.")
+    try:
+        scheduler.start()
+    except (KeyboardInterrupt, SystemExit):
+        signal_handler(signal.SIGINT, None)
 
 if __name__ == "__main__":
     main()

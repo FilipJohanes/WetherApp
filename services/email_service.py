@@ -18,7 +18,27 @@ from services.countdown_service import generate_countdown_summary, get_user_coun
 # Replace with actual implementation
 
 def send_email(config, to, subject, body):
-    print(f"Sending email to {to}: {subject}\n{body}")
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    import reprlib
+    print(f"[DEBUG] Using EMAIL_PASSWORD: {reprlib.repr(config.email_password)} (length: {len(config.email_password)})")
+    try:
+        msg = MIMEMultipart()
+        msg['From'] = config.email_address
+        msg['To'] = to
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain', 'utf-8'))
+
+        server = smtplib.SMTP(config.smtp_host, config.smtp_port)
+        if config.smtp_use_tls:
+            server.starttls()
+        server.login(config.email_address, config.email_password)
+        server.sendmail(config.email_address, to, msg.as_string())
+        server.quit()
+        print(f"✅ Email sent to {to}: {subject}")
+    except Exception as e:
+        print(f"❌ Failed to send email to {to}: {e}")
 
 # Example user dict: {'email': ..., 'weather_enabled': True, 'countdown_enabled': True, ...}
 def send_daily_email(config, user):

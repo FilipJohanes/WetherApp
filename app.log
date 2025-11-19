@@ -2833,3 +2833,36 @@ Body
 2025-11-19 22:11:57,092 - INFO - ⚠️ Scheduler not running
 2025-11-19 22:13:48,553 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-19 22:13:48,554 - INFO - ⚠️ Scheduler not running
+2025-11-19 22:16:07,291 - INFO - Starting Daily Brief Service...
+2025-11-19 22:19:29,199 - INFO - Starting Daily Brief Service...
+2025-11-19 22:19:29,199 - INFO - Loading configuration from environment variables
+2025-11-19 22:19:29,200 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-19 22:19:29,200 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 22:19:29,200 - INFO - Initializing database at app.db
+2025-11-19 22:19:29,209 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-19 22:19:40,257 - INFO - Starting Daily Brief Service...
+2025-11-19 22:19:40,258 - INFO - Loading configuration from environment variables
+2025-11-19 22:19:40,258 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-19 22:19:40,258 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 22:19:40,258 - INFO - Initializing database at app.db
+2025-11-19 22:19:40,263 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-19 22:19:40,263 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-19 22:19:40,263 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-19 22:19:40,284 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-19 22:19:40,285 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-19 22:19:40,285 - INFO - Scheduler started
+2025-11-19 22:20:00,016 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-19 23:30:00 CET)" (scheduled at 2025-11-19 23:20:00+01:00)
+2025-11-19 22:20:00,016 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-19 23:30:00 CET)" executed successfully
+2025-11-19 22:20:58,387 - INFO - Loading configuration from environment variables
+2025-11-19 22:20:58,387 - INFO - ✅ Using .env file: c:\PythonProjects\WetherApp\.env
+2025-11-19 22:20:58,387 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 22:22:17,117 - INFO - Loading configuration from environment variables
+2025-11-19 22:22:17,118 - INFO - ✅ Using .env file: c:\PythonProjects\WetherApp\.env
+2025-11-19 22:22:17,118 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 22:23:50,499 - INFO - Loading configuration from environment variables
+2025-11-19 22:23:50,499 - INFO - ✅ Using .env file: c:\PythonProjects\WetherApp\.env
+2025-11-19 22:23:50,499 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 22:24:49,918 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-19 22:24:49,919 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-19 22:24:49,919 - INFO - Scheduler has been shut down
+2025-11-19 22:24:49,920 - INFO - ✅ Daily Brief Service stopped successfully
