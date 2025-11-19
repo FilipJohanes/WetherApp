@@ -2472,3 +2472,244 @@ Sk
 2025-11-18 22:52:33,410 - INFO - Fetching unseen emails from IMAP
 2025-11-18 22:52:33,536 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com
 2025-11-18 22:52:34,585 - INFO - Found 0 unseen messages
+2025-11-19 14:50:44,251 - INFO - Initializing database at app.db
+2025-11-19 14:50:44,265 - INFO - Database initialized successfully
+2025-11-19 14:50:44,271 - INFO - Starting Daily Brief Service
+2025-11-19 14:50:44,271 - INFO - Loading configuration from environment variables
+2025-11-19 14:50:44,271 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-19 14:50:44,271 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 14:50:44,282 - INFO - 🔄 Starting real-time email monitoring
+2025-11-19 14:50:44,282 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-19 14:50:44,283 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-19 14:50:44,283 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-19 14:50:44,283 - INFO - Jobs scheduled:
+2025-11-19 14:50:44,283 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-19 14:50:44,284 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-19 14:50:44,284 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-19 14:50:44,292 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-19 14:50:44,292 - INFO - Scheduler started
+2025-11-19 14:50:44,468 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:50:44,743 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:50:44,744 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 13:50:59,904 - INFO - Starting Daily Brief Web Interface
+2025-11-19 13:50:59,905 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-19 13:50:59,905 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-19 13:50:59,905 - WARNING - Add to .env: FLASK_SECRET_KEY=6796cbc11ca56ff284d4ef6398de946fdb4d0615ec4c6cca4ffb6d77770b2626
+2025-11-19 13:50:59,924 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-19 13:50:59,924 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-19 14:51:14,900 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:51:15,188 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:51:15,189 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:51:45,327 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:51:46,085 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:51:46,086 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:52:16,235 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:52:16,991 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:52:16,991 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:52:47,143 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:52:47,405 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:52:47,405 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:53:17,577 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:53:17,961 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:53:17,962 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:53:48,087 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:53:48,893 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:53:48,895 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:54:19,098 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:54:19,380 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:54:19,380 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:54:49,594 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:54:49,866 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:54:49,866 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:55:20,044 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:55:20,362 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:55:20,363 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:55:50,505 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:55:51,231 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:55:51,231 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:56:21,376 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:56:22,195 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:56:22,196 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 13:56:46,845 - INFO - 127.0.0.1 - - [19/Nov/2025 13:56:46] "GET / HTTP/1.1" 200 -
+2025-11-19 13:56:46,979 - INFO - 127.0.0.1 - - [19/Nov/2025 13:56:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-19 13:56:49,314 - INFO - 127.0.0.1 - - [19/Nov/2025 13:56:49] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 14:56:52,350 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:56:53,120 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:56:53,121 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:57:23,378 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:57:24,142 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:57:24,143 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:57:54,317 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:57:54,675 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:57:54,676 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:58:24,910 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:58:25,714 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:58:25,714 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:58:55,846 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:58:56,660 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:58:56,660 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:59:26,815 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:59:27,624 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:59:27,625 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:59:57,779 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 14:59:58,538 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 14:59:58,538 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:00:00,001 - INFO - Running job "Check hourly for 5 AM deliveries (trigger: cron[minute='0'], next run at: 2025-11-19 16:00:00 CET)" (scheduled at 2025-11-19 15:00:00+01:00)
+2025-11-19 15:00:00,003 - INFO - Running hourly weather check - looking for 5 AM deliveries
+2025-11-19 15:00:00,008 - INFO - Checking 7 subscribers for 5 AM delivery
+2025-11-19 15:00:00,012 - INFO - No emails sent this hour
+2025-11-19 15:00:00,013 - INFO - Job "Check hourly for 5 AM deliveries (trigger: cron[minute='0'], next run at: 2025-11-19 16:00:00 CET)" executed successfully
+2025-11-19 15:00:28,705 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:00:29,432 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:00:29,433 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:00:59,667 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:01:00,408 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:01:00,409 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:01:30,562 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:01:31,322 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:01:31,323 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:06:04,192 - INFO - Initializing database at app.db
+2025-11-19 15:06:04,193 - INFO - Database initialized successfully
+2025-11-19 15:06:04,193 - INFO - Starting Daily Brief Service
+2025-11-19 15:06:04,193 - INFO - Loading configuration from environment variables
+2025-11-19 15:06:04,193 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-19 15:06:04,193 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-19 15:06:04,196 - INFO - 🔄 Starting real-time email monitoring
+2025-11-19 15:06:04,196 - INFO - 📧 Real-time email monitoring started using IMAP IDLE
+2025-11-19 15:06:04,196 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-19 15:06:04,196 - INFO - Scheduler started - Daily Brief Service is running
+2025-11-19 15:06:04,197 - INFO - Jobs scheduled:
+2025-11-19 15:06:04,197 - INFO -   - Email monitoring: real-time IMAP IDLE (immediate response)
+2025-11-19 15:06:04,197 - INFO -   - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber
+2025-11-19 15:06:04,197 - INFO - 🎯 Press Ctrl+C to stop the service gracefully
+2025-11-19 15:06:04,199 - INFO - Added job "Check hourly for 5 AM deliveries" to job store "default"
+2025-11-19 15:06:04,199 - INFO - Scheduler started
+2025-11-19 15:06:04,347 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:06:04,699 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:06:04,700 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:06:26,478 - INFO - Starting Daily Brief Web Interface
+2025-11-19 14:06:26,478 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-19 14:06:26,478 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-19 14:06:26,478 - WARNING - Add to .env: FLASK_SECRET_KEY=d4016db1479f89b96c2d76783e412327f161f18af58a08aafdaca6ab321c7c5c
+2025-11-19 14:06:26,489 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-19 14:06:26,489 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-19 15:06:34,836 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:06:35,608 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:06:35,609 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:06:39,966 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:39] "GET / HTTP/1.1" 200 -
+2025-11-19 14:06:43,768 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:43] "GET / HTTP/1.1" 200 -
+2025-11-19 14:06:44,567 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:44] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 14:06:51,726 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:51] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-19 14:06:52,947 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:52] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 14:06:53,798 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:53] "GET /stats HTTP/1.1" 200 -
+2025-11-19 14:06:56,440 - INFO - 127.0.0.1 - - [19/Nov/2025 14:06:56] "GET / HTTP/1.1" 200 -
+2025-11-19 15:07:05,753 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:07:06,030 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:07:06,030 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:07:36,161 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:07:36,443 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:07:36,443 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:08:06,601 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:08:07,416 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:08:07,416 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:08:37,607 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:08:37,899 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:08:37,899 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:09:08,228 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:09:09,059 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:09:09,060 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:09:39,219 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:09:39,506 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:09:39,506 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:10:09,635 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:10:10,372 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:10:10,372 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:10:40,645 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:10:41,419 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:10:41,419 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:11:11,575 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:11:12,290 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:11:12,291 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:11:42,451 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:11:43,220 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:11:43,220 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:12:13,356 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:12:14,118 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:12:14,121 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:12:44,258 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:12:45,052 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:12:45,052 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:13:15,174 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:13:15,568 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:13:15,569 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:13:45,716 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:13:45,986 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:13:45,986 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:14:16,129 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:14:16,501 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:14:16,501 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:14:46,648 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:14:47,378 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:14:47,379 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:15:17,527 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:15:18,302 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:15:18,303 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:15:48,467 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:15:48,863 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:15:48,863 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:16:19,088 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:16:19,836 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:16:19,837 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:16:50,162 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:16:50,552 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:16:50,552 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:17:20,697 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:17:21,081 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:17:21,081 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:17:51,218 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:17:51,989 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:17:51,989 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:18:22,159 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:18:22,920 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:18:22,921 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:18:53,084 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:18:53,904 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:18:53,905 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:19:24,052 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:19:24,787 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:19:24,787 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:19:54,938 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:19:55,313 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:19:55,314 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:20:25,577 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:20:25,849 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:20:25,849 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:20:55,998 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:20:56,356 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:20:56,356 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:21:26,564 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:21:27,330 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:21:27,331 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:21:57,485 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:21:57,774 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:21:57,775 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:22:27,904 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:22:28,175 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:22:28,176 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:22:58,332 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:22:59,098 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:22:59,098 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 15:23:29,278 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:23:29,635 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:23:29,635 - INFO - 🔄 Reconnecting to email server in 30 seconds...
+2025-11-19 14:23:44,667 - INFO - 127.0.0.1 - - [19/Nov/2025 14:23:44] "GET / HTTP/1.1" 200 -
+2025-11-19 14:23:46,389 - INFO - 127.0.0.1 - - [19/Nov/2025 14:23:46] "GET /subscribe HTTP/1.1" 200 -
+2025-11-19 15:23:59,785 - INFO - 🔐 Attempting IMAP login - Email: dailywether.reminder@gmail.com, Password: koul lehj prfx zopu
+2025-11-19 15:24:00,046 - ERROR - ❌ IMAP connection error in monitor: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)'
+2025-11-19 15:24:00,046 - INFO - 🔄 Reconnecting to email server in 30 seconds...
