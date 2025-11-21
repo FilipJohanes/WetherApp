@@ -1,0 +1,25 @@
+# Clothing Advice Configuration - Slovak
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Use keys matching weather_messages.txt for consistency
+
+sunny|Ľahké oblečenie, slnečné okuliare.|🌞 Obleč si najkrajšie letné šaty a okuliare!|Tričko, kraťasy, okuliare. Hotovo.|Bambulka, daj si šaty a okuliare, nech si najkrajšia pod slnkom! 
+raining|Nepremokavá bunda, dáždnik.|🌧️ Rozkošný pršiplášť a gumáky!|Pršiplášť alebo zmokni.|Drahá Emuška, vezmi si dáždnik a gumáky! 
+heavy_rain|Plná nepremokavá výbava, gumáky.|⛈️ Gumáky, pláštenka a veľký dáždnik!|Nepremokavé všetko alebo zostaň doma.|Emuška, obleč si všetko nepremokavé! 
+snowing|Teplý kabát, čižmy, rukavice.|❄️ Chlpatý kabátik, rukavičky a snehule!|Obliecť sa na Sibír alebo zmrznúť.|Zlatíčko, obleč si najteplejší kabátik! 
+hot|Kraťasy, tričko, klobúk, opaľovací krém.|😎 Ľahké oblečenie, klobúčik a krém!|Minimum oblečenia, maximum vody.|Srdiečko, nezabudni na klobúk a krém! 
+cold|Vrstvy, teplý kabát, šál.|🧥 Útulný sveter, šál a čiapka!|Vrstvi alebo sa triasť.|Pampúšik, zabaľ sa do teplých vecí! 
+freezing|Ťažká zimná výbava, termo vrstvy.|🥶 Hrubý kabát, termo legíny a rukavice!|Arktická výbava alebo sa staň nanukom.|Snehuliačik, obleč sa ako eskimáčka! 
+mild|Pohodlné oblečenie.|😊 Čokoľvek chceš, je to perfektné!|Čokoľvek, je to fajn.|Zlatíčko, obleč sa ako chceš! 
+windy|Vetrovka, pevný klobúk.|💨 Vetrovka a zábavný klobúk!|Drž si klobúk alebo ho stratíš.|Emuška, pozor na klobúk! 
+stormy|Zostaň doma, núdzová výbava.|☕ Horúca čokoláda a deka!|Zostaň doma alebo to oľutuješ.|Pampúšik, zostaň v teple! 
+foggy|Reflexné prvky, jazdi opatrne.|🌫️ Jasné farby a jazdi pomaly!|Buď viditeľný alebo ťa zrazia.|Srdiečko, buď opatrná v hmle! 
+sunny_hot|Ľahké, priedušné oblečenie, krém.|🔥☀️ Plážové oblečenie a veľa krému!|Minimum oblečenia, maximum krému.|Bambulka, chráň sa pred slnkom! 
+cold_windy|Extra vrstvy, vetrovka.|🌬️❄️ Zabaľ sa ako burrito!|Vetrovka na všetko.|Emuška, zabaľ sa do teplých vecí! 
+rainy_cold|Nepremokavé a teplé vrstvy.|🌧️🧥 Gumáky a teplý kabát!|Studený dážď, obleč sa múdro.|Zlatíčko, obleč sa ako kráľovná! 
+humid|Priedušné, savé oblečenie.|💧 Ľahké, vzdušné oblečenie!|Savé alebo trpieť.|Emuška, obleč si niečo ľahké! 
+dry|Hydratovať, piť vodu.|🏜️ Hydratuj sa a použi krém!|Balzam, voda, krém.|Emuška, nezabudni na krém! 
+heatwave|Zostaň v chlade, vyhýbaj sa slnku, klimatizácia.|🔥🌡️ Nájdeň tieň, pi studené nápoje!|Zostaň doma alebo sa roztopíš.|Pampúšik, zostaň v chlade! 
+blizzard|Zostaň doma, núdzová výbava.|🌨️❄️ Deka, kakao a Netflix!|Nevychádzaj von, ak nechceš zomrieť.|Emuška, zostaň doma v teple! 
+thunderstorm|Zostaň doma, vyhýbaj sa kovu.|⚡🌩️ Sleduj z okna, buď v bezpečí!|Drž sa ďalej od okien.|Zlatíčko, buď v bezpečí doma! 
+default|Skontroluj počasie a obleč sa podľa toho.|🌤️ Zvládneš to!|Obliekaj sa ako človek.|Emuška, obleč sa ako princezná! 

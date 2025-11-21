@@ -1,0 +1,25 @@
+# Clothing Advice Configuration - English
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Use keys matching weather_messages.txt for consistency
+
+sunny|Light clothes, sunglasses recommended.|🌞 Wear your favorite summer dress and shades!|T-shirt, shorts, sunglasses. Done.| 
+raining|Waterproof jacket, umbrella.|🌧️ Cute raincoat and boots!|Rain jacket or get wet.| 
+heavy_rain|Full waterproof gear, boots.|⛈️ Rain boots, raincoat, and a big umbrella!|Waterproof everything or stay inside.| 
+snowing|Warm coat, boots, gloves.|❄️ Fluffy coat, mittens, and snow boots!|Dress for Siberia or freeze.| 
+hot|Shorts, t-shirt, hat, sunscreen.|😎 Light clothes, sunhat, and sunscreen!|Minimal clothing, max water.| 
+cold|Layers, warm coat, scarf.|🧥 Cozy sweater, scarf, and hat!|Layer up or shiver.| 
+freezing|Heavy winter gear, thermal layers.|🥶 Thick coat, thermal leggings, and gloves!|Arctic gear or become a popsicle.| 
+mild|Comfortable clothes.|😊 Anything you like, it's perfect!|Whatever, it's fine.| 
+windy|Windbreaker, secure hat.|💨 Windbreaker and fun hat!|Hold your hat or lose it.| 
+stormy|Stay inside, emergency kit ready.|☕ Hot cocoa and a blanket!|Stay inside or regret it.| 
+foggy|Reflective gear, drive carefully.|🌫️ Bright colors and drive slow!|Be visible or get hit.| 
+sunny_hot|Light, breathable clothes, sunscreen.|🔥☀️ Beachwear and lots of sunscreen!|Minimal clothing, max sunscreen.| 
+cold_windy|Extra layers, windproof coat.|🌬️❄️ Bundle up like a burrito!|Windproof everything.| 
+rainy_cold|Waterproof and warm layers.|🌧️🧥 Rain boots and warm coat!|Cold, wet, miserable. Dress smart.| 
+humid|Breathable, moisture-wicking clothes.|💧 Light, airy clothes!|Sweat-wicking or suffer.| 
+dry|Moisturize, drink water.|🏜️ Hydrate and use lotion!|Chapstick, water, lotion.| 
+heatwave|Stay cool, avoid sun, AC.|🔥🌡️ Find shade, drink cold drinks!|Stay inside or melt.| 
+blizzard|Stay inside, emergency gear.|🌨️❄️ Blanket, cocoa, and Netflix!|Don't go out unless you want to die.| 
+thunderstorm|Stay inside, avoid metal.|⚡🌩️ Watch from inside, stay safe!|Stay away from windows.| 
+default|Check weather and dress accordingly.|🌤️ You got this!|Dress like a human.| 

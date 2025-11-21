@@ -1,0 +1,25 @@
+# Clothing Advice Configuration - Spanish
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Use keys matching weather_messages.txt for consistency
+
+sunny|Ropa ligera, gafas de sol.|🌞 Ponte tu vestido favorito y gafas de sol!|Camiseta, shorts, gafas. Listo.| 
+raining|Impermeable, paraguas.|🌧️ Impermeable lindo y botas!|Impermeable o mójate.| 
+heavy_rain|Equipo impermeable completo, botas.|⛈️ Botas de lluvia, impermeable y paraguas grande!|Impermeabiliza todo o quédate adentro.| 
+snowing|Abrigo, botas, guantes.|❄️ Abrigo peludo, guantes y botas de nieve!|Vístete para Siberia o congélate.| 
+hot|Shorts, camiseta, sombrero, protector solar.|😎 Ropa ligera, sombrero y protector solar!|Mínima ropa, máxima agua.| 
+cold|Capas, abrigo, bufanda.|🧥 Suéter acogedor, bufanda y gorro!|Abrígate o tiembla.| 
+freezing|Ropa de invierno pesada, térmicas.|🥶 Abrigo grueso, leggings térmicos y guantes!|Equipo ártico o conviértete en paleta.| 
+mild|Ropa cómoda.|😊 Lo que quieras, es perfecto!|Lo que sea, está bien.| 
+windy|Rompevientos, sombrero seguro.|💨 Rompevientos y sombrero divertido!|Sujeta tu sombrero o piérdelo.| 
+stormy|Quédate adentro, kit de emergencia.|☕ Chocolate caliente y manta!|Quédate adentro o arrepiéntete.| 
+foggy|Ropa reflectante, maneja con cuidado.|🌫️ Colores brillantes y maneja despacio!|Sé visible o te atropellan.| 
+sunny_hot|Ropa ligera y transpirable, protector solar.|🔥☀️ Ropa de playa y mucho protector solar!|Mínima ropa, máximo protector solar.| 
+cold_windy|Capas extra, abrigo cortaviento.|🌬️❄️ Abrígate como burrito!|Rompevientos en todo.| 
+rainy_cold|Impermeable y ropa cálida.|🌧️🧥 Botas de lluvia y abrigo cálido!|Lluvia fría, vístete inteligente.| 
+humid|Ropa transpirable y absorbente.|💧 Ropa ligera y aireada!|Absorbente o sufre.| 
+dry|Hidrátate, usa crema.|🏜️ Hidrátate y usa loción!|Bálsamo, agua, loción.| 
+heatwave|Mantente fresco, evita el sol, AC.|🔥🌡️ Busca sombra, bebe frío!|Quédate adentro o derrítete.| 
+blizzard|Quédate adentro, equipo de emergencia.|🌨️❄️ Manta, cacao y Netflix!|No salgas si no quieres morir.| 
+thunderstorm|Quédate adentro, evita el metal.|⚡🌩️ Mira desde adentro, mantente seguro!|Aléjate de las ventanas.| 
+default|Revisa el clima y vístete apropiadamente.|🌤️ Tú puedes con esto!|Vístete como humano.| 
