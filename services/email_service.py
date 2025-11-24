@@ -66,6 +66,7 @@ def send_daily_email(config, user):
         if weather:
             body += generate_weather_summary(weather, location, personality, language) + "\n\n"
     # Countdown
+    print("COUNTDOWN User dict:", user)
     if user.get('countdown_enabled'):
         body += generate_countdown_summary(email, datetime.now(ZoneInfo(config.timezone)), config.timezone) + "\n"
     else:
