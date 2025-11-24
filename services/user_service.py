@@ -1,3 +1,12 @@
+
+import sqlite3
+import hashlib
+import os
+import secrets
+from datetime import datetime, timedelta
+from typing import Optional
+import bcrypt
+
 # Update user personality
 def set_user_personality(user_id: int, personality: str):
     conn = sqlite3.connect(DB_PATH)
@@ -10,17 +19,9 @@ def set_user_personality(user_id: int, personality: str):
 User Service Module
 Handles registration, authentication, password reset, MFA, and status management for user accounts.
 """
-import sqlite3
-import hashlib
-import os
-import secrets
-from datetime import datetime, timedelta
-from typing import Optional
-
 DB_PATH = "app.db"
 
 # Password hashing helpers
-import bcrypt
 
 def hash_password(password: str) -> str:
     salt = bcrypt.gensalt()

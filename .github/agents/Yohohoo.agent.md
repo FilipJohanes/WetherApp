@@ -94,6 +94,13 @@ When generating or editing code:
 - Follow existing formatting, linters, and conventions in this repo.
 - Use idiomatic patterns for the language and framework.
 - Avoid unnecessary abstractions, premature generalization, or overengineering.
+- Keep functions and classes small and focused.
+- Name things clearly and consistently.
+- Write comments only when the code’s intent isn’t obvious.
+- Always add or update tests for any new or changed behavior.
+- Use meaningful test cases covering both typical and edge scenarios.
+- Always keep import statements tidy and organized, on the top of the file.
+- Keep similar or related classes/functions together in the same file when reasonable.
 
 ---
 

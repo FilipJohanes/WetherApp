@@ -49,6 +49,11 @@ def init_countdown_db(path: str = "app.db"):
     conn = sqlite3.connect(path)
     try:
         conn.execute(COUNTDOWN_TABLE_SQL)
+        # Add unique index for (email, name, date)
+        conn.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_countdowns_email_name_date
+            ON countdowns (email, name, date)
+        """)
         conn.commit()
     finally:
         conn.close()
@@ -56,6 +61,13 @@ def init_countdown_db(path: str = "app.db"):
 def add_countdown(event: CountdownEvent, path: str = "app.db"):
     conn = sqlite3.connect(path)
     try:
+        # Check for duplicate
+        existing = conn.execute(
+            "SELECT 1 FROM countdowns WHERE email = ? AND name = ? AND date = ?",
+            (event.email, event.name, event.date)
+        ).fetchone()
+        if existing:
+            raise ValueError(f"Countdown for '{event.name}' on {event.date} already exists for {event.email}.")
         conn.execute("""
             INSERT INTO countdowns (email, name, date, yearly, message_before, message_after)
             VALUES (?, ?, ?, ?, ?, ?)
