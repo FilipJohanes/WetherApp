@@ -17,8 +17,7 @@ from wtforms import StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, ValidationError
 from email_validator import validate_email, EmailNotValidError
 from dotenv import load_dotenv
-from services.weather_service import geocode_location, get_weather_forecast
-from services.summary_service import generate_weather_summary
+from services.weather_service import geocode_location, get_weather_forecast, generate_weather_summary
 from app import Config
 from services.countdown_service import add_countdown, CountdownEvent
 
@@ -89,7 +88,6 @@ def validate_location_format(form, field):
             raise ValidationError('Invalid location format')
     
     # Allow only letters, numbers, spaces, commas, dashes, dots
-    import re
     if not re.match(r'^[a-zA-Z0-9\s,.\-áéíóúñüÁÉÍÓÚÑÜčďěňřšťůýžČĎĚŇŘŠŤŮÝŽ]+$', location):
         raise ValidationError('Location contains invalid characters')
 
@@ -173,7 +171,6 @@ def get_db_connection():
 
 def sanitize_output(text: str) -> str:
     """Sanitize text output to prevent XSS."""
-    import html
     return html.escape(str(text))
 
 
