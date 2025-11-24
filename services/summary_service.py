@@ -3,20 +3,23 @@
 """
 Provides message formatting for weather, countdowns, reminders, and unified daily summary.
 """
+import os
+import csv
+from functools import lru_cache
 
 def generate_weather_summary(weather, location, personality, language):
-    import os
-    import csv
-    from functools import lru_cache
+
 
     if not weather:
         return f"Weather for {location} is unavailable."
 
-    temp_max = weather.get('temp_max', 20)
-    temp_min = weather.get('temp_min', 10)
-    precipitation = weather.get('precipitation_sum', 0)
-    wind_speed = weather.get('wind_speed_max', 5)
-    rain_prob = min(int((precipitation / 1.5) * 100), 100) if precipitation else 0
+    temp_max = weather.get('temp_max', 'error')
+    temp_min = weather.get('temp_min', 'error')
+    precipitation = weather.get('precipitation_sum', 'error')
+    wind_speed = weather.get('wind_speed_max', 'error')
+    if 'error' in [temp_max, temp_min, precipitation, wind_speed]:
+        return f"Data error: Missing weather data for {location}. Please try again later."
+    rain_prob = min(int((precipitation / 1.5) * 100), 100) if precipitation != 'error' else 0
 
     # Load weather_messages.txt (cache for performance)
     @lru_cache(maxsize=8)
@@ -112,44 +115,70 @@ def generate_weather_summary(weather, location, personality, language):
     condition = get_condition(temp_max, temp_min, precipitation, wind_speed, rain_prob)
     condition_msg = get_msg(condition, personality)
 
-    # Clothing suggestion logic: combine all relevant conditions
+    # Clothing suggestion logic: combine all relevant conditions, but exclude main condition message
     clothing = []
-    # Always include the main condition advice
-    if condition != 'default':
-        clothing.append(get_msg(condition, personality))
+    main_condition_msg = get_msg(condition, personality)
     # Add advice for temperature extremes
     if temp_max >= 36:
-        clothing.append(get_msg('heatwave', personality))
+        msg = get_msg('heatwave', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if temp_min <= -15:
-        clothing.append(get_msg('blizzard', personality))
+        msg = get_msg('blizzard', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if temp_max >= 30 and rain_prob < 20:
-        clothing.append(get_msg('sunny_hot', personality))
+        msg = get_msg('sunny_hot', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if temp_max <= 5 and wind_speed >= 15:
-        clothing.append(get_msg('cold_windy', personality))
+        msg = get_msg('cold_windy', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if temp_max <= 5 and precipitation >= 2:
-        clothing.append(get_msg('rainy_cold', personality))
+        msg = get_msg('rainy_cold', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     # Add advice for rain and wind
     if precipitation >= 7:
-        clothing.append(get_msg('heavy_rain', personality))
+        msg = get_msg('heavy_rain', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     elif precipitation >= 2:
-        clothing.append(get_msg('raining', personality))
+        msg = get_msg('raining', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if wind_speed >= 15:
-        clothing.append(get_msg('windy', personality))
+        msg = get_msg('windy', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     # Add advice for snow/freezing
     if temp_max <= 2 and precipitation > 0.5:
-        clothing.append(get_msg('snowing', personality))
+        msg = get_msg('snowing', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if temp_min < 0 and precipitation <= 0.1:
-        clothing.append(get_msg('freezing', personality))
+        msg = get_msg('freezing', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     # Add advice for fog/humid/dry
     if temp_min >= -2 and temp_max <= 8 and precipitation < 0.2 and wind_speed < 8 and rain_prob >= 60:
-        clothing.append(get_msg('foggy', personality))
+        msg = get_msg('foggy', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if rain_prob >= 70 and precipitation < 0.2:
-        clothing.append(get_msg('humid', personality))
+        msg = get_msg('humid', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     if precipitation < 0.05 and temp_max >= 25:
-        clothing.append(get_msg('dry', personality))
+        msg = get_msg('dry', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     # Add advice for mild if nothing else
     if not clothing:
-        clothing.append(get_msg('mild', personality))
+        msg = get_msg('mild', personality)
+        if msg and msg != main_condition_msg:
+            clothing.append(msg)
     # Remove duplicates and empty
     clothing_msg = '\n'.join(dict.fromkeys([c for c in clothing if c]))
 

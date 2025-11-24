@@ -68,6 +68,8 @@ def send_daily_email(config, user):
     # Countdown
     if user.get('countdown_enabled'):
         body += generate_countdown_summary(email, datetime.now(ZoneInfo(config.timezone)), config.timezone) + "\n"
+    else:
+        body += "countdown error\n"
     if not body.strip():
         body = "No active subscriptions."
     result = send_email(config, email, subject, body)

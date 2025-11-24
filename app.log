@@ -3716,3 +3716,249 @@ Body
 2025-11-21 14:30:00,014 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-21 15:40:00 CET)" executed successfully
 2025-11-21 14:30:00,015 - INFO - Checking 9 subscribers for test delivery
 2025-11-21 14:30:04,341 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 07:35:23,692 - INFO - Starting Daily Brief Web Interface
+2025-11-24 07:35:23,693 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-24 07:35:23,694 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-24 07:35:23,694 - WARNING - Add to .env: FLASK_SECRET_KEY=812707c2e9d437674806c74f21860cf14a02db4a333d5337d389a4a5850bc2af
+2025-11-24 07:35:23,713 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-24 07:35:23,714 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-24 07:35:26,989 - INFO - Starting Daily Brief Service...
+2025-11-24 07:35:26,989 - INFO - Loading configuration from environment variables
+2025-11-24 07:35:26,990 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-24 07:35:26,990 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 07:35:26,990 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 07:35:26,990 - INFO - Initializing database at app.db
+2025-11-24 07:35:27,008 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 07:35:27,009 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 07:35:27,009 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 07:35:27,015 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 07:35:27,016 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 07:35:27,016 - INFO - Scheduler started
+2025-11-24 07:35:31,847 - INFO - 127.0.0.1 - - [24/Nov/2025 07:35:31] "GET / HTTP/1.1" 200 -
+2025-11-24 07:35:31,936 - INFO - 127.0.0.1 - - [24/Nov/2025 07:35:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-24 07:35:34,494 - INFO - 127.0.0.1 - - [24/Nov/2025 07:35:34] "GET /subscribe HTTP/1.1" 200 -
+2025-11-24 07:40:00,012 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 08:45:00 CET)" (scheduled at 2025-11-24 08:40:00+01:00)
+2025-11-24 07:40:00,014 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 08:50:00 CET)" (scheduled at 2025-11-24 08:40:00+01:00)
+2025-11-24 07:40:00,014 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 07:40:00,015 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 08:50:00 CET)" executed successfully
+2025-11-24 07:40:00,017 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 07:40:05,297 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 07:40:07,363 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 07:40:08,869 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 07:40:10,526 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 07:40:12,744 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 07:40:14,240 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 07:40:15,623 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 07:40:16,969 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 07:40:18,352 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 07:40:18,352 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 07:40:18,353 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 08:45:00 CET)" executed successfully
+2025-11-24 07:41:03,742 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 07:41:03,743 - INFO - ⚠️ Scheduler not running
+2025-11-24 07:45:00,002 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 07:45:00,003 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 07:45:00,004 - INFO - Scheduler has been shut down
+2025-11-24 07:45:00,004 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 07:45:00,005 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 07:45:00,005 - INFO - ⚠️ Scheduler not running
+2025-11-24 08:36:35,880 - INFO - Starting Daily Brief Service...
+2025-11-24 08:36:35,881 - INFO - Loading configuration from environment variables
+2025-11-24 08:36:35,881 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-24 08:36:35,881 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 08:36:35,882 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 08:36:35,882 - INFO - Initializing database at app.db
+2025-11-24 08:36:35,886 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 08:36:35,887 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 08:36:35,887 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 08:36:35,888 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 08:36:35,888 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 08:36:35,889 - INFO - Scheduler started
+2025-11-24 08:40:00,010 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:45:00 CET)" (scheduled at 2025-11-24 09:40:00+01:00)
+2025-11-24 08:40:00,012 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 09:50:00 CET)" (scheduled at 2025-11-24 09:40:00+01:00)
+2025-11-24 08:40:00,012 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 08:40:00,013 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 09:50:00 CET)" executed successfully
+2025-11-24 08:40:00,014 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 08:40:04,746 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 08:40:07,508 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 08:40:09,644 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 08:40:11,570 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 08:40:13,631 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 08:40:15,485 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 08:40:17,478 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 08:40:19,399 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 08:40:21,427 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 08:40:21,428 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 08:40:21,428 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:45:00 CET)" executed successfully
+2025-11-24 08:45:00,015 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:50:00 CET)" (scheduled at 2025-11-24 09:45:00+01:00)
+2025-11-24 08:45:00,017 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 08:45:00,019 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 08:45:02,175 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 08:45:04,960 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 08:45:07,809 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 08:45:10,880 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 08:45:12,668 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 08:45:14,464 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 08:45:16,483 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 08:45:18,277 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 08:45:20,171 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 08:45:20,172 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 08:45:20,172 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:50:00 CET)" executed successfully
+2025-11-24 08:50:00,004 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:55:00 CET)" (scheduled at 2025-11-24 09:50:00+01:00)
+2025-11-24 08:50:00,004 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:00:00 CET)" (scheduled at 2025-11-24 09:50:00+01:00)
+2025-11-24 08:50:00,005 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 08:50:00,006 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:00:00 CET)" executed successfully
+2025-11-24 08:50:00,008 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 08:50:04,272 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 08:50:07,022 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 08:50:08,799 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 08:50:10,724 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 08:50:12,578 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 08:50:14,464 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 08:50:16,546 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 08:50:18,602 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 08:50:20,541 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 08:50:20,541 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 08:50:20,542 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 09:55:00 CET)" executed successfully
+2025-11-24 08:55:00,014 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:00:00 CET)" (scheduled at 2025-11-24 09:55:00+01:00)
+2025-11-24 08:55:00,014 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 08:55:00,016 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 08:55:01,792 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 08:55:03,660 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 08:55:05,451 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 08:55:07,280 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 08:55:09,119 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 08:55:10,962 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 08:55:12,816 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 08:55:14,582 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 08:55:16,432 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 08:55:16,432 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 08:55:16,433 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:00:00 CET)" executed successfully
+2025-11-24 09:00:00,012 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:05:00 CET)" (scheduled at 2025-11-24 10:00:00+01:00)
+2025-11-24 09:00:00,012 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:10:00 CET)" (scheduled at 2025-11-24 10:00:00+01:00)
+2025-11-24 09:00:00,013 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:00:00,014 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:10:00 CET)" executed successfully
+2025-11-24 09:00:00,015 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:00:05,314 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:00:09,707 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:00:12,306 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:00:14,520 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:00:16,592 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:00:18,549 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:00:20,379 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:00:22,132 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:00:24,492 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:00:24,492 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:00:24,493 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:05:00 CET)" executed successfully
+2025-11-24 09:05:00,006 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 09:05:00,007 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 09:05:00,008 - INFO - Scheduler has been shut down
+2025-11-24 09:05:00,009 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 09:05:00,010 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 09:05:00,010 - INFO - ⚠️ Scheduler not running
+2025-11-24 09:12:41,331 - INFO - Starting Daily Brief Service...
+2025-11-24 09:12:41,331 - INFO - Loading configuration from environment variables
+2025-11-24 09:12:41,332 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-24 09:12:41,332 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 09:12:41,332 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 09:12:41,333 - INFO - Initializing database at app.db
+2025-11-24 09:12:41,336 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 09:12:41,337 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 09:12:41,337 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 09:12:41,338 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 09:12:41,338 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 09:12:41,339 - INFO - Scheduler started
+2025-11-24 09:15:00,015 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:20:00 CET)" (scheduled at 2025-11-24 10:15:00+01:00)
+2025-11-24 09:15:00,016 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:15:00,021 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:15:01,995 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:15:03,865 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:15:05,936 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:15:07,861 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:15:09,712 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:15:12,409 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:15:14,364 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:15:16,312 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:15:18,107 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:15:18,108 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:15:18,110 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:20:00 CET)" executed successfully
+2025-11-24 09:20:00,011 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:25:00 CET)" (scheduled at 2025-11-24 10:20:00+01:00)
+2025-11-24 09:20:00,011 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:30:00 CET)" (scheduled at 2025-11-24 10:20:00+01:00)
+2025-11-24 09:20:00,012 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:20:00,013 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:30:00 CET)" executed successfully
+2025-11-24 09:20:00,016 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:20:04,504 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:20:07,169 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:20:09,047 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:20:10,859 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:20:12,752 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:20:14,648 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:20:16,562 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:20:19,178 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:20:21,062 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:20:21,063 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:20:21,064 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:25:00 CET)" executed successfully
+2025-11-24 09:25:00,001 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:30:00 CET)" (scheduled at 2025-11-24 10:25:00+01:00)
+2025-11-24 09:25:00,003 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:25:00,006 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:25:01,891 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:25:03,854 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:25:05,774 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:25:07,723 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:25:09,973 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:25:12,278 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:25:14,391 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:25:16,370 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:25:18,209 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:25:18,210 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:25:18,211 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:30:00 CET)" executed successfully
+2025-11-24 09:30:00,002 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:35:00 CET)" (scheduled at 2025-11-24 10:30:00+01:00)
+2025-11-24 09:30:00,002 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:40:00 CET)" (scheduled at 2025-11-24 10:30:00+01:00)
+2025-11-24 09:30:00,003 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:30:00,004 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-24 10:40:00 CET)" executed successfully
+2025-11-24 09:30:00,005 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:30:04,641 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:30:07,920 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:30:09,910 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:30:11,635 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:30:13,041 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:30:14,554 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:30:15,973 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:30:17,687 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:30:19,300 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:30:19,300 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:30:19,301 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:35:00 CET)" executed successfully
+2025-11-24 09:31:28,220 - INFO - Starting Daily Brief Service...
+2025-11-24 09:31:28,220 - INFO - Loading configuration from environment variables
+2025-11-24 09:31:28,221 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-11-24 09:31:28,221 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 09:31:28,221 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 09:31:28,221 - INFO - Initializing database at app.db
+2025-11-24 09:31:28,227 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 09:31:28,228 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 09:31:28,228 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 09:31:28,230 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 09:31:28,231 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 09:31:28,231 - INFO - Scheduler started
+2025-11-24 09:35:00,005 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:40:00 CET)" (scheduled at 2025-11-24 10:35:00+01:00)
+2025-11-24 09:35:00,006 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 09:35:00,007 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 09:35:02,238 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 09:35:04,393 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 09:35:05,873 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 09:35:07,320 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 09:35:08,668 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 09:35:10,256 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 09:35:11,692 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 09:35:13,098 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 09:35:14,395 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 09:35:14,396 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 09:35:14,396 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 10:40:00 CET)" executed successfully
+2025-11-24 09:40:00,022 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 09:40:00,024 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 09:40:00,024 - INFO - Scheduler has been shut down
+2025-11-24 09:40:00,025 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 09:40:00,026 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 09:40:00,026 - INFO - ⚠️ Scheduler not running

@@ -98,9 +98,8 @@ def generate_countdown_summary(email: str, today: datetime, tz: str = "Europe/Br
     if not events:
         return ""
     summary = ""
-    now = today.astimezone(ZoneInfo(tz))
     for event in events:
-        msg = event.get_countdown_message(now)
+        msg = event.get_countdown_message(today)
         if msg:
             summary += f"{event.name}: {msg}\n"
     return summary.strip()
