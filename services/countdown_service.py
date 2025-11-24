@@ -15,6 +15,9 @@ class CountdownEvent:
 
     def get_next_event_date(self, today: datetime) -> Optional[datetime]:
         event_date = datetime.strptime(self.date, "%Y-%m-%d")
+        # Make event_date timezone-aware if today is aware
+        if today.tzinfo is not None and event_date.tzinfo is None:
+            event_date = event_date.replace(tzinfo=today.tzinfo)
         if self.yearly:
             event_date = event_date.replace(year=today.year)
             if event_date < today:
@@ -98,9 +101,41 @@ def generate_countdown_summary(email: str, today: datetime, tz: str = "Europe/Br
     if not events:
         return ""
     summary = ""
-    now = today.astimezone(ZoneInfo(tz))
+    # Ensure 'today' is timezone-aware
+    if today.tzinfo is None:
+        now = today.replace(tzinfo=ZoneInfo(tz))
+    else:
+        now = today.astimezone(ZoneInfo(tz))
+    def get_days_word(days, language):
+        if language == "sk":
+            if days == 1:
+                return "deň"
+            elif 2 <= days <= 4:
+                return "dni"
+            else:
+                return "dní"
+        elif language == "es":
+            return "día" if days == 1 else "días"
+        else:
+            return "day" if days == 1 else "days"
+
     for event in events:
+        event_date = event.get_next_event_date(now)
+        if event_date:
+            if event_date > now:
+                days_number = (event_date - now).days
+            else:
+                days_number = (now - event_date).days
+        else:
+            days_number = "?"
         msg = event.get_countdown_message(now)
+        # Try to get language from event, fallback to 'en'
+        language = getattr(event, 'language', 'en')
+        days_word = get_days_word(days_number if isinstance(days_number, int) else 2, language)
         if msg:
-            summary += f"{event.name}: {msg}\n"
+            # If {days_number} is not already replaced in msg, append days
+            if "{days_number}" not in event.message_before and "{days_number}" not in event.message_after:
+                summary += f"{msg}: {days_number} {days_word}\n"
+            else:
+                summary += f"{msg}\n"
     return summary.strip()

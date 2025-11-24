@@ -3,12 +3,14 @@
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(__file__))
+# Add project root to sys.path for module imports
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-from app import (
-    Config, load_env, get_weather_forecast, get_weather_message, 
-    send_email, geocode_location
-)
+from app import Config, load_env
+from services.weather_service import get_weather_forecast, geocode_location, generate_weather_summary
+from services.email_service import send_email
 import sqlite3
 
 def send_test_weather_email(target_email):
@@ -26,12 +28,12 @@ def send_test_weather_email(target_email):
         return False
     
     # Get user details from database
-    conn = sqlite3.connect("app.db")
+    conn = sqlite3.connect("examples/app.db")
     try:
         cursor = conn.cursor()
         cursor.execute("""
             SELECT email, location, lat, lon, personality, language 
-            FROM subscribers 
+            FROM users 
             WHERE email = ?
         """, (target_email,))
         
@@ -72,7 +74,7 @@ def send_test_weather_email(target_email):
     
     # Generate weather message
     print("📝 Generating weather message...")
-    message = get_weather_message(weather, location, personality, language)
+    message = generate_weather_summary(weather, location, personality, language)
     
     if not message:
         print("❌ Failed to generate weather message")

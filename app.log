@@ -3716,3 +3716,475 @@ Body
 2025-11-21 14:30:00,014 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/10'], next run at: 2025-11-21 15:40:00 CET)" executed successfully
 2025-11-21 14:30:00,015 - INFO - Checking 9 subscribers for test delivery
 2025-11-21 14:30:04,341 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 12:12:01,570 - INFO - Starting Daily Brief Service...
+2025-11-24 12:12:01,570 - INFO - Loading configuration from environment variables
+2025-11-24 12:12:01,571 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 12:12:01,571 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 12:12:01,571 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 12:12:01,571 - INFO - Initializing database at app.db
+2025-11-24 12:12:01,578 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 12:12:01,578 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 12:12:01,579 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 12:12:01,579 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 12:12:01,580 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 12:12:01,580 - INFO - Scheduler started
+2025-11-24 12:15:00,011 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 13:20:00 CET)" (scheduled at 2025-11-24 13:15:00+01:00)
+2025-11-24 12:15:00,011 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 12:15:00,012 - INFO - Checking 9 subscribers for test delivery
+2025-11-24 12:15:02,332 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 12:15:03,791 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 12:15:05,223 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 12:15:06,658 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 12:15:08,190 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 12:15:09,619 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 12:15:11,146 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 12:15:12,838 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 12:15:14,341 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 12:15:14,341 - INFO - ✅ Test weather job complete - sent 9 emails
+2025-11-24 12:15:14,341 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/5'], next run at: 2025-11-24 13:20:00 CET)" executed successfully
+2025-11-24 13:03:36,739 - INFO - Initializing database at app.db
+2025-11-24 13:03:36,749 - INFO - Added countdown_enabled column to subscribers table
+2025-11-24 13:03:36,750 - INFO - Added reminder_enabled column to subscribers table
+2025-11-24 14:32:12,930 - INFO - Initializing database at app.db
+2025-11-24 14:32:12,939 - INFO - Ensured master users table exists.
+2025-11-24 14:47:52,685 - INFO - Initializing database at app.db
+2025-11-24 14:47:52,687 - INFO - Renamed subscribers table to weather.
+2025-11-24 14:47:52,687 - INFO - Ensured master users table exists.
+2025-11-24 14:47:52,692 - INFO - Added language column to subscribers table
+2025-11-24 14:47:52,694 - INFO - Added timezone column to subscribers table
+2025-11-24 14:47:52,696 - INFO - Added last_sent_date column to subscribers table
+2025-11-24 14:47:52,697 - INFO - Added countdown_enabled column to subscribers table
+2025-11-24 14:47:52,699 - INFO - Added reminder_enabled column to subscribers table
+2025-11-24 14:52:01,327 - INFO - Starting Daily Brief Service...
+2025-11-24 14:52:01,327 - INFO - Loading configuration from environment variables
+2025-11-24 14:52:01,328 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 14:52:01,328 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 14:52:01,328 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 14:52:01,328 - INFO - Initializing database at app.db
+2025-11-24 14:52:01,328 - INFO - Ensured master users table exists.
+2025-11-24 14:52:01,332 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 14:52:01,332 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 14:52:01,332 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 14:52:01,333 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 14:52:01,334 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 14:52:01,334 - INFO - Scheduler started
+2025-11-24 14:53:21,857 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 14:53:21,858 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 14:53:21,859 - INFO - Scheduler has been shut down
+2025-11-24 14:53:21,859 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 14:53:21,860 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 14:53:21,860 - INFO - ⚠️ Scheduler not running
+2025-11-24 14:53:49,774 - INFO - Starting Daily Brief Service...
+2025-11-24 14:53:49,774 - INFO - Loading configuration from environment variables
+2025-11-24 14:53:49,774 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 14:53:49,774 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 14:53:49,774 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 14:53:49,774 - INFO - Initializing database at app.db
+2025-11-24 14:53:49,775 - INFO - Ensured master users table exists.
+2025-11-24 14:53:49,778 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 14:53:49,778 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 14:53:49,778 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 14:53:49,778 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 14:53:49,779 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 14:53:49,779 - INFO - Scheduler started
+2025-11-24 14:54:00,010 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 15:55:00 CET)" (scheduled at 2025-11-24 15:54:00+01:00)
+2025-11-24 14:54:00,011 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 14:54:00,013 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 14:54:00,013 - INFO - No emails sent this run
+2025-11-24 14:54:00,013 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 15:55:00 CET)" executed successfully
+2025-11-24 14:55:00,002 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 15:56:00 CET)" (scheduled at 2025-11-24 15:55:00+01:00)
+2025-11-24 14:55:00,002 - INFO - Running weather job - sending emails every 5 minutes for testing
+2025-11-24 14:55:00,003 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 14:55:00,003 - INFO - No emails sent this run
+2025-11-24 14:55:00,003 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 15:56:00 CET)" executed successfully
+2025-11-24 14:55:13,598 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 14:55:13,598 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 14:55:13,598 - INFO - Scheduler has been shut down
+2025-11-24 14:55:13,598 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 14:55:13,599 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 14:55:13,599 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:02:56,769 - INFO - Starting Daily Brief Service...
+2025-11-24 16:02:56,769 - INFO - Loading configuration from environment variables
+2025-11-24 16:02:56,770 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:02:56,770 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:02:56,770 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:02:56,770 - INFO - Initializing database at app.db
+2025-11-24 16:02:56,770 - INFO - Ensured master users table exists.
+2025-11-24 16:02:56,772 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:02:56,773 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:02:56,773 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:02:56,773 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:02:56,773 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:02:56,773 - INFO - Scheduler started
+2025-11-24 16:03:00,008 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:04:00 CET)" (scheduled at 2025-11-24 17:03:00+01:00)
+2025-11-24 16:03:00,008 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:03:00,009 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 16:03:00,009 - INFO - No emails sent this run
+2025-11-24 16:03:00,009 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:04:00 CET)" executed successfully
+2025-11-24 16:04:00,003 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:05:00 CET)" (scheduled at 2025-11-24 17:04:00+01:00)
+2025-11-24 16:04:00,004 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:04:00,005 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 16:04:00,005 - INFO - No emails sent this run
+2025-11-24 16:04:00,006 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:05:00 CET)" executed successfully
+2025-11-24 16:04:06,909 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:04:06,910 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:04:06,910 - INFO - Scheduler has been shut down
+2025-11-24 16:04:06,910 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:04:06,910 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:04:06,910 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:11:58,605 - INFO - Starting Daily Brief Service...
+2025-11-24 16:11:58,605 - INFO - Loading configuration from environment variables
+2025-11-24 16:11:58,605 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:11:58,606 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:11:58,606 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:11:58,606 - INFO - Initializing database at app.db
+2025-11-24 16:11:58,606 - INFO - Ensured master users table exists.
+2025-11-24 16:11:58,608 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:11:58,609 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:11:58,609 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:11:58,610 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:11:58,610 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:11:58,610 - INFO - Scheduler started
+2025-11-24 16:12:00,014 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:13:00 CET)" (scheduled at 2025-11-24 17:12:00+01:00)
+2025-11-24 16:12:00,015 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:12:00,015 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 16:12:00,015 - INFO - No emails sent this run
+2025-11-24 16:12:00,016 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:13:00 CET)" executed successfully
+2025-11-24 16:13:00,009 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:14:00 CET)" (scheduled at 2025-11-24 17:13:00+01:00)
+2025-11-24 16:13:00,009 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:13:00,010 - INFO - Checking 0 subscribers for test delivery
+2025-11-24 16:13:00,010 - INFO - No emails sent this run
+2025-11-24 16:13:00,010 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:14:00 CET)" executed successfully
+2025-11-24 16:13:07,438 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:13:07,438 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:13:07,438 - INFO - Scheduler has been shut down
+2025-11-24 16:13:07,438 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:13:07,438 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:13:07,439 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:17:50,059 - INFO - Starting Daily Brief Service...
+2025-11-24 16:17:50,060 - INFO - Loading configuration from environment variables
+2025-11-24 16:17:50,060 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:17:50,060 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:17:50,060 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:17:50,060 - INFO - Initializing database at app.db
+2025-11-24 16:17:50,061 - INFO - Ensured master users table exists.
+2025-11-24 16:17:50,063 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:17:50,063 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:17:50,063 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:17:50,064 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:17:50,064 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:17:50,064 - INFO - Scheduler started
+2025-11-24 16:18:00,013 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:19:00 CET)" (scheduled at 2025-11-24 17:18:00+01:00)
+2025-11-24 16:18:00,014 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:18:00,015 - INFO - Checking 9 users for test delivery
+2025-11-24 16:18:01,630 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 16:18:03,135 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 16:18:04,548 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 16:18:05,984 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 16:18:07,427 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 16:18:08,882 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 16:18:10,256 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 16:18:11,789 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:18:13,215 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 16:18:13,215 - INFO - ✅ Test daily job complete - sent 9 emails
+2025-11-24 16:18:13,215 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:19:00 CET)" executed successfully
+2025-11-24 16:19:00,000 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:20:00 CET)" (scheduled at 2025-11-24 17:19:00+01:00)
+2025-11-24 16:19:00,001 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:19:00,002 - INFO - Checking 9 users for test delivery
+2025-11-24 16:19:01,493 - INFO - ✅ Sent test weather to user1@test.com (1 total)
+2025-11-24 16:19:03,020 - INFO - ✅ Sent test weather to user2@test.com (2 total)
+2025-11-24 16:19:05,167 - INFO - ✅ Sent test weather to user3@test.com (3 total)
+2025-11-24 16:19:06,727 - INFO - ✅ Sent test weather to emuska@test.com (4 total)
+2025-11-24 16:19:08,166 - INFO - ✅ Sent test weather to english@test-lang.com (5 total)
+2025-11-24 16:19:09,576 - INFO - ✅ Sent test weather to spanish@test-lang.com (6 total)
+2025-11-24 16:19:10,963 - INFO - ✅ Sent test weather to slovak@test-lang.com (7 total)
+2025-11-24 16:19:12,392 - INFO - ✅ Sent test weather to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:19:13,869 - INFO - ✅ Sent test weather to filip.johanes9@gmail.com (9 total)
+2025-11-24 16:19:13,869 - INFO - ✅ Test daily job complete - sent 9 emails
+2025-11-24 16:19:13,870 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:20:00 CET)" executed successfully
+2025-11-24 16:19:28,534 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:19:28,534 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:19:28,534 - INFO - Scheduler has been shut down
+2025-11-24 16:19:28,535 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:19:28,535 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:19:28,535 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:30:29,503 - INFO - Starting Daily Brief Service...
+2025-11-24 16:30:29,503 - INFO - Loading configuration from environment variables
+2025-11-24 16:30:29,503 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:30:29,503 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:30:29,503 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:30:29,503 - INFO - Initializing database at app.db
+2025-11-24 16:30:29,504 - INFO - Ensured master users table exists.
+2025-11-24 16:30:29,506 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:30:29,506 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:30:29,506 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:30:29,507 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:30:29,507 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:30:29,507 - INFO - Scheduler started
+2025-11-24 16:31:00,011 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:32:00 CET)" (scheduled at 2025-11-24 17:31:00+01:00)
+2025-11-24 16:31:00,013 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:31:00,014 - INFO - Checking 9 users for test delivery
+2025-11-24 16:31:01,445 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:31:02,889 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:31:04,368 - INFO - ✅ Sent daily brief to user3@test.com (3 total)
+2025-11-24 16:31:05,793 - INFO - ✅ Sent daily brief to emuska@test.com (4 total)
+2025-11-24 16:31:07,217 - INFO - ✅ Sent daily brief to english@test-lang.com (5 total)
+2025-11-24 16:31:08,582 - INFO - ✅ Sent daily brief to spanish@test-lang.com (6 total)
+2025-11-24 16:31:09,964 - INFO - ✅ Sent daily brief to slovak@test-lang.com (7 total)
+2025-11-24 16:31:11,379 - INFO - ✅ Sent daily brief to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:31:11,698 - ERROR - Error processing user filip.johanes9@gmail.com: can't compare offset-naive and offset-aware datetimes
+2025-11-24 16:31:11,698 - INFO - ✅ Daily job complete - sent 8 emails
+2025-11-24 16:31:11,698 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:32:00 CET)" executed successfully
+2025-11-24 16:32:00,003 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:33:00 CET)" (scheduled at 2025-11-24 17:32:00+01:00)
+2025-11-24 16:32:00,003 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:32:00,004 - INFO - Checking 9 users for test delivery
+2025-11-24 16:32:01,446 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:32:02,879 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:32:04,306 - INFO - ✅ Sent daily brief to user3@test.com (3 total)
+2025-11-24 16:32:05,725 - INFO - ✅ Sent daily brief to emuska@test.com (4 total)
+2025-11-24 16:32:07,276 - INFO - ✅ Sent daily brief to english@test-lang.com (5 total)
+2025-11-24 16:32:08,874 - INFO - ✅ Sent daily brief to spanish@test-lang.com (6 total)
+2025-11-24 16:32:10,353 - INFO - ✅ Sent daily brief to slovak@test-lang.com (7 total)
+2025-11-24 16:32:11,841 - INFO - ✅ Sent daily brief to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:32:12,136 - ERROR - Error processing user filip.johanes9@gmail.com: can't compare offset-naive and offset-aware datetimes
+2025-11-24 16:32:12,137 - INFO - ✅ Daily job complete - sent 8 emails
+2025-11-24 16:32:12,137 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:33:00 CET)" executed successfully
+2025-11-24 16:32:27,389 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:32:27,389 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:32:27,389 - INFO - Scheduler has been shut down
+2025-11-24 16:32:27,389 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:32:27,390 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:32:27,390 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:33:48,789 - INFO - Starting Daily Brief Service...
+2025-11-24 16:33:48,789 - INFO - Loading configuration from environment variables
+2025-11-24 16:33:48,789 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:33:48,789 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:33:48,789 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:33:48,789 - INFO - Initializing database at app.db
+2025-11-24 16:33:48,790 - INFO - Ensured master users table exists.
+2025-11-24 16:33:48,792 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:33:48,792 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:33:48,792 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:33:48,793 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:33:48,793 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:33:48,793 - INFO - Scheduler started
+2025-11-24 16:34:00,004 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:35:00 CET)" (scheduled at 2025-11-24 17:34:00+01:00)
+2025-11-24 16:34:00,005 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:34:00,006 - INFO - Checking 9 users for test delivery
+2025-11-24 16:34:01,419 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:34:02,896 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:34:04,356 - INFO - ✅ Sent daily brief to user3@test.com (3 total)
+2025-11-24 16:34:05,751 - INFO - ✅ Sent daily brief to emuska@test.com (4 total)
+2025-11-24 16:34:07,848 - INFO - ✅ Sent daily brief to english@test-lang.com (5 total)
+2025-11-24 16:34:09,244 - INFO - ✅ Sent daily brief to spanish@test-lang.com (6 total)
+2025-11-24 16:34:10,733 - INFO - ✅ Sent daily brief to slovak@test-lang.com (7 total)
+2025-11-24 16:34:12,127 - INFO - ✅ Sent daily brief to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:34:12,421 - ERROR - Error processing user filip.johanes9@gmail.com: can't compare offset-naive and offset-aware datetimes
+2025-11-24 16:34:12,421 - INFO - ✅ Daily job complete - sent 8 emails
+2025-11-24 16:34:12,421 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:35:00 CET)" executed successfully
+2025-11-24 16:34:57,141 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:34:57,141 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:34:57,142 - INFO - Scheduler has been shut down
+2025-11-24 16:34:57,142 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:34:57,142 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:34:57,142 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:35:20,758 - INFO - Starting Daily Brief Service...
+2025-11-24 16:35:20,758 - INFO - Loading configuration from environment variables
+2025-11-24 16:35:20,759 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:35:20,759 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:35:20,759 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:35:20,759 - INFO - Initializing database at app.db
+2025-11-24 16:35:20,759 - INFO - Ensured master users table exists.
+2025-11-24 16:35:20,761 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:35:20,762 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:35:20,762 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:35:20,762 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:35:20,762 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:35:20,762 - INFO - Scheduler started
+2025-11-24 16:35:31,582 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:35:31,582 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:35:31,583 - INFO - Scheduler has been shut down
+2025-11-24 16:35:31,583 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:35:31,583 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:35:31,584 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:35:38,633 - INFO - Starting Daily Brief Service...
+2025-11-24 16:35:38,634 - INFO - Loading configuration from environment variables
+2025-11-24 16:35:38,634 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:35:38,634 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:35:38,634 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:35:38,634 - INFO - Initializing database at app.db
+2025-11-24 16:35:38,635 - INFO - Ensured master users table exists.
+2025-11-24 16:35:38,636 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:35:38,636 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:35:38,637 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:35:38,637 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:35:38,637 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:35:38,637 - INFO - Scheduler started
+2025-11-24 16:36:00,002 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:37:00 CET)" (scheduled at 2025-11-24 17:36:00+01:00)
+2025-11-24 16:36:00,003 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:36:00,003 - INFO - Checking 9 users for test delivery
+2025-11-24 16:36:02,213 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:36:03,619 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:36:05,064 - INFO - ✅ Sent daily brief to user3@test.com (3 total)
+2025-11-24 16:36:06,526 - INFO - ✅ Sent daily brief to emuska@test.com (4 total)
+2025-11-24 16:36:08,001 - INFO - ✅ Sent daily brief to english@test-lang.com (5 total)
+2025-11-24 16:36:09,417 - INFO - ✅ Sent daily brief to spanish@test-lang.com (6 total)
+2025-11-24 16:36:10,816 - INFO - ✅ Sent daily brief to slovak@test-lang.com (7 total)
+2025-11-24 16:36:12,219 - INFO - ✅ Sent daily brief to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:36:13,614 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (9 total)
+2025-11-24 16:36:13,614 - INFO - ✅ Daily job complete - sent 9 emails
+2025-11-24 16:36:13,615 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:37:00 CET)" executed successfully
+2025-11-24 16:37:00,014 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:38:00 CET)" (scheduled at 2025-11-24 17:37:00+01:00)
+2025-11-24 16:37:00,015 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:37:00,016 - INFO - Checking 9 users for test delivery
+2025-11-24 16:37:01,516 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:37:02,965 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:37:04,062 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:37:04,063 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:37:04,063 - INFO - Scheduler has been shut down
+2025-11-24 16:37:04,064 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:37:04,064 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:37:04,064 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:37:04,255 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:37:04,255 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:47:00,485 - INFO - Starting Daily Brief Service...
+2025-11-24 16:47:00,485 - INFO - Loading configuration from environment variables
+2025-11-24 16:47:00,485 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:47:00,486 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:47:00,486 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:47:00,486 - INFO - Initializing database at app.db
+2025-11-24 16:47:00,486 - INFO - Ensured master users table exists.
+2025-11-24 16:47:00,488 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:47:00,488 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:47:00,488 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:47:00,489 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:47:00,489 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:47:00,489 - INFO - Scheduler started
+2025-11-24 16:48:00,011 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:49:00 CET)" (scheduled at 2025-11-24 17:48:00+01:00)
+2025-11-24 16:48:00,012 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:48:00,014 - INFO - Checking 9 users for test delivery
+2025-11-24 16:48:01,668 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:48:03,101 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:48:04,547 - INFO - ✅ Sent daily brief to user3@test.com (3 total)
+2025-11-24 16:48:06,171 - INFO - ✅ Sent daily brief to emuska@test.com (4 total)
+2025-11-24 16:48:07,834 - INFO - ✅ Sent daily brief to english@test-lang.com (5 total)
+2025-11-24 16:48:09,489 - INFO - ✅ Sent daily brief to spanish@test-lang.com (6 total)
+2025-11-24 16:48:10,958 - INFO - ✅ Sent daily brief to slovak@test-lang.com (7 total)
+2025-11-24 16:48:12,427 - INFO - ✅ Sent daily brief to fotky2019.filip@gmail.com (8 total)
+2025-11-24 16:48:14,171 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (9 total)
+2025-11-24 16:48:14,171 - INFO - ✅ Daily job complete - sent 9 emails
+2025-11-24 16:48:14,171 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:49:00 CET)" executed successfully
+2025-11-24 16:49:00,013 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 17:50:00 CET)" (scheduled at 2025-11-24 17:49:00+01:00)
+2025-11-24 16:49:00,014 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 16:49:00,014 - INFO - Checking 9 users for test delivery
+2025-11-24 16:49:01,571 - INFO - ✅ Sent daily brief to user1@test.com (1 total)
+2025-11-24 16:49:03,137 - INFO - ✅ Sent daily brief to user2@test.com (2 total)
+2025-11-24 16:49:03,222 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:49:03,222 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:49:03,222 - INFO - Scheduler has been shut down
+2025-11-24 16:49:03,222 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:49:03,223 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:49:03,223 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:49:04,574 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:49:04,574 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:58:16,436 - INFO - Starting Daily Brief Service...
+2025-11-24 16:58:16,437 - INFO - Loading configuration from environment variables
+2025-11-24 16:58:16,437 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:58:16,437 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:58:16,437 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:58:16,437 - INFO - Initializing database at app.db
+2025-11-24 16:58:16,438 - INFO - Ensured master users table exists.
+2025-11-24 16:58:16,440 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:58:16,440 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:58:16,440 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:58:16,441 - INFO - Scheduler started
+2025-11-24 16:58:25,142 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:58:25,142 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:58:25,142 - INFO - Scheduler has been shut down
+2025-11-24 16:58:25,142 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:58:25,142 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:58:25,142 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:58:56,729 - INFO - Starting Daily Brief Service...
+2025-11-24 16:58:56,729 - INFO - Loading configuration from environment variables
+2025-11-24 16:58:56,729 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:58:56,729 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:58:56,729 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:58:56,729 - INFO - Initializing database at app.db
+2025-11-24 16:58:56,731 - INFO - Ensured master users table exists.
+2025-11-24 16:58:56,733 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:58:56,733 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:58:56,734 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:58:56,734 - INFO - Scheduler started
+2025-11-24 16:58:57,870 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:58:57,870 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 16:58:57,870 - INFO - Scheduler has been shut down
+2025-11-24 16:58:57,870 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 16:58:57,871 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 16:58:57,871 - INFO - ⚠️ Scheduler not running
+2025-11-24 16:59:12,400 - INFO - Starting Daily Brief Service...
+2025-11-24 16:59:12,400 - INFO - Loading configuration from environment variables
+2025-11-24 16:59:12,401 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 16:59:12,401 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 16:59:12,401 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 16:59:12,401 - INFO - Initializing database at app.db
+2025-11-24 16:59:12,401 - INFO - Ensured master users table exists.
+2025-11-24 16:59:12,403 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 16:59:12,403 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 16:59:12,404 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 16:59:12,404 - INFO - Scheduler started
+2025-11-24 17:00:00,004 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='0'], next run at: 2025-11-24 19:00:00 CET)" (scheduled at 2025-11-24 18:00:00+01:00)
+2025-11-24 17:00:00,005 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 17:00:00,006 - INFO - Checking 9 users for test delivery
+2025-11-24 17:00:04,266 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (1 total)
+2025-11-24 17:00:04,267 - INFO - ✅ Daily job complete - sent 1 emails
+2025-11-24 17:00:04,267 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='0'], next run at: 2025-11-24 19:00:00 CET)" executed successfully
+2025-11-24 17:00:25,573 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:00:25,573 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 17:00:25,574 - INFO - Scheduler has been shut down
+2025-11-24 17:00:25,574 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 17:00:25,574 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:00:25,574 - INFO - ⚠️ Scheduler not running
+2025-11-24 17:05:47,376 - INFO - Loading configuration from environment variables
+2025-11-24 17:05:47,376 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 17:05:47,376 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 17:05:47,376 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 17:07:14,619 - INFO - Starting Daily Brief Service...
+2025-11-24 17:07:14,619 - INFO - Loading configuration from environment variables
+2025-11-24 17:07:14,619 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 17:07:14,619 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 17:07:14,619 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 17:07:14,619 - INFO - Initializing database at app.db
+2025-11-24 17:07:14,620 - INFO - Ensured master users table exists.
+2025-11-24 17:07:14,622 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 17:07:14,622 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 17:07:14,623 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 17:07:14,623 - INFO - Scheduler started
+2025-11-24 17:09:11,949 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:09:11,950 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 17:09:11,950 - INFO - Scheduler has been shut down
+2025-11-24 17:09:11,950 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 17:09:11,950 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:09:11,950 - INFO - ⚠️ Scheduler not running
+2025-11-24 17:09:14,097 - INFO - Starting Daily Brief Service...
+2025-11-24 17:09:14,097 - INFO - Loading configuration from environment variables
+2025-11-24 17:09:14,097 - INFO - ✅ Using .env file: C:\PythonProjects\WetherApp\.env
+2025-11-24 17:09:14,097 - INFO - Loaded EMAIL_PASSWORD: zk***xe
+2025-11-24 17:09:14,098 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-11-24 17:09:14,098 - INFO - Initializing database at app.db
+2025-11-24 17:09:14,099 - INFO - Ensured master users table exists.
+2025-11-24 17:09:14,102 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-11-24 17:09:14,102 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-11-24 17:09:14,103 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-11-24 17:09:14,103 - INFO - Scheduler started
+2025-11-24 17:10:00,014 - INFO - Running job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 18:11:00 CET)" (scheduled at 2025-11-24 18:10:00+01:00)
+2025-11-24 17:10:00,016 - INFO - Running daily job - sending emails every 5 minutes for testing
+2025-11-24 17:10:00,020 - INFO - Checking 9 users for test delivery
+2025-11-24 17:10:04,129 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (1 total)
+2025-11-24 17:10:04,129 - INFO - ✅ Daily job complete - sent 1 emails
+2025-11-24 17:10:04,129 - INFO - Job "main.<locals>.<lambda> (trigger: cron[minute='*/1'], next run at: 2025-11-24 18:11:00 CET)" executed successfully
+2025-11-24 17:10:27,582 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:10:27,583 - INFO - ⏰ Stopping scheduled jobs...
+2025-11-24 17:10:27,583 - INFO - Scheduler has been shut down
+2025-11-24 17:10:27,583 - INFO - ✅ Daily Brief Service stopped successfully
+2025-11-24 17:10:27,583 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 17:10:27,583 - INFO - ⚠️ Scheduler not running

@@ -32,8 +32,8 @@ import signal
 import argparse
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from services.weather_service import run_daily_weather_job, list_subscribers
-from services.email_service import start_email_monitor, stop_email_monitor, send_test_email
+from services.weather_service import list_subscribers
+from services.email_service import start_email_monitor, stop_email_monitor, send_test_email, run_daily_job
 from services.reminder_service import list_reminders, run_due_reminders_job
 from timezonefinder import TimezoneFinder
 from services.countdown_service import init_countdown_db
@@ -130,9 +130,32 @@ def load_env() -> Config:
 def init_db(path: str = "app.db") -> None:
     """Initialize SQLite database with required tables."""
     logger.info(f"Initializing database at {path}")
-    
     conn = sqlite3.connect(path)
     try:
+        # Rename subscribers table to weather if it exists
+        try:
+            conn.execute("ALTER TABLE subscribers RENAME TO weather")
+            logger.info("Renamed subscribers table to weather.")
+        except sqlite3.OperationalError:
+            # Table may not exist or already renamed
+            pass
+        # Master users table for quick access and subscriptions
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT UNIQUE NOT NULL,
+                active INTEGER DEFAULT 1,
+                weather_enabled INTEGER DEFAULT 0,
+                countdown_enabled INTEGER DEFAULT 0,
+                reminder_enabled INTEGER DEFAULT 0,
+                timezone TEXT DEFAULT 'UTC',
+                last_active TEXT,
+                created_at TEXT,
+                personality TEXT DEFAULT 'neutral',
+                language TEXT DEFAULT 'en'
+            )
+        """)
+        logger.info("Ensured master users table exists.")
         # Subscribers table for weather service
         conn.execute("""
             CREATE TABLE IF NOT EXISTS subscribers (
@@ -173,6 +196,21 @@ def init_db(path: str = "app.db") -> None:
         try:
             conn.execute("ALTER TABLE subscribers ADD COLUMN last_sent_date TEXT NULL")
             logger.info("Added last_sent_date column to subscribers table")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+
+        # Add countdown_enabled column if it doesn't exist
+        try:
+            conn.execute("ALTER TABLE subscribers ADD COLUMN countdown_enabled INTEGER DEFAULT 0")
+            logger.info("Added countdown_enabled column to subscribers table")
+        except sqlite3.OperationalError:
+            # Column already exists, which is fine
+            pass
+        # Add reminder_enabled column if it doesn't exist
+        try:
+            conn.execute("ALTER TABLE subscribers ADD COLUMN reminder_enabled INTEGER DEFAULT 0")
+            logger.info("Added reminder_enabled column to subscribers table")
         except sqlite3.OperationalError:
             # Column already exists, which is fine
             pass
@@ -229,17 +267,9 @@ def main():
 
     # Schedule daily weather job to run every hour
     scheduler.add_job(
-        lambda: run_daily_weather_job(config),
-        CronTrigger(minute="*/5"),
-        id="daily_weather",
-        replace_existing=True
-    )
-
-    # Schedule reminders job every 10 minutes
-    scheduler.add_job(
-        lambda: run_due_reminders_job(config),
-        CronTrigger(minute="*/10", timezone=config.timezone),
-        id="reminders",
+        lambda: run_daily_job(config),
+        CronTrigger(minute=0, timezone=config.timezone),
+        #CronTrigger(minute="*/1"),
         replace_existing=True
     )
 
