@@ -186,23 +186,58 @@ def index():
 def subscribe():
     """Secure subscription page."""
     form = SubscribeForm()
-    tab = request.args.get('tab', 'weather')
+    tab = request.args.get('tab')
+    if not tab:
+        tab = 'subscriptions' if request.args.get('email') else 'weather'
     email = request.form.get('email', '')
     error = None
-    
-    if form.validate_on_submit():
+    subscriptions = []
+    # Get subscriptions for the current email (from form or query)
+    user_email = request.form.get('email', '') or request.args.get('email', '')
+    if user_email:
+        # Weather subscription (from subscribers table)
+        conn = get_db_connection()
         try:
-            email = form.email.data.strip().lower()
-            # Weather subscription
-            if request.form.get('subscribe_weather'):
-                location = form.location.data.strip()
-                language = form.language.data
-                personality = form.personality.data
+            weather_sub = conn.execute("SELECT email, location, timezone, personality, language, updated_at FROM subscribers WHERE email = ?", (user_email,)).fetchone()
+            if weather_sub:
+                subscriptions.append({
+                    'id': f"weather_{weather_sub['email']}",
+                    'type': 'weather',
+                    'name': weather_sub['location'],
+                    'location': weather_sub['location'],
+                    'language': weather_sub['language'],
+                    'personality': weather_sub['personality'],
+                    'date_added': weather_sub['updated_at'],
+                })
+        finally:
+            conn.close()
+        # Countdown subscriptions
+        from services.countdown_service import get_user_countdowns
+        countdowns = get_user_countdowns(user_email)
+        for cd in countdowns:
+            subscriptions.append({
+                'id': f"countdown_{cd.name}_{cd.date}",
+                'type': 'countdown',
+                'name': cd.name,
+                'date': cd.date,
+                'date_added': cd.date,
+                'message_before': cd.message_before,
+                'yearly': cd.yearly,
+            })
+
+    if request.method == 'POST':
+        try:
+            email = request.form.get('email', '').strip().lower()
+            if tab == 'weather':
+                # Weather subscription form
+                location = request.form.get('location', '').strip()
+                language = request.form.get('language', '')
+                personality = request.form.get('personality', '')
                 logger.info(f"Processing weather subscription for {email} - {location}")
                 geocode_result = geocode_location(location)
                 if not geocode_result:
                     flash('Could not find that location. Please try a more specific address (e.g., "Bratislava, Slovakia")', 'error')
-                    return render_template('subscribe.html', form=form)
+                    return render_template('subscribe.html', form=form, tab='weather', error=error)
                 lat, lon, display_name, timezone_str = geocode_result
                 conn = get_db_connection()
                 try:
@@ -234,13 +269,14 @@ def subscribe():
                     flash('An error occurred. Please try again later.', 'error')
                 finally:
                     conn.close()
-            # Countdown subscription
-            if request.form.get('subscribe_countdown'):
-                countdown_name = form.countdown_name.data.strip()
-                countdown_date = form.countdown_date.data.strip()
+                return redirect(url_for('preview', email=email))
+            elif tab == 'countdown':
+                # Countdown subscription form
+                countdown_name = request.form.get('countdown_name', '').strip()
+                countdown_date = request.form.get('countdown_date', '').strip()
                 countdown_yearly = bool(request.form.get('countdown_yearly'))
-                countdown_message_before = form.countdown_message_before.data.strip()
-                countdown_message_after = form.countdown_message_after.data.strip()
+                countdown_message_before = request.form.get('countdown_message_before', '').strip()
+                countdown_message_after = request.form.get('countdown_message_after', '').strip()
                 logger.info(f"Processing countdown subscription for {email} - {countdown_name} on {countdown_date}")
                 try:
                     event = CountdownEvent(
@@ -256,11 +292,11 @@ def subscribe():
                 except Exception as e:
                     logger.error(f"Countdown subscription error: {e}")
                     flash('An error occurred while saving countdown. Please try again.', 'error')
-            return redirect(url_for('preview', email=email))
+                return render_template('subscribe.html', form=form, tab='countdown', error=error)
         except Exception as e:
             logger.error(f"Subscription error: {e}")
             flash('An unexpected error occurred. Please try again.', 'error')
-    return render_template('subscribe.html', form=form, tab=tab, error=error)
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
 
 
 @app.route('/unsubscribe', methods=['GET', 'POST'])

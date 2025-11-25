@@ -145,15 +145,19 @@ Select option `L` for localization tests or `A` for all safe tests.
 
 #### 4.2 Test Main Application (Manual Run)
 ```bash
-# Start the application (it will run until you press Ctrl+C)
+# Start the main application (it will run until you press Ctrl+C)
 python app.py
+
+# To run the web interface at the same time, open a second terminal or use tmux/screen:
+python web_app.py
 
 # You should see:
 # - "Starting Daily Brief Service..."
 # - Scheduler initialization
 # - Email monitoring startup
+# - Web app startup (if running web_app.py)
 
-# Press Ctrl+C to stop gracefully
+# Press Ctrl+C to stop gracefully in each terminal
 ```
 
 ---

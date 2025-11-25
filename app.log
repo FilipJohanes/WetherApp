@@ -4188,3 +4188,1046 @@ Body
 2025-11-24 17:10:27,583 - INFO - ✅ Daily Brief Service stopped successfully
 2025-11-24 17:10:27,583 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-24 17:10:27,583 - INFO - ⚠️ Scheduler not running
+2025-11-24 18:48:56,920 - INFO - Starting Daily Brief Web Interface
+2025-11-24 18:48:56,921 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-24 18:48:56,921 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-24 18:48:56,922 - WARNING - Add to .env: FLASK_SECRET_KEY=b507ad55fad02b503a6f4cfcdf19dad0d074f11e1ff66fa18733be0d05cf3947
+2025-11-24 18:48:56,942 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-24 18:48:56,942 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-24 18:49:01,014 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-24 18:49:01,015 - INFO - ⚠️ Scheduler not running
+2025-11-25 16:53:41,794 - INFO - Starting Daily Brief Web Interface
+2025-11-25 16:53:41,795 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 16:53:41,795 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 16:53:41,795 - WARNING - Add to .env: FLASK_SECRET_KEY=37afcede845f89f27ad58f8c0900ae06a3cc499bb632002bab08f6bba4b5bbe0
+2025-11-25 16:53:41,815 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 16:53:41,816 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 16:53:43,503 - INFO - 127.0.0.1 - - [25/Nov/2025 16:53:43] "GET / HTTP/1.1" 200 -
+2025-11-25 16:53:43,712 - INFO - 127.0.0.1 - - [25/Nov/2025 16:53:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-25 16:53:45,289 - INFO - 127.0.0.1 - - [25/Nov/2025 16:53:45] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 16:54:33,398 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 16:54:33,399 - INFO - ⚠️ Scheduler not running
+2025-11-25 16:54:36,497 - INFO - Starting Daily Brief Web Interface
+2025-11-25 16:54:36,497 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 16:54:36,497 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 16:54:36,497 - WARNING - Add to .env: FLASK_SECRET_KEY=415837c47e3a44d0171168f9e703819958211fea3edd793b5f7b3ae33c2d2c25
+2025-11-25 16:54:36,504 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 16:54:36,504 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 16:54:37,622 - INFO - 127.0.0.1 - - [25/Nov/2025 16:54:37] "GET / HTTP/1.1" 200 -
+2025-11-25 16:54:39,741 - INFO - 127.0.0.1 - - [25/Nov/2025 16:54:39] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 16:54:44,859 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 16:54:44,860 - INFO - ⚠️ Scheduler not running
+2025-11-25 16:57:35,635 - INFO - Starting Daily Brief Web Interface
+2025-11-25 16:57:35,635 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 16:57:35,636 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 16:57:35,636 - WARNING - Add to .env: FLASK_SECRET_KEY=154e2b8301670c9cdad7c72e0f7f6901a528f558823a0f264335260f96d79f8e
+2025-11-25 16:57:35,643 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 16:57:35,643 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 16:57:37,244 - INFO - 127.0.0.1 - - [25/Nov/2025 16:57:37] "GET / HTTP/1.1" 200 -
+2025-11-25 16:57:38,973 - INFO - 127.0.0.1 - - [25/Nov/2025 16:57:38] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 16:58:00,447 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 16:58:00,448 - INFO - ⚠️ Scheduler not running
+2025-11-25 16:58:02,157 - INFO - Starting Daily Brief Web Interface
+2025-11-25 16:58:02,157 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 16:58:02,157 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 16:58:02,157 - WARNING - Add to .env: FLASK_SECRET_KEY=41b323acb0dedc7c8185c4bf46790d2d33d81bdc33f3d31ceda8843c4a00f983
+2025-11-25 16:58:02,164 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 16:58:02,164 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 16:58:03,198 - INFO - 127.0.0.1 - - [25/Nov/2025 16:58:03] "GET / HTTP/1.1" 200 -
+2025-11-25 16:58:04,969 - INFO - 127.0.0.1 - - [25/Nov/2025 16:58:04] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:00:07,271 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:00:07,271 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:00:09,467 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:00:09,468 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:00:09,468 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:00:09,468 - WARNING - Add to .env: FLASK_SECRET_KEY=686e7acd8814649f75d66a08ed25708a6de04a711fd70b76e4f983cd5b9533ec
+2025-11-25 17:00:09,476 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:00:09,476 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:00:10,629 - INFO - 127.0.0.1 - - [25/Nov/2025 17:00:10] "GET / HTTP/1.1" 200 -
+2025-11-25 17:00:12,163 - INFO - 127.0.0.1 - - [25/Nov/2025 17:00:12] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:00:27,998 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:00:27,998 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:00:38,059 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:00:38,060 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:00:38,060 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:00:38,060 - WARNING - Add to .env: FLASK_SECRET_KEY=141f6c116ecbf82dea151027dc1cec1d1d5bbffae01781d563f0d53b733194d4
+2025-11-25 17:00:38,067 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:00:38,067 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:00:39,171 - INFO - 127.0.0.1 - - [25/Nov/2025 17:00:39] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:00:40,506 - INFO - 127.0.0.1 - - [25/Nov/2025 17:00:40] "GET / HTTP/1.1" 200 -
+2025-11-25 17:00:41,221 - INFO - 127.0.0.1 - - [25/Nov/2025 17:00:41] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:04:33,887 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:04:33,888 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:04:44,923 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:04:44,923 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:04:44,923 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:04:44,923 - WARNING - Add to .env: FLASK_SECRET_KEY=8dda1f0f111329fcef305659c5ed652fef914561dae776a70070b88477ab3188
+2025-11-25 17:04:44,930 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:04:44,931 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:04:46,086 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:46] "GET / HTTP/1.1" 200 -
+2025-11-25 17:04:47,774 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:47] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:04:53,861 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:53] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:04:54,445 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:54] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:04:54,995 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:54] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:04:58,900 - INFO - Processing weather subscription for  - 
+2025-11-25 17:04:59,209 - INFO - 127.0.0.1 - - [25/Nov/2025 17:04:59] "POST /subscribe?tab=weather HTTP/1.1" 200 -
+2025-11-25 17:05:35,892 - INFO - 127.0.0.1 - - [25/Nov/2025 17:05:35] "GET / HTTP/1.1" 200 -
+2025-11-25 17:05:38,986 - INFO - 127.0.0.1 - - [25/Nov/2025 17:05:38] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 17:05:48,702 - INFO - 127.0.0.1 - - [25/Nov/2025 17:05:48] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:05:48,720 - INFO - 127.0.0.1 - - [25/Nov/2025 17:05:48] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 17:09:15,439 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:09:15,439 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:10:20,506 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:10:20,507 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:10:20,507 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:10:20,507 - WARNING - Add to .env: FLASK_SECRET_KEY=b90f4c850322f3d96fa6f19386753ba787555b798a77d8dbdc2dcbee7b920548
+2025-11-25 17:10:20,514 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:10:20,514 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:10:30,270 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:30] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:10:30,295 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:30] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 17:10:33,314 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:33] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:10:33,335 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 17:10:38,532 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:38] "GET / HTTP/1.1" 200 -
+2025-11-25 17:10:40,081 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:40] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:10:47,645 - INFO - 127.0.0.1 - - [25/Nov/2025 17:10:47] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 17:15:10,220 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:15:10,221 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:15:12,347 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:15:12,347 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:15:12,347 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:15:12,347 - WARNING - Add to .env: FLASK_SECRET_KEY=7d6d8c4a2cdcd47b49d629e7abc2a368265eb44f63239c358b2a56f32ac4c4ec
+2025-11-25 17:15:12,355 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:15:12,355 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:15:14,537 - INFO - 127.0.0.1 - - [25/Nov/2025 17:15:14] "GET / HTTP/1.1" 200 -
+2025-11-25 17:15:15,973 - INFO - 127.0.0.1 - - [25/Nov/2025 17:15:15] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:15:16,021 - INFO - 127.0.0.1 - - [25/Nov/2025 17:15:16] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-11-25 17:19:09,945 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:09] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-25 17:19:11,932 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:11] "POST /unsubscribe HTTP/1.1" 200 -
+2025-11-25 17:19:14,360 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:14] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:19:14,380 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:14] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:19:23,218 - INFO - Processing weather subscription for filip.johanes9@gmail.com - Senec, Slovakia
+2025-11-25 17:19:23,543 - INFO - Weather subscription created for filip.johanes9@gmail.com in timezone Europe/Bratislava
+2025-11-25 17:19:23,545 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:23] "[32mPOST /subscribe?tab=weather HTTP/1.1[0m" 302 -
+2025-11-25 17:19:23,861 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:23] "GET /preview?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 17:19:27,281 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:27] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:19:27,302 - INFO - 127.0.0.1 - - [25/Nov/2025 17:19:27] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:20:20,008 - INFO - Processing countdown subscription for filip.johanes9@gmail.com - svadba on 2026-04-25
+2025-11-25 17:20:20,009 - ERROR - Countdown subscription error: Countdown for 'svadba' on 2026-04-25 already exists for filip.johanes9@gmail.com.
+2025-11-25 17:20:20,010 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:20] "POST /subscribe?tab=countdown HTTP/1.1" 200 -
+2025-11-25 17:20:20,037 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:20] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:20:26,730 - INFO - Processing countdown subscription for filip.johanes9@gmail.com - svadba on 2026-04-25
+2025-11-25 17:20:26,731 - ERROR - Countdown subscription error: Countdown for 'svadba' on 2026-04-25 already exists for filip.johanes9@gmail.com.
+2025-11-25 17:20:26,732 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:26] "POST /subscribe?tab=countdown HTTP/1.1" 200 -
+2025-11-25 17:20:26,752 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:26] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:20:30,063 - INFO - Processing countdown subscription for filip.johanes9@gmail.com - svadba on 2026-04-25
+2025-11-25 17:20:30,064 - ERROR - Countdown subscription error: Countdown for 'svadba' on 2026-04-25 already exists for filip.johanes9@gmail.com.
+2025-11-25 17:20:30,064 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:30] "POST /subscribe?tab=countdown HTTP/1.1" 200 -
+2025-11-25 17:20:30,083 - INFO - 127.0.0.1 - - [25/Nov/2025 17:20:30] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:47:28,792 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:47:28,793 - INFO - ⚠️ Scheduler not running
+2025-11-25 17:47:39,056 - INFO - Starting Daily Brief Web Interface
+2025-11-25 17:47:39,056 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 17:47:39,056 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 17:47:39,056 - WARNING - Add to .env: FLASK_SECRET_KEY=6a82883896110f33c8bfc7eca6ee442adc55d8ae6e8dedf16ef45e433160eef1
+2025-11-25 17:47:39,063 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 17:47:39,063 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 17:47:40,392 - INFO - 127.0.0.1 - - [25/Nov/2025 17:47:40] "GET / HTTP/1.1" 200 -
+2025-11-25 17:47:42,999 - INFO - 127.0.0.1 - - [25/Nov/2025 17:47:42] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 17:47:43,041 - INFO - 127.0.0.1 - - [25/Nov/2025 17:47:43] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 17:47:56,688 - INFO - 127.0.0.1 - - [25/Nov/2025 17:47:56] "GET / HTTP/1.1" 200 -
+2025-11-25 17:48:00,765 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 17:48:00,766 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:04:39,622 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:04:39,622 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:04:39,622 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:04:39,622 - WARNING - Add to .env: FLASK_SECRET_KEY=a0be906b1fb3d4a29c316ed3f289d7c5d711c931b300cf1387aa317bbb295418
+2025-11-25 18:04:39,629 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:04:39,629 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:04:43,286 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:43] "GET / HTTP/1.1" 200 -
+2025-11-25 18:04:52,481 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:52] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:04:52,529 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:52] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:04:53,902 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:53] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-25 18:04:56,748 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:56] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:04:56,767 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:56] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:04:57,209 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:57] "GET / HTTP/1.1" 200 -
+2025-11-25 18:04:59,639 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:59] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:04:59,655 - INFO - 127.0.0.1 - - [25/Nov/2025 18:04:59] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:05:01,765 - INFO - 127.0.0.1 - - [25/Nov/2025 18:05:01] "GET / HTTP/1.1" 200 -
+2025-11-25 18:06:01,607 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:06:01,608 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:06:04,527 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:06:04,527 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:06:04,527 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:06:04,527 - WARNING - Add to .env: FLASK_SECRET_KEY=f34e7b454b70a856d1688d95cf21fcf4bd44cf6156be8df5624cf83e732215f6
+2025-11-25 18:06:04,535 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:06:04,535 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:06:06,065 - INFO - 127.0.0.1 - - [25/Nov/2025 18:06:06] "GET / HTTP/1.1" 200 -
+2025-11-25 18:07:54,995 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:07:54,995 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:07:56,521 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:07:56,521 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:07:56,521 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:07:56,521 - WARNING - Add to .env: FLASK_SECRET_KEY=d0e9e36e5411116a8e1a3da270969829226e6acfeddf88853b12494009a53a45
+2025-11-25 18:07:56,528 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:07:56,529 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:07:57,534 - INFO - 127.0.0.1 - - [25/Nov/2025 18:07:57] "GET / HTTP/1.1" 200 -
+2025-11-25 18:07:57,618 - INFO - 127.0.0.1 - - [25/Nov/2025 18:07:57] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-25 18:08:01,453 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:01] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:08:01,476 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:01] "GET /static/icons/delete.svg HTTP/1.1" 200 -
+2025-11-25 18:08:01,478 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:01] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:08:01,484 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:01] "GET /static/icons/edit.svg HTTP/1.1" 200 -
+2025-11-25 18:08:04,566 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:04] "GET /unsubscribe HTTP/1.1" 200 -
+2025-11-25 18:08:05,094 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:05] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:08:05,112 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:05] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:08:06,563 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:06] "GET / HTTP/1.1" 200 -
+2025-11-25 18:08:06,580 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:06] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:08:09,228 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:09] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:08:09,247 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:09] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:08:09,249 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:09] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:08:09,256 - INFO - 127.0.0.1 - - [25/Nov/2025 18:08:09] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:10:05,373 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:10:05,373 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:10:28,947 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:10:28,947 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:10:28,947 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:10:28,947 - WARNING - Add to .env: FLASK_SECRET_KEY=d309a61c0f16804aa5630809cc73a471548fcb2b483ebe301b2a4af74a021c5b
+2025-11-25 18:10:28,955 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:10:28,955 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:10:33,942 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:33] "GET / HTTP/1.1" 200 -
+2025-11-25 18:10:34,030 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:34] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-25 18:10:38,310 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:38] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:10:38,328 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:38] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:10:38,330 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:38] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:10:38,338 - INFO - 127.0.0.1 - - [25/Nov/2025 18:10:38] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-11-25 18:11:41,351 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:11:41,351 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:11:43,091 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:11:43,091 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:11:43,091 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:11:43,091 - WARNING - Add to .env: FLASK_SECRET_KEY=a4d3989b70c64689cd98f9a5327e2fa4ba0de818d4d978af7919da29189ffd2e
+2025-11-25 18:11:43,098 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:11:43,098 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:11:45,499 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:45] "GET / HTTP/1.1" 200 -
+2025-11-25 18:11:45,571 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:45] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:11:50,935 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:50] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:11:50,959 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:50] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:11:50,961 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:50] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:11:50,966 - INFO - 127.0.0.1 - - [25/Nov/2025 18:11:50] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:13:04,984 - INFO - 127.0.0.1 - - [25/Nov/2025 18:13:04] "GET / HTTP/1.1" 200 -
+2025-11-25 18:13:05,008 - INFO - 127.0.0.1 - - [25/Nov/2025 18:13:05] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:14:01,237 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:14:01,238 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:14:02,560 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:14:02,561 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:14:02,561 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:14:02,561 - WARNING - Add to .env: FLASK_SECRET_KEY=3d7aa21d438f0cfca356a2db2d435de2affb997285a316c4c33cb8341e1a9a83
+2025-11-25 18:14:02,568 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:14:02,568 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:14:05,095 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:05] "GET / HTTP/1.1" 200 -
+2025-11-25 18:14:05,170 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:05] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:14:09,718 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:09] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:14:09,743 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:09] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:14:09,745 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:09] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:14:09,747 - INFO - 127.0.0.1 - - [25/Nov/2025 18:14:09] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:47,170 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 18:17:47,170 - INFO - ⚠️ Scheduler not running
+2025-11-25 18:17:48,818 - INFO - Starting Daily Brief Web Interface
+2025-11-25 18:17:48,818 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 18:17:48,818 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 18:17:48,818 - WARNING - Add to .env: FLASK_SECRET_KEY=073cb00312ca3fc04885d0650b1c68b9fb9a6123c1739e3554913047723a7a14
+2025-11-25 18:17:48,825 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 18:17:48,825 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 18:17:50,120 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:50] "GET / HTTP/1.1" 200 -
+2025-11-25 18:17:50,183 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:50] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:53,894 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:53] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:17:53,912 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:53] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:17:53,914 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:53] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:17:53,921 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:53] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:54,582 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:54] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:17:54,600 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:54] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:55,669 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:55] "GET / HTTP/1.1" 200 -
+2025-11-25 18:17:55,685 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:55] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:56,102 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:56] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 18:17:56,119 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:56] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 18:17:59,482 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:59] "GET / HTTP/1.1" 200 -
+2025-11-25 18:17:59,506 - INFO - 127.0.0.1 - - [25/Nov/2025 18:17:59] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 18:18:01,690 - INFO - 127.0.0.1 - - [25/Nov/2025 18:18:01] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 18:18:01,709 - INFO - 127.0.0.1 - - [25/Nov/2025 18:18:01] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:18:01,711 - INFO - 127.0.0.1 - - [25/Nov/2025 18:18:01] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 18:18:01,715 - INFO - 127.0.0.1 - - [25/Nov/2025 18:18:01] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 20:42:39,056 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 20:42:39,057 - INFO - ⚠️ Scheduler not running
+2025-11-25 20:42:43,178 - INFO - Starting Daily Brief Web Interface
+2025-11-25 20:42:43,178 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 20:42:43,179 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 20:42:43,179 - WARNING - Add to .env: FLASK_SECRET_KEY=eaaf4134800b88d3580e2498ca58b66f96bb1ac69b587ca97cb1734c9d2dab48
+2025-11-25 20:42:43,188 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 20:42:43,188 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 20:42:44,483 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:44] "GET / HTTP/1.1" 200 -
+2025-11-25 20:42:44,589 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:44] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 20:42:44,780 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-25 20:42:46,239 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:46] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 20:42:46,261 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:46] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 20:42:49,014 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:49] "GET / HTTP/1.1" 200 -
+2025-11-25 20:42:49,033 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:49] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 20:42:51,936 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:51] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 20:42:51,957 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:51] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 20:42:51,957 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:51] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 20:42:51,963 - INFO - 127.0.0.1 - - [25/Nov/2025 20:42:51] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 20:43:01,683 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 20:43:01,683 - INFO - ⚠️ Scheduler not running
+2025-11-25 20:46:23,300 - INFO - Starting Daily Brief Web Interface
+2025-11-25 20:46:23,300 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 20:46:23,300 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 20:46:23,301 - WARNING - Add to .env: FLASK_SECRET_KEY=30bb44d1f2cf5a802b94eba232353a617bf594133c929580d5088ead90fcada1
+2025-11-25 20:46:23,308 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 20:46:23,309 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 20:46:24,347 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:24] "GET / HTTP/1.1" 200 -
+2025-11-25 20:46:24,409 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:24] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 20:46:28,855 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:28] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 20:46:28,876 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:28] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 20:46:28,878 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:28] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 20:46:28,881 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:28] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 20:46:28,884 - INFO - 127.0.0.1 - - [25/Nov/2025 20:46:28] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-25 20:47:09,780 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 20:47:09,781 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:01:09,244 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:01:09,244 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:01:09,244 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:01:09,244 - WARNING - Add to .env: FLASK_SECRET_KEY=7d9886364413e4bad4e10612d4ce09245966d30941e8c55001c600d2c795ad5d
+2025-11-25 21:01:09,253 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:01:09,253 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:01:10,794 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:10] "GET / HTTP/1.1" 200 -
+2025-11-25 21:01:10,862 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:10] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:01:15,435 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:15] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:01:15,453 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:15] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:01:15,457 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:15] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:01:15,466 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:15] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:01:15,469 - INFO - 127.0.0.1 - - [25/Nov/2025 21:01:15] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-25 21:01:39,476 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:01:39,477 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:04:23,765 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:04:23,765 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:04:23,765 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:04:23,765 - WARNING - Add to .env: FLASK_SECRET_KEY=fac3cb8edf60fee79b6e3e8145e2ad0d4942501b1280ed23028a103258ee6307
+2025-11-25 21:04:23,773 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:04:23,773 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:04:25,295 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:25] "GET / HTTP/1.1" 200 -
+2025-11-25 21:04:25,389 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:25] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:04:25,561 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-25 21:04:30,074 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:30] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:04:30,097 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:30] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:04:30,101 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:30] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:04:42,496 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:42] "GET / HTTP/1.1" 200 -
+2025-11-25 21:04:42,526 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:42] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:04:45,188 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:45] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:04:45,206 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:45] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:04:45,208 - INFO - 127.0.0.1 - - [25/Nov/2025 21:04:45] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:07:09,912 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:07:09,913 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:07:11,153 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:07:11,153 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:07:11,153 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:07:11,153 - WARNING - Add to .env: FLASK_SECRET_KEY=a3d3b699e30b1c968c0632b8b443c246aec5406419c84d87bae5059b65dd8e2a
+2025-11-25 21:07:11,160 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:07:11,160 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:07:14,374 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:14] "GET / HTTP/1.1" 200 -
+2025-11-25 21:07:14,466 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:14] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:07:14,590 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-25 21:07:17,954 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:17] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:07:17,974 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:17] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:07:17,979 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:17] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:07:49,720 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:07:49,721 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:07:54,634 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:07:54,634 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:07:54,634 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:07:54,635 - WARNING - Add to .env: FLASK_SECRET_KEY=82ec5c732d5a0d350f0d0fba7f71e12a6b8a743fba14ab1f3aa952dcf3321e68
+2025-11-25 21:07:54,641 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:07:54,641 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:07:56,167 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:56] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:07:56,298 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:56] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:07:56,303 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:56] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:07:56,306 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:56] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:07:56,307 - INFO - 127.0.0.1 - - [25/Nov/2025 21:07:56] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:08:11,532 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:08:11,532 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:09:23,842 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:09:23,842 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:09:23,842 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:09:23,842 - WARNING - Add to .env: FLASK_SECRET_KEY=5c44ec5fa46b4d6fce94e70e306f0999e64da962a39edbacb125187e27903005
+2025-11-25 21:09:23,850 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:09:23,850 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:09:24,936 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:24] "GET / HTTP/1.1" 200 -
+2025-11-25 21:09:24,998 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:24] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:09:29,280 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:29] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:09:29,301 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:29] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:09:29,302 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:29] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:09:29,311 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:29] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:09:29,311 - INFO - 127.0.0.1 - - [25/Nov/2025 21:09:29] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:10:10,701 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:10:10,702 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:10:12,423 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:10:12,424 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:10:12,424 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:10:12,424 - WARNING - Add to .env: FLASK_SECRET_KEY=60dffcf8b5d5c362f7d80298fe6f96a590c2768337ac703e0457a653bbd62774
+2025-11-25 21:10:12,432 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:10:12,432 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:10:13,658 - INFO - 127.0.0.1 - - [25/Nov/2025 21:10:13] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:10:13,790 - INFO - 127.0.0.1 - - [25/Nov/2025 21:10:13] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:10:13,791 - INFO - 127.0.0.1 - - [25/Nov/2025 21:10:13] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:10:13,791 - INFO - 127.0.0.1 - - [25/Nov/2025 21:10:13] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:10:13,792 - INFO - 127.0.0.1 - - [25/Nov/2025 21:10:13] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:12:33,245 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:12:33,245 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:12:35,181 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:12:35,182 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:12:35,182 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:12:35,182 - WARNING - Add to .env: FLASK_SECRET_KEY=c9e88a5d9453e01f642d91c53977a3758a7ab087a01d09958b1e23e23d04f260
+2025-11-25 21:12:35,190 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:12:35,190 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:12:39,183 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:39] "GET / HTTP/1.1" 200 -
+2025-11-25 21:12:39,244 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:39] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:12:43,064 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:43] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:12:43,086 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:43] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:12:43,088 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:43] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:12:43,095 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:43] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:12:43,095 - INFO - 127.0.0.1 - - [25/Nov/2025 21:12:43] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:14:49,929 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:14:49,929 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:14:52,066 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:14:52,066 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:14:52,067 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:14:52,067 - WARNING - Add to .env: FLASK_SECRET_KEY=ff023435875166c780eec185deb014775a592286ca1ed74d355b56973b495f41
+2025-11-25 21:14:52,073 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:14:52,073 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:14:54,299 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:54] "GET / HTTP/1.1" 200 -
+2025-11-25 21:14:54,408 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:54] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:14:54,572 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-25 21:14:59,111 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:59] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:14:59,132 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:59] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:14:59,139 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:59] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:14:59,144 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:59] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:14:59,145 - INFO - 127.0.0.1 - - [25/Nov/2025 21:14:59] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:15:22,851 - INFO - 127.0.0.1 - - [25/Nov/2025 21:15:22] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-11-25 21:24:04,660 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:24:04,661 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:24:07,257 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:24:07,257 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:24:07,257 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:24:07,257 - WARNING - Add to .env: FLASK_SECRET_KEY=9558006fe168033c865b4da9089317d75edbb152cab7f83e7e474f9624d4c646
+2025-11-25 21:24:07,265 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:24:07,266 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:24:08,382 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:08] "GET / HTTP/1.1" 200 -
+2025-11-25 21:24:08,443 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:08] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:24:10,338 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:10] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 21:24:10,359 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:10] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:24:10,361 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:10] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:24:11,369 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:11] "GET / HTTP/1.1" 200 -
+2025-11-25 21:24:11,385 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:11] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:24:13,598 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:13] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:24:13,617 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:13] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:24:13,618 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:13] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:24:13,626 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:13] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:24:13,627 - INFO - 127.0.0.1 - - [25/Nov/2025 21:24:13] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:28:12,539 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:28:12,539 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:28:14,187 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:28:14,188 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:28:14,188 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:28:14,188 - WARNING - Add to .env: FLASK_SECRET_KEY=e7f4f0fcd1daaa8aaa00b61ec7097db699f58a79c73c58114c964a3e2be7d852
+2025-11-25 21:28:14,195 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:28:14,195 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:28:15,346 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:15] "GET / HTTP/1.1" 200 -
+2025-11-25 21:28:15,388 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:15] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:28:20,234 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:20] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:28:20,255 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:20] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:28:20,256 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:20] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:28:20,262 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:20] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:28:20,264 - INFO - 127.0.0.1 - - [25/Nov/2025 21:28:20] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:32:40,006 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:32:40,007 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:32:41,669 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:32:41,669 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:32:41,669 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:32:41,669 - WARNING - Add to .env: FLASK_SECRET_KEY=fbe3c8debf871bcf259d4246c9f23201c1334b4035f231e0b242d0d0b038725f
+2025-11-25 21:32:41,676 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:32:41,676 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:32:42,695 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:42] "GET / HTTP/1.1" 200 -
+2025-11-25 21:32:42,735 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:42] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:32:46,665 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:46] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:32:46,688 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:46] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:32:46,691 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:46] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:32:46,696 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:46] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:32:46,697 - INFO - 127.0.0.1 - - [25/Nov/2025 21:32:46] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:36:26,129 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:36:26,130 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:36:27,831 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:36:27,831 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:36:27,831 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:36:27,831 - WARNING - Add to .env: FLASK_SECRET_KEY=ea65a8bbd9ecd6e0b6a0bbf8cb790b257a6ba298fb80e9237132bd43604ff100
+2025-11-25 21:36:27,839 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:36:27,839 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:36:29,084 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:29] "GET / HTTP/1.1" 200 -
+2025-11-25 21:36:29,148 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:29] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:36:34,741 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:34] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:36:34,761 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:34] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:36:34,762 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:34] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:36:34,770 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:34] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:36:34,771 - INFO - 127.0.0.1 - - [25/Nov/2025 21:36:34] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:47:08,622 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:47:08,622 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:47:11,012 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:47:11,012 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:47:11,012 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:47:11,012 - WARNING - Add to .env: FLASK_SECRET_KEY=764e5186248f09190f1f8002b44b39193fcb98bc984b00b7caa9da3aa023a187
+2025-11-25 21:47:11,019 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:47:11,020 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:47:15,161 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:15] "GET / HTTP/1.1" 200 -
+2025-11-25 21:47:15,220 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:15] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:47:18,786 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:18] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:47:18,804 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:18] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:47:18,806 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:18] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:47:18,814 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:18] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:47:18,814 - INFO - 127.0.0.1 - - [25/Nov/2025 21:47:18] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:49:33,325 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:49:33,326 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:49:35,259 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:49:35,259 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:49:35,259 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:49:35,260 - WARNING - Add to .env: FLASK_SECRET_KEY=a0976a049a79db29cb694740468a4f4da503806616be92fe22a36565333be74b
+2025-11-25 21:49:35,266 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:49:35,266 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:49:36,606 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:36] "GET / HTTP/1.1" 200 -
+2025-11-25 21:49:36,671 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:36] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:49:41,614 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:41] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:49:41,634 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:41] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:49:41,636 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:41] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:49:41,642 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:41] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:49:41,643 - INFO - 127.0.0.1 - - [25/Nov/2025 21:49:41] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:49:49,323 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:49:49,323 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:49:56,503 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:49:56,504 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:49:56,504 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:49:56,504 - WARNING - Add to .env: FLASK_SECRET_KEY=c4a942b1765b2d6b9590ec3eda58eb63cb9c02e1c8219e4074c576ea89868c63
+2025-11-25 21:49:56,511 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:49:56,512 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:50:01,233 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:01] "GET / HTTP/1.1" 200 -
+2025-11-25 21:50:01,274 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:01] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:50:06,133 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:06] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:50:06,153 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:06] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:50:06,156 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:06] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:50:06,165 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:06] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:50:06,166 - INFO - 127.0.0.1 - - [25/Nov/2025 21:50:06] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:50:11,793 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:50:11,794 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:51:06,983 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:51:06,983 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:51:06,983 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:51:06,983 - WARNING - Add to .env: FLASK_SECRET_KEY=d2bd05a2873b6631564b7f1265d09ac817ac146a09df027003eaee1b58cde86a
+2025-11-25 21:51:06,990 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:51:06,991 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:51:10,231 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:10] "GET / HTTP/1.1" 200 -
+2025-11-25 21:51:10,281 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:10] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:51:13,798 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:13] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:51:13,820 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:13] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:51:13,821 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:13] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:51:13,829 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:13] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:51:13,830 - INFO - 127.0.0.1 - - [25/Nov/2025 21:51:13] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 21:51:23,019 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 21:51:23,019 - INFO - ⚠️ Scheduler not running
+2025-11-25 21:56:08,297 - INFO - Starting Daily Brief Web Interface
+2025-11-25 21:56:08,297 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 21:56:08,297 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 21:56:08,297 - WARNING - Add to .env: FLASK_SECRET_KEY=469f4ee1e07b7f414494927c3dadcb31fc598fa93063d03f945790580498505b
+2025-11-25 21:56:08,304 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 21:56:08,304 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 21:56:10,851 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:10] "GET / HTTP/1.1" 200 -
+2025-11-25 21:56:10,905 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:10] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 21:56:14,869 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:14] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 21:56:14,894 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:14] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:56:14,896 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:14] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 21:56:14,901 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:14] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 21:56:14,902 - INFO - 127.0.0.1 - - [25/Nov/2025 21:56:14] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:07:01,292 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:07:01,293 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:07:02,990 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:07:02,991 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:07:02,991 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:07:02,991 - WARNING - Add to .env: FLASK_SECRET_KEY=bfc562fcf7be4207487f33581f2a26b7f48360b80af288409e683c6b69c98034
+2025-11-25 22:07:02,999 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:07:02,999 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:07:06,521 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:06] "GET / HTTP/1.1" 200 -
+2025-11-25 22:07:06,581 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:06] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:07:11,426 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:11] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 22:07:11,446 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:11] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:07:11,447 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:11] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:07:11,452 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:11] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:07:11,453 - INFO - 127.0.0.1 - - [25/Nov/2025 22:07:11] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:08:25,532 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:08:25,532 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:08:27,706 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:08:27,706 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:08:27,706 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:08:27,706 - WARNING - Add to .env: FLASK_SECRET_KEY=9760da2937f9f0b5ca63741f66f7c85a1c4af243d74078b28f10517b615051ab
+2025-11-25 22:08:27,714 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:08:27,715 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:08:28,888 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:28] "GET / HTTP/1.1" 200 -
+2025-11-25 22:08:28,924 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:28] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:08:34,077 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:34] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 22:08:34,099 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:34] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:08:34,100 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:34] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:08:34,109 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:34] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:08:34,109 - INFO - 127.0.0.1 - - [25/Nov/2025 22:08:34] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:09:11,959 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:09:11,959 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:09:13,990 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:09:13,990 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:09:13,990 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:09:13,991 - WARNING - Add to .env: FLASK_SECRET_KEY=2c611e852d14e173b99efb814f2bcd047ead5f5932d467fedccd378942397740
+2025-11-25 22:09:13,998 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:09:13,998 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:09:15,535 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:15] "GET / HTTP/1.1" 200 -
+2025-11-25 22:09:15,580 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:15] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:09:22,038 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:22] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 22:09:22,061 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:22] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:09:22,062 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:22] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:09:22,070 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:22] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:09:22,071 - INFO - 127.0.0.1 - - [25/Nov/2025 22:09:22] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:09:28,217 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:09:28,218 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:15:37,590 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:15:37,590 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:15:37,591 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:15:37,591 - WARNING - Add to .env: FLASK_SECRET_KEY=dfee79dcae00246085506489696b54d6c6e4b84eed5341133e85483d933e6c15
+2025-11-25 22:15:37,597 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:15:37,598 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:15:38,676 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:38] "GET / HTTP/1.1" 200 -
+2025-11-25 22:15:38,728 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:38] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:41,395 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:41] "GET /subscribe HTTP/1.1" 200 -
+2025-11-25 22:15:41,410 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:41] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:41,416 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:41] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:42,694 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:42] "GET / HTTP/1.1" 200 -
+2025-11-25 22:15:42,709 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:42] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:45,673 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:45] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 22:15:45,691 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:45] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:15:45,694 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:45] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:15:45,697 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:45] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:45,699 - INFO - 127.0.0.1 - - [25/Nov/2025 22:15:45] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:15:51,332 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:15:51,332 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:19:19,149 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:19:19,149 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:19:19,149 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:19:19,149 - WARNING - Add to .env: FLASK_SECRET_KEY=6155c90e2d77f822ebe99cab271972e9739f048f56c250e739c6492cc084847b
+2025-11-25 22:19:19,157 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:19:19,157 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:19:20,615 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:20] "GET / HTTP/1.1" 200 -
+2025-11-25 22:19:20,677 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:20] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:19:24,328 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:19:24,372 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:19:24,374 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:24] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-25 22:19:26,516 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:26] "GET / HTTP/1.1" 200 -
+2025-11-25 22:19:26,533 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:26] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:19:28,902 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:19:28,903 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:19:28,904 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:28] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-25 22:19:30,255 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:19:30,256 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:19:30,257 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:30] "[35m[1mGET /subscribe HTTP/1.1[0m" 500 -
+2025-11-25 22:19:33,839 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:33] "GET / HTTP/1.1" 200 -
+2025-11-25 22:19:33,869 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:33] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:19:35,642 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:19:35,644 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:19:35,644 - INFO - 127.0.0.1 - - [25/Nov/2025 22:19:35] "[35m[1mGET /subscribe HTTP/1.1[0m" 500 -
+2025-11-25 22:19:42,791 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:19:42,792 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:23:49,103 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:23:49,104 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:23:49,104 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:23:49,104 - WARNING - Add to .env: FLASK_SECRET_KEY=6218625ba481be2f996aad0c77557b60cd818ed4af6e3e660d73a2a752c1fe5f
+2025-11-25 22:23:49,111 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:23:49,111 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:23:52,947 - INFO - 127.0.0.1 - - [25/Nov/2025 22:23:52] "GET / HTTP/1.1" 200 -
+2025-11-25 22:23:53,016 - INFO - 127.0.0.1 - - [25/Nov/2025 22:23:53] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:23:56,330 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions, editing_id=None)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:23:56,334 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:23:56,337 - INFO - 127.0.0.1 - - [25/Nov/2025 22:23:56] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-25 22:23:57,432 - INFO - 127.0.0.1 - - [25/Nov/2025 22:23:57] "GET / HTTP/1.1" 200 -
+2025-11-25 22:23:57,450 - INFO - 127.0.0.1 - - [25/Nov/2025 22:23:57] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:24:04,070 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:24:04,070 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:24:06,447 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:24:06,447 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:24:06,447 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:24:06,447 - WARNING - Add to .env: FLASK_SECRET_KEY=5bc74f80211a67d9ff5c20dbaca8eadb9a933bf177f4f3efc217414f3e15f3b9
+2025-11-25 22:24:06,453 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:24:06,454 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:24:07,603 - INFO - 127.0.0.1 - - [25/Nov/2025 22:24:07] "GET / HTTP/1.1" 200 -
+2025-11-25 22:24:07,645 - INFO - 127.0.0.1 - - [25/Nov/2025 22:24:07] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:24:11,858 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 299, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 206, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endblock'. You probably made a nesting mistake. Jinja is expecting this tag, but currently looking for 'elif' or 'else' or 'endif'. The innermost block that needs to be closed is 'if'.
+2025-11-25 22:24:11,861 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-25 22:24:11,864 - INFO - 127.0.0.1 - - [25/Nov/2025 22:24:11] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-25 22:26:32,223 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:26:32,223 - INFO - ⚠️ Scheduler not running
+2025-11-25 22:26:34,469 - INFO - Starting Daily Brief Web Interface
+2025-11-25 22:26:34,469 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-25 22:26:34,469 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-25 22:26:34,469 - WARNING - Add to .env: FLASK_SECRET_KEY=824fe869466405fa27ea0c0942672cc4fb18fa0e0392eb39f2dce9bb55cf89fa
+2025-11-25 22:26:34,476 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-25 22:26:34,476 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-25 22:26:35,773 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:35] "GET / HTTP/1.1" 200 -
+2025-11-25 22:26:35,809 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:35] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-25 22:26:39,462 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:39] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-25 22:26:39,482 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:39] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:26:39,483 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:39] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-25 22:26:39,490 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:39] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-25 22:26:39,491 - INFO - 127.0.0.1 - - [25/Nov/2025 22:26:39] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-25 22:27:23,494 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-25 22:27:23,495 - INFO - ⚠️ Scheduler not running

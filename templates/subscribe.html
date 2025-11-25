@@ -8,22 +8,123 @@
 <div class="card">
     <h2>📧 Subscribe to Daily Updates</h2>
     <p style="margin-top: 10px;">
-        You can subscribe to <b>weather</b> and/or <b>countdown</b> updates. Select one or both below.
+        Choose your subscription type:
     </p>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button type="button" id="weatherTab" class="btn btn-primary" style="min-width:120px;">Weather</button>
+        <button type="button" id="countdownTab" class="btn btn-secondary" style="min-width:120px;">Countdown</button>
+        <button type="button" id="subscriptionsTab" class="btn btn-secondary" style="min-width:160px;">Active Subscriptions</button>
+    </div>
 </div>
 
-<form method="POST" action="{{ url_for('subscribe') }}" novalidate>
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        <label for="email">Email (required)</label>
-        <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
-        <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
+<div id="subscriptionsLayer" style="display: none;">
+    <h3 style="margin-bottom: 18px; color: #5a67d8;">Active Subscriptions</h3>
+    <div id="subscriptionsList" style="background: #fff; padding: 24px 20px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); max-width: 600px; margin: 0 auto;">
+        <div style="display: flex; font-weight: bold; margin-bottom: 8px;">
+            <div style="flex: 2;">event name</div>
+            <div style="flex: 1;">Type</div>
+            <div style="flex: 1;">Date</div>
+            <div style="flex: 0 0 80px; text-align: right;"></div>
+        </div>
+        {% if subscriptions %}
+            {% for sub in subscriptions %}
+                <div class="subscription-card" style="border-bottom: 1px solid #e0e0e0; padding: 12px 0; display: flex; align-items: center; background: none; position: relative;">
+                    <div style="flex: 2;">{{ (sub.name or sub.location)[:20] }}{% if (sub.name or sub.location)|length > 20 %}...{% endif %}</div>
+                    <div style="flex: 1;">{{ sub.type }}</div>
+                    <div style="flex: 1;">{{ (sub.date_added or sub.date)[:10] }}</div>
+                    <div style="flex: 0 0 80px; display: flex; gap: 8px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ sub.id }}" data-type="{{ sub.type }}" data-index="{{ loop.index0 }}" title="Edit" style="padding: 4px 8px; border-radius: 8px;">
+                            <img src="{{ url_for('static', filename='icons/edit.svg') }}" alt="Edit" style="width: 24px; height: 24px;">
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ sub.id }}" title="Delete" style="padding: 4px 8px; border-radius: 8px;">
+                            <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete" style="width: 24px; height: 24px;">
+                        </button>
+                    </div>
+                    <div class="edit-form-container" id="edit-form-{{ sub.id }}" style="display: none; position: static; width: 100%; background: #f9f9ff; border: 1px solid #d1d5db; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 18px 24px; margin-top: 8px;">
+                        {% if sub.type == 'countdown' %}
+                        <form class="edit-countdown-form">
+                            <div style="max-height: 450px; overflow-y: auto;">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" name="email" class="form-control" value="{{ sub.email or '' }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Countdown Name</label>
+                                    <input type="text" name="countdown_name" class="form-control" value="{{ sub.name or '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" name="countdown_date" class="form-control" value="{{ sub.date or '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" name="countdown_yearly" {% if sub.yearly %}checked{% endif %}>
+                                    <label>Yearly event</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Message before event</label>
+                                    <input type="text" name="countdown_message_before" class="form-control" value="{{ sub.message_before or '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Message after event</label>
+                                    <input type="text" name="countdown_message_after" class="form-control" value="{{ sub.message_after or '' }}">
+                                </div>
+                            </div>
+                            <div style="margin-top: 18px;">
+                                <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                                <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                            </div>
+                        </form>
+                        {% elif sub.type == 'weather' %}
+                        <form class="edit-weather-form">
+                            <div style="max-height: 450px; overflow-y: auto;">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" name="email" class="form-control" value="{{ sub.email or '' }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input type="text" name="location" class="form-control" value="{{ sub.location or '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Language</label>
+                                    <select name="language" class="form-control">
+                                        <option value="en" {% if sub.language == 'en' %}selected{% endif %}>English</option>
+                                        <option value="es" {% if sub.language == 'es' %}selected{% endif %}>Spanish</option>
+                                        <option value="sk" {% if sub.language == 'sk' %}selected{% endif %}>Slovak</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Personality</label>
+                                    <select name="personality" class="form-control">
+                                        <option value="neutral" {% if sub.personality == 'neutral' %}selected{% endif %}>Neutral</option>
+                                        <option value="cute" {% if sub.personality == 'cute' %}selected{% endif %}>Cute</option>
+                                        <option value="brutal" {% if sub.personality == 'brutal' %}selected{% endif %}>Brutal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="margin-top: 18px;">
+                                <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                                <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No active subscriptions found.</p>
+        {% endif %}
     </div>
-    <div class="form-group">
-        <input type="checkbox" id="subscribe_weather" name="subscribe_weather" {% if request.form.subscribe_weather %}checked{% endif %}>
-        <label for="subscribe_weather">Subscribe to daily weather updates</label>
-    </div>
-    <div id="weather-fields">
+</div>>
+
+<div id="weatherLayer" style="display: block;">
+    <form method="POST" action="{{ url_for('subscribe') }}?tab=weather" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="email">Email (required)</label>
+            <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
+            <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
+        </div>
         <div class="form-group">
             <label for="location">Location</label>
             <input type="text" id="location" name="location" class="form-control" placeholder="Bratislava, Slovakia" value="{{ request.form.location or '' }}">
@@ -44,12 +145,20 @@
                 <option value="brutal">Brutal</option>
             </select>
         </div>
-    </div>
-    <div class="form-group">
-        <input type="checkbox" id="subscribe_countdown" name="subscribe_countdown" {% if request.form.subscribe_countdown %}checked{% endif %}>
-        <label for="subscribe_countdown">Subscribe to countdown event</label>
-    </div>
-    <div id="countdown-fields">
+        <div style="margin-top: 30px;">
+            <button type="submit" class="btn btn-success">Subscribe to Weather</button>
+        </div>
+    </form>
+</div>
+
+<div id="countdownLayer" style="display: none;">
+    <form method="POST" action="{{ url_for('subscribe') }}?tab=countdown" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="email">Email (required)</label>
+            <input type="email" id="email_cd" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
+            <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
+        </div>
         <div class="form-group">
             <label for="countdown_name">Countdown Name</label>
             <input type="text" id="countdown_name" name="countdown_name" class="form-control" placeholder="Birthday, Wedding, Christmas" value="{{ request.form.countdown_name or '' }}">
@@ -58,9 +167,8 @@
             <label for="countdown_date">Date</label>
             <input type="date" id="countdown_date" name="countdown_date" class="form-control" value="{{ request.form.countdown_date or '' }}">
         </div>
-
         <div class="form-group">
-            <input type="checkbox" id="countdown_yearly" name="countdown_yearly" {% if request.form.countdown_yearly %}checked{% endif %}>
+            <input type="checkbox" id="countdown_yearly" name="countdown_yearly" {% if request.form.countdown_yearly %}checked{% endif %} onchange="toggleAfterEvent()">
             <label for="countdown_yearly">Yearly event (e.g. Christmas)</label>
         </div>
         <div class="form-group">
@@ -68,24 +176,21 @@
             <input type="text" id="countdown_message_before" name="countdown_message_before" class="form-control" placeholder="Days to wedding: {days}" value="{{ request.form.countdown_message_before or '' }}">
             <small>Use <code>{days}</code> to insert countdown value.</small>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="afterEventGroup">
             <label for="countdown_message_after">Message after event (optional)</label>
             <input type="text" id="countdown_message_after" name="countdown_message_after" class="form-control" placeholder="Married for: {days}" value="{{ request.form.countdown_message_after or '' }}">
             <small>If empty, countdown disables after event.</small>
         </div>
-    </div>
-    <div style="margin-top: 30px;">
-        <button type="submit" class="btn btn-success">Subscribe</button>
-    </div>
-</form>
+        <div style="margin-top: 30px;">
+            <button type="submit" class="btn btn-success">Subscribe to Countdown</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/subscribe.js') }}"></script>
+<script src="{{ url_for('static', filename='js/subscriptions.js') }}"></script>
 <script>
-// Show/hide fields based on checkboxes
-function updateFields() {
-    document.getElementById('weather-fields').style.display = document.getElementById('subscribe_weather').checked ? '' : 'none';
-    document.getElementById('countdown-fields').style.display = document.getElementById('subscribe_countdown').checked ? '' : 'none';
-}
-document.getElementById('subscribe_weather').addEventListener('change', updateFields);
-document.getElementById('subscribe_countdown').addEventListener('change', updateFields);
-window.onload = updateFields;
+    // Set the default tab based on context variable or URL
+    window.tabValue = '{{ tab|default("weather") }}';
 </script>
 {% endblock %}
