@@ -33,7 +33,45 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.querySelectorAll('.save-edit-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      alert('Save functionality coming soon! ID: ' + btn.dataset.id);
+      var modalId = 'edit-modal-' + btn.dataset.id;
+      var modalEl = document.getElementById(modalId);
+      if (!modalEl) return;
+      // Find the form inside the modal
+      var form = modalEl.querySelector('form');
+      if (!form) return;
+      // Collect form data
+      var formData = {};
+      Array.from(form.elements).forEach(function(el) {
+        if (el.name) {
+          if (el.type === 'checkbox') {
+            formData[el.name] = el.checked;
+          } else {
+            formData[el.name] = el.value;
+          }
+        }
+      });
+      formData['id'] = btn.dataset.id;
+      // Send AJAX request to backend
+      fetch('/api/update_subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('Subscription updated!');
+          modalEl.style.display = 'none';
+          var backdropEl = document.getElementById('edit-modal-backdrop-' + btn.dataset.id);
+          if (backdropEl) backdropEl.style.display = 'none';
+          location.reload();
+        } else {
+          alert('Error: ' + data.message);
+        }
+      })
+      .catch(err => {
+        alert('Error saving subscription: ' + err);
+      });
     });
   });
   document.querySelectorAll('.delete-btn').forEach(function(btn) {

@@ -427,6 +427,83 @@ def stats():
 
 
 # API endpoints (optional, but secure)
+
+@app.route('/api/update_subscription', methods=['POST'])
+@limiter.limit("20 per minute")
+@csrf.exempt  # For API calls, but we still validate
+def api_update_subscription():
+    """API to update a subscription (weather or countdown) from modal edit form."""
+    try:
+        data = request.get_json()
+        if not data or 'id' not in data:
+            return jsonify({'status': 'error', 'message': 'Missing subscription ID'}), 400
+
+        sub_id = data['id']
+        # Weather subscription: id starts with 'weather_'
+        if sub_id.startswith('weather_'):
+            email = sub_id.replace('weather_', '', 1)
+            location = data.get('location', '').strip()
+            language = data.get('language', '')
+            personality = data.get('personality', '')
+            # Optionally, validate input here
+            conn = get_db_connection()
+            try:
+                # Geocode location if changed
+                from services.weather_service import geocode_location
+                geocode_result = geocode_location(location)
+                if not geocode_result:
+                    return jsonify({'status': 'error', 'message': 'Invalid location'}), 400
+                lat, lon, display_name, timezone_str = geocode_result
+                conn.execute("""
+                    UPDATE subscribers SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, language = ?, updated_at = ?
+                    WHERE email = ?
+                """, (display_name, lat, lon, timezone_str, personality, language, datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
+                conn.commit()
+                return jsonify({'status': 'success'})
+            except Exception as e:
+                logger.error(f"Weather update error: {e}")
+                return jsonify({'status': 'error', 'message': str(e)}), 500
+            finally:
+                conn.close()
+        # Countdown subscription: id starts with 'countdown_'
+        elif sub_id.startswith('countdown_'):
+            # id format: countdown_{name}_{date}
+            parts = sub_id.split('_', 2)
+            if len(parts) < 3:
+                return jsonify({'status': 'error', 'message': 'Invalid countdown ID'}), 400
+            name = parts[1]
+            date = parts[2]
+            # Get fields
+            new_name = data.get('name', name)
+            new_date = data.get('date', date)
+            yearly = bool(data.get('yearly', False))
+            message_before = data.get('message_before', '')
+            # Update countdown in DB
+            conn = get_db_connection()
+            try:
+                # Find countdown by name and date
+                cursor = conn.execute("""
+                    SELECT * FROM countdowns WHERE name = ? AND date = ?
+                """, (name, date))
+                countdown = cursor.fetchone()
+                if not countdown:
+                    return jsonify({'status': 'error', 'message': 'Countdown not found'}), 404
+                conn.execute("""
+                    UPDATE countdowns SET name = ?, date = ?, yearly = ?, message_before = ?
+                    WHERE name = ? AND date = ?
+                """, (new_name, new_date, int(yearly), message_before, name, date))
+                conn.commit()
+                return jsonify({'status': 'success'})
+            except Exception as e:
+                logger.error(f"Countdown update error: {e}")
+                return jsonify({'status': 'error', 'message': str(e)}), 500
+            finally:
+                conn.close()
+        else:
+            return jsonify({'status': 'error', 'message': 'Unknown subscription type'}), 400
+    except Exception as e:
+        logger.error(f"API update error: {e}")
+        return jsonify({'status': 'error', 'message': 'Internal server error'}), 500
 @app.route('/api/check-email', methods=['POST'])
 @limiter.limit("20 per minute")
 @csrf.exempt  # For API calls, but we still validate

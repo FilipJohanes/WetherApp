@@ -5703,3 +5703,34 @@ jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. You prob
 2025-11-26 12:56:16,459 - INFO - 127.0.0.1 - - [26/Nov/2025 12:56:16] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
 2025-11-26 13:24:19,742 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-26 13:24:19,743 - INFO - ⚠️ Scheduler not running
+2025-11-26 13:54:30,841 - INFO - Starting Daily Brief Web Interface
+2025-11-26 13:54:30,842 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-26 13:54:30,842 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-26 13:54:30,843 - WARNING - Add to .env: FLASK_SECRET_KEY=9ecbb51ad6094cdc9c73440700ded3dee3e0d4e0a92aaa587a8e0c2dafe8d9fa
+2025-11-26 13:54:30,866 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-26 13:54:30,867 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-26 13:54:36,274 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:36] "GET / HTTP/1.1" 200 -
+2025-11-26 13:54:36,410 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:36] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-26 13:54:42,867 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:42] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 13:54:42,931 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:42] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 13:54:42,932 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:42] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-26 13:54:42,942 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:42] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-26 13:54:42,943 - INFO - 127.0.0.1 - - [26/Nov/2025 13:54:42] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-26 13:55:34,587 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:34] "POST /api/update_subscription HTTP/1.1" 200 -
+2025-11-26 13:55:36,781 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:36] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 13:55:36,828 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:36] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 13:55:36,832 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:36] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-26 13:55:36,839 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:36] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-26 13:55:36,839 - INFO - 127.0.0.1 - - [26/Nov/2025 13:55:36] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-26 13:59:00,410 - INFO - Starting Daily Brief Web Interface
+2025-11-26 13:59:00,410 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-26 13:59:00,411 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-26 13:59:00,411 - WARNING - Add to .env: FLASK_SECRET_KEY=2f69bc3c251770c1135ceac0654112efc46554bc5a15fdd05f7a3291be51a035
+2025-11-26 13:59:00,431 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-26 13:59:00,431 - INFO - [33mPress CTRL+C to quit[0m
