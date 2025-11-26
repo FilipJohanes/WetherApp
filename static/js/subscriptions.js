@@ -1,24 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.edit-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      // Hide all edit forms first
-      document.querySelectorAll('.edit-form-container').forEach(function(form) {
-        form.style.display = 'none';
+      // Hide all modals first
+      document.querySelectorAll('.edit-modal').forEach(function(modal) {
+        modal.style.display = 'none';
       });
-      // Show the edit form for this event
-      var formId = 'edit-form-' + btn.dataset.id;
-      var formEl = document.getElementById(formId);
-      if (formEl) {
-        formEl.style.display = 'block';
+      document.querySelectorAll('.edit-modal-backdrop').forEach(function(backdrop) {
+        backdrop.style.display = 'none';
+      });
+      // Show the modal and backdrop for this event
+      var modalId = 'edit-modal-' + btn.dataset.id;
+      var backdropId = 'edit-modal-backdrop-' + btn.dataset.id;
+      var modalEl = document.getElementById(modalId);
+      var backdropEl = document.getElementById(backdropId);
+      if (modalEl && backdropEl) {
+        modalEl.style.display = 'block';
+        backdropEl.style.display = 'block';
       }
     });
   });
   document.querySelectorAll('.cancel-edit-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var formId = 'edit-form-' + btn.dataset.id;
-      var formEl = document.getElementById(formId);
-      if (formEl) {
-        formEl.style.display = 'none';
+      var modalId = 'edit-modal-' + btn.dataset.id;
+      var backdropId = 'edit-modal-backdrop-' + btn.dataset.id;
+      var modalEl = document.getElementById(modalId);
+      var backdropEl = document.getElementById(backdropId);
+      if (modalEl && backdropEl) {
+        modalEl.style.display = 'none';
+        backdropEl.style.display = 'none';
       }
     });
   });
