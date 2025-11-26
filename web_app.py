@@ -1,4 +1,3 @@
-
 # --- All imports at the top, deduplicated and complete ---
 import os
 import sys
@@ -504,6 +503,61 @@ def api_update_subscription():
     except Exception as e:
         logger.error(f"API update error: {e}")
         return jsonify({'status': 'error', 'message': 'Internal server error'}), 500
+    
+    
+# --- API endpoint to delete a subscription ---
+@app.route('/api/delete_subscription', methods=['POST'])
+@limiter.limit("20 per minute")
+@csrf.exempt
+def api_delete_subscription():
+    """API to delete a subscription (weather or countdown) from modal or card."""
+    try:
+        data = request.get_json()
+        if not data or 'id' not in data:
+            return jsonify({'status': 'error', 'message': 'Missing subscription ID'}), 400
+
+        sub_id = data['id']
+        if sub_id.startswith('weather_'):
+            email = sub_id.replace('weather_', '', 1)
+            conn = get_db_connection()
+            try:
+                cursor = conn.execute('DELETE FROM subscribers WHERE email = ?', (email,))
+                conn.commit()
+                if cursor.rowcount > 0:
+                    return jsonify({'status': 'success'})
+                else:
+                    return jsonify({'status': 'error', 'message': 'Subscription not found'}), 404
+            except Exception as e:
+                logger.error(f"Weather delete error: {e}")
+                return jsonify({'status': 'error', 'message': str(e)}), 500
+            finally:
+                conn.close()
+        elif sub_id.startswith('countdown_'):
+            parts = sub_id.split('_', 2)
+            if len(parts) < 3:
+                return jsonify({'status': 'error', 'message': 'Invalid countdown ID'}), 400
+            name = parts[1]
+            date = parts[2]
+            conn = get_db_connection()
+            try:
+                cursor = conn.execute('DELETE FROM countdowns WHERE name = ? AND date = ?', (name, date))
+                conn.commit()
+                if cursor.rowcount > 0:
+                    return jsonify({'status': 'success'})
+                else:
+                    return jsonify({'status': 'error', 'message': 'Countdown not found'}), 404
+            except Exception as e:
+                logger.error(f"Countdown delete error: {e}")
+                return jsonify({'status': 'error', 'message': str(e)}), 500
+            finally:
+                conn.close()
+        else:
+            return jsonify({'status': 'error', 'message': 'Unknown subscription type'}), 400
+    except Exception as e:
+        logger.error(f"API delete error: {e}")
+        return jsonify({'status': 'error', 'message': 'Internal server error'}), 500
+
+
 @app.route('/api/check-email', methods=['POST'])
 @limiter.limit("20 per minute")
 @csrf.exempt  # For API calls, but we still validate

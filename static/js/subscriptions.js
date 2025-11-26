@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Hide all modals and backdrops on page load
+  document.querySelectorAll('.edit-modal').forEach(function(modal) {
+    modal.style.display = 'none';
+  });
+  document.querySelectorAll('.edit-modal-backdrop').forEach(function(backdrop) {
+    backdrop.style.display = 'none';
+  });
   document.querySelectorAll('.edit-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       // Hide all modals first
@@ -76,7 +83,24 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.querySelectorAll('.delete-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      alert('Delete functionality coming soon! ID: ' + btn.dataset.id);
+      if (!confirm('Are you sure you want to delete this subscription?')) return;
+      fetch('/api/delete_subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: btn.dataset.id })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          alert('Subscription deleted!');
+          location.reload();
+        } else {
+          alert('Error: ' + (data.message || 'Could not delete subscription.'));
+        }
+      })
+      .catch(err => {
+        alert('Error deleting subscription: ' + err);
+      });
     });
   });
 });

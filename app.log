@@ -5734,3 +5734,75 @@ jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. You prob
  * Running on http://127.0.0.1:5000
  * Running on http://10.201.160.86:5000
 2025-11-26 13:59:00,431 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-26 20:01:37,043 - INFO - Starting Daily Brief Web Interface
+2025-11-26 20:01:37,044 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-26 20:01:37,044 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-26 20:01:37,044 - WARNING - Add to .env: FLASK_SECRET_KEY=f3d82c5b68ed9ddea37bcdc1d1b6c8f7ea38948ed9a46a279a338de33771baf0
+2025-11-26 20:01:37,063 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-26 20:01:37,063 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-26 20:01:38,334 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:38] "GET / HTTP/1.1" 200 -
+2025-11-26 20:01:38,409 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:38] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-26 20:01:38,556 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-26 20:01:42,097 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:42] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 20:01:42,122 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:42] "GET /static/icons/edit.svg HTTP/1.1" 200 -
+2025-11-26 20:01:42,123 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:42] "GET /static/icons/delete.svg HTTP/1.1" 200 -
+2025-11-26 20:01:42,128 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:42] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-11-26 20:01:42,129 - INFO - 127.0.0.1 - - [26/Nov/2025 20:01:42] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-26 20:02:04,980 - INFO - 127.0.0.1 - - [26/Nov/2025 20:02:04] "GET / HTTP/1.1" 200 -
+2025-11-26 20:02:05,002 - INFO - 127.0.0.1 - - [26/Nov/2025 20:02:05] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:03:34,567 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-26 20:03:34,568 - INFO - ⚠️ Scheduler not running
+2025-11-26 20:03:36,569 - INFO - Starting Daily Brief Web Interface
+2025-11-26 20:03:36,570 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-26 20:03:36,570 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-26 20:03:36,570 - WARNING - Add to .env: FLASK_SECRET_KEY=5d3a4591c008b1f4fa9a201627a8e4315699a514fe54450fde024a929f8bae11
+2025-11-26 20:03:36,578 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-26 20:03:36,578 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-26 20:03:37,696 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:37] "GET / HTTP/1.1" 200 -
+2025-11-26 20:03:37,759 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:37] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:03:39,182 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:39] "GET / HTTP/1.1" 200 -
+2025-11-26 20:03:39,200 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:39] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:03:41,190 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:41] "GET / HTTP/1.1" 200 -
+2025-11-26 20:03:41,207 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:41] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:03:45,337 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:45] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 20:03:45,356 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:45] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:03:45,357 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:45] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:03:45,362 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:45] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 20:03:45,392 - INFO - 127.0.0.1 - - [26/Nov/2025 20:03:45] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-26 20:10:09,655 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-26 20:10:09,656 - INFO - ⚠️ Scheduler not running
+2025-11-26 20:12:14,165 - INFO - Starting Daily Brief Web Interface
+2025-11-26 20:12:14,166 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-26 20:12:14,166 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-26 20:12:14,166 - WARNING - Add to .env: FLASK_SECRET_KEY=ce0eb006ed46f60eb41f53540b4e21865c5328d305cd8f0af7b3f1bf7cd8108f
+2025-11-26 20:12:14,186 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-26 20:12:14,187 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-26 20:12:16,932 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:16] "GET / HTTP/1.1" 200 -
+2025-11-26 20:12:17,003 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:17] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:23,000 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:23] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 20:12:23,042 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:23] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-26 20:12:23,047 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:23] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:12:23,047 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:23] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:12:23,065 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:23] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:27,064 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:27] "POST /api/delete_subscription HTTP/1.1" 200 -
+2025-11-26 20:12:28,327 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:28] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-26 20:12:28,349 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:28] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:12:28,354 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:28] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-26 20:12:28,358 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:28] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:28,360 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:28] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:33,350 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:33] "GET / HTTP/1.1" 200 -
+2025-11-26 20:12:33,368 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:33] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:35,006 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:35] "GET /subscribe HTTP/1.1" 200 -
+2025-11-26 20:12:35,034 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:35] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-26 20:12:35,036 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:35] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-26 20:13:05,753 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-26 20:13:05,753 - INFO - ⚠️ Scheduler not running
