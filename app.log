@@ -5806,3 +5806,51 @@ jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. You prob
 2025-11-26 20:12:35,036 - INFO - 127.0.0.1 - - [26/Nov/2025 20:12:35] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
 2025-11-26 20:13:05,753 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-26 20:13:05,753 - INFO - ⚠️ Scheduler not running
+2025-11-27 11:06:11,582 - INFO - Starting Daily Brief Web Interface
+2025-11-27 11:06:11,582 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-27 11:06:11,583 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-27 11:06:11,583 - WARNING - Add to .env: FLASK_SECRET_KEY=c41ac6cc303e849e0b94d953735f0e68080659ca4f62dc383573c53f5e34d481
+2025-11-27 11:06:11,604 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-27 11:06:11,604 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 11:06:15,231 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:15] "GET / HTTP/1.1" 200 -
+2025-11-27 11:06:15,577 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:15] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-27 11:06:17,014 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:17] "GET /subscribe HTTP/1.1" 200 -
+2025-11-27 11:06:17,078 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:17] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-27 11:06:17,079 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:17] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-27 11:06:40,385 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-27 11:06:40,386 - INFO - ⚠️ Scheduler not running
+2025-11-27 11:06:43,628 - INFO - Starting Daily Brief Web Interface
+2025-11-27 11:06:43,629 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-27 11:06:43,630 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-27 11:06:43,630 - WARNING - Add to .env: FLASK_SECRET_KEY=1be7e364fc74de040f2a72a9e2e93a72f462f550c94f2b6bded90c2b5264b6c3
+2025-11-27 11:06:43,656 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-27 11:06:43,657 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 11:06:47,105 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:47] "GET / HTTP/1.1" 200 -
+2025-11-27 11:06:47,334 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:47] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-27 11:06:48,593 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:48] "GET /subscribe HTTP/1.1" 200 -
+2025-11-27 11:06:48,652 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:48] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-27 11:06:48,652 - INFO - 127.0.0.1 - - [27/Nov/2025 11:06:48] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-27 11:07:30,195 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-27 11:07:30,195 - INFO - ⚠️ Scheduler not running
+2025-11-27 11:07:44,091 - INFO - Starting Daily Brief Web Interface
+2025-11-27 11:07:44,091 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-27 11:07:44,092 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-27 11:07:44,092 - WARNING - Add to .env: FLASK_SECRET_KEY=962ebfef607436a27188c9b1cee6dd2e33c094bf496a007708521264b6e2e2c7
+2025-11-27 11:07:44,112 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-11-27 11:07:44,112 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 11:07:49,066 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:49] "GET / HTTP/1.1" 200 -
+2025-11-27 11:07:49,301 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:49] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-27 11:07:50,812 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:50] "GET /subscribe HTTP/1.1" 200 -
+2025-11-27 11:07:50,861 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:50] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-27 11:07:50,901 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:50] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-27 11:08:03,557 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-27 11:08:03,558 - INFO - ⚠️ Scheduler not running
