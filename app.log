@@ -5854,3 +5854,19 @@ jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'. You prob
 2025-11-27 11:07:50,901 - INFO - 127.0.0.1 - - [27/Nov/2025 11:07:50] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
 2025-11-27 11:08:03,557 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-11-27 11:08:03,558 - INFO - ⚠️ Scheduler not running
+2025-11-27 21:43:49,246 - INFO - Starting Daily Brief Web Interface
+2025-11-27 21:43:49,246 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-27 21:43:49,247 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-27 21:43:49,247 - WARNING - Add to .env: FLASK_SECRET_KEY=0bc7b04de4287b00e079503a593ee555c005bea370eb26e6585e43f9ccafa833
+2025-11-27 21:43:49,254 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-27 21:43:49,255 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 21:43:51,867 - INFO - 127.0.0.1 - - [27/Nov/2025 21:43:51] "GET / HTTP/1.1" 200 -
+2025-11-27 21:43:51,935 - INFO - 127.0.0.1 - - [27/Nov/2025 21:43:51] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-27 21:43:55,026 - INFO - 127.0.0.1 - - [27/Nov/2025 21:43:55] "GET /subscribe HTTP/1.1" 200 -
+2025-11-27 21:43:55,046 - INFO - 127.0.0.1 - - [27/Nov/2025 21:43:55] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-27 21:43:55,047 - INFO - 127.0.0.1 - - [27/Nov/2025 21:43:55] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-27 21:44:04,741 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-27 21:44:04,741 - INFO - ⚠️ Scheduler not running

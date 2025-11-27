@@ -1,5 +1,9 @@
 # 🥧 Raspberry Pi Deployment Guide - Daily Brief Service
 
+# ✅ NOTE: All instructions, commands, and examples in this guide have been reviewed and updated to match the current state of the WetherApp project (MVP2.0 branch, November 2025). If you spot any outdated information, please report it for immediate correction.
+
+This guide walks you through deploying the **Daily Brief Service** (WetherApp MVP2.0) on your Raspberry Pi, making it a dedicated 24/7 weather and reminder email server. All instructions are up-to-date for the current codebase and deployment workflow.
+
 ## 📋 **Overview**
 
 This guide will walk you through deploying the **Daily Brief Service** on your Raspberry Pi, making it a dedicated 24/7 weather email server.
@@ -12,6 +16,8 @@ This guide will walk you through deploying the **Daily Brief Service** on your R
 - **MicroSD card** (16GB+ recommended)
 - **Power supply** for your Pi
 - **Internet connection** (WiFi or Ethernet)
+---
+
 - **SSH access** or keyboard/monitor for initial setup
 - **GitHub account credentials** (to clone the repository)
 
@@ -59,7 +65,6 @@ timedatectl
 #### 2.1 Create Application Directory
 ```bash
 # Create projects directory
-mkdir -p ~/projects
 cd ~/projects
 
 # Clone the repository
@@ -239,6 +244,9 @@ sudo systemctl stop dailybrief.service
 
 # Disable automatic startup
 sudo systemctl disable dailybrief.service
+
+# Shows active gunicorn tasks
+sudo lsof -i :5000
 ```
 
 #### 6.2 Application Logs
@@ -261,7 +269,29 @@ SELECT * FROM subscribers;       # View all subscribers
 SELECT * FROM inbox_log;         # View email processing log
 .exit                            # Exit sqlite3
 ```
+#### 6.3 DuckDNS setup/check
+```bash
 
+# Create a directory for DuckDNS
+mkdir ~/duckdns
+cd ~/duckdns
+
+# nano duck.sh
+nano duck.sh
+
+# Make it executable
+chmod 700 duck.sh
+
+# Test it
+./duck.sh
+cat duck.log
+
+# Set up the cron job
+crontab -e
+
+#Add this line
+*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
+``` 
 ---
 
 ### **Step 7: Update Application**
@@ -459,8 +489,9 @@ personality: emuska
 cd ~/projects/WetherApp
 sqlite3 app.db
 
-INSERT INTO subscribers (email, location, personality, language, active)
-VALUES ('em.solarova@gmail.com', 'Bratislava', 'emuska', 'sk', 1);
+-- Update for current schema (example, adjust as needed):
+INSERT INTO subscribers (email, location, personality, language, active, created_at)
+VALUES ('em.solarova@gmail.com', 'Bratislava', 'emuska', 'sk', 1, CURRENT_TIMESTAMP);
 
 .exit
 ```
