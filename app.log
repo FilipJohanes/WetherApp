@@ -1,0 +1,255 @@
+2025-11-29 11:15:22,367 - INFO - Starting Daily Brief Web Interface
+2025-11-29 11:15:22,367 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-29 11:15:22,368 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-29 11:15:22,368 - WARNING - Add to .env: FLASK_SECRET_KEY=594a8fc8f40bcd6c575038d9e546b6a79c080c2ff520d16ff67c2d6275764a47
+2025-11-29 11:15:22,375 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-29 11:15:22,375 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-29 11:15:24,593 - INFO - 127.0.0.1 - - [29/Nov/2025 11:15:24] "GET / HTTP/1.1" 200 -
+2025-11-29 11:15:24,639 - INFO - 127.0.0.1 - - [29/Nov/2025 11:15:24] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-11-29 11:15:26,078 - INFO - 127.0.0.1 - - [29/Nov/2025 11:15:26] "GET /subscribe HTTP/1.1" 200 -
+2025-11-29 11:15:26,101 - INFO - 127.0.0.1 - - [29/Nov/2025 11:15:26] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-11-29 11:15:26,102 - INFO - 127.0.0.1 - - [29/Nov/2025 11:15:26] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-11-29 11:15:30,707 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-29 11:15:30,708 - INFO - ⚠️ Scheduler not running
+2025-11-29 11:21:34,946 - INFO - Starting Daily Brief Web Interface
+2025-11-29 11:21:34,946 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-29 11:21:34,946 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-29 11:21:34,946 - WARNING - Add to .env: FLASK_SECRET_KEY=0cdac93184ae943cc52529620c6752dfa6ea9aa5b4ad4b66c21f33352fb9cd0e
+2025-11-29 11:21:34,954 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-29 11:21:34,954 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-29 11:21:37,364 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:37] "GET / HTTP/1.1" 200 -
+2025-11-29 11:21:37,435 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:37] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:21:39,208 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:39] "GET /subscribe HTTP/1.1" 200 -
+2025-11-29 11:21:39,225 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:39] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 11:21:39,227 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:39] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 11:21:43,784 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:43] "GET / HTTP/1.1" 200 -
+2025-11-29 11:21:43,799 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:43] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:21:48,543 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:48] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 11:21:48,560 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:48] "GET /static/icons/edit.svg HTTP/1.1" 200 -
+2025-11-29 11:21:48,562 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:48] "GET /static/icons/delete.svg HTTP/1.1" 200 -
+2025-11-29 11:21:48,571 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:48] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 11:21:48,571 - INFO - 127.0.0.1 - - [29/Nov/2025 11:21:48] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 11:22:15,257 - INFO - 127.0.0.1 - - [29/Nov/2025 11:22:15] "GET / HTTP/1.1" 200 -
+2025-11-29 11:22:15,273 - INFO - 127.0.0.1 - - [29/Nov/2025 11:22:15] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:23:12,533 - INFO - 127.0.0.1 - - [29/Nov/2025 11:23:12] "GET /subscribe HTTP/1.1" 200 -
+2025-11-29 11:23:12,554 - INFO - 127.0.0.1 - - [29/Nov/2025 11:23:12] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 11:23:12,556 - INFO - 127.0.0.1 - - [29/Nov/2025 11:23:12] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 11:34:55,676 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-29 11:34:55,677 - INFO - ⚠️ Scheduler not running
+2025-11-29 11:59:39,555 - INFO - Starting Daily Brief Web Interface
+2025-11-29 11:59:39,555 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-29 11:59:39,555 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-29 11:59:39,556 - WARNING - Add to .env: FLASK_SECRET_KEY=a6640df04483e5232de448c5272cd59121ef982350fd4b56197ffe5a8a486f45
+2025-11-29 11:59:39,562 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-29 11:59:39,562 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-29 11:59:40,511 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:40] "GET / HTTP/1.1" 200 -
+2025-11-29 11:59:40,569 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:40] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:59:44,351 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 298, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\PythonProjects\WetherApp\templates\base.html", line 363, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 81, in block 'content'
+    <form class="edit-weather-form" method="POST" action="{{ url_for('edit_weather', sub_id=sub.id) }}">
+    ^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_weather' with values ['sub_id']. Did you mean 'stats' instead?
+2025-11-29 11:59:44,407 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-29 11:59:44,410 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:44] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-29 11:59:45,554 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:45] "GET / HTTP/1.1" 200 -
+2025-11-29 11:59:45,574 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:45] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:59:48,023 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 298, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\PythonProjects\WetherApp\templates\base.html", line 363, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 81, in block 'content'
+    <form class="edit-weather-form" method="POST" action="{{ url_for('edit_weather', sub_id=sub.id) }}">
+    ^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_weather' with values ['sub_id']. Did you mean 'stats' instead?
+2025-11-29 11:59:48,025 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-29 11:59:48,026 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:48] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-29 11:59:52,707 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:52] "GET / HTTP/1.1" 200 -
+2025-11-29 11:59:52,731 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:52] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:59:58,424 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:58] "GET / HTTP/1.1" 200 -
+2025-11-29 11:59:58,448 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:58] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 11:59:59,433 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:59] "GET / HTTP/1.1" 200 -
+2025-11-29 11:59:59,452 - INFO - 127.0.0.1 - - [29/Nov/2025 11:59:59] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 12:00:00,063 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:00] "GET /subscribe HTTP/1.1" 200 -
+2025-11-29 12:00:00,081 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:00] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 12:00:00,082 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:00] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 12:00:04,613 - INFO - Processing weather subscription for filip.johanes9@gmail.com - Senec
+2025-11-29 12:00:04,930 - INFO - Weather subscription updated for filip.johanes9@gmail.com in timezone Europe/Bratislava
+2025-11-29 12:00:04,931 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:04] "[32mPOST /subscribe?tab=weather HTTP/1.1[0m" 302 -
+2025-11-29 12:00:06,026 - INFO - Processing weather subscription for filip.johanes9@gmail.com - Senec
+2025-11-29 12:00:06,272 - INFO - Weather subscription updated for filip.johanes9@gmail.com in timezone Europe/Bratislava
+2025-11-29 12:00:06,272 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:06] "[32mPOST /subscribe?tab=weather HTTP/1.1[0m" 302 -
+2025-11-29 12:00:08,274 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:08] "GET /preview?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 12:00:09,871 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:09] "GET /preview?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 12:00:12,353 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:12] "GET / HTTP/1.1" 200 -
+2025-11-29 12:00:12,367 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:12] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 12:00:14,704 - ERROR - Exception on /subscribe [GET]
+Traceback (most recent call last):
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask_limiter\_limits.py", line 326, in __inner
+    return cast(R, flask.current_app.ensure_sync(obj)(*a, **k))
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\web_app.py", line 298, in subscribe
+    return render_template('subscribe.html', form=form, tab=tab, error=error, subscriptions=subscriptions)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\PythonProjects\WetherApp\templates\base.html", line 363, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^
+  File "C:\PythonProjects\WetherApp\templates\subscribe.html", line 81, in block 'content'
+    <form class="edit-weather-form" method="POST" action="{{ url_for('edit_weather', sub_id=sub.id) }}">
+    ^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\filip\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_weather' with values ['sub_id']. Did you mean 'stats' instead?
+2025-11-29 12:00:14,706 - ERROR - Internal error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-29 12:00:14,706 - INFO - 127.0.0.1 - - [29/Nov/2025 12:00:14] "[35m[1mGET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1[0m" 500 -
+2025-11-29 12:03:22,321 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-29 12:03:22,321 - INFO - ⚠️ Scheduler not running
+2025-11-29 12:03:28,144 - INFO - Starting Daily Brief Web Interface
+2025-11-29 12:03:28,145 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-11-29 12:03:28,145 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-11-29 12:03:28,145 - WARNING - Add to .env: FLASK_SECRET_KEY=ace94bf43b1a761fd2d1f2bc77dd069fa40f4dd40c00e11c89cf68e375f8c4ca
+2025-11-29 12:03:28,152 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-11-29 12:03:28,152 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-29 12:03:29,352 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:29] "GET / HTTP/1.1" 200 -
+2025-11-29 12:03:29,407 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:29] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:38,796 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:38] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 12:03:38,817 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:38] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-29 12:03:38,819 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:38] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-29 12:03:38,828 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:38] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:38,828 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:38] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:46,096 - INFO - Processing weather subscription for filip.johanes9@gmail.com - Senec
+2025-11-29 12:03:46,344 - INFO - Weather subscription updated for filip.johanes9@gmail.com in timezone Europe/Bratislava
+2025-11-29 12:03:46,345 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:46] "[32mPOST /subscribe?tab=weather HTTP/1.1[0m" 302 -
+2025-11-29 12:03:46,682 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:46] "GET /preview?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 12:03:50,335 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:50] "GET /subscribe HTTP/1.1" 200 -
+2025-11-29 12:03:50,353 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:50] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:50,354 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:50] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:52,814 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:52] "GET / HTTP/1.1" 200 -
+2025-11-29 12:03:52,831 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:52] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:56,424 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:56] "GET /subscribe?email=filip.johanes9@gmail.com HTTP/1.1" 200 -
+2025-11-29 12:03:56,443 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:56] "[36mGET /static/icons/edit.svg HTTP/1.1[0m" 304 -
+2025-11-29 12:03:56,447 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:56] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
+2025-11-29 12:03:56,451 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:56] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 12:03:56,452 - INFO - 127.0.0.1 - - [29/Nov/2025 12:03:56] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 12:04:04,026 - INFO - Processing countdown subscription for filip.johanes9@gmail.com - gfnfgn on 2025-12-07
+2025-11-29 12:04:04,029 - INFO - 127.0.0.1 - - [29/Nov/2025 12:04:04] "POST /subscribe?tab=countdown HTTP/1.1" 200 -
+2025-11-29 12:04:04,049 - INFO - 127.0.0.1 - - [29/Nov/2025 12:04:04] "[36mGET /static/js/subscribe.js HTTP/1.1[0m" 304 -
+2025-11-29 12:04:04,049 - INFO - 127.0.0.1 - - [29/Nov/2025 12:04:04] "[36mGET /static/js/subscriptions.js HTTP/1.1[0m" 304 -
+2025-11-29 12:04:10,201 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-11-29 12:04:10,201 - INFO - ⚠️ Scheduler not running

@@ -221,6 +221,33 @@ sudo systemctl status dailybrief.service
 
 You should see "active (running)" in green! ✅
 
+#### 5.4 Disable and Enable webservice
+
+```bash
+#If running with systemd
+sudo systemctl stop dailybrief.service
+
+#If running Gunicorn manually:
+pkill gunicorn
+
+#Check that all related processes are stopped
+sudo lsof -i :5000
+
+#Start the web service again
+#If using systemd:
+sudo systemctl start dailybrief.service
+
+#If running Gunicorn manually
+gunicorn -w 4 -b 0.0.0.0:5000 web_app:app
+
+#If running Flask manually
+python web_app.py
+
+#Check status and logs
+sudo systemctl status dailybrief.service
+sudo journalctl -u dailybrief.service -n 50
+
+```
 ---
 
 ### **Step 6: Monitor and Manage**
@@ -306,7 +333,9 @@ cd ~/projects/WetherApp
 source venv/bin/activate
 
 # Pull latest changes
-git pull origin main
+git fetch origin
+git checkout "name"
+git pull origin "name"
 
 # Install any new dependencies
 pip install -r requirements.txt
@@ -568,6 +597,28 @@ ssh-copy-id pi@<raspberry-pi-ip>
 ssh pi@<raspberry-pi-ip>
 ```
 
+### **Updating pi**
+
+```bash
+# Fetch all remote changes without merging them
+git fetch --all
+
+# Switch to the branch you want to be on
+git checkout your-branch-name
+
+# Pull the latest changes from the remote branch into your local branch
+git pull
+
+# Forcefully reset your local branch to match the remote branch exactly
+git reset --hard origin/your-branch-name
+
+# Check the current status of your working directory
+git status
+
+# (Optional) Remove any untracked files or directories if you want a completely clean slate
+git clean -f -d
+
+```
 ---
 
 ## 🎉 **Verification Checklist**
