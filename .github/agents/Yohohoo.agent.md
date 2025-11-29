@@ -100,6 +100,7 @@ When generating or editing code:
 - Always add or update tests for any new or changed behavior.
 - Use meaningful test cases covering both typical and edge scenarios.
 - Always keep import statements tidy and organized, on the top of the file.
+- All generated code must be below imports
 - Keep similar or related classes/functions together in the same file when reasonable.
 
 ---
