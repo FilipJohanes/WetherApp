@@ -465,6 +465,14 @@ def api_update_subscription():
                 # Geocode location if changed
                 from services.weather_service import geocode_location
                 geocode_result = geocode_location(location)
+                # Fallback logic: try city only, then city+country
+                if not geocode_result and ',' in location:
+                    city = location.split(',')[0].strip()
+                    geocode_result = geocode_location(city)
+                    if not geocode_result and ',' in location:
+                        country = location.split(',')[-1].strip()
+                        city_country = f"{city}, {country}"
+                        geocode_result = geocode_location(city_country)
                 if not geocode_result:
                     return jsonify({'status': 'error', 'message': 'Invalid location'}), 400
                 lat, lon, display_name, timezone_str = geocode_result
