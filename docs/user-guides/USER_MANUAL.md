@@ -364,6 +364,7 @@ The Daily Brief Service uses a single SQLite database (`app.db`) with multiple t
 - `body_hash` (TEXT)
 
 ---
+#
 
 This structure allows efficient management of users and their subscriptions, weather data, reminders, countdowns, and email logs. The master `users` table provides quick access to user status and subscription flags, minimizing unnecessary database queries.
 
