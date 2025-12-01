@@ -2014,3 +2014,28 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_w
 2025-11-30 16:50:09,689 - INFO - 127.0.0.1 - - [30/Nov/2025 16:50:09] "[36mGET /static/icons/delete.svg HTTP/1.1[0m" 304 -
 2025-12-01 19:30:38,036 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-12-01 19:30:38,040 - INFO - ⚠️ Scheduler not running
+2025-12-01 19:56:54,959 - INFO - Starting Daily Brief Web Interface
+2025-12-01 19:56:54,959 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-12-01 19:56:54,960 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-12-01 19:56:54,960 - WARNING - Add to .env: FLASK_SECRET_KEY=0717932667ae0a11e4e784b237619f8afe30b0b4cd146561a5f6837d19e167b1
+2025-12-01 19:56:54,977 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.24:5000
+2025-12-01 19:56:54,977 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-01 19:56:56,097 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:56] "GET / HTTP/1.1" 200 -
+2025-12-01 19:56:56,165 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:56] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-12-01 19:56:57,670 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:57] "GET /subscribe HTTP/1.1" 200 -
+2025-12-01 19:56:57,691 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:57] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-12-01 19:56:57,695 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:57] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-12-01 19:56:57,696 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:57] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-12-01 19:56:58,384 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:58] "GET /unsubscribe HTTP/1.1" 200 -
+2025-12-01 19:56:58,400 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:58] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-12-01 19:56:58,868 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:58] "GET /stats HTTP/1.1" 200 -
+2025-12-01 19:56:58,884 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:58] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-12-01 19:56:59,501 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:59] "GET / HTTP/1.1" 200 -
+2025-12-01 19:56:59,518 - INFO - 127.0.0.1 - - [01/Dec/2025 19:56:59] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-12-01 19:57:00,139 - INFO - 127.0.0.1 - - [01/Dec/2025 19:57:00] "GET /stats HTTP/1.1" 200 -
+2025-12-01 19:57:00,156 - INFO - 127.0.0.1 - - [01/Dec/2025 19:57:00] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-12-01 19:57:03,146 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-12-01 19:57:03,146 - INFO - ⚠️ Scheduler not running
