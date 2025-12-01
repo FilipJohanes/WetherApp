@@ -178,6 +178,8 @@ sudo nano /etc/systemd/system/dailybrief.service
 #### 5.2 Add Service Configuration
 Paste this content (adjust paths if needed):
 
+# Backend
+
 ```ini
 [Unit]
 Description=Daily Brief Weather Service
@@ -189,6 +191,30 @@ User=pi
 WorkingDirectory=/home/pi/projects/WetherApp
 Environment="PATH=/home/pi/projects/WetherApp/venv/bin"
 ExecStart=/home/pi/projects/WetherApp/venv/bin/python /home/pi/projects/WetherApp/app.py
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+# Frontend 
+
+```ini
+[Unit]
+Description=Daily Brief Web Interface
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/projects/WetherApp
+Environment="PATH=/home/pi/projects/WetherApp/venv/bin"
+ExecStart=/home/pi/projects/WetherApp/venv/bin/python /home/pi/projects/WetherApp/web_app.py
 Restart=always
 RestartSec=10
 
@@ -336,6 +362,9 @@ source venv/bin/activate
 git fetch origin
 git checkout "name"
 git pull origin "name"
+
+# Shows name of the pulled version
+git log -1
 
 # Install any new dependencies
 pip install -r requirements.txt

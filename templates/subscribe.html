@@ -26,95 +26,98 @@
             <div style="flex: 1;">Date</div>
             <div style="flex: 0 0 80px; text-align: right;"></div>
         </div>
-        {% if subscriptions %}
-            {% for sub in subscriptions %}
-                <div class="subscription-card" style="border-bottom: 1px solid #e0e0e0; padding: 12px 0; display: flex; align-items: center; background: none; position: relative;">
-                    <div style="flex: 2;">{{ (sub.name or sub.location)[:20] }}{% if (sub.name or sub.location)|length > 20 %}...{% endif %}</div>
-                    <div style="flex: 1;">{{ sub.type }}</div>
-                    <div style="flex: 1;">{{ (sub.date_added or sub.date)[:10] }}</div>
-                    <div style="flex: 0 0 80px; display: flex; gap: 8px; justify-content: flex-end;">
-                        <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ sub.id }}" data-type="{{ sub.type }}" data-index="{{ loop.index0 }}" title="Edit" style="padding: 4px 8px; border-radius: 8px;">
-                            <img src="{{ url_for('static', filename='icons/edit.svg') }}" alt="Edit" style="width: 24px; height: 24px;">
-                        </button>
-                        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ sub.id }}" title="Delete" style="padding: 4px 8px; border-radius: 8px;">
-                            <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete" style="width: 24px; height: 24px;">
-                        </button>
+        <div id="subscriptionsCards">
+            {% if subscriptions %}
+                {% for sub in subscriptions %}
+                    <div class="subscription-card" data-id="{{ sub.id }}" data-type="{{ sub.type }}" style="border-bottom: 1px solid #e0e0e0; padding: 12px 0; display: flex; align-items: center; background: none; position: relative;">
+                        <div style="flex: 2;">{{ (sub.name or sub.location)[:20] }}{% if (sub.name or sub.location)|length > 20 %}...{% endif %}</div>
+                        <div style="flex: 1;">{{ sub.type }}</div>
+                        <div style="flex: 1;">{{ (sub.date_added or sub.date)[:10] }}</div>
+                        <div style="flex: 0 0 80px; display: flex; gap: 8px; justify-content: flex-end;">
+                            <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ sub.id }}" data-type="{{ sub.type }}" data-index="{{ loop.index0 }}" title="Edit" style="padding: 4px 8px; border-radius: 8px;">
+                                <img src="{{ url_for('static', filename='icons/edit.svg') }}" alt="Edit" style="width: 24px; height: 24px;">
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ sub.id }}" title="Delete" style="padding: 4px 8px; border-radius: 8px;">
+                                <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete" style="width: 24px; height: 24px;">
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <!-- Modal Edit Form -->
-                <div class="edit-modal-backdrop" id="edit-modal-backdrop-{{ sub.id }}"></div>
-                <div class="edit-modal" id="edit-modal-{{ sub.id }}">
-                    <h3>Edit Subscription</h3>
-                    {% if sub.type == 'countdown' %}
-                    <form class="edit-countdown-form" method="POST" action="{{ url_for('subscribe') }}?tab=countdown">
-                        {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" value="{{ sub.email or '' }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Countdown Name</label>
-                            <input type="text" name="countdown_name" value="{{ sub.name or '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input type="date" name="countdown_date" value="{{ sub.date or '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Yearly event</label>
-                            <input type="checkbox" name="countdown_yearly" {% if sub.yearly %}checked{% endif %}>
-                        </div>
-                        <div class="form-group">
-                            <label>Message before event</label>
-                            <input type="text" name="countdown_message_before" value="{{ sub.message_before or '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Message after event</label>
-                            <input type="text" name="countdown_message_after" value="{{ sub.message_after or '' }}">
-                        </div>
-                        <div class="modal-actions">
-                            <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
-                            <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
-                        </div>
-                    </form>
-                    {% else %}
-                    <form class="edit-weather-form" method="POST" action="{{ url_for('subscribe') }}?tab=weather">
-                        {{ form.csrf_token }}
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" value="{{ sub.email or '' }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" name="location" value="{{ sub.location or '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Language</label>
-                            <select name="language">
-                                <option value="en" {% if sub.language == 'en' %}selected{% endif %}>English</option>
-                                <option value="es" {% if sub.language == 'es' %}selected{% endif %}>Spanish</option>
-                                <option value="sk" {% if sub.language == 'sk' %}selected{% endif %}>Slovak</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Personality</label>
-                            <select name="personality">
-                                <option value="neutral" {% if sub.personality == 'neutral' %}selected{% endif %}>Neutral</option>
-                                <option value="cute" {% if sub.personality == 'cute' %}selected{% endif %}>Cute</option>
-                                <option value="brutal" {% if sub.personality == 'brutal' %}selected{% endif %}>Brutal</option>
-                            </select>
-                        </div>
-                        <div class="modal-actions">
-                            <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
-                            <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
-                        </div>
-                    </form>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No active subscriptions found.</p>
-        {% endif %}
+                    <!-- Modal Edit Form -->
+                    <div class="edit-modal-backdrop" id="edit-modal-backdrop-{{ sub.id }}"></div>
+                    <div class="edit-modal" id="edit-modal-{{ sub.id }}">
+                        <h3>Edit Subscription</h3>
+                        {% if sub.type == 'countdown' %}
+                        <form class="edit-countdown-form" method="POST" action="{{ url_for('subscribe') }}?tab=countdown">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" value="{{ sub.email or '' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Countdown Name</label>
+                                <input type="text" name="countdown_name" value="{{ sub.name or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" name="countdown_date" value="{{ sub.date or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Yearly event</label>
+                                <input type="checkbox" name="countdown_yearly" {% if sub.yearly %}checked{% endif %}>
+                            </div>
+                            <div class="form-group">
+                                <label>Message before event</label>
+                                <input type="text" name="countdown_message_before" value="{{ sub.message_before or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Message after event</label>
+                                <input type="text" name="countdown_message_after" value="{{ sub.message_after or '' }}">
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                                <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <form class="edit-weather-form" method="POST" action="{{ url_for('subscribe') }}?tab=weather">
+                            {{ form.csrf_token }}
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" value="{{ sub.email or '' }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" name="location" value="{{ sub.location or '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Language</label>
+                                <select name="language">
+                                    <option value="en" {% if sub.language == 'en' %}selected{% endif %}>English</option>
+                                    <option value="es" {% if sub.language == 'es' %}selected{% endif %}>Spanish</option>
+                                    <option value="sk" {% if sub.language == 'sk' %}selected{% endif %}>Slovak</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="personality">Personality</label>
+                                <input list="personality-options" id="personality" name="personality" class="form-control" style="border-radius: 12px; background: #edeef0; border: none; font-size: 1.08em; height: 48px; padding: 12px 16px; margin-bottom: 0;" placeholder="Type or select..." value="{{ sub.personality or '' }}">
+                                <datalist id="personality-options">
+                                    <option value="neutral">
+                                    <option value="cute">
+                                    <option value="brutal">
+                                </datalist>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                                <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No active subscriptions found.</p>
+            {% endif %}
+        </div>
     </div>
 </div>>
 

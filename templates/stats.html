@@ -64,26 +64,28 @@
     {% if personalities %}
         <div style="margin-top: 15px;">
             {% for pers in personalities %}
-                <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <span>
-                            {% if pers.personality == 'neutral' %}😐 Neutral{% endif %}
-                            {% if pers.personality == 'cute' %}🥰 Cute{% endif %}
-                            {% if pers.personality == 'brutal' %}😤 Brutal{% endif %}
-                        </span>
-                        <strong>{{ pers.count }} ({{ "%.1f"|format((pers.count / total * 100) if total > 0 else 0) }}%)</strong>
+                    {% if pers.personality in ['neutral', 'cute', 'brutal'] %}
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>
+                                {% if pers.personality == 'neutral' %}😐 Neutral{% endif %}
+                                {% if pers.personality == 'cute' %}🥰 Cute{% endif %}
+                                {% if pers.personality == 'brutal' %}😤 Brutal{% endif %}
+                            </span>
+                            <strong>{{ pers.count }} ({{ "%.1f"|format((pers.count / total * 100) if total > 0 else 0) }}%)</strong>
+                        </div>
+                        <div style="background: #dee2e6; height: 20px; border-radius: 10px; overflow: hidden;">
+                            <div style="
+                                height: 100%; 
+                                width: {{ (pers.count / total * 100) if total > 0 else 0 }}%; 
+                                transition: width 0.5s;
+                                {% if pers.personality == 'neutral' %}background: #6c757d;{% endif %}
+                                {% if pers.personality == 'cute' %}background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);{% endif %}
+                                {% if pers.personality == 'brutal' %}background: linear-gradient(135deg, #434343 0%, #000000 100%);{% endif %}
+                            "></div>
+                        </div>
                     </div>
-                    <div style="background: #dee2e6; height: 20px; border-radius: 10px; overflow: hidden;">
-                        <div style="
-                            height: 100%; 
-                            width: {{ (pers.count / total * 100) if total > 0 else 0 }}%; 
-                            transition: width 0.5s;
-                            {% if pers.personality == 'neutral' %}background: #6c757d;{% endif %}
-                            {% if pers.personality == 'cute' %}background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);{% endif %}
-                            {% if pers.personality == 'brutal' %}background: linear-gradient(135deg, #434343 0%, #000000 100%);{% endif %}
-                        "></div>
-                    </div>
-                </div>
+                    {% endif %}
             {% endfor %}
         </div>
     {% else %}

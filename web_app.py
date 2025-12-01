@@ -1,5 +1,4 @@
 
-
 # --- API endpoint to delete a subscription ---
 # Place this after Flask app, limiter, and csrf are initialized
 
@@ -200,10 +199,10 @@ def subscribe():
     # Get subscriptions for the current email (from form or query)
     user_email = request.form.get('email', '') or request.args.get('email', '')
     if user_email:
-        # Weather subscription (from subscribers table)
+        # Weather subscription (from weather table)
         conn = get_db_connection()
         try:
-            weather_sub = conn.execute("SELECT email, location, timezone, personality, language, updated_at FROM subscribers WHERE email = ?", (user_email,)).fetchone()
+            weather_sub = conn.execute("SELECT email, location, timezone, personality, language, updated_at FROM weather WHERE email = ?", (user_email,)).fetchone()
             if weather_sub:
                 subscriptions.append({
                     'id': f"weather_{weather_sub['email']}",
@@ -256,12 +255,12 @@ def subscribe():
                 conn = get_db_connection()
                 try:
                     existing = conn.execute(
-                        'SELECT email FROM subscribers WHERE email = ?', 
+                        'SELECT email FROM weather WHERE email = ?', 
                         (email,)
                     ).fetchone()
                     if existing:
                         conn.execute("""
-                            UPDATE subscribers 
+                            UPDATE weather 
                             SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, 
                                 language = ?, updated_at = ?
                             WHERE email = ?
@@ -270,7 +269,7 @@ def subscribe():
                         action = 'updated'
                     else:
                         conn.execute("""
-                            INSERT INTO subscribers (email, location, lat, lon, timezone, personality, language, updated_at)
+                            INSERT INTO weather (email, location, lat, lon, timezone, personality, language, updated_at)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                         """, (email, display_name, lat, lon, timezone_str, personality, language,
                               datetime.now(ZoneInfo(service_config.timezone)).isoformat()))
@@ -325,7 +324,7 @@ def unsubscribe():
             
             conn = get_db_connection()
             try:
-                cursor = conn.execute('DELETE FROM subscribers WHERE email = ?', (email,))
+                cursor = conn.execute('DELETE FROM weather WHERE email = ?', (email,))
                 conn.commit()
                 
                 if cursor.rowcount > 0:
@@ -369,7 +368,7 @@ def preview():
         # Parameterized query (SQL injection safe)
         subscriber = conn.execute("""
             SELECT email, location, lat, lon, COALESCE(timezone, 'UTC') as timezone, personality, language 
-            FROM subscribers WHERE email = ?
+            FROM weather WHERE email = ?
         """, (email,)).fetchone()
         
         if not subscriber:
@@ -412,17 +411,17 @@ def stats():
     conn = get_db_connection()
     try:
         # Get aggregate statistics (include all users in totals, but hide special personality)
-        total_subscribers = conn.execute('SELECT COUNT(*) as count FROM subscribers').fetchone()['count']
+        total_subscribers = conn.execute('SELECT COUNT(*) as count FROM weather').fetchone()['count']
         
         language_stats = conn.execute("""
             SELECT language, COUNT(*) as count 
-            FROM subscribers 
+            FROM weather 
             GROUP BY language
         """).fetchall()
         
         personality_stats = conn.execute("""
             SELECT personality, COUNT(*) as count 
-            FROM subscribers 
+            FROM weather 
             WHERE personality != 'emuska'
             GROUP BY personality
         """).fetchall()
@@ -439,8 +438,132 @@ def stats():
     finally:
         conn.close()
 
+# API endpoint to get all subscriptions for a user
+@app.route('/api/get_subscriptions', methods=['POST'])
+@limiter.limit("20 per minute")
+@csrf.exempt
+def api_get_subscriptions():
+    """Return all active subscriptions (weather + countdowns) for a given email."""
+    try:
+        if not request.is_json:
+            return jsonify({'error': "Unsupported Media Type: Content-Type must be 'application/json'"}), 400
+        data = request.get_json(silent=True)
+        if not data or 'email' not in data:
+            return jsonify({'error': 'Email required'}), 400
+        email = data['email'].strip().lower()
+        # Validate email
+        try:
+            validate_email(email, check_deliverability=False)
+        except EmailNotValidError:
+            return jsonify({'error': 'Invalid email format'}), 400
+        conn = get_db_connection()
+        try:
+            # Weather subscription
+            weather = conn.execute("SELECT location, language, personality, updated_at FROM weather WHERE email = ?", (email,)).fetchone()
+            weather_debug = dict(weather) if weather else None
+            logger.info(f"DB weather response for {email}: {weather_debug}")
+            # Countdown subscriptions
+            countdowns = conn.execute("SELECT name, date, yearly, message_before FROM countdowns WHERE email = ?", (email,)).fetchall()
+            countdowns_debug = [dict(cd) for cd in countdowns] if countdowns else []
+            logger.info(f"DB countdowns response for {email}: {countdowns_debug}")
+            result = {'weather': None, 'countdowns': []}
+            if weather:
+                result['weather'] = {
+                    'location': weather['location'],
+                    'language': weather['language'],
+                    'personality': weather['personality'],
+                    'date_added': weather['updated_at']
+                }
+            for cd in countdowns:
+                result['countdowns'].append({
+                    'name': cd['name'],
+                    'date': cd['date'],
+                    'yearly': bool(cd['yearly']),
+                    'message_before': cd['message_before']
+                })
+            logger.info(f"API response for {email}: {result}")
+            print(f"API response for {email}: {result}")
+            return jsonify(result), 200
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.error(f"API get_subscriptions error: {e}")
+        
+        return jsonify({'error': 'Internal server error'}), 500
+
 
 # API endpoints (optional, but secure)
+@app.route('/api/delete_subscription', methods=['POST'])
+@limiter.limit("20 per minute")
+@csrf.exempt
+def api_delete_subscription():
+    """API to delete a subscription (weather or countdown) from dashboard."""
+    logger.info('API delete_subscription called')
+    try:
+        if not request.is_json:
+            logger.warning('Request Content-Type is not application/json')
+            return jsonify({'status': 'error', 'message': "Unsupported Media Type: Content-Type must be 'application/json'"}), 400
+        data = request.get_json(silent=True)
+        logger.info(f'Received data: {data}')
+        if not data:
+            logger.warning('No data received in request')
+            return jsonify({'status': 'error', 'message': 'No data received'}), 400
+        if 'id' not in data:
+            logger.warning('Missing subscription ID in request')
+            return jsonify({'status': 'error', 'message': 'Missing subscription ID'}), 400
+
+        sub_id = data['id']
+        logger.info(f'Processing sub_id: {sub_id}')
+        if sub_id.startswith('weather_'):
+            email = sub_id.replace('weather_', '', 1)
+            logger.info(f'Deleting weather subscription for email: {email}')
+            conn = get_db_connection()
+            try:
+                cursor = conn.execute('DELETE FROM weather WHERE email = ?', (email,))
+                conn.commit()
+                logger.info(f'Delete cursor.rowcount: {cursor.rowcount}')
+                if cursor.rowcount > 0:
+                    logger.info('Weather subscription deleted successfully')
+                    return jsonify({'status': 'success', 'message': 'Weather subscription deleted'}), 200
+                else:
+                    logger.warning('Weather subscription not found')
+                    return jsonify({'status': 'error', 'message': 'Weather subscription not found'}), 404
+            except Exception as e:
+                logger.error(f"Weather delete error: {e}")
+                return jsonify({'status': 'error', 'message': f'Weather delete error: {str(e)}'}), 500
+            finally:
+                conn.close()
+        elif sub_id.startswith('countdown_'):
+            parts = sub_id.split('_', 2)
+            logger.info(f'Countdown parts: {parts}')
+            if len(parts) < 3:
+                logger.warning('Invalid countdown ID format')
+                return jsonify({'status': 'error', 'message': 'Invalid countdown ID format'}), 400
+            name = parts[1]
+            date = parts[2]
+            logger.info(f'Deleting countdown: name={name}, date={date}')
+            conn = get_db_connection()
+            try:
+                cursor = conn.execute('DELETE FROM countdowns WHERE name = ? AND date = ?', (name, date))
+                conn.commit()
+                logger.info(f'Delete cursor.rowcount: {cursor.rowcount}')
+                if cursor.rowcount > 0:
+                    logger.info('Countdown deleted successfully')
+                    return jsonify({'status': 'success', 'message': 'Countdown deleted'}), 200
+                else:
+                    logger.warning('Countdown not found')
+                    return jsonify({'status': 'error', 'message': 'Countdown not found'}), 404
+            except Exception as e:
+                logger.error(f"Countdown delete error: {e}")
+                return jsonify({'status': 'error', 'message': f'Countdown delete error: {str(e)}'}), 500
+            finally:
+                conn.close()
+        else:
+            logger.warning('Unknown subscription type')
+            return jsonify({'status': 'error', 'message': 'Unknown subscription type'}), 400
+    except Exception as e:
+        logger.error(f"API delete error: {e}")
+        return jsonify({'status': 'error', 'message': f'API delete error: {str(e)}'}), 500
 
 @app.route('/api/update_subscription', methods=['POST'])
 @limiter.limit("20 per minute")
@@ -448,7 +571,10 @@ def stats():
 def api_update_subscription():
     """API to update a subscription (weather or countdown) from modal edit form."""
     try:
-        data = request.get_json()
+        if not request.is_json:
+            logger.warning('Request Content-Type is not application/json')
+            return jsonify({'status': 'error', 'message': "Unsupported Media Type: Content-Type must be 'application/json'"}), 400
+        data = request.get_json(silent=True)
         if not data or 'id' not in data:
             return jsonify({'status': 'error', 'message': 'Missing subscription ID'}), 400
 
@@ -459,13 +585,10 @@ def api_update_subscription():
             location = data.get('location', '').strip()
             language = data.get('language', '')
             personality = data.get('personality', '')
-            # Optionally, validate input here
             conn = get_db_connection()
             try:
-                # Geocode location if changed
                 from services.weather_service import geocode_location
                 geocode_result = geocode_location(location)
-                # Fallback logic: try city only, then city+country
                 if not geocode_result and ',' in location:
                     city = location.split(',')[0].strip()
                     geocode_result = geocode_location(city)
@@ -476,12 +599,16 @@ def api_update_subscription():
                 if not geocode_result:
                     return jsonify({'status': 'error', 'message': 'Invalid location'}), 400
                 lat, lon, display_name, timezone_str = geocode_result
+                cursor = conn.execute("SELECT email FROM weather WHERE email = ?", (email,))
+                existing = cursor.fetchone()
+                if not existing:
+                    return jsonify({'status': 'error', 'message': 'Weather subscription not found'}), 404
                 conn.execute("""
-                    UPDATE subscribers SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, language = ?, updated_at = ?
+                    UPDATE weather SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, language = ?, updated_at = ?
                     WHERE email = ?
                 """, (display_name, lat, lon, timezone_str, personality, language, datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
                 conn.commit()
-                return jsonify({'status': 'success'})
+                return jsonify({'status': 'success'}), 200
             except Exception as e:
                 logger.error(f"Weather update error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
@@ -532,7 +659,10 @@ def api_update_subscription():
 def api_check_email():
     """API to check if email is subscribed (rate limited)."""
     try:
-        data = request.get_json()
+        if not request.is_json:
+            logger.warning('Request Content-Type is not application/json')
+            return jsonify({'error': "Unsupported Media Type: Content-Type must be 'application/json'"}), 400
+        data = request.get_json(silent=True)
         if not data or 'email' not in data:
             return jsonify({'error': 'Email required'}), 400
         
@@ -547,20 +677,18 @@ def api_check_email():
         conn = get_db_connection()
         try:
             subscriber = conn.execute(
-                'SELECT email, location, personality, language FROM subscribers WHERE email = ?',
+                'SELECT email, location, personality, language FROM weather WHERE email = ?',
                 (email,)
             ).fetchone()
-            
             if subscriber:
                 return jsonify({
                     'subscribed': True,
                     'location': subscriber['location'],
                     'personality': subscriber['personality'],
                     'language': subscriber['language']
-                })
+                }), 200
             else:
-                return jsonify({'subscribed': False})
-        
+                return jsonify({'subscribed': False}), 404
         finally:
             conn.close()
     
@@ -570,26 +698,26 @@ def api_check_email():
 
 
 # Error handlers
+
+# Custom error handlers for API routes
 @app.errorhandler(404)
 def not_found(e):
-    return render_template('error.html', 
-                         error_code=404,
-                         error_message='Page not found'), 404
-
+    if request.path.startswith('/api/'):
+        return jsonify({'status': 'error', 'message': 'API endpoint not found'}), 404
+    return render_template('error.html', error_code=404, error_message='Page not found'), 404
 
 @app.errorhandler(429)
 def ratelimit_handler(e):
-    return render_template('error.html',
-                         error_code=429,
-                         error_message='Too many requests. Please slow down.'), 429
-
+    if request.path.startswith('/api/'):
+        return jsonify({'status': 'error', 'message': 'Rate limit exceeded'}), 429
+    return render_template('error.html', error_code=429, error_message='Too many requests. Please slow down.'), 429
 
 @app.errorhandler(500)
 def internal_error(e):
     logger.error(f"Internal error: {e}")
-    return render_template('error.html',
-                         error_code=500,
-                         error_message='Internal server error'), 500
+    if request.path.startswith('/api/'):
+        return jsonify({'status': 'error', 'message': 'Internal server error'}), 500
+    return render_template('error.html', error_code=500, error_message='Internal server error'), 500
 
 
 # Security headers
