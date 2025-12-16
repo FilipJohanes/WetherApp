@@ -261,17 +261,23 @@ Handles daily weather job and subscriber listing for the weather app.
 """
 
 def list_subscribers(db_path="app.db"):
-	"""List all weather subscribers in the database."""
+	"""List all weather subscribers from unified database."""
 	conn = sqlite3.connect(db_path)
+	conn.row_factory = sqlite3.Row
 	try:
-		cursor = conn.execute("SELECT email, location, lat, lon, personality, language, timezone FROM subscribers")
+		cursor = conn.execute("""
+			SELECT u.email, ws.location, u.lat, u.lon, ws.personality, ws.language, u.timezone
+			FROM users u
+			JOIN weather_subscriptions ws ON u.email = ws.email
+			WHERE u.weather_enabled = 1
+		""")
 		subscribers = cursor.fetchall()
 		if not subscribers:
-			print("No subscribers found.")
+			print("No weather subscribers found.")
 			return
 		print("Weather Subscribers:")
 		for sub in subscribers:
-			print(f"- {sub[0]} | {sub[1]} | {sub[2]}, {sub[3]} | {sub[4]} | {sub[5]} | {sub[6]}")
+			print(f"- {sub['email']} | {sub['location']} | {sub['lat']}, {sub['lon']} | {sub['personality']} | {sub['language']} | {sub['timezone']}")
 	finally:
 		conn.close()
 

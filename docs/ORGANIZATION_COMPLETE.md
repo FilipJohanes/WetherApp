@@ -1,4 +1,17 @@
-# 🎉 Daily Brief Service - Organization Complete!
+# Quick test (takes ~8 seconds)
+pytest -q
+
+# Detailed test output
+pytest -v
+
+# Run manual daily job simulation
+python scripts/test_local_daily_job.py
+
+# Check your database stats
+python scripts/show_stats.py
+
+# Test web flow
+python scripts/test_local_web_flow.py# 🎉 Daily Brief Service - Organization Complete!
 
 ## ✅ **Professional Project Structure Achieved**
 

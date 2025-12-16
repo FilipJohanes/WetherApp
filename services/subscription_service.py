@@ -1,52 +1,87 @@
 """
 Subscription Service Module
-Handles all subscriber insert, update, and delete logic for the weather app.
+Handles weather subscription insert, update, and delete logic with unified schema.
 """
+import os
 import sqlite3
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-# You may need to import Config from the main app if type checking is required
-# from app import Config
-
-def add_or_update_subscriber(email, location, lat, lon, personality, language, timezone, db_path="app.db"):
-    """Add a new subscriber or update existing one."""
+def add_or_update_subscriber(email, location, lat, lon, personality, language, timezone, db_path=None):
+    """Add or update a weather subscription. Creates user if doesn't exist."""
+    if db_path is None:
+        db_path = os.getenv("APP_DB_PATH", "app.db")
     conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
     try:
-        now = datetime.now(ZoneInfo(timezone)).isoformat() if timezone else datetime.now().isoformat()
+        now = datetime.now(ZoneInfo(timezone)).isoformat() if timezone else datetime.utcnow().isoformat()
+        
+        # Ensure user exists in master table
+        user_exists = conn.execute("SELECT 1 FROM users WHERE email = ?", (email,)).fetchone()
+        if not user_exists:
+            # Create new user
+            conn.execute("""
+                INSERT INTO users (email, timezone, lat, lon, weather_enabled, created_at, updated_at)
+                VALUES (?, ?, ?, ?, 1, ?, ?)
+            """, (email, timezone, lat, lon, now, now))
+        else:
+            # Update existing user
+            conn.execute("""
+                UPDATE users SET timezone = ?, lat = ?, lon = ?, weather_enabled = 1, updated_at = ?
+                WHERE email = ?
+            """, (timezone, lat, lon, now, email))
+        
+        # Insert or update weather subscription
         conn.execute("""
-            INSERT INTO subscribers (email, location, lat, lon, personality, language, timezone, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO weather_subscriptions (email, location, personality, language, updated_at)
+            VALUES (?, ?, ?, ?, ?)
             ON CONFLICT(email) DO UPDATE SET
                 location=excluded.location,
-                lat=excluded.lat,
-                lon=excluded.lon,
                 personality=excluded.personality,
                 language=excluded.language,
-                timezone=excluded.timezone,
                 updated_at=excluded.updated_at
-        """, (email, location, lat, lon, personality, language, timezone, now))
+        """, (email, location, personality, language, now))
+        
         conn.commit()
     finally:
         conn.close()
 
-def delete_subscriber(email, db_path="app.db"):
-    """Delete a subscriber by email."""
+def delete_subscriber(email, db_path=None):
+    """Delete a weather subscription and disable weather module for user."""
+    if db_path is None:
+        db_path = os.getenv("APP_DB_PATH", "app.db")
     conn = sqlite3.connect(db_path)
     try:
-        cursor = conn.execute("DELETE FROM subscribers WHERE email = ?", (email,))
+        # Delete weather subscription
+        cursor = conn.execute("DELETE FROM weather_subscriptions WHERE email = ?", (email,))
+        deleted = cursor.rowcount
+        
+        # Disable weather module in user table
+        if deleted > 0:
+            now = datetime.utcnow().isoformat()
+            conn.execute("""
+                UPDATE users SET weather_enabled = 0, updated_at = ? WHERE email = ?
+            """, (now, email))
+        
         conn.commit()
-        return cursor.rowcount
+        return deleted
     finally:
         conn.close()
 
-def get_subscriber(email, db_path="app.db"):
-    """Get subscriber info by email."""
+def get_subscriber(email, db_path=None):
+    """Get weather subscription info by email."""
+    if db_path is None:
+        db_path = os.getenv("APP_DB_PATH", "app.db")
     conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
     try:
         result = conn.execute("""
-            SELECT location, lat, lon, personality, COALESCE(language, 'en'), COALESCE(timezone, 'Europe/Bratislava')
-            FROM subscribers WHERE email = ?
+            SELECT ws.location, u.lat, u.lon, ws.personality, 
+                   COALESCE(ws.language, 'en') as language,
+                   COALESCE(u.timezone, 'UTC') as timezone
+            FROM weather_subscriptions ws
+            JOIN users u ON ws.email = u.email
+            WHERE ws.email = ?
         """, (email,)).fetchone()
         return result
     finally:

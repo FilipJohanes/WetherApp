@@ -1,4 +1,4 @@
-
+import os
 import sqlite3
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -35,34 +35,14 @@ class CountdownEvent:
         else:
             return None  # Countdown disables after event if no message_after
 
-# DB helpers
-COUNTDOWN_TABLE_SQL = """
-CREATE TABLE IF NOT EXISTS countdowns (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    name TEXT NOT NULL,
-    date TEXT NOT NULL,
-    yearly INTEGER NOT NULL,
-    message_before TEXT,
-    message_after TEXT
-);
-"""
+# DB helpers - No longer need init_countdown_db, handled in main init_db()
 
-def init_countdown_db(path: str = "app.db"):
+def add_countdown(event: CountdownEvent, path: str = None):
+    """Add a countdown for a user. Ensures user exists and enables countdown module."""
+    if path is None:
+        path = os.getenv("APP_DB_PATH", "app.db")
     conn = sqlite3.connect(path)
-    try:
-        conn.execute(COUNTDOWN_TABLE_SQL)
-        # Add unique index for (email, name, date)
-        conn.execute("""
-            CREATE UNIQUE INDEX IF NOT EXISTS idx_countdowns_email_name_date
-            ON countdowns (email, name, date)
-        """)
-        conn.commit()
-    finally:
-        conn.close()
-
-def add_countdown(event: CountdownEvent, path: str = "app.db"):
-    conn = sqlite3.connect(path)
+    conn.row_factory = sqlite3.Row
     try:
         # Check for duplicate
         existing = conn.execute(
@@ -71,15 +51,26 @@ def add_countdown(event: CountdownEvent, path: str = "app.db"):
         ).fetchone()
         if existing:
             raise ValueError(f"Countdown for '{event.name}' on {event.date} already exists for {event.email}.")
+        
+        # Insert countdown with created_at timestamp
+        now = datetime.utcnow().isoformat()
         conn.execute("""
-            INSERT INTO countdowns (email, name, date, yearly, message_before, message_after)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (event.email, event.name, event.date, int(event.yearly), event.message_before, event.message_after))
+            INSERT INTO countdowns (email, name, date, yearly, message_before, message_after, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (event.email, event.name, event.date, int(event.yearly), event.message_before, event.message_after, now))
+        
+        # Enable countdown module for user
+        conn.execute("""
+            UPDATE users SET countdown_enabled = 1, updated_at = ? WHERE email = ?
+        """, (now, event.email))
+        
         conn.commit()
     finally:
         conn.close()
 
-def get_user_countdowns(email: str, path: str = "app.db") -> List[CountdownEvent]:
+def get_user_countdowns(email: str, path: str = None) -> List[CountdownEvent]:
+    if path is None:
+        path = os.getenv("APP_DB_PATH", "app.db")
     conn = sqlite3.connect(path)
     try:
         rows = conn.execute("SELECT name, date, yearly, message_before, message_after FROM countdowns WHERE email = ?", (email,)).fetchall()
@@ -89,9 +80,23 @@ def get_user_countdowns(email: str, path: str = "app.db") -> List[CountdownEvent
         conn.close()
 
 def delete_countdown(email: str, name: str, path: str = "app.db"):
+    """Delete a countdown and disable module if user has no more countdowns."""
     conn = sqlite3.connect(path)
     try:
         conn.execute("DELETE FROM countdowns WHERE email = ? AND name = ?", (email, name))
+        
+        # Check if user has any remaining countdowns
+        remaining = conn.execute(
+            "SELECT COUNT(*) as count FROM countdowns WHERE email = ?", (email,)
+        ).fetchone()[0]
+        
+        # If no countdowns left, disable the module
+        if remaining == 0:
+            now = datetime.utcnow().isoformat()
+            conn.execute("""
+                UPDATE users SET countdown_enabled = 0, updated_at = ? WHERE email = ?
+            """, (now, email))
+        
         conn.commit()
     finally:
         conn.close()

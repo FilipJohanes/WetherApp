@@ -163,7 +163,8 @@ class UnsubscribeForm(FlaskForm):
 
 def get_db_connection():
     """Get secure database connection with read-only where appropriate."""
-    conn = sqlite3.connect('app.db', check_same_thread=False)
+    db_path = os.getenv('APP_DB_PATH', 'app.db')
+    conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -194,10 +195,15 @@ def subscribe():
     # Get subscriptions for the current email (from form or query)
     user_email = request.form.get('email', '') or request.args.get('email', '')
     if user_email:
-        # Weather subscription (from subscribers table)
+        # Weather subscription (from unified schema)
         conn = get_db_connection()
         try:
-            weather_sub = conn.execute("SELECT email, location, timezone, personality, language, updated_at FROM subscribers WHERE email = ?", (user_email,)).fetchone()
+            weather_sub = conn.execute("""
+                SELECT ws.email, ws.location, u.timezone, ws.personality, ws.language, ws.updated_at 
+                FROM weather_subscriptions ws
+                JOIN users u ON ws.email = u.email
+                WHERE ws.email = ? AND u.weather_enabled = 1
+            """, (user_email,)).fetchone()
             if weather_sub:
                 subscriptions.append({
                     'id': f"weather_{weather_sub['email']}",
@@ -238,36 +244,16 @@ def subscribe():
                     flash('Could not find that location. Please try a more specific address (e.g., "Bratislava, Slovakia")', 'error')
                     return render_template('subscribe.html', form=form, tab='weather', error=error)
                 lat, lon, display_name, timezone_str = geocode_result
-                conn = get_db_connection()
+                
+                # Use subscription service which handles unified schema
+                from services.subscription_service import add_or_update_subscriber
                 try:
-                    existing = conn.execute(
-                        'SELECT email FROM subscribers WHERE email = ?', 
-                        (email,)
-                    ).fetchone()
-                    if existing:
-                        conn.execute("""
-                            UPDATE subscribers 
-                            SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, 
-                                language = ?, updated_at = ?
-                            WHERE email = ?
-                        """, (display_name, lat, lon, timezone_str, personality, language, 
-                              datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
-                        action = 'updated'
-                    else:
-                        conn.execute("""
-                            INSERT INTO subscribers (email, location, lat, lon, timezone, personality, language, updated_at)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                        """, (email, display_name, lat, lon, timezone_str, personality, language,
-                              datetime.now(ZoneInfo(service_config.timezone)).isoformat()))
-                        action = 'created'
-                    conn.commit()
-                    logger.info(f"Weather subscription {action} for {email} in timezone {timezone_str}")
+                    add_or_update_subscriber(email, display_name, lat, lon, personality, language, timezone_str)
+                    logger.info(f"Weather subscription added/updated for {email} in timezone {timezone_str}")
                     flash(f'✅ Successfully subscribed to daily weather for {sanitize_output(display_name)} (emails at 05:00 {timezone_str})!', 'success')
-                except sqlite3.Error as e:
-                    logger.error(f"Database error: {e}")
+                except Exception as e:
+                    logger.error(f"Subscription error: {e}")
                     flash('An error occurred. Please try again later.', 'error')
-                finally:
-                    conn.close()
                 return redirect(url_for('preview', email=email))
             elif tab == 'countdown':
                 # Countdown subscription form
@@ -308,22 +294,14 @@ def unsubscribe():
         try:
             email = form.email.data.strip().lower()
             
-            conn = get_db_connection()
-            try:
-                cursor = conn.execute('DELETE FROM subscribers WHERE email = ?', (email,))
-                conn.commit()
-                
-                if cursor.rowcount > 0:
-                    logger.info(f"Unsubscribed: {email}")
-                    flash(f'✅ Successfully unsubscribed {sanitize_output(email)} from daily weather.', 'success')
-                else:
-                    flash(f'Email {sanitize_output(email)} was not found in our system.', 'info')
+            from services.subscription_service import delete_subscriber
+            deleted = delete_subscriber(email)
             
-            except sqlite3.Error as e:
-                logger.error(f"Database error during unsubscribe: {e}")
-                flash('An error occurred. Please try again later.', 'error')
-            finally:
-                conn.close()
+            if deleted > 0:
+                logger.info(f"Unsubscribed: {email}")
+                flash(f'✅ Successfully unsubscribed {sanitize_output(email)} from daily weather.', 'success')
+            else:
+                flash(f'Email {sanitize_output(email)} was not found in our system.', 'info')
         
         except Exception as e:
             logger.error(f"Unsubscribe error: {e}")
@@ -396,20 +374,25 @@ def stats():
     """Public statistics page (no sensitive data)."""
     conn = get_db_connection()
     try:
-        # Get aggregate statistics (include all users in totals, but hide special personality)
-        total_subscribers = conn.execute('SELECT COUNT(*) as count FROM subscribers').fetchone()['count']
+        # Get aggregate statistics from unified schema
+        total_subscribers = conn.execute("""
+            SELECT COUNT(*) as count FROM users WHERE weather_enabled = 1
+        """).fetchone()['count']
         
         language_stats = conn.execute("""
-            SELECT language, COUNT(*) as count 
-            FROM subscribers 
-            GROUP BY language
+            SELECT ws.language, COUNT(*) as count 
+            FROM weather_subscriptions ws
+            JOIN users u ON ws.email = u.email
+            WHERE u.weather_enabled = 1
+            GROUP BY ws.language
         """).fetchall()
         
         personality_stats = conn.execute("""
-            SELECT personality, COUNT(*) as count 
-            FROM subscribers 
-            WHERE personality != 'emuska'
-            GROUP BY personality
+            SELECT ws.personality, COUNT(*) as count 
+            FROM weather_subscriptions ws
+            JOIN users u ON ws.email = u.email
+            WHERE u.weather_enabled = 1 AND ws.personality != 'emuska'
+            GROUP BY ws.personality
         """).fetchall()
         
         return render_template('stats.html',
@@ -444,26 +427,24 @@ def api_update_subscription():
             location = data.get('location', '').strip()
             language = data.get('language', '')
             personality = data.get('personality', '')
-            # Optionally, validate input here
-            conn = get_db_connection()
+            
             try:
                 # Geocode location if changed
                 from services.weather_service import geocode_location
                 geocode_result = geocode_location(location)
                 if not geocode_result:
                     return jsonify({'status': 'error', 'message': 'Invalid location'}), 400
+                
                 lat, lon, display_name, timezone_str = geocode_result
-                conn.execute("""
-                    UPDATE subscribers SET location = ?, lat = ?, lon = ?, timezone = ?, personality = ?, language = ?, updated_at = ?
-                    WHERE email = ?
-                """, (display_name, lat, lon, timezone_str, personality, language, datetime.now(ZoneInfo(service_config.timezone)).isoformat(), email))
-                conn.commit()
+                
+                # Use subscription service to update (handles unified schema)
+                from services.subscription_service import add_or_update_subscriber
+                add_or_update_subscriber(email, display_name, lat, lon, personality, language, timezone_str)
+                
                 return jsonify({'status': 'success'})
             except Exception as e:
                 logger.error(f"Weather update error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
-            finally:
-                conn.close()
         # Countdown subscription: id starts with 'countdown_'
         elif sub_id.startswith('countdown_'):
             # id format: countdown_{name}_{date}
@@ -519,19 +500,16 @@ def api_delete_subscription():
         sub_id = data['id']
         if sub_id.startswith('weather_'):
             email = sub_id.replace('weather_', '', 1)
-            conn = get_db_connection()
             try:
-                cursor = conn.execute('DELETE FROM subscribers WHERE email = ?', (email,))
-                conn.commit()
-                if cursor.rowcount > 0:
+                from services.subscription_service import delete_subscriber
+                deleted = delete_subscriber(email)
+                if deleted > 0:
                     return jsonify({'status': 'success'})
                 else:
                     return jsonify({'status': 'error', 'message': 'Subscription not found'}), 404
             except Exception as e:
                 logger.error(f"Weather delete error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
-            finally:
-                conn.close()
         elif sub_id.startswith('countdown_'):
             parts = sub_id.split('_', 2)
             if len(parts) < 3:
@@ -578,10 +556,12 @@ def api_check_email():
         
         conn = get_db_connection()
         try:
-            subscriber = conn.execute(
-                'SELECT email, location, personality, language FROM subscribers WHERE email = ?',
-                (email,)
-            ).fetchone()
+            subscriber = conn.execute("""
+                SELECT ws.email, ws.location, ws.personality, ws.language 
+                FROM weather_subscriptions ws
+                JOIN users u ON ws.email = u.email
+                WHERE ws.email = ? AND u.weather_enabled = 1
+            """, (email,)).fetchone()
             
             if subscriber:
                 return jsonify({

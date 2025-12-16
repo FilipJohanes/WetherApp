@@ -36,7 +36,6 @@ from services.weather_service import list_subscribers
 from services.email_service import start_email_monitor, stop_email_monitor, send_test_email, run_daily_job
 from services.reminder_service import list_reminders, run_due_reminders_job
 from timezonefinder import TimezoneFinder
-from services.countdown_service import init_countdown_db
 
 # Global scheduler variable for signal handling
 scheduler = None
@@ -127,93 +126,63 @@ def load_env() -> Config:
     return config
 
 
-def init_db(path: str = "app.db") -> None:
-    """Initialize SQLite database with required tables."""
+def init_db(path: str = None) -> None:
+    """Initialize SQLite database with unified schema."""
+    if path is None:
+        path = os.getenv("APP_DB_PATH", "app.db")
     logger.info(f"Initializing database at {path}")
     conn = sqlite3.connect(path)
+    conn.execute("PRAGMA foreign_keys = ON")
+    
     try:
-        # Rename subscribers table to weather if it exists
-        try:
-            conn.execute("ALTER TABLE subscribers RENAME TO weather")
-            logger.info("Renamed subscribers table to weather.")
-        except sqlite3.OperationalError:
-            # Table may not exist or already renamed
-            pass
-        # Master users table for quick access and subscriptions
+        # Master users table - central user registry
         conn.execute("""
             CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                email TEXT UNIQUE NOT NULL,
-                active INTEGER DEFAULT 1,
+                email TEXT PRIMARY KEY,
+                username TEXT,
+                password_hash TEXT,
+                timezone TEXT DEFAULT 'UTC',
+                lat REAL,
+                lon REAL,
+                subscription_type TEXT DEFAULT 'free',
                 weather_enabled INTEGER DEFAULT 0,
                 countdown_enabled INTEGER DEFAULT 0,
                 reminder_enabled INTEGER DEFAULT 0,
-                timezone TEXT DEFAULT 'UTC',
-                last_active TEXT,
-                created_at TEXT,
-                personality TEXT DEFAULT 'neutral',
-                language TEXT DEFAULT 'en'
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
             )
         """)
         logger.info("Ensured master users table exists.")
-        # Subscribers table for weather service
+        
+        # Weather subscriptions module table
         conn.execute("""
-            CREATE TABLE IF NOT EXISTS subscribers (
+            CREATE TABLE IF NOT EXISTS weather_subscriptions (
                 email TEXT PRIMARY KEY,
                 location TEXT NOT NULL,
-                lat REAL NULL,
-                lon REAL NULL,
+                personality TEXT DEFAULT 'neutral',
+                language TEXT DEFAULT 'en',
+                last_sent_date TEXT,
                 updated_at TEXT NOT NULL,
-                personality TEXT DEFAULT 'neutral'
+                FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
             )
         """)
+        logger.info("Ensured weather_subscriptions table exists.")
         
-        # Handle schema upgrades - add personality column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN personality TEXT DEFAULT 'neutral'")
-            logger.info("Added personality column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-        
-        # Handle schema upgrade - add language column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN language TEXT DEFAULT 'en'")
-            logger.info("Added language column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-        
-        # Handle schema upgrade - add timezone column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN timezone TEXT DEFAULT 'UTC'")
-            logger.info("Added timezone column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-        
-        # Handle schema upgrade - add last_sent_date column to track daily sends
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN last_sent_date TEXT NULL")
-            logger.info("Added last_sent_date column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-
-        # Add countdown_enabled column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN countdown_enabled INTEGER DEFAULT 0")
-            logger.info("Added countdown_enabled column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-        # Add reminder_enabled column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN reminder_enabled INTEGER DEFAULT 0")
-            logger.info("Added reminder_enabled column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
+        # Countdowns module table
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS countdowns (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                name TEXT NOT NULL,
+                date TEXT NOT NULL,
+                yearly INTEGER DEFAULT 0,
+                message_before TEXT,
+                message_after TEXT,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+            )
+        """)
+        logger.info("Ensured countdowns table exists.")
         
         # Reminders table for calendar service
         conn.execute("""
@@ -223,16 +192,12 @@ def init_db(path: str = "app.db") -> None:
                 message TEXT NOT NULL,
                 first_run_at TEXT NOT NULL,
                 remaining_repeats INTEGER NOT NULL,
-                last_sent_at TEXT NULL,
-                created_at TEXT NOT NULL
+                last_sent_at TEXT,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
             )
         """)
-        
-        # Index for efficient reminder queries
-        conn.execute("""
-            CREATE INDEX IF NOT EXISTS idx_reminders_email_time 
-            ON reminders (email, first_run_at)
-        """)
+        logger.info("Ensured reminders table exists.")
         
         # Inbox log for deduplication
         conn.execute("""
@@ -244,23 +209,44 @@ def init_db(path: str = "app.db") -> None:
                 body_hash TEXT
             )
         """)
-        if scheduler:
-            scheduler.start()
-    except KeyboardInterrupt:
-        logger.info("🛑 Keyboard interrupt received")
-        signal_handler(signal.SIGINT, None)
-    except Exception as e:
-        logger.error(f"❌ Unexpected error: {e}")
-        if scheduler and scheduler.running:
-            scheduler.shutdown()
+        logger.info("Ensured inbox_log table exists.")
+        
+        # Create indexes for performance
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_users_weather 
+            ON users(weather_enabled) WHERE weather_enabled = 1
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_users_countdown 
+            ON users(countdown_enabled) WHERE countdown_enabled = 1
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_users_reminder 
+            ON users(reminder_enabled) WHERE reminder_enabled = 1
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_countdowns_email 
+            ON countdowns(email)
+        """)
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_reminders_email_time 
+            ON reminders(email, first_run_at)
+        """)
+        logger.info("Ensured all indexes exist.")
+        
+        conn.commit()
+    except sqlite3.Error as e:
+        logger.error(f"Database initialization error: {e}")
         raise
+    finally:
+        conn.close()
 
 
 def main():
     logger.info("Starting Daily Brief Service...")
     config = load_env()
-    init_db()
-    init_countdown_db()
+    db_path = os.getenv("APP_DB_PATH", "app.db")
+    init_db(db_path)
 
     global scheduler
     scheduler = BlockingScheduler()
