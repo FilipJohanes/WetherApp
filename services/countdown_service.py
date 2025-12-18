@@ -41,6 +41,21 @@ def add_countdown(event: CountdownEvent, path: str = None):
     """Add a countdown for a user. Ensures user exists and enables countdown module."""
     if path is None:
         path = os.getenv("APP_DB_PATH", "app.db")
+    
+    # Validate event data
+    if not event.name or not event.name.strip():
+        raise ValueError("Countdown name cannot be empty.")
+    if not event.date or not event.date.strip():
+        raise ValueError("Countdown date cannot be empty.")
+    if not event.email or not event.email.strip():
+        raise ValueError("Email cannot be empty.")
+    
+    # Validate date format
+    try:
+        datetime.strptime(event.date, "%Y-%m-%d")
+    except ValueError:
+        raise ValueError(f"Invalid date format: {event.date}. Expected YYYY-MM-DD.")
+    
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     try:
@@ -50,19 +65,33 @@ def add_countdown(event: CountdownEvent, path: str = None):
             (event.email, event.name, event.date)
         ).fetchone()
         if existing:
-            raise ValueError(f"Countdown for '{event.name}' on {event.date} already exists for {event.email}.")
+            raise ValueError(f"Countdown for '{event.name}' on {event.date} already exists.")
         
-        # Insert countdown with created_at timestamp
+        # Ensure user exists in users table first
+        user_exists = conn.execute(
+            "SELECT 1 FROM users WHERE email = ?",
+            (event.email,)
+        ).fetchone()
+        
         now = datetime.utcnow().isoformat()
+        
+        if not user_exists:
+            # Create user record if it doesn't exist
+            conn.execute("""
+                INSERT INTO users (email, username, timezone, weather_enabled, countdown_enabled, reminder_enabled, created_at, updated_at)
+                VALUES (?, ?, 'UTC', 0, 1, 0, ?, ?)
+            """, (event.email, event.email.split('@')[0], now, now))
+        else:
+            # Enable countdown module for existing user
+            conn.execute("""
+                UPDATE users SET countdown_enabled = 1, updated_at = ? WHERE email = ?
+            """, (now, event.email))
+        
+        # Insert countdown with created_at timestamp (handle NULL for existing rows without created_at)
         conn.execute("""
             INSERT INTO countdowns (email, name, date, yearly, message_before, message_after, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (event.email, event.name, event.date, int(event.yearly), event.message_before, event.message_after, now))
-        
-        # Enable countdown module for user
-        conn.execute("""
-            UPDATE users SET countdown_enabled = 1, updated_at = ? WHERE email = ?
-        """, (now, event.email))
         
         conn.commit()
     finally:

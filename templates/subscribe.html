@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Subscribe - Daily Brief Service{% endblock %}
+{% block title %}Subscriptions - Daily Brief Service{% endblock %}
 
-{% block header_subtitle %}Subscribe to Daily Updates{% endblock %}
+{% block header_subtitle %}Manage Your Subscriptions{% endblock %}
 
 {% block content %}
 <div class="card">
-    <h2>📧 Subscribe to Daily Updates</h2>
+    <h2>📧 Manage Your Subscriptions</h2>
     <p style="margin-top: 10px;">
         Choose your subscription type:
     </p>
@@ -120,11 +120,6 @@
     <form method="POST" action="{{ url_for('subscribe') }}?tab=weather" novalidate>
         {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="email">Email (required)</label>
-            <input type="email" id="email" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
-            <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
-        </div>
-        <div class="form-group">
             <label for="location">Location</label>
             <input type="text" id="location" name="location" class="form-control" placeholder="Bratislava, Slovakia" value="{{ request.form.location or '' }}">
         </div>
@@ -154,11 +149,6 @@
 <div id="countdownLayer" style="display: none;">
     <form method="POST" action="{{ url_for('subscribe') }}?tab=countdown" novalidate>
         {{ form.hidden_tag() }}
-        <div class="form-group">
-            <label for="email">Email (required)</label>
-            <input type="email" id="email_cd" name="email" class="form-control" required placeholder="your.email@example.com" value="{{ request.form.email or '' }}">
-            <small style="color: #6c757d; display: block; margin-top: 5px;">Required for all subscriptions.</small>
-        </div>
         <div class="form-group">
             <label for="countdown_name">Countdown Name</label>
             <input type="text" id="countdown_name" name="countdown_name" class="form-control" placeholder="Birthday, Wedding, Christmas" value="{{ request.form.countdown_name or '' }}">

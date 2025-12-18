@@ -4,6 +4,31 @@ import requests
 import sqlite3
 # from services.summary_service import generate_weather_summary  # merged below
 
+def load_clothing_messages(language='en'):
+	"""Load clothing advice messages from clothing.txt for the given language."""
+	clothing_dict = {}
+	file_path = os.path.join(os.path.dirname(__file__), '..', 'languages', language, 'clothing.txt')
+	try:
+		with open(file_path, 'r', encoding='utf-8') as f:
+			for line in f:
+				line = line.strip()
+				if not line or line.startswith('#'):
+					continue
+				parts = line.split('|')
+				if len(parts) >= 5:
+					condition = parts[0].strip()
+					clothing_dict[condition] = {
+						'neutral': parts[1].strip(),
+						'cute': parts[2].strip(),
+						'brutal': parts[3].strip(),
+						'emuska': parts[4].strip()
+					}
+	except FileNotFoundError:
+		print(f"Warning: clothing.txt not found for language {language}, using English fallback")
+		if language != 'en':
+			return load_clothing_messages('en')  # Fallback to English
+	return clothing_dict
+
 def generate_weather_summary(weather, location, personality, language):
 
 
@@ -15,6 +40,9 @@ def generate_weather_summary(weather, location, personality, language):
 	precipitation = weather.get('precipitation_sum', 0)
 	wind_speed = weather.get('wind_speed_max', 5)
 	rain_prob = min(int((precipitation / 1.5) * 100), 100) if precipitation else 0
+
+	# Load clothing messages for the user's language
+	clothing_dict = load_clothing_messages(language)
 
 	# Load weather_messages.txt (cache for performance)
 	@lru_cache(maxsize=8)
@@ -114,41 +142,47 @@ def generate_weather_summary(weather, location, personality, language):
 	clothing = set()
 	# Add advice for temperature extremes
 	if temp_max >= 36:
-		clothing.add(get_msg('heatwave', personality).strip())
+		clothing.add(clothing_dict.get('heatwave', {}).get(personality, ''))
 	if temp_min <= -15:
-		clothing.add(get_msg('blizzard', personality).strip())
+		clothing.add(clothing_dict.get('blizzard', {}).get(personality, ''))
 	if temp_max >= 30 and rain_prob < 20:
-		clothing.add(get_msg('sunny_hot', personality).strip())
+		clothing.add(clothing_dict.get('sunny_hot', {}).get(personality, ''))
 	if temp_max <= 5 and wind_speed >= 15:
-		clothing.add(get_msg('cold_windy', personality).strip())
+		clothing.add(clothing_dict.get('cold_windy', {}).get(personality, ''))
 	if temp_max <= 5 and precipitation >= 2:
-		clothing.add(get_msg('rainy_cold', personality).strip())
+		clothing.add(clothing_dict.get('rainy_cold', {}).get(personality, ''))
 	# Add advice for rain and wind
 	if precipitation >= 7:
-		clothing.add(get_msg('heavy_rain', personality).strip())
+		clothing.add(clothing_dict.get('heavy_rain', {}).get(personality, ''))
 	elif precipitation >= 2:
-		clothing.add(get_msg('raining', personality).strip())
+		clothing.add(clothing_dict.get('raining', {}).get(personality, ''))
 	if wind_speed >= 15:
-		clothing.add(get_msg('windy', personality).strip())
+		clothing.add(clothing_dict.get('windy', {}).get(personality, ''))
 	# Add advice for snow/freezing
 	if temp_max <= 2 and precipitation > 0.5:
-		clothing.add(get_msg('snowing', personality).strip())
+		clothing.add(clothing_dict.get('snowing', {}).get(personality, ''))
 	if temp_min < 0 and precipitation <= 0.1:
-		clothing.add(get_msg('freezing', personality).strip())
+		clothing.add(clothing_dict.get('freezing', {}).get(personality, ''))
 	# Add advice for fog/humid/dry
 	if temp_min >= -2 and temp_max <= 8 and precipitation < 0.2 and wind_speed < 8 and rain_prob >= 60:
-		clothing.add(get_msg('foggy', personality).strip())
+		clothing.add(clothing_dict.get('foggy', {}).get(personality, ''))
 	if rain_prob >= 70 and precipitation < 0.2:
-		clothing.add(get_msg('humid', personality).strip())
+		clothing.add(clothing_dict.get('humid', {}).get(personality, ''))
 	if precipitation < 0.05 and temp_max >= 25:
-		clothing.add(get_msg('dry', personality).strip())
+		clothing.add(clothing_dict.get('dry', {}).get(personality, ''))
 	# Add advice for mild if nothing else
 	if not clothing:
-		clothing.add(get_msg('mild', personality).strip())
+		clothing.add(clothing_dict.get('mild', {}).get(personality, ''))
 	# Remove empty, sort, and join
 	clothing_msg = '\n'.join(sorted([c for c in clothing if c]))
 
-	summary = f"{intro}\n\n{temp_line}\n{rain_line}\n{wind_line}\n\n{condition_msg}\n{clothing_msg}\n"
+	# Build summary: intro, weather details, then clothing advice with clear label
+	summary = f"{intro}\n\n{temp_line}\n{rain_line}\n{wind_line}\n\n"
+	
+	# Add clothing suggestion with clear label (avoid duplicate of condition_msg)
+	if clothing_msg.strip():
+		summary += f"👔 Clothing suggestion:\n{clothing_msg}\n"
+	
 	return summary
 
 def generate_countdown_summary(countdowns, language='en'):
@@ -222,37 +256,63 @@ def geocode_location(location: str):
 	"""
 	Geocode a location string to (lat, lon, display_name, timezone_str) using Open-Meteo API.
 	Returns (lat, lon, display_name, timezone_str) or None if not found.
+	
+	Implements fallback strategy:
+	1. Try full location string
+	2. If fails and contains comma, try parts separated by comma (city, region, country)
 	"""
 	url = "https://geocoding-api.open-meteo.com/v1/search"
-	params = {
-		'name': location,
-		'count': 1,
-		'language': 'en',
-		'format': 'json'
-	}
-	try:
-		response = requests.get(url, params=params, timeout=10)
-		response.raise_for_status()
-		data = response.json()
-		if data.get('results'):
-			result = data['results'][0]
-			lat = result['latitude']
-			lon = result['longitude']
-			name = result['name']
-			country = result.get('country', '')
-			admin1 = result.get('admin1', '')
-			display_name = f"{name}"
-			if admin1:
-				display_name += f", {admin1}"
-			if country:
-				display_name += f", {country}"
-			timezone_str = result.get('timezone', 'UTC')
-			return lat, lon, display_name, timezone_str
-		else:
+	
+	def try_geocode(search_term):
+		"""Helper to attempt geocoding with a specific search term."""
+		params = {
+			'name': search_term.strip(),
+			'count': 1,
+			'language': 'en',
+			'format': 'json'
+		}
+		try:
+			response = requests.get(url, params=params, timeout=10)
+			response.raise_for_status()
+			data = response.json()
+			if data.get('results'):
+				result = data['results'][0]
+				lat = result['latitude']
+				lon = result['longitude']
+				name = result['name']
+				country = result.get('country', '')
+				admin1 = result.get('admin1', '')
+				display_name = f"{name}"
+				if admin1:
+					display_name += f", {admin1}"
+				if country:
+					display_name += f", {country}"
+				timezone_str = result.get('timezone', 'UTC')
+				return lat, lon, display_name, timezone_str
 			return None
-	except Exception as e:
-		print(f"Geocoding error for '{location}': {e}")
-		return None
+		except Exception as e:
+			print(f"Geocoding error for '{search_term}': {e}")
+			return None
+	
+	# Try full location first
+	result = try_geocode(location)
+	if result:
+		return result
+	
+	# Fallback: if location contains comma, try individual parts
+	if ',' in location:
+		parts = [part.strip() for part in location.split(',') if part.strip()]
+		print(f"Full location '{location}' not found. Trying parts: {parts}")
+		
+		# Try each part, starting from most specific (first) to least specific (last)
+		for part in parts:
+			result = try_geocode(part)
+			if result:
+				print(f"Found location using part: '{part}'")
+				return result
+	
+	print(f"Could not geocode location: '{location}'")
+	return None
 
 # weather_service.py
 """

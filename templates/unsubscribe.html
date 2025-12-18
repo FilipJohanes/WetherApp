@@ -6,26 +6,22 @@
 
 {% block content %}
 <div class="card">
-    <h2>🚫 Unsubscribe from Daily Weather</h2>
+    <h2>🚫 Unsubscribe from All Services</h2>
     <p style="margin-top: 10px; color: #6c757d;">
-        We're sorry to see you go! Enter your email below to unsubscribe from daily weather updates.
+        We're sorry to see you go! This will unsubscribe you from all weather and countdown services.
+    </p>
+    <p style="margin-top: 10px; color: #667eea; font-weight: 600;">
+        Account: {{ user_email }}
     </p>
 </div>
 
 <form method="POST" action="{{ url_for('unsubscribe') }}" novalidate>
     {{ form.hidden_tag() }}
     
-    <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
-        {% if form.email.errors %}
-            {% for error in form.email.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    
     <div style="margin-top: 20px;">
+        <p style="color: #6c757d; margin-bottom: 15px;">
+            Are you sure you want to unsubscribe from all services? You can re-subscribe anytime.
+        </p>
         {{ form.submit(class="btn", style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);") }}
     </div>
 </form>

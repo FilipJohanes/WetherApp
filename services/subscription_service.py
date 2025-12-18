@@ -21,26 +21,28 @@ def add_or_update_subscriber(email, location, lat, lon, personality, language, t
         if not user_exists:
             # Create new user
             conn.execute("""
-                INSERT INTO users (email, timezone, lat, lon, weather_enabled, created_at, updated_at)
-                VALUES (?, ?, ?, ?, 1, ?, ?)
-            """, (email, timezone, lat, lon, now, now))
+                INSERT INTO users (email, timezone, weather_enabled, created_at, updated_at)
+                VALUES (?, ?, 1, ?, ?)
+            """, (email, timezone, now, now))
         else:
             # Update existing user
             conn.execute("""
-                UPDATE users SET timezone = ?, lat = ?, lon = ?, weather_enabled = 1, updated_at = ?
+                UPDATE users SET timezone = ?, weather_enabled = 1, updated_at = ?
                 WHERE email = ?
-            """, (timezone, lat, lon, now, email))
+            """, (timezone, now, email))
         
         # Insert or update weather subscription
         conn.execute("""
-            INSERT INTO weather_subscriptions (email, location, personality, language, updated_at)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO weather_subscriptions (email, location, lat, lon, personality, language, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(email) DO UPDATE SET
                 location=excluded.location,
+                lat=excluded.lat,
+                lon=excluded.lon,
                 personality=excluded.personality,
                 language=excluded.language,
                 updated_at=excluded.updated_at
-        """, (email, location, personality, language, now))
+        """, (email, location, lat, lon, personality, language, now))
         
         conn.commit()
     finally:

@@ -51,34 +51,48 @@ def send_email(config, to, subject, body):
 def send_daily_email(config, user):
     email = user['email']
     subject = "Your Daily Brief"
-    body = ""
-    # Weather
-    if user.get('weather_enabled'):
-        # You'd fetch location, personality, language, etc. from user
-        location = user.get('location', 'Bratislava')
-        personality = user.get('personality', 'neutral')
-        language = user.get('language', 'en')
-        weather = user.get('weather_data')  # Should be fetched from weather_service
-        if weather:
-            body += generate_weather_summary(weather, location, personality, language) + "\n\n"
-    # Countdown
-    print(f"[DEBUG] Fetching countdowns for {email}")
-    if user.get('countdown_enabled'):
-        body += generate_countdown_summary(email, datetime.now(ZoneInfo(config.timezone)), config.timezone) + "\n"
-    if not body.strip():
-        body = "No active subscriptions."
+    
+    # Use the pre-built email_body if provided (from run_daily_job)
+    # Otherwise, build it here (for backward compatibility)
+    if user.get('email_body'):
+        body = user['email_body']
+    else:
+        body = ""
+        # Weather
+        if user.get('weather_enabled'):
+            location = user.get('location', 'Bratislava')
+            personality = user.get('personality', 'neutral')
+            language = user.get('language', 'en')
+            weather = user.get('weather_data')
+            if weather:
+                body += generate_weather_summary(weather, location, personality, language) + "\n\n"
+        # Countdown
+        print(f"[DEBUG] Fetching countdowns for {email}")
+        if user.get('countdown_enabled'):
+            body += generate_countdown_summary(email, datetime.now(ZoneInfo(config.timezone)), config.timezone) + "\n"
+        if not body.strip():
+            body = "No active subscriptions."
+    
     result = send_email(config, email, subject, body)
     if result:
         print(f"✅ Sent daily email to {email}")
     else:
         print(f"❌ Failed to send daily email to {email}")
+    return result
 
         
-def run_daily_job(config, dry_run=False, db_path=None):
-    """Send daily emails to all subscribers using unified database schema."""
+def run_daily_job(config, dry_run=False, db_path=None, force_send=False):
+    """Send daily emails to all subscribers using unified database schema.
+    
+    Args:
+        config: Email configuration
+        dry_run: If True, don't actually send emails
+        db_path: Path to database
+        force_send: If True, bypass time check and send immediately (for testing)
+    """
     if db_path is None:
         db_path = os.getenv("APP_DB_PATH", "app.db")
-    logger.info("Running daily job - checking users for delivery")
+    logger.info("Running daily job - checking users for delivery" + (" [FORCE SEND MODE]" if force_send else ""))
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
@@ -86,8 +100,8 @@ def run_daily_job(config, dry_run=False, db_path=None):
         users = conn.execute("""
             SELECT 
                 u.email, 
-                u.lat, 
-                u.lon, 
+                ws.lat, 
+                ws.lon, 
                 u.timezone,
                 u.weather_enabled, 
                 u.countdown_enabled, 
@@ -109,8 +123,8 @@ def run_daily_job(config, dry_run=False, db_path=None):
             
             try:
                 user_now = datetime.now(ZoneInfo(user_tz))
-                # Only send if it's 5AM in user's local time
-                if user_now.hour != 5:
+                # Only send if it's 5AM in user's local time (unless force_send is True)
+                if not force_send and user_now.hour != 5:
                     continue
                 
                 email_body = ""
@@ -135,17 +149,20 @@ def run_daily_job(config, dry_run=False, db_path=None):
                     # TODO: Implement reminder fetching and formatting
                     email_body += "[Reminders go here]\n"
                 
+                # Skip sending if no actual content (no active subscriptions)
                 if not email_body.strip():
-                    email_body = "No active subscriptions."
+                    logger.info(f"Skipping {email_addr} - no active subscriptions")
+                    continue
                 
                 subject = f"Your Daily Brief"
-                footer = f"\n\n---\nDaily Brief Service ({personality} mode, {language})\nTo unsubscribe, reply with 'delete'"
+                footer = f"\n\n---\nHave a great day!\nYour DailyWeather team"
                 full_message = email_body + footer
                 
                 if dry_run:
                     print(f"[DRY RUN] Would send daily email to {email_addr} at {user_now.strftime('%H:%M')} {user_tz}")
+                    sent_count += 1
                 else:
-                    send_daily_email(config, {
+                    success = send_daily_email(config, {
                         'email': email_addr,
                         'location': location,
                         'lat': user['lat'],
@@ -159,8 +176,11 @@ def run_daily_job(config, dry_run=False, db_path=None):
                         'weather_data': None,  # Already included in body
                         'email_body': full_message,
                     })
-                    sent_count += 1
-                    logger.info(f"✅ Sent daily brief to {email_addr} ({sent_count} total)")
+                    if success:
+                        sent_count += 1
+                        logger.info(f"✅ Sent daily brief to {email_addr} ({sent_count} total)")
+                    else:
+                        logger.error(f"❌ Failed to send daily brief to {email_addr}")
             except Exception as e:
                 logger.error(f"Error processing user {email_addr}: {e}")
         

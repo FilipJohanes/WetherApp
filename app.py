@@ -140,6 +140,7 @@ def init_db(path: str = None) -> None:
             CREATE TABLE IF NOT EXISTS users (
                 email TEXT PRIMARY KEY,
                 username TEXT,
+                nickname TEXT,
                 password_hash TEXT,
                 timezone TEXT DEFAULT 'UTC',
                 lat REAL,
@@ -148,11 +149,33 @@ def init_db(path: str = None) -> None:
                 weather_enabled INTEGER DEFAULT 0,
                 countdown_enabled INTEGER DEFAULT 0,
                 reminder_enabled INTEGER DEFAULT 0,
+                email_consent INTEGER DEFAULT 0,
+                terms_accepted INTEGER DEFAULT 0,
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL
             )
         """)
         logger.info("Ensured master users table exists.")
+        
+        # Add nickname column if it doesn't exist (for migration)
+        try:
+            conn.execute("ALTER TABLE users ADD COLUMN nickname TEXT")
+            logger.info("Added nickname column to users table")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
+        
+        # Add consent columns if they don't exist
+        try:
+            conn.execute("ALTER TABLE users ADD COLUMN email_consent INTEGER DEFAULT 0")
+            logger.info("Added email_consent column to users table")
+        except sqlite3.OperationalError:
+            pass
+        
+        try:
+            conn.execute("ALTER TABLE users ADD COLUMN terms_accepted INTEGER DEFAULT 0")
+            logger.info("Added terms_accepted column to users table")
+        except sqlite3.OperationalError:
+            pass
         
         # Weather subscriptions module table
         conn.execute("""
@@ -183,6 +206,13 @@ def init_db(path: str = None) -> None:
             )
         """)
         logger.info("Ensured countdowns table exists.")
+        
+        # Add created_at column to countdowns if it doesn't exist (migration)
+        try:
+            conn.execute("ALTER TABLE countdowns ADD COLUMN created_at TEXT")
+            logger.info("Added created_at column to countdowns table")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
         
         # Reminders table for calendar service
         conn.execute("""
@@ -251,13 +281,15 @@ def main():
     global scheduler
     scheduler = BlockingScheduler()
 
-    # Schedule daily weather job to run every hour
+    # Schedule daily weather job to run at 5 AM daily (change to */5 for testing)
     scheduler.add_job(
         lambda: run_daily_job(config),
-        CronTrigger(minute=0, timezone=config.timezone),
-        #CronTrigger(minute="*/1"),
+        #CronTrigger(hour=5, minute=0, timezone=config.timezone),
+        CronTrigger(minute='*/5', timezone=config.timezone),  # For testing: every 5 minutes
         replace_existing=True
     )
+    
+    logger.info(f"📅 Scheduler configured: Daily emails at 5:00 AM {config.timezone}")
 
     # Start email monitor in a separate thread
     start_email_monitor()

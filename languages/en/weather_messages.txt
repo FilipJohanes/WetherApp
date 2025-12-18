@@ -47,11 +47,11 @@ humid|High humidity - light breathable clothing recommended.|💧 Sticky-warm ai
 dry|Very dry conditions - moisturize and stay hydrated.|🏜️ Super dry day! Keep your skin happy and drink extra water! 💦|Dry as a desert. Chapstick and water or turn into dust.|
 
 # Extreme conditions
-heatwave|Extreme heat warning - limit outdoor activities, cooling centers available.|🔥🌡️ Ultra-mega hot day! Stay cool, drink ice-cold drinks, and find AC! 🧊|Heatwave. Deadly hot. Stay inside with AC or risk becoming bacon.|
+heatwave|Extreme heat warning - limit outdoor activities, cooling centers available.|🔥🌡️ Ultra-mega hot day! Stay cool, drink ice-cold drinks, and find AC! 🧊|Heatwave. Deadly hot. Stay inside with AC or risk becoming bacon.
 
-blizzard|Blizzard conditions - stay indoors, travel extremely dangerous.|🌨️❄️ Epic snow adventure outside! But stay cozy inside where it's warm! 🏠|Blizzard. Don't be an idiot. Stay inside or become a snow sculpture.|
+blizzard|Blizzard conditions - extreme snow and wind, stay indoors.|🌨️❄️ Mega snow storm! Cozy blanket time with hot cocoa! Stay safe inside! ☕|Blizzard. Don't go outside unless you want to die.
 
-thunderstorm|Thunderstorms likely - avoid outdoor activities and tall objects.|⚡🌩️ Thunder and lightning show! Nature's fireworks, but watch from inside! 🏠|Thunderstorms. Lightning wants to kill you. Stay indoors.|
+thunderstorm|Thunderstorm alert - lightning and heavy rain, stay indoors.|⚡🌩️ Thunder and lightning show! Watch from inside where it's safe and dry! 🏠|Thunderstorm. Stay away from windows and metal. Seriously.
 
 # Default fallback
-default|Check current conditions and dress accordingly.|🌤️ Whatever the weather brings, you've got this! Have a wonderful day! 💖|Weather is weather. Dress like a functional human being.|
+default|Check weather and dress accordingly.|🌤️ You got this!|Dress like a human.

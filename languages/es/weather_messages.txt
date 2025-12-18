@@ -47,11 +47,11 @@ humid|Alta humedad - se recomienda ropa ligera y transpirable.|💧 ¡Abrazos de
 dry|Condiciones muy secas - hidrátate y usa humectante.|🏜️ ¡Día súper seco! ¡Mantén tu piel feliz y bebe agua extra! 💦|Seco como un desierto. Bálsamo labial y agua o convertirte en polvo.|
 
 # Extreme conditions
-heatwave|Advertencia de calor extremo - limita actividades al aire libre, centros de enfriamiento disponibles.|🔥🌡️ ¡Día ultra-mega caliente! ¡Mantente fresco, bebe bebidas heladas y encuentra AC! 🧊|Ola de calor. Mortalmente caliente. Quédate adentro con AC o arriesgarte a convertirte en tocino.|
+heatwave|Advertencia de calor extremo - limita actividades al aire libre, centros de enfriamiento disponibles.|🔥🌡️ ¡Día ultra-mega caliente! ¡Mantente fresco, bebe bebidas heladas y encuentra AC! 🧊|Ola de calor. Mortalmente caliente. Quédate adentro con AC o arriesgarte a convertirte en tocino.
 
-blizzard|Condiciones de ventisca - quédate adentro, viajar es extremadamente peligroso.|🌨️❄️ ¡Épica aventura de nieve afuera! ¡Pero quédate acogedor adentro donde está cálido! 🏠|Ventisca. No seas idiota. Quédate adentro o conviértete en escultura de nieve.|
+blizzard|Condiciones de ventisca - nieve extrema y viento, quédate adentro.|🌨️❄️ ¡Mega tormenta de nieve! ¡Hora de manta acogedora con chocolate caliente! ¡Quédate seguro adentro! ☕|Ventisca. No salgas a menos que quieras morir.
 
-thunderstorm|Probables tormentas eléctricas - evita actividades al aire libre y objetos altos.|⚡🌩️ ¡Espectáculo de truenos y relámpagos! ¡Fuegos artificiales de la naturaleza, pero mira desde adentro! 🏠|Tormentas eléctricas. Los rayos quieren matarte. Quédate adentro.|
+thunderstorm|Alerta de tormenta eléctrica - rayos y lluvia intensa, quédate adentro.|⚡🌩️ ¡Espectáculo de truenos y relámpagos! ¡Mira desde adentro donde es seguro y seco! 🏠|Tormenta eléctrica. Aléjate de ventanas y metal. En serio.
 
 # Default fallback
-default|Revisa las condiciones actuales y vístete apropiadamente.|🌤️ ¡Cualquier clima que traiga, tú puedes con esto! ¡Ten un día maravilloso! 💖|El clima es clima. Vístete como un ser humano funcional.|
+default|Revisa el clima y vístete apropiadamente.|🌤️ ¡Tú puedes con esto!|Vístete como humano.
