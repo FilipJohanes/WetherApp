@@ -308,6 +308,69 @@ Want new languages, personalities, or features? Let us know!
 
 ---
 
+## 🗄️ Database Structure
+
+The Daily Brief Service uses a single SQLite database (`app.db`) with multiple tables to manage users, subscriptions, weather, reminders, countdowns, and email logs. Here is the current structure:
+
+### **users** (master table)
+- `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+- `email` (TEXT, UNIQUE, NOT NULL)
+- `active` (INTEGER, default 1)
+- `weather_enabled` (INTEGER, default 0)
+- `countdown_enabled` (INTEGER, default 0)
+- `reminder_enabled` (INTEGER, default 0)
+- `timezone` (TEXT, default 'UTC')
+- `last_active` (TEXT)
+- `created_at` (TEXT)
+- `personality` (TEXT, default 'neutral')
+- `language` (TEXT, default 'en')
+
+### **weather**
+- `email` (TEXT, PRIMARY KEY)
+- `location` (TEXT)
+- `lat` (REAL)
+- `lon` (REAL)
+- `updated_at` (TEXT)
+- `personality` (TEXT, default 'neutral')
+- `language` (TEXT, default 'en')
+- `timezone` (TEXT, default 'UTC')
+- `last_sent_date` (TEXT)
+- `countdown_enabled` (INTEGER, default 0)
+- `reminder_enabled` (INTEGER, default 0)
+
+### **reminders**
+- `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+- `email` (TEXT)
+- `message` (TEXT)
+- `first_run_at` (TEXT)
+- `remaining_repeats` (INTEGER)
+- `last_sent_at` (TEXT)
+- `created_at` (TEXT)
+
+### **countdowns**
+- `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+- `email` (TEXT)
+- `name` (TEXT)
+- `date` (TEXT)
+- `yearly` (INTEGER)
+- `message_before` (TEXT)
+- `message_after` (TEXT)
+
+### **inbox_log**
+- `uid` (TEXT, PRIMARY KEY)
+- `from_email` (TEXT)
+- `received_at` (TEXT)
+- `subject` (TEXT)
+- `body_hash` (TEXT)
+
+---
+
+This structure allows efficient management of users and their subscriptions, weather data, reminders, countdowns, and email logs. The master `users` table provides quick access to user status and subscription flags, minimizing unnecessary database queries.
+
+For more details or schema changes, see the developer documentation or contact support.
+
+---
+
 ## 🎉 **Welcome to Your Daily Brief Service!**
 
 Enjoy your personalized weather assistant with personality! Whether you prefer professional reports, cute messages, or brutal honesty - we've got you covered! 🌤️

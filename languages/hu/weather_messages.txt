@@ -1,0 +1,56 @@
+# Weather Messages Configuration - Hungarian
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Note: Emuska mode is not available in Hungarian (only available in Slovak language)
+
+# Rain conditions
+raining|Vigyél esernyőt - ma esni fog.|🌧️ Csodálatos esőcseppek érkeznek! Ne felejtsd el az aranyos esernyődet! ☂️|Eső jön. Esernyő vagy átázás. Te választasz.|
+
+heavy_rain|Heves esőzések várhatók - vízálló felszerelés ajánlott.|⛈️ Nagy csobbanós eső ma! Ideje a gumicsizmának és a kényelmes esőkabátnak! 💧|Heves zápor. Vízálló minden vagy maradj bent.|
+
+# Snow conditions  
+snowing|Havazik - öltözz melegen és vigyázz a csúszós felületekkel.|❄️ Varázslatos hópelyhek táncolnak! Öltözz fel mint egy aranyos hónyúl! ⛄|Hó. Hideg. Csúszós. Ne ess pofára.|
+
+# Temperature conditions
+hot|Nagyon meleg ma - maradj hidratáltan és keress árnyékot.|🌞 Kellemes melegen lesz! Tökéletes fagyira és napsütéses mosolyokra! 😎|Pokoli hőség. Igyál vizet vagy olvadj meg.|
+
+cold|Hideg idő - réteges öltözködés a kényelem érdekében.|🧥 Brr! Ideje a kényelmes pulóvereknek és meleg öleléseknek! Tökéletes bújós idő! 🤗|Hideg. Rétegezz vagy fagyaszd le a feneked.|
+
+freezing|Fagyos hőmérsékletek - nehéz téli ruházat elengedhetetlen.|🥶 Szuper szuper hideg! Ideje a legbolyosabb kabátnak és a legmelegebb kesztyűnek! ❄️|Fagyos hideg. Öltözz sarki felfedezőnek vagy válj jégcsappá.|
+
+mild|Kellemes hőmérséklet - élvezd a kényelmes időt.|😊 Pont jó! Mint egy tökéletes meleg ölelés Anya Természettől! 🌸|Tisztességes hőmérséklet. Legalább egyszer nincs mire panaszkodni.|
+
+# Wind conditions
+windy|Erős széllökések várhatók - rögzítsd a laza tárgyakat.|💨 Whoooosh! Szeles kalandos nap! Tartsd a kalapod és szórakozz! 🎩|Erős szél. A hajad szörnyűen fog kinézni. Fogadd el.|
+
+stormy|Viharfigyelmeztetés - maradj bent ha lehetséges.|⛈️ A nagy viharfelhők bulit tartanak! Maradj bent forró csokival! ☕|Viharfigyelmeztetés. Maradj bent, hacsak nem szereted, ha a természet boxzsákja vagy.|
+
+# Visibility conditions
+foggy|Ködös körülmények - vezess óvatosan és használj lámpát.|🌫️ A rejtélyes köd mindent varázslatos és álomszerűvé tesz! ✨|Köd mindenhol. Vezess lassan vagy ütközz valamivel, ami láthatatlan.|
+
+# Clear conditions
+sunny|Gyönyörű napos nap - tökéletes idő kültéri tevékenységekhez.|☀️ Dicsőséges napsütéses nap! Ideje kültéri kalandokra és jó hangulatokra! 🌻|Tiszta ég. Nincs kifogás bent maradni és sajnáltatni magad.|
+
+cloudy|Borult égbolt - még mindig kellemes idő aktivitásokhoz.|☁️ Puha felhők díszítik az eget mint vattacukor! Milyen szép! 🌤️|Felhős, de mindegy. Legalább nem esik a parádédra.|
+
+# Combined conditions
+sunny_hot|Forró és napos - keress árnyékot, használj fényvédőt, maradj hidratáltan.|🔥☀️ Szuper napos-forró nap! Tökéletes strand hangulathoz, de ne válj homárrá! 🦞|Égető nap. Fényvédő vagy válj emberi szalonnává.|
+
+cold_windy|Hideg és szeles - öltözz jól, a meztelen bőr gyorsan lehűl.|🌬️❄️ A hideg szelek extra-hideg öleléseket adnak! Csomagolódj be mint egy kényelmes burrito! 🌯|Hideg + szél = nyomorúság kombó. Öltözz megfelelően vagy szenvedj.|
+
+rainy_cold|Hideg eső - vízálló és meleg ruházat elengedhetetlen.|🌧️🧥 A hideg cseppek extra kényelmes védelmet igényelnek! Gumicsizma és meleg rétegek! 💙|Hideg eső. A legrosszabb kombó. Vízálló kabát vagy légy hideg ÉS vizes.|
+
+# Special weather
+humid|Magas páratartalom - könnyű, légáteresztő ruházat ajánlott.|💧 Ragacsos-meleg levegő ölelések ma! Maradj hűvös és igyál sok vizet! 🧊|Nyirkos mocsári időjárás. Izzadni fogsz csak állva is.|
+
+dry|Nagyon száraz körülmények - hidratálódj és használj hidratáló krémet.|🏜️ Szuper száraz nap! Tartsd a bőrödet boldognak és igyál extra vizet! 💦|Száraz mint a sivatag. Ajakbalzsam és víz vagy válj porrá.|
+
+# Extreme conditions
+heatwave|Extrém hőség figyelmeztetés - korlátozd a kültéri tevékenységeket, hűtőközpontok elérhetők.|🔥🌡️ Ultra-mega forró nap! Maradj hűvös, igyál jeges italokat és találj klímát! 🧊|Hőhullám. Halálos forró. Maradj bent klímával vagy kockáztatod, hogy szalonna leszel.
+
+blizzard|Hóvihar körülmények - extrém hó és szél, maradj bent.|🌨️❄️ Mega hóvihar! Kényelmes takaró idő forró kakaóval! Maradj biztonságban bent! ☕|Hóvihar. Ne menj ki, hacsak nem akarsz meghalni.
+
+thunderstorm|Viharfigyelmeztetés villámokkal - villámlás és heves eső, maradj bent.|⚡🌩️ Mennydörgés és villámok előadása! Nézd bent, ahol biztonságos és száraz! 🏠|Vihar villámokkal. Maradj távol az ablaktól és a fémtől. Komolyan.
+
+# Default fallback
+default|Ellenőrizd az időjárást és öltözz megfelelően.|🌤️ Meg fogod csinálni!|Öltözz emberként.

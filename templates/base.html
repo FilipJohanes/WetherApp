@@ -343,9 +343,21 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('index') }}">🏠 Home</a></li>
-                <li><a href="{{ url_for('subscribe') }}">✉️ Subscribe</a></li>
-                <li><a href="{{ url_for('unsubscribe') }}">🚫 Unsubscribe</a></li>
+                {% if logged_in %}
+                    <li><a href="{{ url_for('subscribe') }}">✉️ Subscriptions</a></li>
+                    <li><a href="{{ url_for('settings') }}">⚙️ Settings</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('stats') }}">📊 Stats</a></li>
+                
+                {% if logged_in %}
+                    <li style="margin-left: auto; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #667eea; font-weight: 600;">👤 {{ user_nickname or user_username or user_email }}</span>
+                        <a href="{{ url_for('logout') }}" style="color: #dc3545;">🚪 Logout</a>
+                    </li>
+                {% else %}
+                    <li style="margin-left: auto;"><a href="{{ url_for('register') }}">📝 Register</a></li>
+                    <li><a href="{{ url_for('login') }}">🔑 Login</a></li>
+                {% endif %}
             </ul>
         </nav>
         

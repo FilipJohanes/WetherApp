@@ -148,35 +148,41 @@ SMTP_HOST="smtp.gmail.com"              # Your SMTP server
 # Optional Settings (with defaults)
 IMAP_PORT="993"
 SMTP_PORT="587" 
-SMTP_USE_TLS="true"
-TZ="Europe/Bratislava"
-LANGUAGE="en"                           # Default language (en/es/sk)
-```
 
-#### Email Provider Examples:
+# Daily Brief Service
 
-**Gmail:**
-```bash
-export IMAP_HOST="imap.gmail.com"
-export SMTP_HOST="smtp.gmail.com"
-export SMTP_PORT="587"
-export SMTP_USE_TLS="true"
-```
+Email-driven weather subscriptions and calendar reminders service.
 
-**Outlook/Hotmail:**
-```bash
-export IMAP_HOST="outlook.office365.com"
-export SMTP_HOST="smtp.office365.com"
-export SMTP_PORT="587"
-export SMTP_USE_TLS="true"
-```
+## Features
+- Weather Subscriptions: Daily forecasts at 05:00 local time
+- Calendar Reminders: Schedule one-time or repeating reminders via email
+- Free APIs: Uses Open-Meteo for weather data (no API key required)
+- Simple Commands: Send plain text emails to interact with the service
 
-### 4. Test Configuration
+## Setup
+1. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+2. Configure environment variables:
+    See `.env.example` for required variables.
+3. Run the service:
+    ```bash
+    python app.py
+    ```
 
-```bash
-# Test your email setup
-python app.py --send-test your-email@example.com
+## Usage
+Send emails to your configured service address:
+- Weather Subscriptions: Send location (e.g., `Prague, CZ`)
+- Unsubscribe: Send `delete`
+- Calendar Reminders: Structured message (see docs)
+- CLI: `python app.py --list-subs`, `--list-reminders`, `--send-test user@example.com`, `--dry-run`
 
+<<<<<<< HEAD
+## License
+Open source - use freely.
+=======
+<<<<<<< HEAD
 # Run in dry-run mode (no emails sent)
 python app.py --dry-run
 ```
@@ -191,7 +197,6 @@ The service will automatically:
 - ✅ Create `app.db` SQLite database
 - 🔄 Check for emails every minute  
 - 🌅 Send daily weather at 05:00 local time
-- ⏰ Process calendar reminders on schedule
 - 📝 Log all activities to `app.log`
 
 ## 📧 Usage Guide
@@ -209,6 +214,11 @@ or
 Prague, Czech Republic
 ```
 or coordinates:
+=======
+## License
+Open source - use freely.
+>>>>>>> 8c25680 (Repo cleanup: reorganized files, updated .gitignore, .env.example, README.md, modularized app.py)
+>>>>>>> 31f6de7
 ```
 40.7128,-74.0060
 ```
@@ -304,8 +314,6 @@ delete
 # List current weather subscribers
 python app.py --list-subs
 
-# List pending calendar reminders  
-python app.py --list-reminders
 
 # Send test email to verify setup
 python app.py --send-test user@example.com
@@ -474,18 +482,6 @@ CREATE TABLE subscribers (
 );
 ```
 
-**reminders** - Calendar reminders
-```sql
-CREATE TABLE reminders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL,
-    message TEXT NOT NULL,
-    first_run_at TEXT NOT NULL,
-    remaining_repeats INTEGER NOT NULL,
-    last_sent_at TEXT NULL,
-    created_at TEXT NOT NULL
-);
-```
 
 **inbox_log** - Email deduplication
 ```sql
@@ -505,10 +501,6 @@ CREATE TABLE inbox_log (
    - Parses commands and replies
    - Logs for deduplication
 
-2. **Reminder Delivery** - Every 1 minute
-   - Sends due calendar reminders
-   - Handles repeat scheduling
-   - Cleans up completed reminders
 
 3. **Daily Weather** - 05:00 local time
    - Fetches forecasts for all subscribers
@@ -656,4 +648,4 @@ See the [LICENSE](LICENSE) file for complete terms and conditions.
 
 ---
 
-**Made with ❤️ for the open-source community**
+**Made with ❤️ for the beta testers and proprietary users**

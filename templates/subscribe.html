@@ -1,110 +1,186 @@
 {% extends "base.html" %}
 
-{% block title %}Subscribe - Daily Brief Service{% endblock %}
+{% block title %}Subscriptions - Daily Brief Service{% endblock %}
 
-{% block header_subtitle %}Subscribe to Daily Weather Updates{% endblock %}
+{% block header_subtitle %}Manage Your Subscriptions{% endblock %}
 
 {% block content %}
 <div class="card">
-    <h2>📧 Subscribe to Daily Weather</h2>
+    <h2>📧 Manage Your Subscriptions</h2>
     <p style="margin-top: 10px;">
-        Fill out the form below to start receiving personalized weather forecasts every morning at 5:00 AM.
+        Choose your subscription type:
     </p>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button type="button" id="weatherTab" class="btn btn-primary" style="min-width:120px;">Weather</button>
+        <button type="button" id="countdownTab" class="btn btn-secondary" style="min-width:120px;">Countdown</button>
+        <button type="button" id="subscriptionsTab" class="btn btn-secondary" style="min-width:160px;">Active Subscriptions</button>
+    </div>
 </div>
 
-<form method="POST" action="{{ url_for('subscribe') }}" novalidate>
-    {{ form.hidden_tag() }}
-    
-    <div class="form-group">
-        {{ form.email.label }}
-        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
-        {% if form.email.errors %}
-            {% for error in form.email.errors %}
-                <div class="error-message">{{ error }}</div>
+<div id="subscriptionsLayer" style="display: none;">
+    <h3 style="margin-bottom: 18px; color: #5a67d8;">Active Subscriptions</h3>
+    <div id="subscriptionsList" style="background: #fff; padding: 24px 20px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); max-width: 600px; margin: 0 auto;">
+        <div style="display: flex; font-weight: bold; margin-bottom: 8px;">
+            <div style="flex: 2;">event name</div>
+            <div style="flex: 1;">Type</div>
+            <div style="flex: 1;">Date</div>
+            <div style="flex: 0 0 80px; text-align: right;"></div>
+        </div>
+        {% if subscriptions %}
+            {% for sub in subscriptions %}
+                <div class="subscription-card" style="border-bottom: 1px solid #e0e0e0; padding: 12px 0; display: flex; align-items: center; background: none; position: relative;">
+                    <div style="flex: 2;">{{ (sub.name or sub.location)[:20] }}{% if (sub.name or sub.location)|length > 20 %}...{% endif %}</div>
+                    <div style="flex: 1;">{{ sub.type }}</div>
+                    <div style="flex: 1;">{{ (sub.date_added or sub.date)[:10] }}</div>
+                    <div style="flex: 0 0 80px; display: flex; gap: 8px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ sub.id }}" data-type="{{ sub.type }}" data-index="{{ loop.index0 }}" title="Edit" style="padding: 4px 8px; border-radius: 8px;">
+                            <img src="{{ url_for('static', filename='icons/edit.svg') }}" alt="Edit" style="width: 24px; height: 24px;">
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ sub.id }}" title="Delete" style="padding: 4px 8px; border-radius: 8px;">
+                            <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete" style="width: 24px; height: 24px;">
+                        </button>
+                    </div>
+                </div>
+                <!-- Modal Edit Form -->
+                <div class="edit-modal-backdrop" id="edit-modal-backdrop-{{ sub.id }}"></div>
+                <div class="edit-modal" id="edit-modal-{{ sub.id }}">
+                    <h3>Edit Subscription</h3>
+                    {% if sub.type == 'countdown' %}
+                    <form class="edit-countdown-form">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" value="{{ sub.email or '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Countdown Name</label>
+                            <input type="text" name="countdown_name" value="{{ sub.name or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" name="countdown_date" value="{{ sub.date or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Yearly event</label>
+                            <input type="checkbox" name="countdown_yearly" {% if sub.yearly %}checked{% endif %}>
+                        </div>
+                        <div class="form-group">
+                            <label>Message before event</label>
+                            <input type="text" name="countdown_message_before" value="{{ sub.message_before or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Message after event</label>
+                            <input type="text" name="countdown_message_after" value="{{ sub.message_after or '' }}">
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                            <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <form class="edit-weather-form">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" value="{{ sub.email or '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" value="{{ sub.location or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Language</label>
+                            <select name="language">
+                                <option value="en" {% if sub.language == 'en' %}selected{% endif %}>English</option>
+                                <option value="es" {% if sub.language == 'es' %}selected{% endif %}>Spanish</option>
+                                <option value="sk" {% if sub.language == 'sk' %}selected{% endif %}>Slovak</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Personality</label>
+                            <select name="personality">
+                                <option value="neutral" {% if sub.personality == 'neutral' %}selected{% endif %}>Neutral</option>
+                                <option value="cute" {% if sub.personality == 'cute' %}selected{% endif %}>Cute</option>
+                                <option value="brutal" {% if sub.personality == 'brutal' %}selected{% endif %}>Brutal</option>
+                            </select>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-success save-edit-btn" data-id="{{ sub.id }}">Save Changes</button>
+                            <button type="button" class="btn btn-secondary cancel-edit-btn" data-id="{{ sub.id }}">Cancel</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
             {% endfor %}
+        {% else %}
+            <p>No active subscriptions found.</p>
         {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Your email will only be used for weather updates. We never share or sell your data.
-        </small>
     </div>
-    
-    <div class="form-group">
-        {{ form.location.label }}
-        {{ form.location(class="form-control", placeholder="Bratislava, Slovakia") }}
-        {% if form.location.errors %}
-            {% for error in form.location.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Be specific for best results (e.g., "Madrid, Spain" or "New York, NY")
-        </small>
-    </div>
-    
-    <div class="form-group">
-        {{ form.language.label }}
-        {{ form.language(class="form-control") }}
-        {% if form.language.errors %}
-            {% for error in form.language.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            Choose the language for your weather reports
-        </small>
-    </div>
-    
-    <div class="form-group">
-        {{ form.personality.label }}
-        {{ form.personality(class="form-control") }}
-        {% if form.personality.errors %}
-            {% for error in form.personality.errors %}
-                <div class="error-message">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <small style="color: #6c757d; display: block; margin-top: 5px;">
-            <strong>Neutral:</strong> Standard reports | 
-            <strong>Cute:</strong> Friendly & emoji-rich | 
-            <strong>Brutal:</strong> Blunt & direct
-        </small>
-    </div>
-    
-    <div style="margin-top: 30px;">
-        {{ form.submit(class="btn") }}
-    </div>
-    
-    <p style="margin-top: 15px; font-size: 0.9em; color: #6c757d; text-align: center;">
-        Your email is used only for weather delivery. No spam, no sharing.
-    </p>
-</form>
+</div>>
 
-<div class="card" style="margin-top: 30px; background: #e7f3ff; border: 1px solid #0056b3;">
-    <h3 style="color: #004085;">ℹ️ Already Subscribed?</h3>
-    <p style="color: #004085;">
-        Submitting this form with an existing email will <strong>update your preferences</strong> 
-        (location, language, or personality).
-    </p>
+<div id="weatherLayer" style="display: block;">
+    <form method="POST" action="{{ url_for('subscribe') }}?tab=weather" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" class="form-control" placeholder="Bratislava, Slovakia" value="{{ request.form.location or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language" name="language" class="form-control">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="sk">Slovak</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="personality">Personality</label>
+            <input list="personality-options" id="personality" name="personality" class="form-control" style="border-radius: 12px; background: #edeef0; border: none; font-size: 1.08em; height: 48px; padding: 12px 16px; margin-bottom: 0;" placeholder="Type or select..." value="{{ request.form.personality or '' }}">
+            <datalist id="personality-options">
+                <option value="neutral">
+                <option value="cute">
+                <option value="brutal">
+            </datalist>
+        </div>
+        <div style="margin-top: 30px;">
+            <button type="submit" class="btn btn-success">Subscribe to Weather</button>
+        </div>
+    </form>
 </div>
 
+<div id="countdownLayer" style="display: none;">
+    <form method="POST" action="{{ url_for('subscribe') }}?tab=countdown" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="countdown_name">Countdown Name</label>
+            <input type="text" id="countdown_name" name="countdown_name" class="form-control" placeholder="Birthday, Wedding, Christmas" value="{{ request.form.countdown_name or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="countdown_date">Date</label>
+            <input type="date" id="countdown_date" name="countdown_date" class="form-control" value="{{ request.form.countdown_date or '' }}">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="countdown_yearly" name="countdown_yearly" {% if request.form.countdown_yearly %}checked{% endif %} onchange="toggleAfterEvent()">
+            <label for="countdown_yearly">Yearly event (e.g. Christmas)</label>
+        </div>
+        <div class="form-group">
+            <label for="countdown_message_before">Message before event</label>
+            <input type="text" id="countdown_message_before" name="countdown_message_before" class="form-control" placeholder="Days to wedding: {days}" value="{{ request.form.countdown_message_before or '' }}">
+            <small>Use <code>{days}</code> to insert countdown value.</small>
+        </div>
+        <div class="form-group" id="afterEventGroup">
+            <label for="countdown_message_after">Message after event (optional)</label>
+            <input type="text" id="countdown_message_after" name="countdown_message_after" class="form-control" placeholder="Married for: {days}" value="{{ request.form.countdown_message_after or '' }}">
+            <small>If empty, countdown disables after event.</small>
+        </div>
+        <div style="margin-top: 30px;">
+            <button type="submit" class="btn btn-success">Subscribe to Countdown</button>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/subscribe.js') }}"></script>
+<script src="{{ url_for('static', filename='js/subscriptions.js') }}"></script>
 <script>
-// Simple client-side validation enhancement
-document.querySelector('form').addEventListener('submit', function(e) {
-    const email = document.getElementById('email').value;
-    const location = document.getElementById('location').value;
-    
-    if (!email || !location) {
-        alert('Please fill in all required fields');
-        e.preventDefault();
-        return false;
-    }
-    
-    // Basic email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
-        e.preventDefault();
-        return false;
-    }
-});
+    // Set the default tab based on context variable or URL
+    window.tabValue = '{{ tab|default("weather") }}';
 </script>
 {% endblock %}
