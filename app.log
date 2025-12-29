@@ -9570,3 +9570,87 @@ sqlite3.OperationalError: no such column: ws.lat
 2025-12-18 10:40:00,015 - INFO - ✅ Daily Brief Service stopped successfully
 2025-12-18 10:40:00,018 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
 2025-12-18 10:40:00,019 - INFO - ⚠️ Scheduler not running
+2025-12-18 11:40:24,622 - INFO - Starting Daily Brief Web Interface
+2025-12-18 11:40:24,623 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-12-18 11:40:24,623 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-12-18 11:40:24,623 - WARNING - Add to .env: FLASK_SECRET_KEY=d20eea57475ef00021bd332c23c1666eef8f995bd792f3624fabdcba4c8dae7e
+2025-12-18 11:40:24,650 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.201.160.86:5000
+2025-12-18 11:40:24,650 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-18 11:40:32,828 - INFO - Starting Daily Brief Service...
+2025-12-18 11:40:32,829 - INFO - Loading configuration from environment variables
+2025-12-18 11:40:32,829 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-12-18 11:40:32,829 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2025-12-18 11:40:32,830 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-12-18 11:40:32,830 - INFO - Initializing database at app.db
+2025-12-18 11:40:32,831 - INFO - Ensured master users table exists.
+2025-12-18 11:40:32,831 - INFO - Ensured weather_subscriptions table exists.
+2025-12-18 11:40:32,831 - INFO - Ensured countdowns table exists.
+2025-12-18 11:40:32,831 - INFO - Ensured reminders table exists.
+2025-12-18 11:40:32,832 - INFO - Ensured inbox_log table exists.
+2025-12-18 11:40:32,832 - INFO - Ensured all indexes exist.
+2025-12-18 11:40:32,841 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-12-18 11:40:32,841 - INFO - 📅 Scheduler configured: Daily emails at 5:00 AM Europe/Bratislava
+2025-12-18 11:40:32,842 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-12-18 11:40:32,848 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-12-18 11:40:32,848 - INFO - Scheduler started
+2025-12-18 11:40:44,029 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:44] "GET / HTTP/1.1" 200 -
+2025-12-18 11:40:46,745 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:46] "[32mGET /subscribe HTTP/1.1[0m" 302 -
+2025-12-18 11:40:46,845 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:46] "GET /login?next=http://127.0.0.1:5000/subscribe HTTP/1.1" 200 -
+2025-12-18 11:40:47,865 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:47] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-12-18 11:40:47,882 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:47] "GET / HTTP/1.1" 200 -
+2025-12-18 11:40:49,838 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:49] "GET /subscribe HTTP/1.1" 200 -
+2025-12-18 11:40:50,130 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:50] "GET /static/icons/edit.svg HTTP/1.1" 200 -
+2025-12-18 11:40:50,135 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:50] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-12-18 11:40:50,148 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:50] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-12-18 11:40:50,158 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:50] "GET /static/icons/delete.svg HTTP/1.1" 200 -
+2025-12-18 11:40:50,541 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:50] "GET /settings HTTP/1.1" 200 -
+2025-12-18 11:40:52,766 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:52] "GET /stats HTTP/1.1" 200 -
+2025-12-18 11:40:54,840 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:54] "GET / HTTP/1.1" 200 -
+2025-12-18 11:40:56,880 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:56] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-12-18 11:40:56,894 - INFO - 127.0.0.1 - - [18/Dec/2025 11:40:56] "GET / HTTP/1.1" 200 -
+2025-12-23 22:17:11,378 - INFO - Starting Daily Brief Service...
+2025-12-23 22:17:11,379 - INFO - Loading configuration from environment variables
+2025-12-23 22:17:11,379 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2025-12-23 22:17:11,380 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2025-12-23 22:17:11,380 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2025-12-23 22:17:11,380 - INFO - Initializing database at app.db
+2025-12-23 22:17:11,384 - INFO - Ensured master users table exists.
+2025-12-23 22:17:11,385 - INFO - Ensured weather_subscriptions table exists.
+2025-12-23 22:17:11,385 - INFO - Ensured countdowns table exists.
+2025-12-23 22:17:11,385 - INFO - Ensured reminders table exists.
+2025-12-23 22:17:11,386 - INFO - Ensured inbox_log table exists.
+2025-12-23 22:17:11,386 - INFO - Ensured all indexes exist.
+2025-12-23 22:17:11,401 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-12-23 22:17:11,403 - INFO - 📅 Scheduler configured: Daily emails at 5:00 AM Europe/Bratislava
+2025-12-23 22:17:11,403 - INFO - ✅ Daily Brief Service is running. Press Ctrl+C to stop.
+2025-12-23 22:17:11,411 - INFO - Added job "main.<locals>.<lambda>" to job store "default"
+2025-12-23 22:17:11,412 - INFO - Scheduler started
+2025-12-23 22:17:15,063 - INFO - Starting Daily Brief Web Interface
+2025-12-23 22:17:15,063 - INFO - 🔒 Security features enabled: CSRF, Rate Limiting, Input Validation
+2025-12-23 22:17:15,063 - WARNING - ⚠️ FLASK_SECRET_KEY not set! Generated temporary key
+2025-12-23 22:17:15,065 - WARNING - Add to .env: FLASK_SECRET_KEY=add30a4bd86436dd5c373a4b674f14ac91a73bcafd37801212081f57669cf624
+2025-12-23 22:17:16,004 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.253:5000
+2025-12-23 22:17:16,005 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-23 22:17:23,723 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:23] "GET / HTTP/1.1" 200 -
+2025-12-23 22:17:32,926 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:32] "GET /login HTTP/1.1" 200 -
+2025-12-23 22:17:35,271 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:35] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-12-23 22:17:35,287 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:35] "GET / HTTP/1.1" 200 -
+2025-12-23 22:17:38,120 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:38] "GET /subscribe HTTP/1.1" 200 -
+2025-12-23 22:17:38,448 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:38] "GET /static/icons/delete.svg HTTP/1.1" 200 -
+2025-12-23 22:17:38,455 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:38] "GET /static/icons/edit.svg HTTP/1.1" 200 -
+2025-12-23 22:17:38,458 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:38] "GET /static/js/subscribe.js HTTP/1.1" 200 -
+2025-12-23 22:17:38,465 - INFO - 127.0.0.1 - - [23/Dec/2025 22:17:38] "GET /static/js/subscriptions.js HTTP/1.1" 200 -
+2025-12-23 22:19:24,789 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-12-23 22:19:24,790 - INFO - ⚠️ Scheduler not running
+2025-12-23 22:20:00,015 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-12-23 22:20:00,018 - INFO - ⏰ Stopping scheduled jobs...
+2025-12-23 22:20:00,019 - INFO - Scheduler has been shut down
+2025-12-23 22:20:00,020 - INFO - ✅ Daily Brief Service stopped successfully
+2025-12-23 22:20:00,049 - INFO - 🛑 Received SIGINT (Ctrl+C) - Shutting down Daily Brief Service gracefully...
+2025-12-23 22:20:00,050 - INFO - ⚠️ Scheduler not running
