@@ -25,15 +25,15 @@ Requirements:
 """
 
 import os
-import sqlite3
 import sys
+import sqlite3
 import logging
 import signal
 import argparse
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from services.weather_service import list_subscribers
-from services.email_service import start_email_monitor, stop_email_monitor, send_test_email, run_daily_job
+from services.weather_service import run_daily_weather_job, list_subscribers
+from services.email_service import start_email_monitor, stop_email_monitor, send_test_email
 from services.reminder_service import list_reminders, run_due_reminders_job
 from timezonefinder import TimezoneFinder
 from services.countdown_service import init_countdown_db
@@ -53,7 +53,27 @@ except ImportError:
     pass
 
 # Configure logging with UTF-8 encoding to handle emojis
-from services.logging_service import logger
+class SafeStreamHandler(logging.StreamHandler):
+    """Custom stream handler that safely handles Unicode characters"""
+    def emit(self, record):
+        try:
+            super().emit(record)
+        except UnicodeEncodeError:
+            # Fallback: encode with ascii and replace problem characters
+            msg = self.format(record)
+            safe_msg = msg.encode('ascii', errors='replace').decode('ascii')
+            record.msg = safe_msg
+            super().emit(record)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        SafeStreamHandler(sys.stderr),
+        logging.FileHandler('app.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def signal_handler(signum, frame):
     """Graceful shutdown handler for Ctrl+C and other signals"""
@@ -75,7 +95,8 @@ def signal_handler(signum, frame):
         logger.info("⚠️ Scheduler not running")
     
     print("\n👋 Daily Brief Service has been stopped. Goodbye!")
-    sys.exit(0)
+    
+    os._exit(0)
 
 # Register signal handlers
 signal.signal(signal.SIGINT, signal_handler)   # Ctrl+C
@@ -107,22 +128,19 @@ class Config:
 def load_env() -> Config:
     """Load and validate environment configuration."""
     logger.info("Loading configuration from environment variables")
+    
     # Check which .env file is being used
     env_path = os.path.abspath('.env')
     if os.path.exists(env_path):
         logger.info(f"✅ Using .env file: {env_path}")
     else:
         logger.info("⚠️ No .env file found - using system environment variables")
-
+    
     config = Config()
-
-    # Log the loaded EMAIL_PASSWORD for verification (masking for safety)
-    pw_display = config.email_password[:2] + "***" + config.email_password[-2:] if config.email_password and len(config.email_password) > 4 else "***"
-    logger.info(f"Loaded EMAIL_PASSWORD: {pw_display}")
-
+    
     # Set timezone globally
     os.environ['TZ'] = config.timezone
-
+    
     logger.info(f"Configuration loaded - Email: {config.email_address}, TZ: {config.timezone}")
     return config
 
@@ -130,32 +148,9 @@ def load_env() -> Config:
 def init_db(path: str = "app.db") -> None:
     """Initialize SQLite database with required tables."""
     logger.info(f"Initializing database at {path}")
+    
     conn = sqlite3.connect(path)
     try:
-        # Rename subscribers table to weather if it exists
-        try:
-            conn.execute("ALTER TABLE subscribers RENAME TO weather")
-            logger.info("Renamed subscribers table to weather.")
-        except sqlite3.OperationalError:
-            # Table may not exist or already renamed
-            pass
-        # Master users table for quick access and subscriptions
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                email TEXT UNIQUE NOT NULL,
-                active INTEGER DEFAULT 1,
-                weather_enabled INTEGER DEFAULT 0,
-                countdown_enabled INTEGER DEFAULT 0,
-                reminder_enabled INTEGER DEFAULT 0,
-                timezone TEXT DEFAULT 'UTC',
-                last_active TEXT,
-                created_at TEXT,
-                personality TEXT DEFAULT 'neutral',
-                language TEXT DEFAULT 'en'
-            )
-        """)
-        logger.info("Ensured master users table exists.")
         # Subscribers table for weather service
         conn.execute("""
             CREATE TABLE IF NOT EXISTS subscribers (
@@ -199,21 +194,6 @@ def init_db(path: str = "app.db") -> None:
         except sqlite3.OperationalError:
             # Column already exists, which is fine
             pass
-
-        # Add countdown_enabled column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN countdown_enabled INTEGER DEFAULT 0")
-            logger.info("Added countdown_enabled column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
-        # Add reminder_enabled column if it doesn't exist
-        try:
-            conn.execute("ALTER TABLE subscribers ADD COLUMN reminder_enabled INTEGER DEFAULT 0")
-            logger.info("Added reminder_enabled column to subscribers table")
-        except sqlite3.OperationalError:
-            # Column already exists, which is fine
-            pass
         
         # Reminders table for calendar service
         conn.execute("""
@@ -244,8 +224,75 @@ def init_db(path: str = "app.db") -> None:
                 body_hash TEXT
             )
         """)
-        if scheduler:
-            scheduler.start()
+        
+        conn.commit()
+        logger.info("Database initialized successfully")
+        
+    finally:
+        conn.close()
+
+
+def main():
+    """Main application entry point."""
+    parser = argparse.ArgumentParser(description="Daily Brief Service")
+    parser.add_argument("--dry-run", action="store_true", help="Run without sending emails")
+    parser.add_argument("--list-subs", action="store_true", help="List weather subscribers")
+    parser.add_argument("--list-reminders", action="store_true", help="List pending reminders")
+    parser.add_argument("--send-test", metavar="EMAIL", help="Send test email to address")
+    
+    args = parser.parse_args()
+    
+    # Create README on first run
+    create_readme_if_missing()
+    
+    # Initialize database
+    init_db()
+    # Initialize countdown DB
+    init_countdown_db()
+    
+    if args.list_subs:
+        list_subscribers()
+        return
+        
+    if args.list_reminders:
+        list_reminders()
+        return
+    
+    if args.send_test:
+        config = load_env()
+        send_test_email(config, args.send_test)
+        return
+    
+    logger.info("Starting Daily Brief Service")
+    config = load_env()
+    
+    if args.dry_run:
+        logger.info("Running in DRY RUN mode - no emails will be sent")
+    
+    global scheduler
+    scheduler = BlockingScheduler(timezone=config.timezone)
+    
+    start_email_monitor(config, args.dry_run)
+    
+    # Schedule jobs - only weather checking, emails are handled real-time
+    # Reminder system temporarily disabled
+    # scheduler.add_job(lambda: run_due_reminders_job(config, args.dry_run), CronTrigger(minute=1), id='check_reminders', name='Send due calendar reminders')
+    scheduler.add_job(
+        func=lambda: run_daily_weather_job(config, args.dry_run),
+        trigger=CronTrigger(minute=0),
+        id='daily_weather',
+        name='Check hourly for 5 AM deliveries'
+    )
+    
+    logger.info("Scheduler started - Daily Brief Service is running")
+    logger.info("Jobs scheduled:")
+    logger.info("  - Email monitoring: real-time IMAP IDLE (immediate response)")
+    # logger.info("  - Check reminders: every 1 minute")  # Disabled
+    logger.info("  - Daily weather: check at :00 of every hour, send at 5 AM local time per subscriber")
+    logger.info("🎯 Press Ctrl+C to stop the service gracefully")
+    
+    try:
+        scheduler.start()
     except KeyboardInterrupt:
         logger.info("🛑 Keyboard interrupt received")
         signal_handler(signal.SIGINT, None)
@@ -255,32 +302,6 @@ def init_db(path: str = "app.db") -> None:
             scheduler.shutdown()
         raise
 
-
-def main():
-    logger.info("Starting Daily Brief Service...")
-    config = load_env()
-    init_db()
-    init_countdown_db()
-
-    global scheduler
-    scheduler = BlockingScheduler()
-
-    # Schedule daily weather job to run every hour
-    scheduler.add_job(
-        lambda: run_daily_job(config),
-        CronTrigger(minute=0, timezone=config.timezone),
-        #CronTrigger(minute="*/1"),
-        replace_existing=True
-    )
-
-    # Start email monitor in a separate thread
-    start_email_monitor()
-
-    logger.info("✅ Daily Brief Service is running. Press Ctrl+C to stop.")
-    try:
-        scheduler.start()
-    except (KeyboardInterrupt, SystemExit):
-        signal_handler(signal.SIGINT, None)
 
 if __name__ == "__main__":
     main()

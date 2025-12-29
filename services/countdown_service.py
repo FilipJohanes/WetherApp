@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS countdowns (
 """
 
 def init_countdown_db(path: str = "app.db"):
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=10.0)
     try:
+        conn.execute('PRAGMA journal_mode=WAL')
         conn.execute(COUNTDOWN_TABLE_SQL)
         # Add unique index for (email, name, date)
         conn.execute("""
@@ -62,8 +63,9 @@ def init_countdown_db(path: str = "app.db"):
         conn.close()
 
 def add_countdown(event: CountdownEvent, path: str = "app.db"):
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=10.0)
     try:
+        conn.execute('PRAGMA journal_mode=WAL')
         # Check for duplicate
         existing = conn.execute(
             "SELECT 1 FROM countdowns WHERE email = ? AND name = ? AND date = ?",
@@ -80,8 +82,9 @@ def add_countdown(event: CountdownEvent, path: str = "app.db"):
         conn.close()
 
 def get_user_countdowns(email: str, path: str = "app.db") -> List[CountdownEvent]:
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=10.0)
     try:
+        conn.execute('PRAGMA journal_mode=WAL')
         rows = conn.execute("SELECT name, date, yearly, message_before, message_after FROM countdowns WHERE email = ?", (email,)).fetchall()
         events = [CountdownEvent(name, date, bool(yearly), email, message_before, message_after) for name, date, yearly, message_before, message_after in rows]
         return events
@@ -89,8 +92,9 @@ def get_user_countdowns(email: str, path: str = "app.db") -> List[CountdownEvent
         conn.close()
 
 def delete_countdown(email: str, name: str, path: str = "app.db"):
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=10.0)
     try:
+        conn.execute('PRAGMA journal_mode=WAL')
         conn.execute("DELETE FROM countdowns WHERE email = ? AND name = ?", (email, name))
         conn.commit()
     finally:

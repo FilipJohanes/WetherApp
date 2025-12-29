@@ -212,9 +212,9 @@ After=network.target
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/projects/WetherApp
-Environment="PATH=/home/pi/projects/WetherApp/venv/bin"
-ExecStart=/home/pi/projects/WetherApp/venv/bin/python /home/pi/projects/WetherApp/web_app.py
+WorkingDirectory=/home/pi/WetherApp
+Environment="PATH=/home/pi/WetherApp/venv/bin"
+ExecStart=/home/pi/WetherApp/venv/bin/gunicorn -w 4 -b 0.0.0.0:5000 web_app:app
 Restart=always
 RestartSec=10
 
@@ -225,6 +225,8 @@ StandardError=journal
 [Install]
 WantedBy=multi-user.target
 ```
+
+**Note:** Using 4 workers on Raspberry Pi may cause high CPU usage. For Pi Zero/3, consider using 1-2 workers instead: `-w 2`
 
 **Important:** Replace `/home/pi` with your actual home directory if different (use `echo $HOME` to check).
 
@@ -378,7 +380,248 @@ sudo systemctl status dailybrief.service
 
 ---
 
-## 🔧 **Troubleshooting**
+### **Step 8: Complete Reset and Fresh Setup**
+
+If you need to completely reset your Raspberry Pi deployment and start fresh:
+
+#### 8.1 Backup Current Data (IMPORTANT!)
+```bash
+# Create backup directory
+mkdir -p ~/backups/dailybrief_reset_$(date +%Y%m%d)
+cd ~/backups/dailybrief_reset_$(date +%Y%m%d)
+
+# Backup database
+cp ~/WetherApp/app.db ./app.db.backup
+
+# Backup .env configuration
+cp ~/WetherApp/.env ./.env.backup
+
+# Backup any custom files
+cp ~/WetherApp/*.log ./ 2>/dev/null || true
+
+# Verify backups
+ls -lh
+echo "Backups saved in: $(pwd)"
+```
+
+#### 8.2 Stop All Running Services
+```bash
+# Stop dailybrief service (app.py)
+sudo systemctl stop dailybrief.service
+sudo systemctl disable dailybrief.service
+
+# Stop web service if running as systemd
+sudo systemctl stop dailybrief-web.service 2>/dev/null || true
+sudo systemctl disable dailybrief-web.service 2>/dev/null || true
+
+# Kill any remaining Python processes
+pkill -f app.py
+pkill -f web_app.py
+pkill gunicorn
+
+# Verify nothing is running on port 5000
+sudo lsof -i :5000
+
+# If anything is still running, force kill
+# sudo kill -9 $(sudo lsof -t -i:5000)
+```
+
+#### 8.3 Remove Application and Services
+```bash
+# Remove systemd service files
+sudo rm /etc/systemd/system/dailybrief.service
+sudo rm /etc/systemd/system/dailybrief-web.service 2>/dev/null || true
+
+# Reload systemd
+sudo systemctl daemon-reload
+
+# Remove application directory
+cd ~
+rm -rf ~/WetherApp
+
+# Remove any cron jobs (if set)
+crontab -e
+
+        
+        #*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
+# Delete any lines related to WetherApp or dailybrief
+
+# Clear systemd journal logs (optional)
+sudo journalctl --vacuum-time=1s
+```
+
+#### 8.4 Fresh Installation
+```bash
+# Clone repository
+git clone https://github.com/FilipJohanes/WetherApp.git
+cd WetherApp
+
+# Checkout the branch you want (MVP, main, etc.)
+git checkout MVP
+
+# Create fresh virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+#### 8.5 Restore or Reconfigure Settings
+```bash
+# Option A: Restore from backup
+cp ~/backups/dailybrief_reset_*/app.db.backup ~/WetherApp/app.db
+cp ~/backups/dailybrief_reset_*/.env.backup ~/WetherApp/.env
+
+# Option B: Create fresh .env file
+cp ~/WetherApp/example.env ~/WetherApp/.env
+nano ~/WetherApp/.env
+# Add your email credentials and settings
+
+# Set proper permissions
+chmod 600 ~/WetherApp/.env
+
+# Option C: Initialize fresh database (if not restoring)
+cd ~/WetherApp
+source venv/bin/activate
+python scripts/init_db.py
+```
+
+#### 8.6 Recreate systemd Services
+
+**Create Backend Service (app.py):**
+```bash
+sudo nano /etc/systemd/system/dailybrief.service
+```
+
+Paste this configuration:
+```ini
+[Unit]
+Description=Daily Brief Weather Service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/projects/WetherApp
+Environment="PATH=/home/pi/projects/WetherApp/venv/bin"
+ExecStart=/home/pi/projects/WetherApp/venv/bin/python /home/pi/projects/WetherApp/app.py
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Create Web Service (web_app.py):**
+```bash
+sudo nano /etc/systemd/system/dailybrief-web.service
+```
+
+Paste this configuration:
+```ini
+[Unit]
+Description=Daily Brief Web Interface
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/WetherApp
+Environment="PATH=/home/pi/WetherApp/venv/bin"
+ExecStart=/home/pi/WetherApp/venv/bin/gunicorn -w 4 -b 0.0.0.0:5000 web_app:app
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Note:** This uses 4 Gunicorn workers. For Raspberry Pi Zero or Pi 3 with limited RAM, consider reducing to 1-2 workers: `-w 2`
+
+**Important:** Replace `/home/pi` with your actual home directory if different.
+
+#### 8.7 Start Fresh Services
+```bash
+# Reload systemd
+sudo systemctl daemon-reload
+
+# Enable services to start on boot
+sudo systemctl enable dailybrief.service
+sudo systemctl enable dailybrief-web.service
+
+# Start services
+sudo systemctl start dailybrief.service
+sudo systemctl start dailybrief-web.service
+
+# Check status of both services
+sudo systemctl status dailybrief.service
+sudo systemctl status dailybrief-web.service
+
+# View logs
+sudo journalctl -u dailybrief.service -n 50
+sudo journalctl -u dailybrief-web.service -n 50
+```
+
+#### 8.8 Verification
+```bash
+# Check both services are running
+sudo systemctl status dailybrief.service
+sudo systemctl status dailybrief-web.service
+
+# Test web interface
+curl http://localhost:5000
+
+# Check database
+cd ~/WetherApp
+sqlite3 app.db "SELECT * FROM subscribers;"
+
+# Monitor logs in real-time
+sudo journalctl -u dailybrief.service -u dailybrief-web.service -f
+
+# Verify timezone
+timedatectl
+
+# Check disk space
+df -h
+
+# Check memory
+free -h
+```
+
+#### 8.9 Post-Reset Checklist
+
+- [ ] Both services are active and running
+- [ ] Database restored or reinitialized
+- [ ] .env file configured with correct credentials
+- [ ] Timezone set correctly
+- [ ] Logs show no errors
+- [ ] Web interface accessible (http://raspberry-pi-ip:5000)
+- [ ] Email monitoring working (check logs)
+- [ ] Services start automatically after reboot test
+
+#### 8.10 Test Reboot
+```bash
+# Reboot to test auto-start
+sudo reboot
+
+# After Pi restarts, SSH back in and check:
+sudo systemctl status dailybrief.service
+sudo systemctl status dailybrief-web.service
+```
+
+---
+
+##  **Troubleshooting**
 
 ### **Service Won't Start**
 ```bash
@@ -420,6 +663,107 @@ sudo timedatectl set-timezone Europe/Bratislava
 sudo systemctl restart dailybrief.service
 ```
 
+### **No Space Left on Device (During pip install)**
+```bash
+# Error: "could not write to... No space left on device"
+# This happens when installing packages like timezonefinder on Pi
+
+# COMMON CAUSE: /tmp is tmpfs (RAM-based) with limited space (usually 209M)
+# Large packages like timezonefinder (53MB) exceed this during build
+
+# SOLUTION 1: Use disk-based temporary directory (RECOMMENDED)
+mkdir -p ~/pip_tmp
+TMPDIR=~/pip_tmp pip install --no-cache-dir -r requirements.txt
+rm -rf ~/pip_tmp
+
+# SOLUTION 2: Install problem package separately with custom TMPDIR
+mkdir -p ~/pip_tmp
+TMPDIR=~/pip_tmp pip install --no-cache-dir timezonefinder
+rm -rf ~/pip_tmp
+# Then install remaining packages normally
+pip install --no-cache-dir -r requirements.txt
+
+# SOLUTION 3: Increase tmpfs size (if RAM allows)
+# Check current /tmp size
+df -h /tmp
+# Edit fstab to increase tmpfs size
+sudo nano /etc/fstab
+# Add or modify this line:
+# tmpfs /tmp tmpfs defaults,noatime,nosuid,size=512M 0 0
+# Reboot to apply
+sudo reboot
+
+# If disk space is actually low:
+# 1. Check disk space
+df -h
+
+# 2. Clean up unnecessary files
+sudo journalctl --vacuum-time=7d
+sudo apt clean
+sudo apt autoremove -y
+pip cache purge
+rm -rf ~/.cache/pip
+
+# 3. Check for large files
+du -sh ~/* | sort -h | tail -10
+
+# 4. Expand filesystem (if SD card is larger than current partition)
+sudo raspi-config
+# Select: Advanced Options -> Expand Filesystem
+# Reboot after this
+```
+
+### **Web Interface Not Accessible (Port 5000)**
+```bash
+# Error: "Failed to connect to localhost port 5000"
+# This means web_app.py is not running
+
+# 1. Check if web service is running
+sudo systemctl status dailybrief-web.service
+# or
+ps aux | grep web_app.py
+
+# 2. Check logs for errors (MOST IMPORTANT!)
+sudo journalctl -u dailybrief-web.service -n 100
+
+# 3. Common Error: "ModuleNotFoundError: No module named 'bcrypt'"
+# Solution: Install missing dependencies
+sudo systemctl stop dailybrief-web.service
+cd ~/WetherApp
+source venv/bin/activate
+mkdir -p ~/pip_tmp
+TMPDIR=~/pip_tmp pip install --no-cache-dir -r requirements.txt
+rm -rf ~/pip_tmp
+sudo systemctl start dailybrief-web.service
+
+# 4. Check if anything is using port 5000
+sudo lsof -i :5000
+sudo netstat -tlnp | grep 5000
+
+# 5. If service doesn't exist, create it first (see Step 8.6 in this guide)
+# Or start manually for testing:
+cd ~/WetherApp
+source venv/bin/activate
+python web_app.py
+
+# Web app should start on http://0.0.0.0:5000
+# Test from Pi: curl http://localhost:5000
+# Test from another device: http://raspberry-pi-ip:5000
+
+# 6. If service exists but not running, start it:
+sudo systemctl start dailybrief-web.service
+sudo systemctl status dailybrief-web.service
+
+# 7. Other common issues:
+# - Port already in use (kill the other process)
+# - Missing dependencies (see #3 above)
+# - Database locked (stop other services accessing it)
+# - Firewall blocking (sudo ufw allow 5000)
+
+# 8. Enable service to start on boot
+sudo systemctl enable dailybrief-web.service
+```
+
 ### **Database Locked**
 ```bash
 # If you get "database is locked" error:
@@ -449,6 +793,35 @@ sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 ```
 
+### **CPU Spikes / High Load**
+```bash
+# Check what's using CPU
+top -b -n 1 | head -n 20
+
+# If Gunicorn workers are at 80-100% CPU:
+# PROBLEM: Too many Gunicorn workers for Raspberry Pi's limited RAM
+# SOLUTION: Kill gunicorn and use Flask dev server or single worker
+
+# Kill all gunicorn processes
+pkill gunicorn
+
+# Option 1: Use Flask development server (RECOMMENDED for Pi)
+cd ~/WetherApp
+source venv/bin/activate
+python web_app.py &
+
+# Option 2: Use ONLY 1 Gunicorn worker (not 4!)
+gunicorn -w 1 -b 0.0.0.0:5000 web_app:app &
+
+# Verify CPU is back to normal
+top -b -n 1 | head -n 20
+
+# Common causes of CPU spikes:
+# - Too many Gunicorn workers (use -w 1 max on Pi)
+# - Database locking (check for zombie processes)
+# - Memory pressure causing swap thrashing (check free -h)
+```
+
 ---
 
 ## 🔒 **Security Best Practices**
@@ -456,10 +829,10 @@ sudo dphys-swapfile swapon
 ### **Secure Your .env File**
 ```bash
 # Restrict file permissions (owner read/write only)
-chmod 600 ~/projects/WetherApp/.env
+chmod 600 ~/WetherApp/.env
 
 # Verify permissions
-ls -la ~/projects/WetherApp/.env
+ls -la ~/WetherApp/.env
 # Should show: -rw-------
 ```
 
