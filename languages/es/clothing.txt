@@ -1,25 +1,25 @@
 # Clothing Advice Configuration - Spanish
 # Format: condition|neutral|cute|brutal|emuska
 # Each line represents one weather condition with four personality modes
-# Use keys matching weather_messages.txt for consistency
+# Focus on specific clothing items only
 
-sunny|Ropa ligera, gafas de sol.|🌞 Ponte tu vestido favorito y gafas de sol!|Camiseta, shorts, gafas. Listo.| 
-raining|Impermeable, paraguas.|🌧️ Impermeable lindo y botas!|Impermeable o mójate.| 
-heavy_rain|Equipo impermeable completo, botas.|⛈️ Botas de lluvia, impermeable y paraguas grande!|Impermeabiliza todo o quédate adentro.| 
-snowing|Abrigo, botas, guantes.|❄️ Abrigo peludo, guantes y botas de nieve!|Vístete para Siberia o congélate.| 
-hot|Shorts, camiseta, sombrero, protector solar.|😎 Ropa ligera, sombrero y protector solar!|Mínima ropa, máxima agua.| 
-cold|Capas, abrigo, bufanda.|🧥 Suéter acogedor, bufanda y gorro!|Abrígate o tiembla.| 
-freezing|Ropa de invierno pesada, térmicas.|🥶 Abrigo grueso, leggings térmicos y guantes!|Equipo ártico o conviértete en paleta.| 
-mild|Ropa cómoda.|😊 Lo que quieras, es perfecto!|Lo que sea, está bien.| 
-windy|Rompevientos, sombrero seguro.|💨 Rompevientos y sombrero divertido!|Sujeta tu sombrero o piérdelo.| 
-stormy|Quédate adentro, kit de emergencia.|☕ Chocolate caliente y manta!|Quédate adentro o arrepiéntete.| 
-foggy|Ropa reflectante, maneja con cuidado.|🌫️ Colores brillantes y maneja despacio!|Sé visible o te atropellan.| 
-sunny_hot|Ropa ligera y transpirable, protector solar.|🔥☀️ Ropa de playa y mucho protector solar!|Mínima ropa, máximo protector solar.| 
-cold_windy|Capas extra, abrigo cortaviento.|🌬️❄️ Abrígate como burrito!|Rompevientos en todo.| 
-rainy_cold|Impermeable y ropa cálida.|🌧️🧥 Botas de lluvia y abrigo cálido!|Lluvia fría, vístete inteligente.| 
-humid|Ropa transpirable y absorbente.|💧 Ropa ligera y aireada!|Absorbente o sufre.| 
-dry|Hidrátate, usa crema.|🏜️ Hidrátate y usa loción!|Bálsamo, agua, loción.| 
-heatwave|Mantente fresco, evita el sol, AC.|🔥🌡️ Busca sombra, bebe frío!|Quédate adentro o derrítete.| 
-blizzard|Quédate adentro, equipo de emergencia.|🌨️❄️ Manta, cacao y Netflix!|No salgas si no quieres morir.| 
-thunderstorm|Quédate adentro, evita el metal.|⚡🌩️ Mira desde adentro, mantente seguro!|Aléjate de las ventanas.| 
-default|Revisa el clima y vístete apropiadamente.|🌤️ Tú puedes con esto!|Vístete como humano.| 
+blizzard|Capa base térmica, parka aislante, chaqueta de plumón, pasamontañas, guantes aislantes, botas de nieve.|❄️🌨️ Equipo completo de nieve: capa térmica, parka mullida, manoplas y botas de nieve!|Capa térmica, parka aislante, manoplas, botas de nieve. Sobrevive.|Bambulka, vístete como esquimal: parka, pasamontañas, guantes cálidos y botas!
+freezing|Chaqueta acolchada, calcetines térmicos, botas de cuero, gorro tejido, bufanda de lana.|🥶 Chaqueta acolchada, calcetines térmicos, lindo gorro tejido y bufanda cálida!|Chaqueta acolchada, calcetines térmicos, botas de cuero, gorro.|Cariño, abrígate: chaqueta acolchada, calcetines térmicos, botas y bufanda!
+cold|Chaqueta acolchada, sudadera con capucha, jeans, botas de cuero, gorro tejido.|🧥 Chaqueta acolchada acogedora, sudadera, jeans y botines!|Chaqueta acolchada, sudadera, jeans, botas.|Querida, ponte tu chaqueta acolchada, sudadera, jeans y botas!
+cold_windy|Chaqueta softshell, chaqueta de forro polar, suéter de lana, leggings térmicos, botas de cuero, gorro tejido, bufanda de lana.|🌬️❄️ Chaqueta softshell, forro polar, suéter de lana, pantalones cálidos, botas y bufanda!|Chaqueta softshell, forro polar, leggings térmicos, botas.|Pumpkin, capas: chaqueta softshell, forro polar, suéter de lana y botas!
+rainy_cold|Chaqueta impermeable, sudadera, jeans, botas impermeables, gorro tejido.|🌧️🧥 Chaqueta impermeable sobre sudadera, jeans, botas impermeables y gorro cálido!|Chaqueta impermeable, sudadera, jeans, botas impermeables.|Cariño, mantente seca y abrigada: chaqueta impermeable, sudadera y botas!
+snowing|Parka aislante, pantalones de nieve, chaqueta de forro polar, guantes aislantes, botas de nieve, gorro de trampero, bufanda de lana.|❄️ Parka aislante, pantalones de nieve, forro polar mullido, manoplas y botas de nieve!|Parka aislante, pantalones de nieve, guantes, botas de nieve.|Copito, vístete abrigada: parka, pantalones de nieve, guantes y botas!
+mild|Chaqueta ligera, rompevientos, pantalones largos, zapatillas, gorra de béisbol.|😊 Chaqueta ligera, pantalones cómodos, zapatillas y linda gorra!|Chaqueta ligera, pantalones largos, zapatillas.|Querida, día fácil: chaqueta ligera, pantalones y zapatillas!
+sunny|Camiseta, pantalones ligeros, zapatos de lona, sombrero.|🌞 Camiseta, pantalones ligeros, zapatos de lona y sombrero!|Camiseta, pantalones, zapatos de lona.|Cariño, vístete ligera: camiseta, pantalones y sombrero!
+sunny_hot|Camiseta sin mangas, shorts, sandalias, sombrero de ala ancha.|🔥☀️ Camiseta sin mangas, shorts, lindas sandalias y sombrero de ala ancha!|Camiseta sin mangas, shorts, sandalias, sombrero.|Solecito, mantente fresca: camiseta sin mangas, shorts, sandalias y sombrero!
+hot|Camisa deportiva transpirable, shorts, zapatos de lona, sombrero.|😎 Camisa transpirable, shorts, zapatos de lona y sombrero!|Camisa transpirable, shorts, zapatos de lona.|Cariño, combate el calor: camisa transpirable, shorts y sombrero!
+heatwave|Camisa de lino, pantalones ligeros, chanclas, sombrero de ala ancha.|🌡️🔥 Camisa de lino, pantalones ligeros, chanclas y sombrero de ala ancha!|Camisa de lino, pantalones ligeros, chanclas.|Pumpkin, mantente fresca: camisa de lino, pantalones ligeros y chanclas!
+raining|Chaqueta impermeable, pantalones largos, paraguas, botas impermeables.|🌧️ Chaqueta impermeable, pantalones, lindo paraguas y botas impermeables!|Chaqueta impermeable, pantalones, paraguas, botas.|Querida, mantente seca: chaqueta impermeable, paraguas y botas!
+heavy_rain|Poncho impermeable, pantalones de lluvia, botas impermeables, sombrero impermeable, paraguas.|⛈️ Equipo completo de lluvia: poncho, pantalones de lluvia, botas, sombrero y paraguas!|Poncho impermeable, pantalones de lluvia, botas.|Pumpkin, protección completa: poncho, pantalones de lluvia, botas y paraguas!
+windy|Rompevientos, pantalones largos, zapatillas, gorra de béisbol (asegurada).|💨 Rompevientos, pantalones, zapatillas y asegura esa gorra!|Rompevientos, pantalones, zapatillas, gorra asegurada.|Querida, protección contra viento: rompevientos, pantalones y asegura tu gorra!
+stormy|Quédate adentro. Si sales: poncho impermeable, pantalones de lluvia, botas.|☕⛈️ Quédate cómoda adentro! Si debes salir: equipo completo de lluvia!|Quédate adentro. Afuera: todo impermeable.|Cariño, quédate adentro! Si debes salir: equipo impermeable completo!
+thunderstorm|Quédate adentro. Si sales: evita metal, usa zapatos con suela de goma.|⚡ Mantente segura adentro! Si sales: zapatos con suela de goma, evita metal!|Quédate adentro. Afuera: solo suelas de goma.|Querida, mantente segura adentro! Si sales: zapatos con suela de goma!
+foggy|Chaqueta de color brillante, equipo reflectante, pantalones largos, zapatillas.|🌫️ Chaqueta brillante con equipo reflectante, pantalones y zapatillas!|Chaqueta brillante, equipo reflectante, pantalones, zapatillas.|Pumpkin, sé visible: chaqueta brillante, equipo reflectante y zapatillas!
+humid|Camisa deportiva transpirable, shorts ligeros, zapatos de lona.|💧 Camisa transpirable, shorts ligeros y zapatos de lona aireados!|Camisa transpirable, shorts ligeros, zapatos de lona.|Cariño, mantente cómoda: camisa transpirable, shorts ligeros y zapatos!
+dry|Chaqueta ligera, pantalones largos, zapatillas. Lleva: bálsamo labial, botella de agua.|🏜️ Chaqueta ligera, pantalones, zapatillas, bálsamo y mucha agua!|Chaqueta ligera, pantalones, zapatillas, bálsamo, agua.|Querida, mantente hidratada: chaqueta ligera, pantalones, agua y bálsamo!
+default|Chaqueta ligera, pantalones largos, zapatillas.|🌤️ Chaqueta ligera, pantalones cómodos y zapatillas. ¡Tú puedes!|Chaqueta ligera, pantalones, zapatillas.|Cariño, outfit estándar: chaqueta ligera, pantalones y zapatillas! 

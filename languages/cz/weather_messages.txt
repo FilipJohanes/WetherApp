@@ -1,0 +1,56 @@
+# Weather Messages Configuration - Czech
+# Format: condition|neutral|cute|brutal|emuska
+# Each line represents one weather condition with four personality modes
+# Note: Emuska mode is not available in Czech (only available in Slovak language)
+
+# Rain conditions
+raining|Vezmi si deštník - dnes bude pršet.|🌧️ Krásné kapky deště přicházejí! Nezapomeň na svůj rozkošný deštník! ☂️|Déšť přichází. Deštník nebo se zmočit. Tvá volba.|
+
+heavy_rain|Očekávají se silné deště - doporučuje se nepromokavé oblečení.|⛈️ Velký žbluňkající déšť dnes! Čas na holínky a útulnou pláštěnku! 💧|Silný liják. Všechno nepromokavé nebo zůstaň doma.|
+
+# Snow conditions  
+snowing|Sněží - oblékej se teplo a pozor na kluzké povrchy.|❄️ Čarovné sněhové vločky tančí! Zabal se jako rozkošný sněžný zajíček! ⛄|Sníh. Zima. Kluzko. Nespadni na obličej.|
+
+# Temperature conditions
+hot|Velmi teplo dnes - zůstaň hydratovaný a hledej stín.|🌞 Bude krásně teplíčko! Perfektní na zmrzlinu a slunečné úsměvy! 😎|Pekelné teplo. Pij vodu nebo se roztopíš.|
+
+cold|Chladné počasí - vrstvení pro pohodlí.|🧥 Brr! Čas na útulné svetříky a teplé objetí! Perfektní počasí na přitulování! 🤗|Zima. Vrstvení nebo zmrazení zadku.|
+
+freezing|Mrazivé teploty - těžké zimní oblečení nezbytné.|🥶 Super super zima! Čas na nejchlupatější kabát a nejteplejší rukavice! ❄️|Mrazivá zima. Oblékej se jako arktický průzkumník nebo se staň nanukem.|
+
+mild|Příjemná teplota - užívej si pohodlné počasí.|😊 Přesně tak! Jako dokonalé teplé objetí od Matky Přírody! 🌸|Slušná teplota. Není na co si stěžovat alespoň jednou.|
+
+# Wind conditions
+windy|Očekávají se silné větry - zabezpeč volné předměty.|💨 Whoooosh! Větrný dobrodružný den! Drž si klobouk a bav se! 🎩|Silné větry. Tvé vlasy budou vypadat hrozně. Smířit se s tím.|
+
+stormy|Varování před bouřkou - zůstaň doma pokud je to možné.|⛈️ Velké bouřkové mraky mají párty! Zůstaň doma s horkou čokoládou! ☕|Varování před bouřkou. Zůstaň doma pokud si nechceš být boxovacím pytlem přírody.|
+
+# Visibility conditions
+foggy|Mlhavé podmínky - opatrnost při řízení, používej světla.|🌫️ Záhadná mlha dělá všechno kouzelné a snové! ✨|Mlha všude. Jeď pomalu nebo narazíš do něčeho neviditelného.|
+
+# Clear conditions
+sunny|Krásný slunečný den - perfektní počasí na venkovní aktivity.|☀️ Nádherný slunečný den! Čas na venkovní dobrodružství a dobré nálady! 🌻|Jasná obloha. Žádné výmluvy zůstat doma a litovat sebe.|
+
+cloudy|Zamračená obloha - stále příjemné počasí na aktivity.|☁️ Nadýchané oblaky zdobí oblohu jako cukrová vata! Tak krásné! 🌤️|Zamračeno ale cokoliv. Aspoň neprší na tvoji přehlídku.|
+
+# Combined conditions
+sunny_hot|Horko a slunečno - hledej stín, používej opalovací krém, zůstaň hydratovaný.|🔥☀️ Super slunečno-horký den! Perfektní na plážové vibrace ale nestaň se homarem! 🦞|Pálčivé slunce. Opalovací krém nebo se změnit na lidské jerky.|
+
+cold_windy|Zima a vítr - zabal se dobře, odhalená pokožka se rychle ochladí.|🌬️❄️ Chladné větry dávají extra-studené objetí! Zabal se jako útulné burrito! 🌯|Zima + vítr = mizérie kombo. Oblékej se správně nebo trpět.|
+
+rainy_cold|Studený déšť - nepromokavé a teplé oblečení nezbytné.|🌧️🧥 Studené kapky potřebují extra útulnou ochranu! Holínky a teplé vrstvy! 💙|Studený déšť. Nejhorší kombo. Nepromokavá bunda nebo být studený A mokrý.|
+
+# Special weather
+humid|Vysoká vlhkost - doporučuje se lehké prodyšné oblečení.|💧 Lepkavo-teplé vzduchové objetí dnes! Zůstaň v chladu a pij hodně vody! 🧊|Vlhké bažinaté počasí. Budeš se potit jen tak postojačky.|
+
+dry|Velmi suché podmínky - hydratuj se a používej hydratační krém.|🏜️ Super suchý den! Drž svou pokožku šťastnou a pij extra vodu! 💦|Suché jako poušť. Balzám na rty a voda nebo se změnit na prach.|
+
+# Extreme conditions
+heatwave|Extrémní teplo - omezte venkovní aktivity, k dispozici jsou chladicí centra.|🔥🌡️ Ultra-mega horký den! Zůstaň v chladu, pij ledové nápoje a najdi klimatizaci! 🧊|Tepelná vlna. Smrtelně horko. Zůstaň doma s klimatizací nebo riskovat stát se slaninou.
+
+blizzard|Podmínky vánice - extrémní sníh a vítr, zůstaň doma.|🌨️❄️ Mega sněhová bouře! Čas na útulnou deku s horkou čokoládou! Zůstaň v bezpečí doma! ☕|Vánice. Nevycházej ven, pokud nechceš zemřít.
+
+thunderstorm|Varování před bouřkou s blesky - blesky a silný déšť, zůstaň doma.|⚡🌩️ Hřmění a bleskání! Sleduj z vnitř, kde je bezpečno a sucho! 🏠|Bouřka s blesky. Drž se dál od oken a kovu. Vážně.
+
+# Default fallback
+default|Zkontroluj počasí a obleč se podle toho.|🌤️ Zvládneš to!|Oblékej se jako člověk.

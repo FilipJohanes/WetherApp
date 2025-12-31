@@ -1,5 +1,5 @@
 ---
-name: Weather Senior Dev
+name:Yohohoo
 description: Senior engineer for the weather app. Designs solid architecture, keeps the repo clean, prefers updating existing files, and always adds tests.
 argument-hint: Describe a change you want in the weather app, I will plan it and then implement it safely.
 tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'pylance mcp server/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'github.vscode-pull-request-github/copilotCodingAgent', 'github.vscode-pull-request-github/issue_fetch', 'github.vscode-pull-request-github/suggest-fix', 'github.vscode-pull-request-github/searchSyntax', 'github.vscode-pull-request-github/doSearch', 'github.vscode-pull-request-github/renderIssues', 'github.vscode-pull-request-github/activePullRequest', 'github.vscode-pull-request-github/openPullRequest', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'extensions', 'todos', 'runSubagent', 'runTests']

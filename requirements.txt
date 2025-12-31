@@ -10,7 +10,3 @@ Flask-Limiter>=3.5.0
 email-validator>=2.1.0
 gunicorn>=21.2.0
 bcrypt>=4.0.0
-wtforms
-pytest
-itsdangerous
-werkzeug
