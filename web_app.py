@@ -1,7 +1,6 @@
 # --- All imports at the top, deduplicated and complete ---
 import os
 import sys
-import sqlite3
 import logging
 import secrets
 import re
@@ -16,10 +15,7 @@ from wtforms import StringField, SelectField, SubmitField, PasswordField, Boolea
 from wtforms.validators import DataRequired, Email, Length, ValidationError, EqualTo
 from email_validator import validate_email, EmailNotValidError
 from dotenv import load_dotenv
-from services.weather_service import geocode_location, get_weather_forecast, generate_weather_summary
-from app import Config
-from services.countdown_service import add_countdown, CountdownEvent
-from services.user_service import register_user, authenticate_user, get_user_by_email
+from api_client import get_api_client
 from functools import wraps
 
 # Load environment variables FIRST before importing app
@@ -59,12 +55,13 @@ limiter = Limiter(
     storage_uri="memory://"
 )
 
-# Initialize config
+# Initialize API client
 try:
-    service_config = Config()
+    api_client = get_api_client()
+    logger.info(f"✅ API client initialized: {api_client.base_url}")
 except Exception as e:
-    logger.error(f"Failed to load service config: {e}")
-    service_config = None
+    logger.error(f"Failed to initialize API client: {e}")
+    api_client = None
 
 
 # Custom validators
@@ -207,14 +204,6 @@ class ChangeNicknameForm(FlaskForm):
     submit = SubmitField('Update Nickname')
 
 
-def get_db_connection():
-    """Get secure database connection with read-only where appropriate."""
-    db_path = os.getenv('APP_DB_PATH', 'app.db')
-    conn = sqlite3.connect(db_path, check_same_thread=False)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-
 def sanitize_output(text: str) -> str:
     """Sanitize text output to prevent XSS."""
     return html.escape(str(text))
@@ -262,7 +251,7 @@ def register():
         email_consent = form.email_consent.data
         terms_accepted = form.terms_accepted.data
         
-        success, message = register_user(
+        success, message = api_client.register_user(
             email=email,
             password=password,
             nickname=nickname,
@@ -297,11 +286,11 @@ def login():
         if not email or not password:
             return jsonify({'success': False, 'message': 'Email and password are required'}), 400
         
-        user = authenticate_user(email, password)
+        user = api_client.authenticate_user(email, password)
         if user:
             session['user_email'] = user['email']
-            session['user_nickname'] = user['nickname']
-            session['user_username'] = user['username']
+            session['user_nickname'] = user.get('nickname')
+            session['user_username'] = user.get('username')
             session.permanent = False  # Session expires when browser closes
             return jsonify({'success': True, 'message': 'Login successful'})
         else:
@@ -312,11 +301,11 @@ def login():
         email = form.email.data.strip().lower()
         password = form.password.data
         
-        user = authenticate_user(email, password)
+        user = api_client.authenticate_user(email, password)
         if user:
             session['user_email'] = user['email']
-            session['user_nickname'] = user['nickname']
-            session['user_username'] = user['username']
+            session['user_nickname'] = user.get('nickname')
+            session['user_username'] = user.get('username')
             session.permanent = False
             flash('Login successful!', 'success')
             
@@ -366,24 +355,15 @@ def settings():
         new_password = password_form.new_password.data
         
         # Verify current password
-        user = authenticate_user(user_email, current_password)
+        user = api_client.authenticate_user(user_email, current_password)
         if not user:
             flash('Current password is incorrect.', 'error')
         else:
             # Update password
-            from services.user_service import hash_password
-            import sqlite3
-            
-            try:
-                conn = get_db_connection()
-                hashed_pw = hash_password(new_password)
-                conn.execute("UPDATE users SET password_hash = ? WHERE email = ?", (hashed_pw, user_email))
-                conn.commit()
-                conn.close()
+            if api_client.update_password(user_email, new_password):
                 flash('Password updated successfully!', 'success')
                 logger.info(f"Password changed for {user_email}")
-            except Exception as e:
-                logger.error(f"Password change error: {e}")
+            else:
                 flash('An error occurred. Please try again.', 'error')
     
     # Handle nickname change
@@ -391,18 +371,12 @@ def settings():
         user_email = session.get('user_email')
         new_nickname = nickname_form.nickname.data.strip()
         
-        try:
-            conn = get_db_connection()
-            conn.execute("UPDATE users SET nickname = ? WHERE email = ?", (new_nickname, user_email))
-            conn.commit()
-            conn.close()
-            
+        if api_client.update_nickname(user_email, new_nickname):
             # Update session
             session['user_nickname'] = new_nickname
             flash('Nickname updated successfully!', 'success')
             logger.info(f"Nickname changed for {user_email}")
-        except Exception as e:
-            logger.error(f"Nickname change error: {e}")
+        else:
             flash('An error occurred. Please try again.', 'error')
     
     return render_template('settings.html', password_form=password_form, nickname_form=nickname_form)
@@ -429,39 +403,30 @@ def subscribe():
     # Get subscriptions for the logged-in user
     user_email = session.get('user_email')
     if user_email:
-        # Weather subscription (from unified schema)
-        conn = get_db_connection()
-        try:
-            weather_sub = conn.execute("""
-                SELECT ws.email, ws.location, u.timezone, ws.personality, ws.language, ws.updated_at 
-                FROM weather_subscriptions ws
-                JOIN users u ON ws.email = u.email
-                WHERE ws.email = ? AND u.weather_enabled = 1
-            """, (user_email,)).fetchone()
-            if weather_sub:
-                subscriptions.append({
-                    'id': f"weather_{weather_sub['email']}",
-                    'type': 'weather',
-                    'name': weather_sub['location'],
-                    'location': weather_sub['location'],
-                    'language': weather_sub['language'],
-                    'personality': weather_sub['personality'],
-                    'date_added': weather_sub['updated_at'],
-                })
-        finally:
-            conn.close()
+        # Weather subscription
+        weather_sub = api_client.get_weather_subscription(user_email)
+        if weather_sub:
+            subscriptions.append({
+                'id': f"weather_{weather_sub['email']}",
+                'type': 'weather',
+                'name': weather_sub['location'],
+                'location': weather_sub['location'],
+                'language': weather_sub.get('language', 'en'),
+                'personality': weather_sub.get('personality', 'neutral'),
+                'date_added': weather_sub.get('timezone', 'UTC'),
+            })
+        
         # Countdown subscriptions
-        from services.countdown_service import get_user_countdowns
-        countdowns = get_user_countdowns(user_email)
+        countdowns = api_client.get_countdowns(user_email)
         for cd in countdowns:
             subscriptions.append({
-                'id': f"countdown_{cd.name}_{cd.date}",
+                'id': f"countdown_{cd['id']}",
                 'type': 'countdown',
-                'name': cd.name,
-                'date': cd.date,
-                'date_added': cd.date,
-                'message_before': cd.message_before,
-                'yearly': cd.yearly,
+                'name': cd['name'],
+                'date': cd['date'],
+                'date_added': cd.get('created_at', cd['date']),
+                'message_before': cd.get('message_before', ''),
+                'yearly': cd.get('yearly', False),
             })
 
     if request.method == 'POST':
@@ -476,23 +441,21 @@ def subscribe():
                 language = request.form.get('language', '')
                 personality = request.form.get('personality', '')
                 logger.info(f"Processing weather subscription for {email} - {location}")
-                geocode_result = geocode_location(location)
-                if not geocode_result:
-                    flash('Could not find that location. Please try a more specific address (e.g., "Bratislava, Slovakia")', 'error')
-                    return render_template('subscribe.html', form=form, tab='weather', error=error)
-                lat, lon, display_name, timezone_str = geocode_result
                 
-                # Use subscription service which handles unified schema
-                from services.subscription_service import add_or_update_subscriber
-                try:
-                    add_or_update_subscriber(email, display_name, lat, lon, personality, language, timezone_str)
-                    logger.info(f"Weather subscription added/updated for {email} in timezone {timezone_str}")
-                    flash(f'✅ Successfully subscribed to daily weather for {sanitize_output(display_name)} (emails at 05:00 {timezone_str})!', 'success')
+                success, result = api_client.create_weather_subscription(
+                    email=email,
+                    location=location,
+                    personality=personality,
+                    language=language
+                )
+                
+                if success:
+                    logger.info(f"Weather subscription added/updated for {email}")
+                    flash(f'✅ Successfully subscribed to daily weather for {sanitize_output(result)}!', 'success')
                     return redirect(url_for('subscribe', tab='subscriptions', success='weather'))
-                except Exception as e:
-                    logger.error(f"Subscription error: {e}")
-                    flash('An error occurred. Please try again later.', 'error')
-                    return render_template('subscribe.html', form=form, tab='weather', error=str(e), subscriptions=subscriptions)
+                else:
+                    flash(f'Could not subscribe: {result}', 'error')
+                    return render_template('subscribe.html', form=form, tab='weather', error=result, subscriptions=subscriptions)
             elif tab == 'countdown':
                 # Countdown subscription form
                 countdown_name = request.form.get('countdown_name', '').strip()
@@ -513,27 +476,20 @@ def subscribe():
                     return render_template('subscribe.html', form=form, tab='countdown', error='Message required', subscriptions=subscriptions)
                 
                 logger.info(f"Processing countdown subscription for {email} - {countdown_name} on {countdown_date}")
-                try:
-                    event = CountdownEvent(
-                        name=countdown_name,
-                        date=countdown_date,
-                        yearly=countdown_yearly,
-                        email=email,
-                        message_before=countdown_message_before,
-                        message_after=countdown_message_after
-                    )
-                    add_countdown(event)
+                
+                if api_client.create_countdown(
+                    email=email,
+                    name=countdown_name,
+                    date=countdown_date,
+                    yearly=countdown_yearly,
+                    message_before=countdown_message_before,
+                    message_after=countdown_message_after
+                ):
                     flash(f'✅ Successfully subscribed to countdown: {sanitize_output(countdown_name)} ({countdown_date})!', 'success')
                     return redirect(url_for('subscribe', tab='subscriptions', success='countdown'))
-                except ValueError as e:
-                    # Handle duplicate or validation errors
-                    logger.error(f"Countdown validation error: {e}")
-                    flash(f'Error: {str(e)}', 'error')
-                    return render_template('subscribe.html', form=form, tab='countdown', error=str(e), subscriptions=subscriptions)
-                except Exception as e:
-                    logger.error(f"Countdown subscription error: {e}", exc_info=True)
-                    flash(f'An error occurred while saving countdown: {str(e)}', 'error')
-                    return render_template('subscribe.html', form=form, tab='countdown', error=str(e), subscriptions=subscriptions)
+                else:
+                    flash('Error creating countdown', 'error')
+                    return render_template('subscribe.html', form=form, tab='countdown', error='Failed to create', subscriptions=subscriptions)
         except Exception as e:
             logger.error(f"Subscription error: {e}")
             flash('An unexpected error occurred. Please try again.', 'error')
@@ -552,89 +508,42 @@ def preview():
         flash('Session expired. Please log in again.', 'error')
         return redirect(url_for('login'))
     
-    conn = get_db_connection()
     try:
-        # Parameterized query (SQL injection safe) - unified schema
-        subscriber = conn.execute("""
-            SELECT ws.email, ws.location, ws.lat, ws.lon, 
-                   COALESCE(u.timezone, 'UTC') as timezone, 
-                   ws.personality, ws.language 
-            FROM weather_subscriptions ws
-            JOIN users u ON ws.email = u.email
-            WHERE ws.email = ?
-        """, (email,)).fetchone()
+        # Get weather preview from API
+        preview_data = api_client.preview_weather(email)
         
-        if not subscriber:
+        if not preview_data:
             flash('No weather subscription found. Please subscribe first.', 'info')
             return redirect(url_for('subscribe'))
         
-        # Get weather forecast using subscriber's timezone
-        weather = get_weather_forecast(
-            subscriber['lat'], 
-            subscriber['lon'], 
-            subscriber['timezone']
-        )
-        
-        if weather:
-            summary = generate_weather_summary(
-                weather,
-                subscriber['location'],
-                subscriber['personality'],
-                subscriber['language']
-            )
-        else:
-            summary = "Unable to fetch weather data at this time."
-        
         return render_template('preview.html', 
-                             subscriber=subscriber,
-                             weather_summary=summary)
+                             subscriber=preview_data['subscriber'],
+                             weather_summary=preview_data['weather_summary'])
     
     except Exception as e:
         logger.error(f"Preview error: {e}")
         flash('An error occurred loading the preview', 'error')
         return redirect(url_for('index'))
-    finally:
-        conn.close()
 
 
 @app.route('/stats')
 @limiter.limit("20 per minute")
 def stats():
     """Public statistics page (no sensitive data)."""
-    conn = get_db_connection()
     try:
-        # Get aggregate statistics from unified schema
-        total_subscribers = conn.execute("""
-            SELECT COUNT(*) as count FROM users WHERE weather_enabled = 1
-        """).fetchone()['count']
-        
-        language_stats = conn.execute("""
-            SELECT ws.language, COUNT(*) as count 
-            FROM weather_subscriptions ws
-            JOIN users u ON ws.email = u.email
-            WHERE u.weather_enabled = 1
-            GROUP BY ws.language
-        """).fetchall()
-        
-        personality_stats = conn.execute("""
-            SELECT ws.personality, COUNT(*) as count 
-            FROM weather_subscriptions ws
-            JOIN users u ON ws.email = u.email
-            WHERE u.weather_enabled = 1 AND ws.personality != 'emuska'
-            GROUP BY ws.personality
-        """).fetchall()
-        
-        return render_template('stats.html',
-                             total=total_subscribers,
-                             languages=language_stats,
-                             personalities=personality_stats)
-    
+        stats_data = api_client.get_stats()
+        if stats_data:
+            return render_template('stats.html',
+                                 total=stats_data['total'],
+                                 languages=stats_data['languages'],
+                                 personalities=stats_data['personalities'])
+        else:
+            flash('Unable to load statistics', 'error')
+            return redirect(url_for('index'))
     except Exception as e:
         logger.error(f"Stats error: {e}")
         flash('Unable to load statistics', 'error')
         return redirect(url_for('index'))
-    finally:
-        conn.close()
 
 
 # API endpoints (optional, but secure)
@@ -658,56 +567,41 @@ def api_update_subscription():
             personality = data.get('personality', '')
             
             try:
-                # Geocode location if changed
-                from services.weather_service import geocode_location
-                geocode_result = geocode_location(location)
-                if not geocode_result:
-                    return jsonify({'status': 'error', 'message': 'Invalid location'}), 400
+                success, result = api_client.create_weather_subscription(
+                    email=email,
+                    location=location,
+                    personality=personality,
+                    language=language
+                )
                 
-                lat, lon, display_name, timezone_str = geocode_result
-                
-                # Use subscription service to update (handles unified schema)
-                from services.subscription_service import add_or_update_subscriber
-                add_or_update_subscriber(email, display_name, lat, lon, personality, language, timezone_str)
-                
-                return jsonify({'status': 'success'})
+                if success:
+                    return jsonify({'status': 'success'})
+                else:
+                    return jsonify({'status': 'error', 'message': result}), 400
             except Exception as e:
                 logger.error(f"Weather update error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
         # Countdown subscription: id starts with 'countdown_'
         elif sub_id.startswith('countdown_'):
-            # id format: countdown_{name}_{date}
-            parts = sub_id.split('_', 2)
-            if len(parts) < 3:
+            # id format: countdown_{id}
+            parts = sub_id.split('_', 1)
+            if len(parts) < 2:
                 return jsonify({'status': 'error', 'message': 'Invalid countdown ID'}), 400
-            name = parts[1]
-            date = parts[2]
-            # Get fields
-            new_name = data.get('name', name)
-            new_date = data.get('date', date)
+            
+            countdown_id = int(parts[1])
+            new_name = data.get('name', '')
+            new_date = data.get('date', '')
             yearly = bool(data.get('yearly', False))
             message_before = data.get('message_before', '')
-            # Update countdown in DB
-            conn = get_db_connection()
+            
             try:
-                # Find countdown by name and date
-                cursor = conn.execute("""
-                    SELECT * FROM countdowns WHERE name = ? AND date = ?
-                """, (name, date))
-                countdown = cursor.fetchone()
-                if not countdown:
+                if api_client.update_countdown(countdown_id, new_name, new_date, yearly, message_before):
+                    return jsonify({'status': 'success'})
+                else:
                     return jsonify({'status': 'error', 'message': 'Countdown not found'}), 404
-                conn.execute("""
-                    UPDATE countdowns SET name = ?, date = ?, yearly = ?, message_before = ?
-                    WHERE name = ? AND date = ?
-                """, (new_name, new_date, int(yearly), message_before, name, date))
-                conn.commit()
-                return jsonify({'status': 'success'})
             except Exception as e:
                 logger.error(f"Countdown update error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
-            finally:
-                conn.close()
         else:
             return jsonify({'status': 'error', 'message': 'Unknown subscription type'}), 400
     except Exception as e:
@@ -730,9 +624,7 @@ def api_delete_subscription():
         if sub_id.startswith('weather_'):
             email = sub_id.replace('weather_', '', 1)
             try:
-                from services.subscription_service import delete_subscriber
-                deleted = delete_subscriber(email)
-                if deleted > 0:
+                if api_client.delete_weather_subscription(email):
                     return jsonify({'status': 'success'})
                 else:
                     return jsonify({'status': 'error', 'message': 'Subscription not found'}), 404
@@ -740,24 +632,19 @@ def api_delete_subscription():
                 logger.error(f"Weather delete error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
         elif sub_id.startswith('countdown_'):
-            parts = sub_id.split('_', 2)
-            if len(parts) < 3:
+            parts = sub_id.split('_', 1)
+            if len(parts) < 2:
                 return jsonify({'status': 'error', 'message': 'Invalid countdown ID'}), 400
-            name = parts[1]
-            date = parts[2]
-            conn = get_db_connection()
+            
+            countdown_id = int(parts[1])
             try:
-                cursor = conn.execute('DELETE FROM countdowns WHERE name = ? AND date = ?', (name, date))
-                conn.commit()
-                if cursor.rowcount > 0:
+                if api_client.delete_countdown(countdown_id):
                     return jsonify({'status': 'success'})
                 else:
                     return jsonify({'status': 'error', 'message': 'Countdown not found'}), 404
             except Exception as e:
                 logger.error(f"Countdown delete error: {e}")
                 return jsonify({'status': 'error', 'message': str(e)}), 500
-            finally:
-                conn.close()
         else:
             return jsonify({'status': 'error', 'message': 'Unknown subscription type'}), 400
     except Exception as e:
@@ -783,27 +670,16 @@ def api_check_email():
         except EmailNotValidError:
             return jsonify({'error': 'Invalid email format'}), 400
         
-        conn = get_db_connection()
-        try:
-            subscriber = conn.execute("""
-                SELECT ws.email, ws.location, ws.personality, ws.language 
-                FROM weather_subscriptions ws
-                JOIN users u ON ws.email = u.email
-                WHERE ws.email = ? AND u.weather_enabled = 1
-            """, (email,)).fetchone()
-            
-            if subscriber:
-                return jsonify({
-                    'subscribed': True,
-                    'location': subscriber['location'],
-                    'personality': subscriber['personality'],
-                    'language': subscriber['language']
-                })
-            else:
-                return jsonify({'subscribed': False})
-        
-        finally:
-            conn.close()
+        subscriber = api_client.get_weather_subscription(email)
+        if subscriber:
+            return jsonify({
+                'subscribed': True,
+                'location': subscriber.get('location', ''),
+                'personality': subscriber.get('personality', 'neutral'),
+                'language': subscriber.get('language', 'en')
+            })
+        else:
+            return jsonify({'subscribed': False})
     
     except Exception as e:
         logger.error(f"API error: {e}")
