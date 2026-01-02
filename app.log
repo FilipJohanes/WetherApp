@@ -9661,3 +9661,72 @@ sqlite3.OperationalError: no such column: ws.lat
 2025-12-31 12:36:55,036 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
 2025-12-31 12:38:17,135 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
 2025-12-31 12:39:11,332 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 07:40:57,194 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 07:57:15,539 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 10:02:02,004 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 10:04:00,239 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 10:04:51,052 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 10:05:47,371 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 10:05:54,090 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:28:27,506 - INFO - Loading configuration from environment variables
+2026-01-02 13:28:27,507 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2026-01-02 13:28:27,507 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2026-01-02 13:28:27,508 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2026-01-02 13:28:56,370 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:29:23,877 - INFO - Loading configuration from environment variables
+2026-01-02 13:29:23,877 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2026-01-02 13:29:23,878 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2026-01-02 13:29:23,878 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2026-01-02 13:29:35,227 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:30:15,833 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:30:19,138 - INFO - Loading configuration from environment variables
+2026-01-02 13:30:19,138 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2026-01-02 13:30:19,139 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2026-01-02 13:30:19,139 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2026-01-02 13:30:19,139 - INFO - Running daily job - checking users for delivery [FORCE SEND MODE]
+2026-01-02 13:30:19,149 - INFO - Checking 9 users for delivery
+2026-01-02 13:30:19,156 - INFO - Skipping user1@test.com - no active subscriptions
+2026-01-02 13:30:19,157 - INFO - Skipping user2@test.com - no active subscriptions
+2026-01-02 13:30:19,157 - INFO - Skipping user3@test.com - no active subscriptions
+2026-01-02 13:30:19,157 - INFO - Skipping emuska@test.com - no active subscriptions
+2026-01-02 13:30:19,157 - INFO - Skipping english@test-lang.com - no active subscriptions
+2026-01-02 13:30:19,157 - INFO - Skipping spanish@test-lang.com - no active subscriptions
+2026-01-02 13:30:19,158 - INFO - Skipping slovak@test-lang.com - no active subscriptions
+2026-01-02 13:30:19,163 - INFO - Skipping fotky2019.filip@gmail.com - no active subscriptions
+2026-01-02 13:30:21,059 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (1 total)
+2026-01-02 13:30:21,059 - INFO - ✅ Daily job complete - sent 1 emails
+2026-01-02 13:32:18,589 - INFO - Loading configuration from environment variables
+2026-01-02 13:32:18,590 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2026-01-02 13:32:18,590 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2026-01-02 13:32:18,590 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2026-01-02 13:32:18,591 - INFO - Running daily job - checking users for delivery [FORCE SEND MODE]
+2026-01-02 13:32:18,592 - INFO - Checking 9 users for delivery
+2026-01-02 13:32:18,593 - INFO - Skipping user1@test.com - no active subscriptions
+2026-01-02 13:32:18,594 - INFO - Skipping user2@test.com - no active subscriptions
+2026-01-02 13:32:18,594 - INFO - Skipping user3@test.com - no active subscriptions
+2026-01-02 13:32:18,594 - INFO - Skipping emuska@test.com - no active subscriptions
+2026-01-02 13:32:18,594 - INFO - Skipping english@test-lang.com - no active subscriptions
+2026-01-02 13:32:18,594 - INFO - Skipping spanish@test-lang.com - no active subscriptions
+2026-01-02 13:32:18,595 - INFO - Skipping slovak@test-lang.com - no active subscriptions
+2026-01-02 13:32:18,598 - INFO - Skipping fotky2019.filip@gmail.com - no active subscriptions
+2026-01-02 13:32:19,816 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (1 total)
+2026-01-02 13:32:19,816 - INFO - ✅ Daily job complete - sent 1 emails
+2026-01-02 13:34:42,497 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:36:00,483 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set
+2026-01-02 13:36:32,500 - INFO - Loading configuration from environment variables
+2026-01-02 13:36:32,500 - INFO - ✅ Using .env file: C:\Projects\reminderAPP\.env
+2026-01-02 13:36:32,501 - INFO - Loaded EMAIL_PASSWORD: jm***fr
+2026-01-02 13:36:32,501 - INFO - Configuration loaded - Email: dailywether.reminder@gmail.com, TZ: Europe/Bratislava
+2026-01-02 13:36:32,501 - INFO - Running daily job - checking users for delivery [FORCE SEND MODE]
+2026-01-02 13:36:32,502 - INFO - Checking 9 users for delivery
+2026-01-02 13:36:32,504 - INFO - Skipping user1@test.com - no active subscriptions
+2026-01-02 13:36:32,504 - INFO - Skipping user2@test.com - no active subscriptions
+2026-01-02 13:36:32,504 - INFO - Skipping user3@test.com - no active subscriptions
+2026-01-02 13:36:32,504 - INFO - Skipping emuska@test.com - no active subscriptions
+2026-01-02 13:36:32,504 - INFO - Skipping english@test-lang.com - no active subscriptions
+2026-01-02 13:36:32,505 - INFO - Skipping spanish@test-lang.com - no active subscriptions
+2026-01-02 13:36:32,505 - INFO - Skipping slovak@test-lang.com - no active subscriptions
+2026-01-02 13:36:32,508 - INFO - Skipping fotky2019.filip@gmail.com - no active subscriptions
+2026-01-02 13:36:33,787 - INFO - ✅ Sent daily brief to filip.johanes9@gmail.com (1 total)
+2026-01-02 13:36:33,787 - INFO - ✅ Daily job complete - sent 1 emails
+2026-01-02 13:44:01,416 - ERROR - Failed to initialize API client: BACKEND_API_KEY environment variable not set

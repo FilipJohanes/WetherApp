@@ -5,6 +5,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from services.weather_service import generate_weather_summary, get_weather_forecast
 from services.countdown_service import generate_countdown_summary, get_user_countdowns
+from services.namedays_service import get_nameday_message
 from services.logging_service import logger
 import smtplib
 from email.mime.text import MIMEText
@@ -148,6 +149,11 @@ def run_daily_job(config, dry_run=False, db_path=None, force_send=False):
                 if user['reminder_enabled']:
                     # TODO: Implement reminder fetching and formatting
                     email_body += "[Reminders go here]\n"
+                
+                # Nameday section
+                nameday_msg = get_nameday_message(language, user_now)
+                if nameday_msg:
+                    email_body += "\n" + nameday_msg + "\n"
                 
                 # Skip sending if no actual content (no active subscriptions)
                 if not email_body.strip():
