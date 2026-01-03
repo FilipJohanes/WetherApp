@@ -319,6 +319,67 @@ def login():
     return render_template('login.html', form=form)
 
 
+@app.route('/forgot-password', methods=['GET', 'POST'])
+@limiter.limit("5 per minute")
+def forgot_password():
+    """Forgot password page."""
+    if 'user_email' in session:
+        flash('You are already logged in.', 'info')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        
+        if not email:
+            flash('Please enter your email address', 'error')
+            return render_template('forgot_password.html')
+        
+        success, message = api_client.request_password_reset(email)
+        if success:
+            flash('If an account exists with that email, a password reset link has been sent.', 'success')
+        else:
+            flash(f'Error: {message}', 'error')
+        
+        return redirect(url_for('login'))
+    
+    return render_template('forgot_password.html')
+
+
+@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+@limiter.limit("10 per minute")
+def reset_password(token):
+    """Reset password with token."""
+    if 'user_email' in session:
+        flash('You are already logged in.', 'info')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+        
+        if not new_password or not confirm_password:
+            flash('Please fill in all fields', 'error')
+            return render_template('reset_password.html', token=token)
+        
+        if new_password != confirm_password:
+            flash('Passwords do not match', 'error')
+            return render_template('reset_password.html', token=token)
+        
+        if len(new_password) < 8:
+            flash('Password must be at least 8 characters long', 'error')
+            return render_template('reset_password.html', token=token)
+        
+        success, message = api_client.reset_password(token, new_password)
+        if success:
+            flash('Password reset successful! Please log in with your new password.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash(f'Error: {message}', 'error')
+            return render_template('reset_password.html', token=token)
+    
+    return render_template('reset_password.html', token=token)
+
+
 @app.route('/logout')
 def logout():
     """User logout."""

@@ -7,7 +7,7 @@ Exposes database operations for remote web frontend access.
 import os
 import sqlite3
 import secrets
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import wraps
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
@@ -17,6 +17,7 @@ from services.user_service import register_user, authenticate_user, get_user_by_
 from services.subscription_service import add_or_update_subscriber, delete_subscriber
 from services.weather_service import geocode_location, get_weather_forecast, generate_weather_summary
 from services.countdown_service import add_countdown, CountdownEvent
+from services.email_service import send_email
 
 load_dotenv()
 
@@ -198,6 +199,137 @@ def api_update_nickname(email):
             return jsonify({'success': False, 'error': 'User not found'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
+
+
+@app.route('/api/users/password-reset-request', methods=['POST'])
+@limiter.limit("5 per hour")
+@require_api_key
+def api_request_password_reset():
+    """Request a password reset email."""
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    email = data.get('email', '').strip().lower()
+    if not email:
+        return jsonify({'error': 'Email required'}), 400
+    
+    # Check if user exists
+    user = get_user_by_email(email)
+    if not user:
+        # Don't reveal if email exists or not (security best practice)
+        return jsonify({'success': True, 'message': 'If the email exists, a reset link will be sent'}), 200
+    
+    # Generate secure token
+    token = secrets.token_urlsafe(32)
+    expires_at = datetime.now() + timedelta(hours=1)  # Token valid for 1 hour
+    
+    # Store token in database
+    conn = sqlite3.connect(get_db_path())
+    try:
+        # Delete any existing unused tokens for this email
+        conn.execute("DELETE FROM password_reset_tokens WHERE email = ? AND used = 0", (email,))
+        
+        # Insert new token
+        conn.execute("""
+            INSERT INTO password_reset_tokens (email, token, expires_at)
+            VALUES (?, ?, ?)
+        """, (email, token, expires_at))
+        conn.commit()
+        
+        # Get web app URL from environment
+        web_url = os.getenv('WEB_APP_URL', 'http://localhost:5000')
+        reset_link = f"{web_url}/reset-password/{token}"
+        
+        # Send email with reset link
+        subject = "Password Reset Request - Daily Brief"
+        body = f"""Hello,
+
+You requested a password reset for your Daily Brief account.
+
+Click the link below to reset your password:
+{reset_link}
+
+This link will expire in 1 hour.
+
+If you didn't request this, please ignore this email.
+
+Best regards,
+Daily Brief Team
+"""
+        
+        try:
+            send_email(email, subject, body)
+            print(f"✉️ Password reset email sent to {email}")
+        except Exception as e:
+            print(f"❌ Failed to send password reset email: {e}")
+            # Still return success to not reveal if email exists
+        
+        return jsonify({'success': True, 'message': 'If the email exists, a reset link will be sent'}), 200
+        
+    except Exception as e:
+        print(f"❌ Password reset request error: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
+    finally:
+        conn.close()
+
+
+@app.route('/api/users/password-reset', methods=['POST'])
+@limiter.limit("10 per hour")
+@require_api_key
+def api_reset_password():
+    """Reset password using token."""
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    token = data.get('token', '').strip()
+    new_password = data.get('new_password', '')
+    
+    if not token or not new_password:
+        return jsonify({'error': 'Token and new password required'}), 400
+    
+    # Validate token
+    conn = sqlite3.connect(get_db_path())
+    conn.row_factory = sqlite3.Row
+    try:
+        reset_token = conn.execute("""
+            SELECT email, expires_at, used
+            FROM password_reset_tokens
+            WHERE token = ?
+        """, (token,)).fetchone()
+        
+        if not reset_token:
+            return jsonify({'error': 'Invalid or expired token'}), 400
+        
+        if reset_token['used']:
+            return jsonify({'error': 'Token already used'}), 400
+        
+        # Check if token expired
+        expires_at = datetime.fromisoformat(reset_token['expires_at'])
+        if datetime.now() > expires_at:
+            return jsonify({'error': 'Token expired'}), 400
+        
+        # Update password
+        email = reset_token['email']
+        hashed_pw = hash_password(new_password)
+        
+        conn.execute("UPDATE users SET password_hash = ? WHERE email = ?", (hashed_pw, email))
+        
+        # Mark token as used
+        conn.execute("UPDATE password_reset_tokens SET used = 1 WHERE token = ?", (token,))
+        
+        conn.commit()
+        
+        print(f"✅ Password reset successful for {email}")
+        
+        return jsonify({'success': True, 'message': 'Password updated successfully'}), 200
+        
+    except Exception as e:
+        print(f"❌ Password reset error: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
     finally:
         conn.close()
 

@@ -147,6 +147,24 @@ class BackendAPIClient:
         result = self._put(f'/api/users/{email}/nickname', data)
         return result and result.get('success', False)
     
+    def request_password_reset(self, email: str) -> tuple[bool, str]:
+        """Request a password reset email."""
+        data = {'email': email}
+        result = self._post('/api/users/password-reset-request', data)
+        if result and result.get('success'):
+            return True, result.get('message', 'Reset link sent if email exists')
+        else:
+            return False, result.get('error', 'Request failed') if result else 'API connection failed'
+    
+    def reset_password(self, token: str, new_password: str) -> tuple[bool, str]:
+        """Reset password using token."""
+        data = {'token': token, 'new_password': new_password}
+        result = self._post('/api/users/password-reset', data)
+        if result and result.get('success'):
+            return True, result.get('message', 'Password reset successful')
+        else:
+            return False, result.get('error', 'Reset failed') if result else 'API connection failed'
+    
     # ==================== WEATHER SUBSCRIPTION METHODS ====================
     
     def get_weather_subscription(self, email: str) -> Optional[Dict]:
