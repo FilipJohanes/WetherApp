@@ -339,9 +339,6 @@
         <header style="position:relative;">
             <h1>🌤️ Daily Brief Service</h1>
             <p>{% block header_subtitle %}Personalized Weather, Delivered Daily{% endblock %}</p>
-            <div id="userHeader" style="position:absolute;top:20px;right:20px;display:flex;align-items:center;gap:10px;">
-                <!-- Login/Logout UI will be injected by JS -->
-            </div>
         </header>
 
         <nav>
@@ -360,6 +357,7 @@
                     </li>
                 {% else %}
                     <li style="margin-left: auto;"><a href="{{ url_for('register') }}">📝 Register</a></li>
+                    <li><a href="{{ url_for('login') }}">🔑 Login</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -375,11 +373,6 @@
                 {% endif %}
             {% endwith %}
 
-            <div id="activeSubscriptions" style="margin-bottom:30px;display:none;">
-                <h3>Active Subscriptions</h3>
-                <div id="subscriptionsList">Loading...</div>
-            </div>
-
             {% block content %}{% endblock %}
         </main>
 
@@ -390,17 +383,6 @@
                 Emails sent at 5:00 AM daily | Free weather service
             </p>
         </footer>
-
-        <!-- Login Modal -->
-        <div id="loginModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);align-items:center;justify-content:center;z-index:1000;">
-            <div style="background:white;padding:30px 25px;border-radius:12px;min-width:300px;box-shadow:0 8px 32px rgba(0,0,0,0.2);position:relative;">
-                <h2 style="margin-bottom:18px;color:#667eea;">Log In</h2>
-                <label for="loginEmail">Email:</label>
-                <input type="email" id="loginEmail" style="width:100%;margin-bottom:18px;padding:10px 12px;border-radius:8px;border:1px solid #ccc;">
-                <button id="loginSubmit" class="btn" style="width:100%;margin-bottom:10px;">Log In</button>
-                <button id="closeLoginModal" class="btn" style="background:#eee;color:#333;width:100%;">Cancel</button>
-            </div>
-        </div>
     </div>
 </body>
 </html>
