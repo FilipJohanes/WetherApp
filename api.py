@@ -643,8 +643,8 @@ def api_create_countdown():
         return jsonify({'error': 'Email, name, and date required'}), 400
     
     try:
-        countdown = CountdownEvent(name, date, yearly, message_before, message_after)
-        add_countdown(email, countdown)
+        countdown = CountdownEvent(name, date, yearly, email, message_before, message_after)
+        add_countdown(countdown)
         return jsonify({
             'success': True,
             'message': 'Countdown created'
