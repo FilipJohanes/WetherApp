@@ -137,6 +137,41 @@ def init_api_db():
         conn.close()
 
 
+def cleanup_expired_tokens():
+    """Delete expired and old used password reset tokens."""
+    conn = sqlite3.connect(get_db_path())
+    try:
+        # Delete tokens that expired more than 24 hours ago (for audit trail)
+        expired_cutoff = datetime.now() - timedelta(hours=24)
+        
+        cursor = conn.execute("""
+            DELETE FROM password_reset_tokens 
+            WHERE datetime(expires_at) < datetime(?)
+        """, (expired_cutoff,))
+        
+        expired_count = cursor.rowcount
+        
+        # Delete used tokens older than 7 days (keep recent for audit)
+        used_cutoff = datetime.now() - timedelta(days=7)
+        
+        cursor = conn.execute("""
+            DELETE FROM password_reset_tokens 
+            WHERE used = 1 AND datetime(created_at) < datetime(?)
+        """, (used_cutoff,))
+        
+        used_count = cursor.rowcount
+        
+        conn.commit()
+        
+        if expired_count > 0 or used_count > 0:
+            print(f"🧹 Cleaned up {expired_count} expired and {used_count} old used password reset tokens")
+        
+    except Exception as e:
+        print(f"❌ Token cleanup error: {e}")
+    finally:
+        conn.close()
+
+
 def require_api_key(f):
     """Decorator to require valid API key."""
     @wraps(f)
@@ -734,6 +769,9 @@ if __name__ == '__main__':
     
     # Initialize database (creates tables if they don't exist)
     init_api_db()
+    
+    # Clean up expired password reset tokens
+    cleanup_expired_tokens()
     
     print("🔐 API Key authentication enabled")
     
