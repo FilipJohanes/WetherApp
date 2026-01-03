@@ -72,7 +72,10 @@ def api_register_user():
     """Register a new user."""
     data = request.get_json(force=True, silent=True)
     if not data:
+        print("❌ Registration error: No data provided")
         return jsonify({'error': 'No data provided'}), 400
+    
+    print(f"📝 Registration request data: {data}")
     
     email = data.get('email', '').strip().lower()
     password = data.get('password', '')
@@ -81,7 +84,10 @@ def api_register_user():
     email_consent = data.get('email_consent', False)
     terms_accepted = data.get('terms_accepted', False)
     
+    print(f"📧 Email: {email}, Nickname: {nickname}, Username: {username}")
+    
     if not email or not password:
+        print(f"❌ Registration error: Missing email or password")
         return jsonify({'error': 'Email and password required'}), 400
     
     success, message = register_user(
@@ -92,6 +98,8 @@ def api_register_user():
         email_consent=email_consent,
         terms_accepted=terms_accepted
     )
+    
+    print(f"✅ Registration result: success={success}, message={message}")
     
     if success:
         return jsonify({'success': True, 'message': message}), 201
