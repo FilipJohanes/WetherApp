@@ -46,6 +46,97 @@ def get_db_path():
     return os.getenv("APP_DB_PATH", "app.db")
 
 
+def init_api_db():
+    """Initialize database with all necessary tables including password reset."""
+    db_path = get_db_path()
+    
+    # Check if database exists
+    if not os.path.exists(db_path):
+        print(f"⚠️ Database not found at {db_path}")
+        print("🔧 Initializing database...")
+    
+    conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")
+    
+    try:
+        # Create users table if not exists
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                email TEXT PRIMARY KEY,
+                username TEXT,
+                nickname TEXT,
+                password_hash TEXT,
+                timezone TEXT DEFAULT 'UTC',
+                lat REAL,
+                lon REAL,
+                subscription_type TEXT DEFAULT 'free',
+                weather_enabled INTEGER DEFAULT 0,
+                countdown_enabled INTEGER DEFAULT 0,
+                reminder_enabled INTEGER DEFAULT 0,
+                email_consent INTEGER DEFAULT 0,
+                terms_accepted INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+        """)
+        
+        # Create weather_subscriptions table if not exists
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS weather_subscriptions (
+                email TEXT PRIMARY KEY,
+                location TEXT NOT NULL,
+                lat REAL NOT NULL,
+                lon REAL NOT NULL,
+                personality TEXT DEFAULT 'neutral',
+                language TEXT DEFAULT 'en',
+                last_sent_date TEXT,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+            )
+        """)
+        
+        # Create countdowns table if not exists
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS countdowns (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                name TEXT NOT NULL,
+                date TEXT NOT NULL,
+                yearly INTEGER DEFAULT 0,
+                message_before TEXT,
+                message_after TEXT,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE
+            )
+        """)
+        
+        # Create password_reset_tokens table if not exists
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                token TEXT NOT NULL UNIQUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                expires_at TIMESTAMP NOT NULL,
+                used INTEGER DEFAULT 0,
+                FOREIGN KEY (email) REFERENCES users(email)
+            )
+        """)
+        
+        # Create indexes
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_reset_token ON password_reset_tokens(token)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_reset_email ON password_reset_tokens(email)")
+        
+        conn.commit()
+        print("✅ Database initialized successfully")
+        
+    except sqlite3.Error as e:
+        print(f"❌ Database initialization error: {e}")
+        raise
+    finally:
+        conn.close()
+
+
 def require_api_key(f):
     """Decorator to require valid API key."""
     @wraps(f)
@@ -640,6 +731,10 @@ def internal_error(e):
 if __name__ == '__main__':
     print("🚀 Starting Daily Brief REST API")
     print(f"📊 Database: {get_db_path()}")
+    
+    # Initialize database (creates tables if they don't exist)
+    init_api_db()
+    
     print("🔐 API Key authentication enabled")
     
     app.run(
