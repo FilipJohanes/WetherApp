@@ -345,8 +345,8 @@ def api_request_password_reset():
     # Check if user exists
     user = get_user_by_email(email)
     if not user:
-        # Don't reveal if email exists or not (security best practice)
-        return jsonify({'success': True, 'message': 'If the email exists, a reset link will be sent'}), 200
+        print(f"❌ Password reset request for non-existent email: {email}")
+        return jsonify({'success': False, 'error': 'No account found with that email address'}), 404
     
     # Generate secure token
     token = secrets.token_urlsafe(32)
@@ -389,11 +389,10 @@ Daily Brief Team
         try:
             send_email(email, subject, body)
             print(f"✉️ Password reset email sent to {email}")
+            return jsonify({'success': True, 'message': 'Password reset link has been sent to your email'}), 200
         except Exception as e:
             print(f"❌ Failed to send password reset email: {e}")
-            # Still return success to not reveal if email exists
-        
-        return jsonify({'success': True, 'message': 'If the email exists, a reset link will be sent'}), 200
+            return jsonify({'error': 'Failed to send email. Please try again later.'}), 500
         
     except Exception as e:
         print(f"❌ Password reset request error: {e}")

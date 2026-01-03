@@ -336,11 +336,11 @@ def forgot_password():
         
         success, message = api_client.request_password_reset(email)
         if success:
-            flash('If an account exists with that email, a password reset link has been sent.', 'success')
+            flash('Password reset link has been sent to your email!', 'success')
+            return redirect(url_for('login'))
         else:
-            flash(f'Error: {message}', 'error')
-        
-        return redirect(url_for('login'))
+            flash(f'{message}', 'error')
+            return render_template('forgot_password.html')
     
     return render_template('forgot_password.html')
 
