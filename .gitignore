@@ -3,9 +3,9 @@
 
 # === RUNTIME GENERATED FILES ===
 # These are created during normal operation and shouldn't be in version control
-*.db          # SQLite databases (app.db)
-*.log         # Log files (app.log)
-*.pid         # Process ID files
+*.db
+*.log
+*.pid
 
 # === PYTHON CACHE & BYTECODE ===
 __pycache__/
