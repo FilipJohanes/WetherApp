@@ -2,6 +2,8 @@ import os
 from functools import lru_cache
 import requests
 import sqlite3
+from datetime import datetime
+from services.namedays_service import get_nameday_message
 # from services.summary_service import generate_weather_summary  # merged below
 
 def load_clothing_messages(language='en'):
@@ -138,43 +140,49 @@ def generate_weather_summary(weather, location, personality, language):
 	condition = get_condition(temp_max, temp_min, precipitation, wind_speed, rain_prob)
 	condition_msg = get_msg(condition, personality)
 
-	# Clothing suggestion logic: combine all relevant conditions
-	clothing = set()
-	# Add advice for temperature extremes
-	if temp_max >= 36:
-		clothing.add(clothing_dict.get('heatwave', {}).get(personality, ''))
+	# Clothing suggestion logic: pick the SINGLE most relevant advice based on priority
+	# Priority order: extreme conditions > precipitation > temperature > default
+	clothing_msg = ''
+	
+	# 1. EXTREME CONDITIONS (highest priority)
 	if temp_min <= -15:
-		clothing.add(clothing_dict.get('blizzard', {}).get(personality, ''))
-	if temp_max >= 30 and rain_prob < 20:
-		clothing.add(clothing_dict.get('sunny_hot', {}).get(personality, ''))
-	if temp_max <= 5 and wind_speed >= 15:
-		clothing.add(clothing_dict.get('cold_windy', {}).get(personality, ''))
-	if temp_max <= 5 and precipitation >= 2:
-		clothing.add(clothing_dict.get('rainy_cold', {}).get(personality, ''))
-	# Add advice for rain and wind
-	if precipitation >= 7:
-		clothing.add(clothing_dict.get('heavy_rain', {}).get(personality, ''))
+		clothing_msg = clothing_dict.get('blizzard', {}).get(personality, '')
+	elif temp_max >= 36:
+		clothing_msg = clothing_dict.get('heatwave', {}).get(personality, '')
+	# 2. HEAVY PRECIPITATION + TEMPERATURE
+	elif precipitation >= 7:
+		clothing_msg = clothing_dict.get('heavy_rain', {}).get(personality, '')
+	elif temp_max <= 2 and precipitation > 0.5:
+		clothing_msg = clothing_dict.get('snowing', {}).get(personality, '')
+	# 3. MODERATE CONDITIONS (combined temp + other factors)
+	elif temp_max <= 5 and precipitation >= 2:
+		clothing_msg = clothing_dict.get('rainy_cold', {}).get(personality, '')
+	elif temp_max <= 5 and wind_speed >= 15:
+		clothing_msg = clothing_dict.get('cold_windy', {}).get(personality, '')
+	# 4. PRECIPITATION ONLY
 	elif precipitation >= 2:
-		clothing.add(clothing_dict.get('raining', {}).get(personality, ''))
-	if wind_speed >= 15:
-		clothing.add(clothing_dict.get('windy', {}).get(personality, ''))
-	# Add advice for snow/freezing
-	if temp_max <= 2 and precipitation > 0.5:
-		clothing.add(clothing_dict.get('snowing', {}).get(personality, ''))
-	if temp_min < 0 and precipitation <= 0.1:
-		clothing.add(clothing_dict.get('freezing', {}).get(personality, ''))
-	# Add advice for fog/humid/dry
-	if temp_min >= -2 and temp_max <= 8 and precipitation < 0.2 and wind_speed < 8 and rain_prob >= 60:
-		clothing.add(clothing_dict.get('foggy', {}).get(personality, ''))
-	if rain_prob >= 70 and precipitation < 0.2:
-		clothing.add(clothing_dict.get('humid', {}).get(personality, ''))
-	if precipitation < 0.05 and temp_max >= 25:
-		clothing.add(clothing_dict.get('dry', {}).get(personality, ''))
-	# Add advice for mild if nothing else
-	if not clothing:
-		clothing.add(clothing_dict.get('mild', {}).get(personality, ''))
-	# Remove empty, sort, and join
-	clothing_msg = '\n'.join(sorted([c for c in clothing if c]))
+		clothing_msg = clothing_dict.get('raining', {}).get(personality, '')
+	# 5. TEMPERATURE CONDITIONS
+	elif temp_min < 0 and precipitation <= 0.1:
+		clothing_msg = clothing_dict.get('freezing', {}).get(personality, '')
+	elif temp_max <= 5:
+		clothing_msg = clothing_dict.get('cold', {}).get(personality, '')
+	elif temp_max >= 30 and rain_prob < 20:
+		clothing_msg = clothing_dict.get('sunny_hot', {}).get(personality, '')
+	elif temp_max >= 25:
+		clothing_msg = clothing_dict.get('hot', {}).get(personality, '')
+	# 6. WIND/FOG/HUMIDITY
+	elif wind_speed >= 15:
+		clothing_msg = clothing_dict.get('windy', {}).get(personality, '')
+	elif temp_min >= -2 and temp_max <= 8 and precipitation < 0.2 and wind_speed < 8 and rain_prob >= 60:
+		clothing_msg = clothing_dict.get('foggy', {}).get(personality, '')
+	elif rain_prob >= 70 and precipitation < 0.2:
+		clothing_msg = clothing_dict.get('humid', {}).get(personality, '')
+	elif precipitation < 0.05 and temp_max >= 25:
+		clothing_msg = clothing_dict.get('dry', {}).get(personality, '')
+	# 7. DEFAULT (mild weather)
+	else:
+		clothing_msg = clothing_dict.get('mild', {}).get(personality, '')
 
 	# Build summary: intro, weather details, then clothing advice with clear label
 	summary = f"{intro}\n\n{temp_line}\n{rain_line}\n{wind_line}\n\n"
@@ -213,6 +221,12 @@ def generate_daily_summary(weather=None, location=None, personality='neutral', l
 		sections.append(generate_countdown_summary(countdowns, language))
 	if reminders:
 		sections.append(generate_reminder_summary(reminders, language))
+	
+	# Add nameday message if available, datetime.now()
+	nameday_msg = get_nameday_message(language)
+	if nameday_msg:
+		sections.append(nameday_msg)
+	
 	if not sections:
 		return "No active subscriptions."
 	return "\n\n".join(sections)

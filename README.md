@@ -2,650 +2,254 @@
 
 ![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
 ![License](https://img.shields.io/badge/license-Proprietary-red.svg)
-![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey.svg)
-![Tests](https://img.shields.io/badge/tests-17%2F17%20passed-brightgreen.svg)
-![Languages](https://img.shields.io/badge/languages-EN%20%7C%20ES%20%7C%20SK-blue.svg)
+![Platform](https://img.shields.io/badge/platform-linux%20%7C%20raspberry%20pi-lightgrey.svg)
 
-> 🚀 **Proprietary multi-language email-driven weather service**  
+> 🚀 **Multi-language email-driven weather & reminder service**  
 > **© 2025 Filip Johanes. All Rights Reserved.**
 
-⚠️ **PROPRIETARY SOFTWARE** - This project contains proprietary algorithms and unique features. Commercial use, redistribution, or derivative works are strictly prohibited. See [LICENSE](LICENSE) for details.
-
-A comprehensive Python 3.11+ service that transforms your email inbox into a smart weather assistant with full multi-language support:
-
-1. **🌤️ Daily Weather Digest** - Subscribe by sending your location, receive personalized forecasts at 05:00
-2. **🎭 Multi-Language Personality Modes** - Choose from 3 personalities (neutral, cute, brutal) in 3 languages (English, Spanish, Slovak)
-3. **🛡️ Smart Email Processing** - Handles system emails, Unicode characters, and flexible input parsing
-
-## ✨ Features
-
-- **🆓 100% Free**: Uses Open-Meteo weather API (no API keys required)
-- **📧 Email-Driven**: Control everything via simple email commands  
-- **🌍 Multi-Language**: Full support for English, Spanish, and Slovak
-- **🎭 3 Personality Modes**: Neutral, cute, brutal communication styles
-- **🧠 Smart Parsing**: Handles multi-line emails, system email filtering, Unicode support
-- **🛡️ Production Ready**: Handles duplicates, restarts, network failures, and crashes gracefully
-- **📦 Self-Contained**: Organized structure with comprehensive documentation
-- **⏰ Timezone Aware**: Configurable timezone support (default: Europe/Bratislava)
-- **🔄 Cross-Platform**: Works on Windows, Linux, macOS, and Raspberry Pi
-- **🔧 Webhook Ready**: Scalable architecture with Flask webhook support available
-
-## 📁 Project Structure
-
-```
-📁 reminderAPP/
-├── 📄 app.py                    # ⚡ Main service application
-├── 📄 .env                      # 🔐 Configuration (email credentials)  
-├── 📄 requirements.txt          # 📦 Core dependencies
-├── 📄 README.md                # 📖 This file
-│
-├── 📁 docs/                     # 📚 Documentation & guides
-│   ├── DEPLOYMENT.md            # � Production setup guide
-│   ├── WEBHOOK_GUIDE.md         # 🔗 Webhook architecture docs
-│   └── 📁 user-guides/         # 👤 User manuals & quick reference
-│
-├── 📁 languages/               # 🌍 Multi-language support  
-│   ├── 📁 en/es/sk/            # English, Spanish, Slovak messages
-│
-├── 📁 tests/                   # 🧪 Comprehensive test suite (14 test files)
-│   └── test_*.py               # All functionality tests
-│
-├── 📁 scripts/                 # 🛠️ Utilities & deployment tools
-│   ├── check_db.py             # Database inspection
-│   └── 📁 deployment/          # Automated deployment scripts  
-│
-├── 📁 webhook/                 # � Scalable webhook architecture
-│   ├── webhook_simple.py       # Basic Flask webhook server
-│   └── imap_webhook_bridge.py  # IMAP to webhook bridge
-│
-└── 📁 examples/                # 📋 Sample configs & development files
-│   └── 📁 debug/               # Debug & maintenance tools
-│
-└── 📁 examples/                # Sample configurations
-```
-
-## 📖 Table of Contents
-
-- [🚀 Quick Start](#-quick-start)
-- [📚 Documentation](#-documentation) 
-- [📧 Usage Guide](#-usage-guide)
-- [🎭 Personality Modes](#-personality-modes)
-- [🌍 Language Support](#-language-support)
-- [🛠️ CLI Commands](#️-cli-commands)
-- [📊 Example Responses](#-example-responses)
-- [🏗️ Architecture](#️-architecture)
-- [🔧 Configuration](#-configuration)
-- [🧪 Testing](#-testing)
-- [🚀 Deployment](#-deployment)
-- [🚨 Troubleshooting](#-troubleshooting)
-- [🤝 Contributing](#-contributing)
-- [📝 License](#-license)
-
-## 📚 Documentation
-
-Your complete guide to using and deploying the Daily Brief Service:
-
-### 👥 **For Users & Alpha Testers:**
-- **[📖 User Manual](docs/user-guides/USER_MANUAL.md)** - Complete guide with examples
-- **[⚡ Quick Reference](docs/user-guides/QUICK_REFERENCE.md)** - Cheat sheet for commands
-- **[📧 Welcome Template](docs/user-guides/WELCOME_EMAIL_TEMPLATE.md)** - Auto-response content
-
-### 🛠️ **For Deployment & Setup:**
-- **[✅ Final Checklist](docs/deployment/FINAL_CHECKLIST.md)** - Pre-deployment verification
-- **[💻 Local PC Setup](docs/deployment/DEPLOY_LOCAL_PC.md)** - Windows/Mac/Linux deployment
-- **[🥧 Raspberry Pi Guide](docs/deployment/DEPLOY_PI_ZERO_2W.md)** - Pi Zero 2 W specific setup
-- **[☁️ Cloud Options](docs/deployment/DEPLOY_CLOUD_OPTIONS.md)** - AWS/Azure/VPS deployment
-- **[📧 Email Configuration](docs/deployment/EMAIL_SETUP_GUIDE.md)** - Gmail & other providers
-- **[🚀 Alpha Testing Ready](docs/deployment/ALPHA_DEPLOYMENT_READY.md)** - Readiness assessment
-
-### 🔧 **Project Structure:**
-- **[📁 Structure Guide](PROJECT_STRUCTURE.md)** - Detailed directory organization
+Automated daily weather forecasts and reminders delivered via email. Backend runs on Raspberry Pi, web interface hosted on Railway.
 
 ---
-
-## 🚀 Quick Start
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/daily-brief-service.git
-cd daily-brief-service
-```
-
-### 2. Install Dependencies
-
-```bash
-# Using pip
-pip install -r requirements.txt
-
-# Or using virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Configure Email Settings
-
-Copy the example environment file and configure your email settings:
-
-```bash
-# Copy example configuration
-cp .env.example .env
-
-# Edit with your email provider details
-nano .env  # or use your preferred editor
-```
-
-Required environment variables:
-
-```bash
-# Required Settings
-EMAIL_ADDRESS="your-service-email@example.com"
-EMAIL_PASSWORD="your-app-password"      # Use app password for Gmail
-IMAP_HOST="imap.gmail.com"              # Your IMAP server
-SMTP_HOST="smtp.gmail.com"              # Your SMTP server
-
-# Optional Settings (with defaults)
-IMAP_PORT="993"
-SMTP_PORT="587" 
-
-# Daily Brief Service
-
-Email-driven weather subscriptions and calendar reminders service.
 
 ## Features
-- Weather Subscriptions: Daily forecasts at 05:00 local time
-- Calendar Reminders: Schedule one-time or repeating reminders via email
-- Free APIs: Uses Open-Meteo for weather data (no API key required)
-- Simple Commands: Send plain text emails to interact with the service
 
-## Setup
-1. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-2. Configure environment variables:
-    See `.env.example` for required variables.
-3. Run the service:
-    ```bash
-    python app.py
-    ```
+- **🌤️ Daily Weather** - Location-based forecasts at 05:00 local time
+- **📧 Email Control** - Subscribe/unsubscribe via simple email commands
+- **🌍 Multi-Language** - English, Spanish, Slovak
+- **🎭 Personality Modes** - Neutral, cute, brutal communication styles
+- **⏰ Smart Scheduling** - Timezone-aware delivery
+- **🔒 Secure** - API authentication, rate limiting, CSRF protection
+- **📱 Web Interface** - User registration, subscription management
+- **🔄 Separated Architecture** - Backend on Pi, frontend on cloud
+
+---
+
+## Architecture
+
+```
+┌──────────────┐         REST API          ┌─────────────────┐
+│   Railway    │ ─────────────────────────> │  Raspberry Pi   │
+│  (Frontend)  │   Authentication/Data      │   (Backend)     │
+│ web_app.py   │ <───────────────────────── │ app.py + api.py │
+└──────────────┘                            └─────────────────┘
+                                                     │
+                                                     ▼
+                                             ┌──────────────┐
+                                             │  SQLite DB   │
+                                             └──────────────┘
+```
+
+**Backend (Raspberry Pi)**:
+- Email monitoring & scheduled jobs
+- REST API for web frontend
+- Database management
+
+**Frontend (Railway/Cloud)**:
+- Web registration & login
+- Subscription management UI
+- Communicates with backend via API
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Raspberry Pi with Raspberry Pi OS
+- Email account (Gmail/Outlook)
+- Railway account (for frontend deployment)
+
+### 1. Backend Setup (Raspberry Pi)
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/reminderAPP.git
+cd reminderAPP
+
+# Install dependencies
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Configure environment
+cp example.env .env
+nano .env  # Add email credentials and API key
+
+# Initialize database
+python3 -c "from app import init_db; init_db()"
+
+# Start services
+python3 api.py &   # REST API
+python3 app.py     # Email service
+```
+
+### 2. Frontend Setup (Railway)
+
+1. Push repository to GitHub
+2. Deploy to Railway
+3. Set environment variables:
+   - `FLASK_SECRET_KEY`
+   - `BACKEND_API_URL` (your Pi's API endpoint)
+   - `BACKEND_API_KEY` (matches Pi's API_KEYS)
+
+---
+
+## Project Structure
+
+```
+reminderAPP/
+├── app.py                  # Main email monitoring service
+├── api.py                  # REST API server
+├── web_app.py              # Web frontend
+├── api_client.py           # API client library
+│
+├── services/               # Business logic
+│   ├── email_service.py
+│   ├── weather_service.py
+│   ├── user_service.py
+│   ├── countdown_service.py
+│   └── reminder_service.py
+│
+├── templates/              # Web UI templates
+├── static/                 # CSS, JS, images
+├── languages/              # Multi-language support
+│   ├── en/
+│   ├── es/
+│   └── sk/
+│
+├── scripts/                # Utility scripts
+├── tests/                  # Test suite
+└── docs/                   # Documentation
+    ├── SETUP_AND_OPERATIONS.md  # Complete setup guide
+    └── CONTRIBUTING.md          # Development guidelines
+```
+
+---
 
 ## Usage
-Send emails to your configured service address:
-- Weather Subscriptions: Send location (e.g., `Prague, CZ`)
-- Unsubscribe: Send `delete`
-- Calendar Reminders: Structured message (see docs)
-- CLI: `python app.py --list-subs`, `--list-reminders`, `--send-test user@example.com`, `--dry-run`
 
-<<<<<<< HEAD
+### Email Commands
+
+Send email to your configured address:
+
+- **Subscribe**: `Berlin, Germany` (just send location)
+- **Unsubscribe**: `unsubscribe` or `STOP`
+- **Change Location**: `Paris, France` (sends new location)
+- **Change Language**: `language: es` (switch to Spanish)
+- **Change Personality**: `personality: cute` (neutral/cute/brutal)
+
+### Web Interface
+
+Visit your Railway URL:
+- Register account
+- Manage weather subscriptions
+- Add countdowns & reminders
+- Preview daily emails
+- View statistics
+
+---
+
+## Documentation
+
+- **[Setup & Operations Guide](docs/SETUP_AND_OPERATIONS.md)** - Complete deployment guide
+- **[Contributing Guide](docs/CONTRIBUTING.md)** - Development guidelines
+- **[License](LICENSE)** - Proprietary license
+
+---
+
+## Configuration
+
+### Backend (.env on Raspberry Pi)
+
+```bash
+# Email Settings
+EMAIL_ADDRESS=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+IMAP_HOST=imap.gmail.com
+SMTP_HOST=smtp.gmail.com
+
+# API Settings
+API_PORT=5001
+API_KEYS=your-secure-api-key
+
+# Optional
+TZ=Europe/Bratislava
+LANGUAGE=en
+```
+
+### Frontend (Railway Variables)
+
+```bash
+FLASK_SECRET_KEY=your-secret-key
+BACKEND_API_URL=http://your-pi-ip:5001
+BACKEND_API_KEY=same-as-backend
+```
+
+---
+
+## Monitoring
+
+### Backend (Raspberry Pi)
+
+```bash
+# View logs
+sudo journalctl -u dailybrief -f
+sudo journalctl -u dailybrief-api -f
+
+# Service status
+sudo systemctl status dailybrief
+sudo systemctl status dailybrief-api
+```
+
+### Frontend (Railway)
+
+- View logs in Railway Dashboard
+- Monitor deployments
+- Check environment variables
+
+---
+
+## Security
+
+- ✅ API key authentication
+- ✅ Rate limiting (Flask-Limiter)
+- ✅ CSRF protection
+- ✅ Input validation & sanitization
+- ✅ Password hashing (bcrypt)
+- ✅ SQL injection prevention
+- ✅ XSS protection
+
+---
+
+## Requirements
+
+- Python 3.11+
+- SQLite 3
+- Internet connection
+- Email account
+- Raspberry Pi (any model)
+
+---
+
+## Support
+
+For issues, questions, or contributions:
+1. Check [docs/SETUP_AND_OPERATIONS.md](docs/SETUP_AND_OPERATIONS.md)
+2. Review systemd logs on Raspberry Pi
+3. Check Railway deployment logs
+4. Verify environment variables
+
+---
+
 ## License
-Open source - use freely.
-=======
-<<<<<<< HEAD
-# Run in dry-run mode (no emails sent)
-python app.py --dry-run
-```
 
-### 5. Run the Service
+**Proprietary Software** - All Rights Reserved  
+© 2025 Filip Johanes
 
-```bash
-python app.py
-```
+This software contains proprietary algorithms and features. Commercial use, redistribution, or derivative works are strictly prohibited without explicit written permission.
 
-The service will automatically:
-- ✅ Create `app.db` SQLite database
-- 🔄 Check for emails every minute  
-- 🌅 Send daily weather at 05:00 local time
-- 📝 Log all activities to `app.log`
-
-## 📧 Usage Guide
-
-Send emails to your configured service address with these commands:
-
-### Weather Subscriptions
-
-**Subscribe to daily weather:**
-```
-Bratislava
-```
-or
-```
-Prague, Czech Republic
-```
-or coordinates:
-=======
-## License
-Open source - use freely.
->>>>>>> 8c25680 (Repo cleanup: reorganized files, updated .gitignore, .env.example, README.md, modularized app.py)
->>>>>>> 31f6de7
-```
-40.7128,-74.0060
-```
-
-**Unsubscribe:**
-```
-delete
-```
-
-### Personality Modes 🎭
-
-Choose how you want your weather reports delivered:
-
-**Neutral mode (default):**
-```
-neutral
-```
-
-**Cute mode (friendly with emojis):**
-```
-cute
-```
-
-**Brutal mode (blunt and direct):**
-```
-brutal
-```
-
-**Set personality during subscription:**
-```
-Prague, Czech Republic
-personality=cute
-```
-
-**Set language and personality:**
-```
-Madrid, Spain
-personality=brutal
-language=es
-```
-
-### 🌍 Multi-Language Support
-
-The service supports multiple languages for weather messages:
-
-**English (en)** - Default language with full personality support
-**Spanish (es)** - Complete translations for all personality modes
-**Slovak (sk)** - Complete Slovak language support with all personality modes
-
-**Language Examples:**
-```
-# English weather (default)
-London
-personality=cute
-
-# Spanish weather  
-Madrid
-personality=brutal
-language=es
-
-# Slovak weather
-Bratislava
-personality=neutral
-language=sk
-```
-
-### Calendar Reminders
-
-**Schedule a reminder:**
-```
-date=2025-12-01
-time=08:30
-message=Doctor Appointment
-repeat=3
-```
-
-**Field details:**
-- `date=` - Any format: `tomorrow`, `2025-12-01`, `next Friday`
-- `time=` - Any format: `08:30`, `8am`, `noon`, `2:30 PM`
-- `message=` - Your reminder text (required)
-- `repeat=` - Number of reminders (optional, default 1)
-
-Repeats are sent every 10 minutes after the first reminder.
-
-**Delete all reminders:**
-```
-delete
-```
-
-## 🛠️ CLI Commands
-
-```bash
-# List current weather subscribers
-python app.py --list-subs
-
-
-# Send test email to verify setup
-python app.py --send-test user@example.com
-
-# Run without sending emails (testing)
-python app.py --dry-run
-```
-
-## 📊 Example Responses
-
-### Weather Subscription Confirmation
-```
-✅ Weather subscription updated!
-📍 Location: Bratislava, Slovakia (48.1482, 17.1067)
-
-Here's today's forecast:
-Today's weather for Bratislava, Slovakia:
-
-🌡️ Temperature: High 22°C / Low 13°C
-🌧️ Rain probability: 60% (≈4.2 mm)
-💨 Wind: up to 25 km/h
-
-👕 Clothing recommendation: Light jacket or sweater, rain jacket, waterproof shoes
-```
-
-### Personality Mode Examples
-
-**Neutral Mode:**
-```
-💡 Take an umbrella - it's going to rain today.
-👕 Clothing recommendation: light jacket or sweater, rain jacket, waterproof shoes
-```
-
-**Cute Mode:**
-```
-💡 🌧️ Pitter-patter raindrops are coming! Don't forget your cute umbrella! ☂️
-👕 Fashion advice: Wear light jacket or sweater, rain jacket, waterproof shoes and look absolutely adorable! 💖
-```
-
-**Brutal Mode:**
-```
-💡 Rain incoming. Umbrella or get soaked. Your choice.
-🥶 Survival gear: light jacket or sweater, rain jacket, waterproof shoes or suffer the consequences.
-```
-
-### Calendar Reminder Confirmation
-```
-✅ Calendar reminder scheduled!
-
-📝 Message: Doctor Appointment
-📅 First reminder: 2025-12-01 08:30 CET
-🔄 Total reminders: 3 (every 10 minutes)
-📅 Last reminder: 2025-12-01 08:50 CET
-
-💡 To delete all your pending reminders, just reply with 'delete'.
-```
-
-## 🧪 Testing
-
-Run the comprehensive test suite to verify all functionality:
-
-### **Quick Test:**
-```bash
-# Run all tests (17 tests, 100% pass rate)
-cd testing
-python test_all.py
-```
-
-### **Specific Tests:**
-```bash
-# Multi-language tests
-python test_multilang.py
-
-# Slovak language tests
-python test_slovak_complete.py
-
-# Message system validation
-python test_messages_comprehensive.py
-
-# Integration testing
-python test_integration_sk.py
-```
-
-### **Debug Tools:**
-```bash
-# Check service status
-cd scripts/debug
-python check_status.py
-
-# Test personality modes
-python debug_personality.py
-
-# Database management tools
-python db_manager.py
-```
-
-**Test Coverage:**
-- ✅ Multi-language support (EN/ES/SK)
-- ✅ All personality modes (neutral/cute/brutal)
-- ✅ Weather message generation
-- ✅ Email parsing and validation
-- ✅ Database operations
-- ✅ Slovak language implementation
-- ✅ Integration scenarios
+See [LICENSE](LICENSE) for full terms.
 
 ---
 
-## 🚀 Deployment
-
-Choose your deployment platform with automated setup scripts:
-
-### **🖥️ Local PC (Windows/Mac/Linux)**
-```bash
-# Quick deployment
-scripts/deployment/quick_deploy.bat    # Windows
-./scripts/deployment/quick_deploy.sh   # Linux/Mac
-```
-📖 **[Complete Local Setup Guide](docs/deployment/DEPLOY_LOCAL_PC.md)**
-
-### **🥧 Raspberry Pi Zero 2 W**
-```bash
-# Automated Pi setup
-./scripts/deployment/setup_pi_zero.sh
-```
-📖 **[Pi Zero 2 W Setup Guide](docs/deployment/DEPLOY_PI_ZERO_2W.md)**
-
-### **☁️ Cloud Deployment**
-- **AWS EC2**: Free tier compatible
-- **Azure VM**: Student credits supported
-- **Google Cloud**: Compute Engine
-- **VPS Providers**: DigitalOcean, Linode, Vultr
-
-📖 **[Cloud Options Guide](docs/deployment/DEPLOY_CLOUD_OPTIONS.md)**
-
-### **📧 Email Configuration**
-Supports Gmail, Outlook, Yahoo, and custom SMTP/IMAP:
-
-```bash
-# Copy example config
-cp .env.example .env
-
-# Edit with your credentials
-# See EMAIL_SETUP_GUIDE.md for provider-specific instructions
-```
-
-📖 **[Email Setup Guide](docs/deployment/EMAIL_SETUP_GUIDE.md)**
-📖 **[Quick Email Setup](docs/deployment/QUICK_EMAIL_SETUP.md)**
-
-### **✅ Pre-Deployment Checklist**
-📖 **[Final Checklist](docs/deployment/FINAL_CHECKLIST.md)** - Verify readiness before going live
-
----
-
-## 🏗️ Architecture
-
-### Database Schema
-
-**subscribers** - Weather service users
-```sql
-CREATE TABLE subscribers (
-    email TEXT PRIMARY KEY,
-    location TEXT NOT NULL,
-    lat REAL NULL,
-    lon REAL NULL, 
-    updated_at TEXT NOT NULL
-);
-```
-
-
-**inbox_log** - Email deduplication
-```sql
-CREATE TABLE inbox_log (
-    uid TEXT PRIMARY KEY,
-    from_email TEXT NOT NULL,
-    received_at TEXT NOT NULL,
-    subject TEXT,
-    body_hash TEXT
-);
-```
-
-### Scheduled Jobs
-
-1. **Inbox Check** - Every 1 minute
-   - Fetches unseen emails via IMAP
-   - Parses commands and replies
-   - Logs for deduplication
-
-
-3. **Daily Weather** - 05:00 local time
-   - Fetches forecasts for all subscribers
-   - Generates clothing recommendations
-   - Sends personalized weather reports
-
-## 🔧 Configuration Details
-
-### Environment Variables
-
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `EMAIL_ADDRESS` | ✅ | - | Service email address |
-| `EMAIL_PASSWORD` | ✅ | - | Email password/app password |
-| `IMAP_HOST` | ✅ | - | IMAP server hostname |
-| `SMTP_HOST` | ✅ | - | SMTP server hostname |
-| `IMAP_PORT` | ❌ | 993 | IMAP port (usually 993 for SSL) |
-| `SMTP_PORT` | ❌ | 587 | SMTP port (587 for TLS, 465 for SSL) |
-| `SMTP_USE_TLS` | ❌ | true | Use TLS for SMTP |
-| `TZ` | ❌ | Europe/Bratislava | Timezone for scheduling |
-
-### Weather Data
-
-Uses **Open-Meteo APIs** (free, no registration required):
-
-- **Geocoding**: `https://geocoding-api.open-meteo.com/v1/search`
-- **Weather**: `https://api.open-meteo.com/v1/forecast`
-
-Weather reports include:
-- Daily high/low temperatures
-- Precipitation probability and amount
-- Maximum wind speed
-- Intelligent clothing recommendations
-
-### Email Parsing
-
-The service intelligently parses email bodies:
-
-1. **Delete Command**: Exact text `delete` (case-insensitive)
-2. **Calendar Format**: Contains `date=`, `time=`, or `message=`
-3. **Location**: Everything else treated as weather location
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-**"Required environment variable EMAIL_ADDRESS is not set"**
-- Set all required environment variables before running
-
-**"IMAP connection error"**
-- Check IMAP_HOST, IMAP_PORT, and credentials
-- Enable "Less secure app access" or use app passwords
-
-**"No geocoding results for: XYZ"**
-- Try more specific location names
-- Use format: "City, Country" or "City, State, Country"
-
-**"Couldn't parse date/time"**
-- Use clear formats: "2025-12-01 08:30" or "tomorrow 2pm"
-- Avoid ambiguous dates
-
-### Debug Mode
-
-Run with `--dry-run` to test without sending emails:
-
-```bash
-python app.py --dry-run
-```
-
-Check logs in `app.log` for detailed error information.
-
-## 🔒 Security Notes
-
-- 🔐 Uses SSL/TLS for all email connections
-- 🗃️ Stores only necessary data in local SQLite database
-- 🔑 No external API keys required
-- 📧 Email passwords should use app-specific passwords
-- 👤 Run with minimal system privileges
-- 🚫 Sensitive files excluded via `.gitignore`
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how to get started:
-
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Make your changes** and test thoroughly
-4. **Commit your changes**: `git commit -m 'Add amazing feature'`
-5. **Push to the branch**: `git push origin feature/amazing-feature`
-6. **Open a Pull Request**
-
-### Development Setup
-
-```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-python -m pytest tests/
-
-# Run with debug logging
-python app.py --dry-run
-```
-
-### Code Style
-
-- Follow PEP 8 Python style guidelines
-- Add docstrings to all functions
-- Include type hints where appropriate
-- Write tests for new features
-
-## 🐛 Issues & Support
-
-- 🐞 **Bug Reports**: Contact filip.johanes9@gmail.com
-- 💡 **Feature Requests**: Contact for commercial licensing inquiries
-- ❓ **Questions**: Personal use support available via email
-
-## 📝 License & Copyright
-
-**© 2025 Filip Johanes. All Rights Reserved.**
-
-This project is **PROPRIETARY SOFTWARE** under a restrictive license:
-
-⚠️ **Commercial use PROHIBITED**  
-⚠️ **Redistribution PROHIBITED**  
-⚠️ **Selling or licensing PROHIBITED**  
-✅ **Personal use only**  
-✅ **Educational study allowed**
-
-This software contains unique intellectual property including:
-- Proprietary multi-language localization system
-- Custom email processing algorithms
-- Innovative weather delivery architecture
-
-**Any commercial use or redistribution will result in legal action.**
-
-For commercial licensing inquiries, contact: filip.johanes9@gmail.com
-
-See the [LICENSE](LICENSE) file for complete terms and conditions.
-
-## 🙏 Acknowledgments
-
-- **Open-Meteo**: Free weather API service
-- **Python Community**: For excellent libraries and tools
-
----
-
-**Made with ❤️ for the beta testers and proprietary users**
+*Last Updated: December 2025*
