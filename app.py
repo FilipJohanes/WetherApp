@@ -241,6 +241,20 @@ def init_db(path: str = None) -> None:
         """)
         logger.info("Ensured inbox_log table exists.")
         
+        # Password reset tokens table
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                token TEXT UNIQUE NOT NULL,
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                expires_at TEXT NOT NULL,
+                used INTEGER DEFAULT 0,
+                used_at TEXT
+            )
+        """)
+        logger.info("Ensured password_reset_tokens table exists.")
+        
         # Create indexes for performance
         conn.execute("""
             CREATE INDEX IF NOT EXISTS idx_users_weather 

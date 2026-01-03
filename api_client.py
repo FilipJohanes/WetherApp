@@ -222,8 +222,8 @@ class BackendAPIClient:
     
     def create_countdown(self, email: str, name: str, date: str, 
                         yearly: bool = False, message_before: str = '', 
-                        message_after: str = '') -> bool:
-        """Create a new countdown."""
+                        message_after: str = '') -> tuple[bool, str]:
+        """Create a new countdown. Returns (success, message)."""
         data = {
             'email': email,
             'name': name,
@@ -233,7 +233,9 @@ class BackendAPIClient:
             'message_after': message_after
         }
         result = self._post('/api/countdowns', data)
-        return result and result.get('success', False)
+        if result and result.get('success'):
+            return True, result.get('message', 'Countdown created')
+        return False, result.get('error', 'Failed to create countdown') if result else 'API connection failed'
     
     def update_countdown(self, countdown_id: int, name: str, date: str, 
                         yearly: bool = False, message_before: str = '') -> bool:

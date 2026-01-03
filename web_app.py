@@ -538,19 +538,21 @@ def subscribe():
                 
                 logger.info(f"Processing countdown subscription for {email} - {countdown_name} on {countdown_date}")
                 
-                if api_client.create_countdown(
+                success, message = api_client.create_countdown(
                     email=email,
                     name=countdown_name,
                     date=countdown_date,
                     yearly=countdown_yearly,
                     message_before=countdown_message_before,
                     message_after=countdown_message_after
-                ):
+                )
+                
+                if success:
                     flash(f'✅ Successfully subscribed to countdown: {sanitize_output(countdown_name)} ({countdown_date})!', 'success')
                     return redirect(url_for('subscribe', tab='subscriptions', success='countdown'))
                 else:
-                    flash('Error creating countdown', 'error')
-                    return render_template('subscribe.html', form=form, tab='countdown', error='Failed to create', subscriptions=subscriptions)
+                    flash(f'Error: {message}', 'error')
+                    return render_template('subscribe.html', form=form, tab='countdown', error=message, subscriptions=subscriptions)
         except Exception as e:
             logger.error(f"Subscription error: {e}")
             flash('An unexpected error occurred. Please try again.', 'error')
