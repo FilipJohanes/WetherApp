@@ -405,7 +405,7 @@ def settings():
     # Pre-fill nickname form with current nickname
     if request.method == 'GET':
         user_email = session.get('user_email')
-        user = get_user_by_email(user_email)
+        user = api_client.get_user(user_email)
         if user and user.get('nickname'):
             nickname_form.nickname.data = user['nickname']
     

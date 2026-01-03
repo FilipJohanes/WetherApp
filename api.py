@@ -18,6 +18,9 @@ from services.subscription_service import add_or_update_subscriber, delete_subsc
 from services.weather_service import geocode_location, get_weather_forecast, generate_weather_summary
 from services.countdown_service import add_countdown, CountdownEvent
 from services.email_service import send_email
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 load_dotenv()
 
@@ -30,6 +33,37 @@ limiter = Limiter(
     default_limits=["500 per hour"],
     storage_uri="memory://"
 )
+
+
+def send_simple_email(to: str, subject: str, body: str) -> bool:
+    """Send email using environment variables directly (for API use)."""
+    try:
+        email_address = os.getenv('EMAIL_ADDRESS')
+        email_password = os.getenv('EMAIL_PASSWORD')
+        smtp_host = os.getenv('SMTP_HOST', 'smtp.gmail.com')
+        smtp_port = int(os.getenv('SMTP_PORT', '587'))
+        smtp_use_tls = os.getenv('SMTP_USE_TLS', 'true').lower() == 'true'
+        
+        if not email_address or not email_password:
+            print("❌ Email credentials not configured")
+            return False
+        
+        msg = MIMEMultipart()
+        msg['From'] = email_address
+        msg['To'] = to
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain', 'utf-8'))
+        
+        server = smtplib.SMTP(smtp_host, smtp_port)
+        if smtp_use_tls:
+            server.starttls()
+        server.login(email_address, email_password)
+        server.sendmail(email_address, to, msg.as_string())
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"❌ Email sending error: {e}")
+        return False
 
 # API Key Authentication
 API_KEYS = set(os.getenv('API_KEYS', '').split(','))
@@ -387,7 +421,7 @@ Daily Brief Team
 """
         
         try:
-            send_email(email, subject, body)
+            send_simple_email(email, subject, body)
             print(f"✉️ Password reset email sent to {email}")
             return jsonify({'success': True, 'message': 'Password reset link has been sent to your email'}), 200
         except Exception as e:
