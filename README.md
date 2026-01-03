@@ -9,6 +9,14 @@
 
 Automated daily weather forecasts and reminders delivered via email. Backend runs on Raspberry Pi, web interface hosted on Railway.
 
+## ⚠️ SECURITY WARNING
+
+**This application MUST be deployed with HTTPS/SSL in production!**
+
+Passwords and sensitive data are transmitted over the network and MUST be encrypted with TLS/SSL. See [SECURITY.md](SECURITY.md) for setup instructions.
+
+**Never deploy this application over plain HTTP on a public network.**
+
 ---
 
 ## Features

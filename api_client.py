@@ -44,9 +44,23 @@ class BackendAPIClient:
         try:
             url = f"{self.base_url}{endpoint}"
             response = requests.post(url, json=data, headers=self._headers(), timeout=self.timeout)
+            
+            # Try to parse JSON response even on error
+            try:
+                response_data = response.json()
+            except:
+                response_data = None
+            
             response.raise_for_status()
-            return response.json()
+            return response_data
+        except requests.exceptions.HTTPError as e:
+            # HTTP error with response body
+            print(f"API POST error: {e}")
+            if response_data:
+                return response_data  # Return error details from API
+            return None
         except requests.exceptions.RequestException as e:
+            # Connection error, timeout, etc.
             print(f"API POST error: {e}")
             return None
     
@@ -55,9 +69,23 @@ class BackendAPIClient:
         try:
             url = f"{self.base_url}{endpoint}"
             response = requests.put(url, json=data, headers=self._headers(), timeout=self.timeout)
+            
+            # Try to parse JSON response even on error
+            try:
+                response_data = response.json()
+            except:
+                response_data = None
+            
             response.raise_for_status()
-            return response.json()
+            return response_data
+        except requests.exceptions.HTTPError as e:
+            # HTTP error with response body
+            print(f"API PUT error: {e}")
+            if response_data:
+                return response_data  # Return error details from API
+            return None
         except requests.exceptions.RequestException as e:
+            # Connection error, timeout, etc.
             print(f"API PUT error: {e}")
             return None
     
