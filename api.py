@@ -18,9 +18,16 @@ from services.subscription_service import add_or_update_subscriber, delete_subsc
 from services.weather_service import geocode_location, get_weather_forecast, generate_weather_summary
 from services.countdown_service import add_countdown, CountdownEvent
 from services.email_service import send_email
+from services.api_service import (
+    get_daily_brief_data, 
+    get_structured_weather_data, 
+    get_structured_countdown_data,
+    get_structured_nameday_data
+)
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import jwt
 
 load_dotenv()
 
@@ -74,6 +81,38 @@ if not API_KEYS or API_KEYS == {''}:
     print(f"⚠️ WARNING: No API_KEYS set in environment!")
     print(f"⚠️ Generated temporary API key: {default_key}")
     print(f"⚠️ Add to .env: API_KEYS={default_key}")
+
+# JWT Configuration
+JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', '')
+if not JWT_SECRET_KEY:
+    JWT_SECRET_KEY = secrets.token_urlsafe(32)
+    print(f"⚠️ WARNING: No JWT_SECRET_KEY set in environment!")
+    print(f"⚠️ Generated temporary JWT secret: {JWT_SECRET_KEY}")
+    print(f"⚠️ Add to .env: JWT_SECRET_KEY={JWT_SECRET_KEY}")
+
+JWT_ALGORITHM = 'HS256'
+JWT_EXPIRATION_HOURS = 24 * 7  # 7 days
+
+
+def generate_jwt_token(email: str) -> str:
+    """Generate JWT token for authenticated user."""
+    payload = {
+        'email': email,
+        'exp': datetime.utcnow() + timedelta(hours=JWT_EXPIRATION_HOURS),
+        'iat': datetime.utcnow()
+    }
+    return jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+
+
+def decode_jwt_token(token: str) -> dict:
+    """Decode and verify JWT token. Returns payload or raises exception."""
+    try:
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise ValueError("Token has expired")
+    except jwt.InvalidTokenError:
+        raise ValueError("Invalid token")
 
 
 def get_db_path():
@@ -217,6 +256,32 @@ def require_api_key(f):
     return decorated_function
 
 
+def require_jwt(f):
+    """Decorator to require valid JWT token. Adds 'current_user_email' to kwargs."""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        
+        if not auth_header:
+            return jsonify({'error': 'Missing authorization header'}), 401
+        
+        # Expect format: "Bearer <token>"
+        parts = auth_header.split()
+        if len(parts) != 2 or parts[0].lower() != 'bearer':
+            return jsonify({'error': 'Invalid authorization header format. Expected: Bearer <token>'}), 401
+        
+        token = parts[1]
+        
+        try:
+            payload = decode_jwt_token(token)
+            kwargs['current_user_email'] = payload['email']
+            return f(*args, **kwargs)
+        except ValueError as e:
+            return jsonify({'error': str(e)}), 401
+    
+    return decorated_function
+
+
 # Health check endpoint (no auth required)
 @app.route('/health', methods=['GET'])
 def health():
@@ -272,7 +337,7 @@ def api_register_user():
 @limiter.limit("20 per hour")
 @require_api_key
 def api_authenticate_user():
-    """Authenticate a user."""
+    """Authenticate a user and return JWT token."""
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data provided'}), 400
@@ -285,7 +350,15 @@ def api_authenticate_user():
     
     user = authenticate_user(email, password)
     if user:
-        return jsonify({'success': True, 'user': user}), 200
+        # Generate JWT token
+        token = generate_jwt_token(email)
+        return jsonify({
+            'success': True, 
+            'user': user,
+            'token': token,
+            'token_type': 'Bearer',
+            'expires_in': JWT_EXPIRATION_HOURS * 3600  # seconds
+        }), 200
     else:
         return jsonify({'success': False, 'error': 'Invalid credentials'}), 401
 
@@ -780,6 +853,128 @@ def api_get_stats():
         conn.close()
 
 
+# ==================== DATA API ENDPOINTS (JWT Protected) ====================
+
+@app.route('/api/v2/daily-brief', methods=['GET'])
+@limiter.limit("50 per hour")
+@require_jwt
+def api_get_daily_brief(current_user_email):
+    """Get complete daily brief data in structured JSON format (JWT protected)."""
+    try:
+        data = get_daily_brief_data(current_user_email)
+        
+        if 'error' in data:
+            return jsonify({'success': False, 'error': data['error']}), 404
+        
+        return jsonify({
+            'success': True,
+            'data': data
+        }), 200
+    except Exception as e:
+        print(f"Error getting daily brief for {current_user_email}: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
+@app.route('/api/v2/weather', methods=['GET'])
+@limiter.limit("50 per hour")
+@require_jwt
+def api_get_weather_data(current_user_email):
+    """Get structured weather data including week forecast (JWT protected)."""
+    try:
+        weather_data = get_structured_weather_data(current_user_email)
+        
+        if not weather_data:
+            return jsonify({
+                'success': False, 
+                'error': 'Weather subscription not found or not enabled'
+            }), 404
+        
+        return jsonify({
+            'success': True,
+            'data': weather_data
+        }), 200
+    except Exception as e:
+        print(f"Error getting weather data for {current_user_email}: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
+@app.route('/api/v2/countdowns', methods=['GET'])
+@limiter.limit("50 per hour")
+@require_jwt
+def api_get_countdowns_formatted(current_user_email):
+    """Get formatted countdown data with calculations (JWT protected)."""
+    try:
+        # Get user's timezone
+        conn = sqlite3.connect(get_db_path())
+        conn.row_factory = sqlite3.Row
+        user = conn.execute(
+            "SELECT timezone FROM users WHERE email = ?", 
+            (current_user_email,)
+        ).fetchone()
+        conn.close()
+        
+        if not user:
+            return jsonify({'success': False, 'error': 'User not found'}), 404
+        
+        timezone = user['timezone'] or 'UTC'
+        countdown_data = get_structured_countdown_data(current_user_email, timezone)
+        
+        return jsonify({
+            'success': True,
+            'data': countdown_data
+        }), 200
+    except Exception as e:
+        print(f"Error getting countdowns for {current_user_email}: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
+@app.route('/api/v2/nameday', methods=['GET'])
+@limiter.limit("50 per hour")
+@require_jwt
+def api_get_nameday(current_user_email):
+    """Get nameday information for user's language (JWT protected)."""
+    try:
+        # Get user's language preference
+        conn = sqlite3.connect(get_db_path())
+        conn.row_factory = sqlite3.Row
+        weather_sub = conn.execute(
+            "SELECT language FROM weather_subscriptions WHERE email = ?",
+            (current_user_email,)
+        ).fetchone()
+        conn.close()
+        
+        language = weather_sub['language'] if weather_sub else 'en'
+        
+        # Get optional date parameter
+        date_str = request.args.get('date')
+        date_obj = None
+        if date_str:
+            try:
+                date_obj = datetime.fromisoformat(date_str)
+            except ValueError:
+                return jsonify({
+                    'success': False, 
+                    'error': 'Invalid date format. Expected ISO format (YYYY-MM-DD)'
+                }), 400
+        
+        nameday_data = get_structured_nameday_data(language, date_obj)
+        
+        if not nameday_data:
+            return jsonify({
+                'success': True,
+                'data': None,
+                'message': f'Nameday not supported for language: {language}'
+            }), 200
+        
+        return jsonify({
+            'success': True,
+            'data': nameday_data
+        }), 200
+    except Exception as e:
+        print(f"Error getting nameday for {current_user_email}: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
 # Error handlers
 @app.errorhandler(404)
 def not_found(e):
@@ -807,6 +1002,8 @@ if __name__ == '__main__':
     cleanup_expired_tokens()
     
     print("🔐 API Key authentication enabled")
+    print("🔑 JWT authentication enabled for /api/v2/* endpoints")
+    print(f"⏰ JWT token expiration: {JWT_EXPIRATION_HOURS} hours")
     
     app.run(
         host='0.0.0.0',
