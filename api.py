@@ -140,8 +140,6 @@ def init_api_db():
                 nickname TEXT,
                 password_hash TEXT,
                 timezone TEXT DEFAULT 'UTC',
-                lat REAL,
-                lon REAL,
                 subscription_type TEXT DEFAULT 'free',
                 weather_enabled INTEGER DEFAULT 0,
                 countdown_enabled INTEGER DEFAULT 0,
@@ -578,6 +576,14 @@ def api_get_weather_subscription(email):
     conn = sqlite3.connect(get_db_path())
     conn.row_factory = sqlite3.Row
     try:
+        # First, check what data exists for debugging
+        user_check = conn.execute("SELECT email, weather_enabled FROM users WHERE email = ?", (email,)).fetchone()
+        ws_check = conn.execute("SELECT email, location FROM weather_subscriptions WHERE email = ?", (email,)).fetchone()
+        
+        print(f"[API GET SUBSCRIPTION] Checking for {email}")
+        print(f"[API GET SUBSCRIPTION] User exists: {user_check is not None}, weather_enabled: {user_check['weather_enabled'] if user_check else 'N/A'}")
+        print(f"[API GET SUBSCRIPTION] Weather subscription exists: {ws_check is not None}, location: {ws_check['location'] if ws_check else 'N/A'}")
+        
         subscriber = conn.execute("""
             SELECT ws.email, ws.location, ws.lat, ws.lon, 
                    COALESCE(u.timezone, 'UTC') as timezone, 
@@ -588,11 +594,13 @@ def api_get_weather_subscription(email):
         """, (email,)).fetchone()
         
         if subscriber:
+            print(f"[API GET SUBSCRIPTION] Found subscription for {email}: {subscriber['location']}")
             return jsonify({
                 'success': True,
                 'subscription': dict(subscriber)
             }), 200
         else:
+            print(f"[API GET SUBSCRIPTION] No subscription found for {email} (either missing or weather_enabled != 1)")
             return jsonify({'success': False, 'error': 'Subscription not found'}), 404
     finally:
         conn.close()

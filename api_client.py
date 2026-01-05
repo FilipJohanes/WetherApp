@@ -41,6 +41,7 @@ class BackendAPIClient:
     
     def _post(self, endpoint: str, data: Dict) -> Optional[Dict]:
         """Make POST request to API."""
+        response_data = None
         try:
             url = f"{self.base_url}{endpoint}"
             response = requests.post(url, json=data, headers=self._headers(), timeout=self.timeout)
@@ -56,6 +57,8 @@ class BackendAPIClient:
         except requests.exceptions.HTTPError as e:
             # HTTP error with response body
             print(f"API POST error: {e}")
+            print(f"Response status: {response.status_code if 'response' in locals() else 'unknown'}")
+            print(f"Response body: {response_data}")
             if response_data:
                 return response_data  # Return error details from API
             return None

@@ -340,7 +340,7 @@ def list_subscribers(db_path="app.db"):
 	conn.row_factory = sqlite3.Row
 	try:
 		cursor = conn.execute("""
-			SELECT u.email, ws.location, u.lat, u.lon, ws.personality, ws.language, u.timezone
+			SELECT u.email, ws.location, ws.lat, ws.lon, ws.personality, ws.language, u.timezone
 			FROM users u
 			JOIN weather_subscriptions ws ON u.email = ws.email
 			WHERE u.weather_enabled = 1

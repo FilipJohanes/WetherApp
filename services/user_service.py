@@ -7,17 +7,9 @@ from datetime import datetime, timedelta
 from typing import Optional
 import bcrypt
 
-# Update user personality
-def set_user_personality(user_id: int, personality: str):
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        conn.execute("UPDATE users SET personality = ?, updated_at = ? WHERE id = ?", (personality, datetime.utcnow().isoformat(), user_id))
-        conn.commit()
-    finally:
-        conn.close()
 """
 User Service Module
-Handles registration, authentication, password reset, MFA, and status management for user accounts.
+Handles registration, authentication, and user management for user accounts.
 """
 
 def get_db_path():
@@ -107,63 +99,10 @@ def get_user_by_email(email: str) -> Optional[dict]:
     finally:
         conn.close()
 
-# Password reset
-
-def create_password_reset(email: str) -> Optional[str]:
-    token = secrets.token_urlsafe(32)
-    expiry = (datetime.utcnow() + timedelta(hours=1)).isoformat()
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        result = conn.execute("UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE email = ?", (token, expiry, email))
-        conn.commit()
-        if result.rowcount:
-            return token
-        return None
-    finally:
-        conn.close()
-
-def reset_password(token: str, new_password: str) -> bool:
-    now = datetime.utcnow().isoformat()
-    password_hash = hash_password(new_password)
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        row = conn.execute("SELECT id, reset_token_expiry FROM users WHERE reset_token = ?", (token,)).fetchone()
-        if not row:
-            return False
-        user_id, expiry = row
-        if expiry < now:
-            return False
-        conn.execute("UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expiry = NULL, updated_at = ? WHERE id = ?", (password_hash, now, user_id))
-        conn.commit()
-        return True
-    finally:
-        conn.close()
-
-# MFA setup and verification (TOTP placeholder)
-def set_mfa_secret(user_id: int, secret: str):
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        conn.execute("UPDATE users SET mfa_secret = ? WHERE id = ?", (secret, user_id))
-        conn.commit()
-    finally:
-        conn.close()
-
-def get_mfa_secret(user_id: int) -> Optional[str]:
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        row = conn.execute("SELECT mfa_secret FROM users WHERE id = ?", (user_id,)).fetchone()
-        return row[0] if row else None
-    finally:
-        conn.close()
-
-# User status management
-def set_user_status(user_id: int, status: str):
-    conn = sqlite3.connect(get_db_path())
-    try:
-        conn.execute("UPDATE users SET status = ?, updated_at = ? WHERE id = ?", (status, datetime.utcnow().isoformat(), user_id))
-        conn.commit()
-    finally:
-        conn.close()
+# Note: Password reset functionality is handled via the password_reset_tokens table in api.py
+# The old create_password_reset and reset_password functions that used users table columns
+# have been removed as they referenced non-existent columns (reset_token, reset_token_expiry).
+# Use the API endpoints /api/users/password-reset-request and /api/users/password-reset instead.
 
 def get_user_by_email(email: str) -> Optional[dict]:
     """Get user data by email."""
@@ -182,10 +121,5 @@ def get_user_by_email(email: str) -> Optional[dict]:
     finally:
         conn.close()
 
-# Utility for future premium features
-def get_user(user_id: int):
-    conn = sqlite3.connect(get_db_path())
-    try:
-        return conn.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
-    finally:
-        conn.close()
+# Note: The users table uses email as PRIMARY KEY, not an id column
+# Use get_user_by_email() instead for user lookups
